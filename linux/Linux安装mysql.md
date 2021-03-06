@@ -2,7 +2,7 @@
 
 [TOC]
 
-## Centos7
+## Centos7.x
 
 ### rpm安装
 
@@ -16,7 +16,7 @@ mysql-8.0.20-1.el7.x86_64.rpm-bundle.tar
 rpm -qa | grep mariadb
 ```
 
-### 如果存在，则使用yum命令卸载
+### 如果存在,则使用yum命令卸载
 
 ```shell
 rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
@@ -72,7 +72,7 @@ chown mysql:mysql /var/lib/mysql -R
 cat /var/log/mysqld.log | grep password  ccth!RNF.9VE
 ```
 
-### 登陆数据库（第一次登陆使用系统生成的密码，不便于记忆）
+### 登陆数据库（第一次登陆使用系统生成的密码,不便于记忆）
 
 ```mysql
 mysql -u root -p;
@@ -155,8 +155,3 @@ export JAVA_HOME PATH
 #让配置生效
 source /etc/profile
 ```
-
-
-
-
-

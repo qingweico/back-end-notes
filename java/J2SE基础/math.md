@@ -8,7 +8,7 @@
 Random s=new Random();
 s.nextInt(20);  //指定随机数的范围
 
-Math.random();  //产生0到1的随机浮点数，包括0不包括1
+Math.random();  //产生0到1的随机浮点数,包括0不包括1
 ```
 
 ### 大整数和大浮点数
@@ -150,7 +150,7 @@ public class Switch {
         int x = 2,y = 3;
         switch(x)
         {
-            default:  //这里如果不加default则会一直运行下去，直到遇到break
+            default:  //这里如果不加default则会一直运行下去,直到遇到break
                 y++;
             case 3:
                 y++;

@@ -5,14 +5,14 @@
 ## 数组的静态方法
 
 ```javascript
-Array.isArray([]);//用来判断参数是否为数组，弥补了typeof运算符的不足
+Array.isArray([]);//用来判断参数是否为数组,弥补了typeof运算符的不足
 ```
 
 ```javascript
 let str = "hello";
 Array.from(str); //[ "h", "e", "l", "l", "o" ]
 Array.from([1,2,3],(x)=>x*x); //[ 1, 4, 9 ]  
-//如果参数为数组，则返回一摸一样的新数组
+//如果参数为数组,则返回一摸一样的新数组
 let arr = Array.of(12,12);
 arr; // [12,12];
 ```
@@ -25,7 +25,7 @@ console.log(arr.valueOf());      //返回该字符串的本身
 ```
 
 ```javascript
-Object.getOwnPropertyNames(arr)  //用来遍历对象的所有属性，包括不可枚举属性
+Object.getOwnPropertyNames(arr)  //用来遍历对象的所有属性,包括不可枚举属性
 Array(4)
 0: "0"
 1: "1"
@@ -50,14 +50,14 @@ console.log(Array.prototype.join.call(obj, "-"));//1-2
 
 ### concat()
 
-concat()方法用于多个数组的合并 但不改变原数组 注意： 如果参数为数组结果仍然是一维数组 但是参数是对象的话 合并后并不会改变参数类型对象仍然是对象，数组的话就还是数组，不会改变维数，如果参数是其他类型的值，相当于push()直接在数组后面追加值.如果数组成员包括对象的话 concat方法会返回当前数组的一个浅拷贝,就是拷贝的是对象的引用
+concat()方法用于多个数组的合并 但不改变原数组 注意： 如果参数为数组结果仍然是一维数组 但是参数是对象的话 合并后并不会改变参数类型对象仍然是对象,数组的话就还是数组,不会改变维数,如果参数是其他类型的值,相当于push()直接在数组后面追加值.如果数组成员包括对象的话 concat方法会返回当前数组的一个浅拷贝,就是拷贝的是对象的引用
 
 ```javascript
 let concatObject = {a:1};
 let oldArray = [concatObject];
 let newArray = oldArray.concat();
 newArray[0].a = 2;
-console.log(newArray[0].a); //2  改变新数组的值，原对象的值也会跟着改变
+console.log(newArray[0].a); //2  改变新数组的值,原对象的值也会跟着改变
 console.log(concatObject.a);//2  
 ```
 
@@ -94,11 +94,11 @@ Array.prototype.slice.call(document.querySelectorAll("div")); //会返回一个�
 
 ### arr.splice(start,count,addElement1,addElement2.....)会改变原数组
 
-该方法可以删除指定的元素，也可以添加元素.第二个参数为零，后面可以是要插入的数据（可以为多项）
+该方法可以删除指定的元素,也可以添加元素.第二个参数为零,后面可以是要插入的数据（可以为多项）
 
 ```javascript
 let arr = [0,1,2,3,4,5,6];
-arr = arr.splice(1,3);  //返回被删除的元素。输出1，2，3 第一个参数为开始是位置，第二个参数为删除的长度，相当于字符串函数substr()
+arr = arr.splice(1,3);  //返回被删除的元素。输出1,2,3 第一个参数为开始是位置,第二个参数为删除的长度,相当于字符串函数substr()
 //添加元素
 let arr = [0,1,2,3,4,5,6];
 arr.splice(1,0,5);
@@ -107,7 +107,7 @@ console.log(arr);// [0, 5, 1, 2, 3, 4, 5, 6]
 
 ### arr.sort()会改变原数组
 
-该方法默认的是按照字典升序排列的，也可以自定义函数排列
+该方法默认的是按照字典升序排列的,也可以自定义函数排列
 
 ```javascript
 //按照降序排列数组
@@ -120,11 +120,11 @@ arr.sort(function(a,b) {return b-a;})
 
 ### arr.pop()和arr.shift()
 
-两者都会改变原来的数组，且两者都不用加参数
+两者都会改变原来的数组,且两者都不用加参数
 
 ### arr.push(可变参数)和arr.unshift(可变参数)
 
-这两者同样都会改变原数组，且可以一次性向数组中添加多个参数
+这两者同样都会改变原数组,且可以一次性向数组中添加多个参数
 
 ### copyWithin(target: number, start: number, end?: number): this;
 
@@ -137,7 +137,7 @@ console.log(arr.copyWithin(0, -2, -1) ); //4,2,3,4,5
 
 ### map() 
 
-该方法会将数组所有的成员传入参数函数，并且把每次执行的结果组成一个新的数组返回,该方法方法接受一个函数作为第一个参数.该函数可以有3个参数 当前成员，当前位置，数组本身
+该方法会将数组所有的成员传入参数函数,并且把每次执行的结果组成一个新的数组返回,该方法方法接受一个函数作为第一个参数.该函数可以有3个参数 当前成员,当前位置,数组本身
 
 ```javascript
 let temp = [1,2,5];
@@ -155,7 +155,7 @@ console.log([1,2].map(function (e) {
 
 ### forEach()
 
-用法和map差不多，不过前者不是为了得到返回值，只是单纯的遍历数组，而后者只为了得到返回值.而且forEach并不会中断循环.这两者都会跳过数组中的空位
+用法和map差不多,不过前者不是为了得到返回值,只是单纯的遍历数组,而后者只为了得到返回值.而且forEach并不会中断循环.这两者都会跳过数组中的空位
 
 ```javascript
 let forArray = [];
@@ -215,7 +215,7 @@ let result = numbers.reduce(sum, initialVal);
 console.log(result);//13
 ```
 
-作用都是依此处理数组成员的每个值，最终累计为一个值. 不同的是前者是从左到右处理，而后者是从右向左处理
+作用都是依此处理数组成员的每个值,最终累计为一个值. 不同的是前者是从左到右处理,而后者是从右向左处理
 
 ```javascript
 //下面的函数的功能是找出数组中最长的单词
@@ -254,7 +254,7 @@ console.log(result);
 
 - forEach没有返回值 
 
-- 数组的的length方法不只是可读 ，也可以修改 
+- 数组的的length方法不只是可读 ,也可以修改 
 
 ```javascript
 let array = [];
@@ -268,7 +268,7 @@ array;//0 1 2 3 4 5 6 7 8 9
 
 - forEach() 方法 接受以一个函数作为参数 无返回值 不生成新的数组
 
-- every() 方法 接受一个***返回值为布尔类型的函数***，对于所有的元素该函数都返回true 则该方法返回true
+- every() 方法 接受一个***返回值为布尔类型的函数***,对于所有的元素该函数都返回true 则该方法返回true
 
 - some()方法 和every() 方法一样 但是不同的是只要有一个元素返回true 该方法就返回true
 
@@ -279,7 +279,7 @@ function add(runningTotal, currentValue){
     return runningTotal + currentValue;
 }
 var num = [1,2,3,4,5,6,7,8,9];
-num.reduce(add, initialValue);//累加数组中所有元组的和，可以设定初始化的值
+num.reduce(add, initialValue);//累加数组中所有元组的和,可以设定初始化的值
 ```
 
 - map() 该方法会生成一个新的数组 其他与forEach() 方法一样

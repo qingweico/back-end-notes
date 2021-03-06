@@ -6,7 +6,7 @@
 
 ### let和var的区别
 
-#### let块级作用域，而var则是全局作用域
+#### let块级作用域,而var则是全局作用域
 
 ```javascript
 for(var i = 0;i < 10;i++){      
@@ -24,9 +24,9 @@ for(var  i = 0;i < 10;i++){
 a[6](); //10     若是用let则输出6 let仅在块级作用域有效
 ```
 
-#### let和const不存在变量提升，即使用变量之前必须声明变量，不然会报错
+#### let和const不存在变量提升,即使用变量之前必须声明变量,不然会报错
 
-变量提升：即变量可以在声明之前使用.在javascript中并不是严格的自上而下是执行程序，它会将当前作用域所有变量的声明提到程序的顶部
+变量提升：即变量可以在声明之前使用.在javascript中并不是严格的自上而下是执行程序,它会将当前作用域所有变量的声明提到程序的顶部
 
 ```javascript
 console.log(a);//undefined
@@ -37,7 +37,7 @@ let temp;
 console.log(temp); //undefined
 ```
 
-注意变量提升只是将变量的声明提前，则变量的赋值则不会
+注意变量提升只是将变量的声明提前,则变量的赋值则不会
 
 ```javascript
 a = 'a';
@@ -49,7 +49,7 @@ var b = 'b';
 
 #### 暂时性死区
 
-如果块级作用域内存在let命令，那么这个变量就被绑定到该作用域，不会受到外部变量的影响
+如果块级作用域内存在let命令,那么这个变量就被绑定到该作用域,不会受到外部变量的影响
 
 ```javascript
 if(true){
@@ -59,7 +59,7 @@ if(true){
 } 
 ```
 
-总之，在块级作用域内，使用`let`命令声明变量之前，该变量都是不可用的，这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）
+总之,在块级作用域内,使用`let`命令声明变量之前,该变量都是不可用的,这在语法上,称为“暂时性死区”（temporal dead zone,简称 TDZ）
 
 #### 不允许重复声明
 
@@ -89,7 +89,7 @@ function func(args){
 }         //不报错
 ```
 
-ES5只有函数作用域和全局作用域 ，而没有块级作用域
+ES5只有函数作用域和全局作用域 ,而没有块级作用域
 
 - 内层变量会覆盖外部变量
 
@@ -126,7 +126,7 @@ console.log(i); //5
 
 ### const
 
-被const修饰的复合类型的数据类型（引用类型的数据类型）所指向的内存地址不能再改变，而在内存地址中保存的数据是可以改变的，而基本数据类型的值不可再改变
+被const修饰的复合类型的数据类型（引用类型的数据类型）所指向的内存地址不能再改变,而在内存地址中保存的数据是可以改变的,而基本数据类型的值不可再改变
 
 ```javascript
 const a = [];
@@ -135,7 +135,7 @@ console.log(a.length);//1
 a = [];               //报错
 ```
 
-ES5 只有两种声明变量的方法：`var`命令和`function`命令。ES6 除了添加`let`和`const`命令，另外两种声明变量的方法：`import`命令和`class`命令。所以，ES6 一共有 6 种声明变量的方法。
+ES5 只有两种声明变量的方法：`var`命令和`function`命令。ES6 除了添加`let`和`const`命令,另外两种声明变量的方法：`import`命令和`class`命令。所以,ES6 一共有 6 种声明变量的方法。
 
 ### 顶层对象
 
@@ -144,7 +144,7 @@ window.a = 1
 => var a = 1;
 ```
 
-`var`命令和`function`命令声明的全局变量，依旧是顶层对象的属性；另一方面规定，`let`命令、`const`命令、`class`命令声明的全局变量，不属于顶层对象的属性。
+`var`命令和`function`命令声明的全局变量,依旧是顶层对象的属性；另一方面规定,`let`命令、`const`命令、`class`命令声明的全局变量,不属于顶层对象的属性。
 
 ```javascript
 class A{
@@ -167,7 +167,7 @@ tail // [2, 3, 4]
 
 let [x, y, ...z] = ['a'];
 x // "a"
-y // undefined  如果解构不成功，则返回undefined
+y // undefined  如果解构不成功,则返回undefined
 z // []
 ```
 
@@ -197,7 +197,7 @@ console.log(x); //1 只有当x对应的数组成员为undefined时才会加载�
 
 ### 对象的解构赋值
 
-对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。
+对象的解构与数组有一个重要的不同。数组的元素是按次序排列的,变量的取值由它的位置决定；而对象的属性没有次序,变量必须与属性同名,才能取到正确的值。
 
 ### 字符串的解构赋值
 
@@ -226,7 +226,7 @@ console.log(`hello ${name}`);//hello jack
 
 ```javascript
 let obj = {};
-let name = Symbol('name').toString();  //注意括号里的参数一定要加，为了区分两个不一样的Symbol
+let name = Symbol('name').toString();  //注意括号里的参数一定要加,为了区分两个不一样的Symbol
 let age = Symbol('age').toString();    //如果不加参数则返回一个Symbol
 obj[name] = 'Lisa';
 obj[age] = '21';
@@ -234,17 +234,17 @@ obj.color = "red";
 obj.name = "007";
 console.log(obj);                 //{Symbol(name): "Lisa", Symbol(age): "21", color: "red", name: "007"}
 Object.getOwnPropertySymbols(obj) //[ Symbol(name), Symbol(age) ]
-Reflect.ownKeys(obj)              //返回对象的属性所有类型的键名，包括普通键名
+Reflect.ownKeys(obj)              //返回对象的属性所有类型的键名,包括普通键名
 ```
 
 ### 箭头函数
 
 ```properties
 箭头函数有几个使用注意点：
-（1）函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
-（2）不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
-（3）不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用rest参数代替。
-（4）不可以使用yield命令，因此箭头函数不能用作Generator函数。
+（1）函数体内的this对象,就是定义时所在的对象,而不是使用时所在的对象。
+（2）不可以当作构造函数,也就是说,不可以使用new命令,否则会抛出一个错误。
+（3）不可以使用arguments对象,该对象在函数体内不存在。如果要用,可以用rest参数代替。
+（4）不可以使用yield命令,因此箭头函数不能用作Generator函数。
 ```
 
 es6允许为函数设定默认值
@@ -256,7 +256,7 @@ function log(x = 12,y = "index") {
 log();//12,index
 ```
 
-函数的长度（length返回(从第一个开始)没有默认参数的长度）要是第一个参数有默认值，管不管后面参数有没有默认值，length都为0
+函数的长度（length返回(从第一个开始)没有默认参数的长度）要是第一个参数有默认值,管不管后面参数有没有默认值,length都为0
 
 ```javascript
 (function f(a,b,c = 1) {
@@ -277,7 +277,7 @@ function f(x = 1 ,y = x) {
 }
 f();//1
 let i = 1;
-function fx(y = i) {   //在函数调用时，y的默认变量i在函数内部尚未生成，所以指向了全局变量i
+function fx(y = i) {   //在函数调用时,y的默认变量i在函数内部尚未生成,所以指向了全局变量i
     let i = 2;
     console.log(y);
 }
@@ -464,7 +464,7 @@ person.age = "jack"; // 抛出错误
 
 ### apply()函数
 
-apply方法用于函数的调用，call及apply操作 apply()方法可以接受三个参数，分别是目标对象，目标对象的上下文对象，以及目标对象的参数数组
+apply方法用于函数的调用,call及apply操作 apply()方法可以接受三个参数,分别是目标对象,目标对象的上下文对象,以及目标对象的参数数组
 ```javascript
 let twice = {
     apply(target,ctx,args){
@@ -482,7 +482,7 @@ console.log(proxy.apply(null,[7,8]));//16
 
 ### hash()函数
 
-has方法用来拦截hasProperty方法，即判断对象是否具有某个属性时生效
+has方法用来拦截hasProperty方法,即判断对象是否具有某个属性时生效
 
 ```javascript
 let  handler = {
@@ -536,7 +536,7 @@ console.log(delete p._prop);      //抛出错误
 
 ### Reflect方法
 
-该方法可以接受三个参数，第一个必须为对象类型，第二个为对象的属性，第三个为另一个对象
+该方法可以接受三个参数,第一个必须为对象类型,第二个为对象的属性,第三个为另一个对象
 
 ```javascript
 /*get方法*/
@@ -567,27 +567,27 @@ let obj = {
 };
 Reflect.set(obj,"name","Mike");
 console.log(obj.name);                 //Mike
-/*当value为空时，表示删除属性的值*/
+/*当value为空时,表示删除属性的值*/
 Reflect.set(obj,"age");
 console.log(obj.age);                 //undefined
-/*当对象中有set方法且有receiver时，该方法会指向receiver中，所以修改的是receiver中属性*/
+/*当对象中有set方法且有receiver时,该方法会指向receiver中,所以修改的是receiver中属性*/
 ```
 
 ### Iterator
 
 ```properties
 for..in
-适合遍历对象，不适合遍历数组，遍历得到是键名(key)
+适合遍历对象,不适合遍历数组,遍历得到是键名(key)
 for...of
 遍历得到的是值(value) 而且提供了遍历所有数据结构是统一操作接口 可以使用break continue语句
 ```
 
 ### Generator函数
 
-首先Generator函数在形式上就是一个普通函数，但也有两点不同之处
+首先Generator函数在形式上就是一个普通函数,但也有两点不同之处
 
 - 在function 与函数名之间有一个*号
-- 在函数体语句内部使用yield语句，定义不同的内部状态      
+- 在函数体语句内部使用yield语句,定义不同的内部状态      
 
 ```javascript
 function* generator() {
@@ -596,8 +596,8 @@ function* generator() {
     return "javaScript";
 }
 let result = generator();
-console.log(result);  //该函数并不执行，而是返回一个指向内部状态的指针对象，也就是遍历器对象Object [Generator] {}
-/*想要取出定义在Generator函数里的值，使用next方法*/
+console.log(result);  //该函数并不执行,而是返回一个指向内部状态的指针对象,也就是遍历器对象Object [Generator] {}
+/*想要取出定义在Generator函数里的值,使用next方法*/
 console.log(result.next());  //{ value: 'hello', done: false }
 console.log(result.next());  //{ value: 'world', done: false }
 console.log(result.next());  //{ value: 'javaScript', done: true }
@@ -650,7 +650,7 @@ fo().then((args) => console.log(args));
 
 #### await命令
 
-await操作符用于等待一个Promise对象，只能在async function内部使用
+await操作符用于等待一个Promise对象,只能在async function内部使用
 
 ```javascript
 function testAwait(x) {
@@ -665,7 +665,7 @@ async function f() {
 f();  //2s后打印Hello World
 ```
 
-在正常情况await后跟都是Promise对象，如果不是，回转换为一个已完成状态的Promise对象
+在正常情况await后跟都是Promise对象,如果不是,回转换为一个已完成状态的Promise对象
 
 ```javascript
 async function f1() {
@@ -674,7 +674,7 @@ async function f1() {
 f1().then(v => console.log(v));    //123
 ```
 
-await函数返回的Promise对象，必须等到内部的所有的await命令和Promise对象执行完状态才会发生改变,也就是说要等到await函数内部的异步操作在执行完才会执行then方法指定的回调函数
+await函数返回的Promise对象,必须等到内部的所有的await命令和Promise对象执行完状态才会发生改变,也就是说要等到await函数内部的异步操作在执行完才会执行then方法指定的回调函数
 
 #### async函数的错误处理
 
@@ -693,12 +693,12 @@ f()
 
 ```properties
 变量必须声明后再使用
-函数的参数不能有同名属性，否则报错；
+函数的参数不能有同名属性,否则报错；
 不能使用with语句
-不能对只读属性赋值，否则报错
-不能使用前缀0表示八进制数，否则报错
-不能删除不可删除的属性，否则报错；
-不能删除变量delete prop，会报错，只能删除属性delete global[prop]
+不能对只读属性赋值,否则报错
+不能使用前缀0表示八进制数,否则报错
+不能删除不可删除的属性,否则报错；
+不能删除变量delete prop,会报错,只能删除属性delete global[prop]
 eval不会在它的外层作用域引入变量
 eval和arguments不能被重新赋值；
 arguments不会自动反映函数参数的变化

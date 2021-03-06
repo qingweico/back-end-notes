@@ -41,7 +41,7 @@
         <param-value>classpath:springmvc.xml</param-value>
     </init-param>
     <!--一般情况下当有请求时服务器才会创建Servlet对象-->
-    <!--此时应该当服务器完成初始化时就要创建Servlet对象,完成对springmvc配置文件的加载，完成注解扫描-->
+    <!--此时应该当服务器完成初始化时就要创建Servlet对象,完成对springmvc配置文件的加载,完成注解扫描-->
     <load-on-startup>1</load-on-startup>
 </servlet>
 <!--配置解决中文乱码的过滤器-->
@@ -117,7 +117,7 @@ public String hello() {
 
 ### DispatcherServlet 前端控制器
 
-DispatcherServlet是整个流程控制的核心，当用户请求到达前端控制器时，由它调用其他组件来处理用户的请求，正是DispatcherServlet的存在降低了组件之间的耦合性
+DispatcherServlet是整个流程控制的核心,当用户请求到达前端控制器时,由它调用其他组件来处理用户的请求,正是DispatcherServlet的存在降低了组件之间的耦合性
 
 ### HandlerMapping 处理器映射器
 
@@ -125,22 +125,22 @@ HandlerMapping根据用户的请求找到JHandler 即处理器
 
 ### Handler 处理器
 
-它是我们开发中要编写的具体业务控制器，由DispatcherServlet把用户请求转发到Handler，由Handler对具体的用户请求进行处理
+它是我们开发中要编写的具体业务控制器,由DispatcherServlet把用户请求转发到Handler,由Handler对具体的用户请求进行处理
 
 ### HandlerAdapter 处理器适配器
 
-通过HandlAdapter对处理器进行执行，这是适配器模式的应用，通过扩展适配器可以对更多类型的处理器进行执行
+通过HandlAdapter对处理器进行执行,这是适配器模式的应用,通过扩展适配器可以对更多类型的处理器进行执行
 
 ### ViewResolver 视图解析器
 
-View Resolver负责将处理的结果生成视图。View Resolver首先根据逻辑视图名解析成物理视图名即具体的页面地址，再生成具体的视图对象，最后对视图进行渲染将处理结果通过页面展示给用户
+View Resolver负责将处理的结果生成视图。View Resolver首先根据逻辑视图名解析成物理视图名即具体的页面地址,再生成具体的视图对象,最后对视图进行渲染将处理结果通过页面展示给用户
 
 ### RequestMapping的属性
 
 ```properties
 @RequestMapping(path = '')   //用于建立请求URL和请求方法之间的对应关系
-#放在类上表示请求的一级目录，放在方法上表示请求的二级目录
-@RequestMapping(value = '')  //path和value表示相同的作用，即请求的URL地址，当只有URL时可以省略
+#放在类上表示请求的一级目录,放在方法上表示请求的二级目录
+@RequestMapping(value = '')  //path和value表示相同的作用,即请求的URL地址,当只有URL时可以省略
 @RequestMapping(value = '',method = RequestMethod.GET) 
 method:表示请求的方式 (GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS,TRACE)
 params:表示指定限制请求参数的条件
@@ -178,7 +178,7 @@ headers：用于指定限制请求消息头的条件
   ```jsp
   <form action="test" method="post">
       <!--name的值与实体类中的属性名保持一致-->
-      <!--而且实体类中一定要有属性的set方法，这样才能把数据封装到实体类中-->
+      <!--而且实体类中一定要有属性的set方法,这样才能把数据封装到实体类中-->
       姓名:<input type="text" name="username"><br>  
       密码:<input type="text" name="password">
       <input type="submit" value="提交">
@@ -238,8 +238,8 @@ public String servlet(HttpServletRequest request) {
 
 ```java
 @RequestMapping(path = "/hello",method = RequestMethod.GET)
-    //@RequestMapping参数中name和value属性的作用是一样的，且当只有一个参数时可以省略
-    //参数required类型为boolean默认是true，当为false时，请求中可以没有name属性
+    //@RequestMapping参数中name和value属性的作用是一样的,且当只有一个参数时可以省略
+    //参数required类型为boolean默认是true,当为false时,请求中可以没有name属性
     public String hello(@RequestParam(name = "name")String username) {
     System.out.println("你好" + username + "!");
     return "success";
@@ -252,7 +252,7 @@ public String servlet(HttpServletRequest request) {
 
 ### RequestBody注解
 
-主要用来接收前端传递给后端的json字符串中的数据的，且@RequestBody最多只能有一个
+主要用来接收前端传递给后端的json字符串中的数据的,且@RequestBody最多只能有一个
 
 ```JAVA
 @RequestMapping(value = "/body")
@@ -307,7 +307,7 @@ public String servlet(HttpServletRequest request) {
 修饰参数时可以获取指定的数据给参数赋值
 
 ```jsp
-<!--当用户输入的数据不完整时，即没有输入学号和年龄时,可以通过先执行带有ModelAttribute注解的方法来获取学号和年龄，从而保证数据的完整性-->
+<!--当用户输入的数据不完整时,即没有输入学号和年龄时,可以通过先执行带有ModelAttribute注解的方法来获取学号和年龄,从而保证数据的完整性-->
 <form action="model" method="post">
     用户名：<label><input type="text" name="username"></label><br>
     密码:<label><input type="text" name="password"></label><br>
@@ -606,8 +606,8 @@ public class SysExceptionResolver implements HandlerExceptionResolver {
 
 spirng拦截器和过滤器的区别：
 
-- 过滤器可以在任何的java web项目下使用，属于servlet技术，可以过滤任何请求
-- 拦截器只能在springmvc环境下使用，属于springmvc框架自带的技术，只能对Controller层请求有效
+- 过滤器可以在任何的java web项目下使用,属于servlet技术,可以过滤任何请求
+- 拦截器只能在springmvc环境下使用,属于springmvc框架自带的技术,只能对Controller层请求有效
 
 ```xml
 <mvc:interceptors>

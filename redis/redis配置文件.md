@@ -6,7 +6,7 @@
 
 ### United单位
 
-- 配置大小单位，支持bytes，不支持bit
+- 配置大小单位,支持bytes,不支持bit
 
 - 对大小写不敏感
 
@@ -53,7 +53,7 @@ bind 127.0.0.1 //本机
 #### Tcp-keepalive
 
 ```java
-tcp-keepalive 300 //单位为秒，代表以时间间隔进行keepalive检查 如果为0则代表不进行keepalive检查
+tcp-keepalive 300 //单位为秒,代表以时间间隔进行keepalive检查 如果为0则代表不进行keepalive检查
 ```
 
 #### Loglevel

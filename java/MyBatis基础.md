@@ -6,11 +6,11 @@
 
 ![mybatis](https://pic.downk.cc/item/5ea6ab97c2a9a83be5655477.png)
 
-Mybatis是一个持久层框架，使用java编写，它封装了JDBC的很多的细节，使开发者只关注sql语句本身，而不用关注使用原生jdbc时应该具有的注册驱动，创建连接，关闭连接等繁杂的过程，它使用了ORM的思想实现了结果集的封装。
+Mybatis是一个持久层框架,使用java编写,它封装了JDBC的很多的细节,使开发者只关注sql语句本身,而不用关注使用原生jdbc时应该具有的注册驱动,创建连接,关闭连接等繁杂的过程,它使用了ORM的思想实现了结果集的封装。
 
 ORM ：Object Relational Mappering 对象关系映射
 
-就是把数据库表的字段和实体类属性对应起来，从而对实体类进行操作就可以完成对数据库表的操作
+就是把数据库表的字段和实体类属性对应起来,从而对实体类进行操作就可以完成对数据库表的操作
 
 ### MyBatis环境搭建
 
@@ -116,7 +116,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
 ```xml
 <!--AccountMapper.xml配置文件-->
-<!--namespace表示该配置文件所在的类路径，不是接口所在的路径-->
+<!--namespace表示该配置文件所在的类路径,不是接口所在的路径-->
 <!--基于接口的namespace则表示对应的接口所在的类路径-->
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -211,7 +211,7 @@ public class Demo {
 <typeAliases>
     <typeAlias type="cn.qingweico.entity.Student" alias="Student"/>
 </typeAliases>
-<!--也可以指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean  此时aliae默认是实体类首字母小写-->
+<!--也可以指定一个包名,MyBatis 会在包名下面搜索需要的 Java Bean  此时aliae默认是实体类首字母小写-->
 <typeAliases>
     <package name="cn.qingweico.entity"/>
 </typeAliases>
@@ -233,21 +233,21 @@ public class Demo {
 </resultMap>
 ```
 
-<font style="color:purple;font-size:20px"> 起别名的作用是可以简写resultType中的值(接口的返回类型) 并不是可简写namespace中的值(mapper文件映射的接口所在的位置)，不要混为一谈</font> 
+<font style="color:purple;font-size:20px"> 起别名的作用是可以简写resultType中的值(接口的返回类型) 并不是可简写namespace中的值(mapper文件映射的接口所在的位置),不要混为一谈</font> 
 
 ### 连接池
 
 可以减少获取连接所消耗的次数
 
-一个存放很多Connection的集合容器，且线程安全（保证两个线程不能拿到同一个连接）
+一个存放很多Connection的集合容器,且线程安全（保证两个线程不能拿到同一个连接）
 
 实现的队列的性质（先进先出）
 
 type类型包括POOLED UNPOOLED JNDI
 
-POOLED ：每次使用时都会从连接池中获取连接，使用完后会放入连接池
+POOLED ：每次使用时都会从连接池中获取连接,使用完后会放入连接池
 
-UNPOOLED：不使用连接池，每次使用都会加载驱动，创建连接
+UNPOOLED：不使用连接池,每次使用都会加载驱动,创建连接
 
 ### MyBatis中的事务
 
@@ -296,7 +296,7 @@ public class Class implements Serializable {
 ```xml
 <select id="findByStudent" resultType="Student">
     select * from student where
-    <!--当if标签条件满足时，标签内部的条件就会加上-->
+    <!--当if标签条件满足时,标签内部的条件就会加上-->
     <if test="id != null">
         id = #{id}
     </if>
@@ -311,7 +311,7 @@ public class Class implements Serializable {
 
 #### where标签
 
-当id为null时，where会直接和and连接，where标签可以解决这个问题
+当id为null时,where会直接和and连接,where标签可以解决这个问题
 
 ```xml
 <select id="findByStudent" parameterType="Student" resultType="Student">
@@ -391,7 +391,7 @@ select * from student
 #### set标签
 
 ```xml
-<!--当只修改数据库中某一字段时，而不用修改数据库中的全部字段-->
+<!--当只修改数据库中某一字段时,而不用修改数据库中的全部字段-->
 <update id="update" parameterType="Student">
     update student
     <set>
@@ -408,7 +408,7 @@ select * from student
 
 #### foreach标签
 
-可以一次性生成很多值，主要用于sql的in语句
+可以一次性生成很多值,主要用于sql的in语句
 
 ```java
 public class Student implements Serializable {
@@ -468,7 +468,7 @@ public void ForEachLabel() throws IOException {
 
 ```xml
 <resultMap id="studentMap" type="Student">
-    <!--column表示数据库中的字段名，property表示要映射的实体类中的属性-->
+    <!--column表示数据库中的字段名,property表示要映射的实体类中的属性-->
     <id column="id" property="id"/>
     <result column="name" property="name"/>
     <!--assocation配置实体类中的引用类型 propety代表实体类中的属性 javaType代表属性的全限定类名-->
@@ -495,7 +495,7 @@ public void ForEachLabel() throws IOException {
 
 ### MyBatis一对多查询操作
 
-需求：查询班级信息，要求把所在该班级的所有学生查出来
+需求：查询班级信息,要求把所在该班级的所有学生查出来
 
 ```java
 public class Class implements Serializable {
@@ -546,9 +546,9 @@ public class Class implements Serializable {
 
 ### MyBatis多对多查询操作
 
-需求：查询客户，要求把该客户购买的货物查询出来
+需求：查询客户,要求把该客户购买的货物查询出来
 
-需求：查询货物，要求把购买该货物的客户信息查询出来
+需求：查询货物,要求把购买该货物的客户信息查询出来
 
 ```java
 public class Customer {
@@ -650,7 +650,7 @@ public class Goods {
 
 ### MyBatis延迟加载
 
-延迟加载可以根据特定的场景来选择需要查询的表，可以减少与数据库的交互次数，从而达到提高程序的执行效率
+延迟加载可以根据特定的场景来选择需要查询的表,可以减少与数据库的交互次数,从而达到提高程序的执行效率
 
 将多表的查询分成多个单表查询
 
@@ -736,9 +736,9 @@ public void lazyLoading() throws IOException {
 
 ### MyBatis缓存
 
-- MyBatis自带一级缓存 默认开启且不能关闭， 作用范围是同一个sqlSession。当从同一个sqlSession获取相同的数据时，则会使用缓存。当有cud操作时，会自动清除二级缓存，保证数据的准确性
+- MyBatis自带一级缓存 默认开启且不能关闭, 作用范围是同一个sqlSession。当从同一个sqlSession获取相同的数据时,则会使用缓存。当有cud操作时,会自动清除二级缓存,保证数据的准确性
 
-- MyBatis自带的二级缓存，需要手动打开 作用范围是Mapper下的同一个namespace，二级缓存比一级缓存有更大的范围
+- MyBatis自带的二级缓存,需要手动打开 作用范围是Mapper下的同一个namespace,二级缓存比一级缓存有更大的范围
 
   二级缓存开启的条件
 
@@ -798,7 +798,7 @@ public interface AccountRepository {
 
 ```java
 @Results(id = "studentMap",value = {
-    /*id为true表示主键 property表示实体类属性的值，column表示数据库字段名*/
+    /*id为true表示主键 property表示实体类属性的值,column表示数据库字段名*/
     @Result( id = true,property = "id",column = "id"),
     @Result(property = "name",column = "name"),
 })

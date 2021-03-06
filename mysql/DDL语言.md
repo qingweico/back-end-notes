@@ -3,7 +3,7 @@
 ### 修改表
 
 ```mysql
-alter TABLE userinfo CHANGE COLUMN username name INT; #将表userinfo中字段为username修改为name，且类型修改为int
+alter TABLE userinfo CHANGE COLUMN username name INT; #将表userinfo中字段为username修改为name,且类型修改为int
 ```
 
 ```mysql
@@ -25,13 +25,13 @@ ALTER TABLE userinfos MODIFY name int;                #修改表中字段的类�
 ### 表的删除
 
 ```mysql
-drop table 表名;                                      #从数据库中删除该表，会改变表的数据结构
+drop table 表名;                                      #从数据库中删除该表,会改变表的数据结构
 ```
 
 ### 表的复制
 
 ```mysql
-create TABLE info like userinfos;                    #只复制表的结构，不会复制表的内容
+create TABLE info like userinfos;                    #只复制表的结构,不会复制表的内容
 ```
 
 ```mysql

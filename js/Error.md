@@ -32,7 +32,7 @@ console.log(error);  //出错了
      this.message = message || "默认信息";
      this.name = "userError";
  }
-/*让userError继承Error对象，然后就可以生成这种自定义的错误*/
+/*让userError继承Error对象,然后就可以生成这种自定义的错误*/
  UserError.prototype = new Error();
  UserError.prototype.constructor = UserError;
  console.log(new UserError("这是自定义的错误"));
@@ -55,9 +55,7 @@ console.log(count);//1
 /*说明return语句是在finally之前就执行了 f函数只是等到finally代码执行完毕后再弹出*/
 ```
 
-```javascript
-/*下面是一个很好的例子来说明   try catch finally 及return 之间的关系*/
-```
+下面是一个很好的例子来说明   try catch finally 及return 之间的关系
 
 ```javascript
 function g() {
@@ -83,8 +81,8 @@ Uncaught 出错了！
 若在finally语句中加上return语句则只会打印一句'捕捉到内部错误'*/
 ```
 
-```javascript
+```properties
 finally 后面的语句根本不会再执行的两种情况
-*   1: 当finally语句块中有 return语句时且此时没有错误被捕获
-*   2: 当有错误被捕获时，无论finally语句块中是否有return语句
+   1: 当finally语句块中有 return语句时且此时没有错误被捕获
+   2: 当有错误被捕获时,无论finally语句块中是否有return语句
 ```

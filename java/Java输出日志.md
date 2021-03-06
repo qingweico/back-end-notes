@@ -1,10 +1,16 @@
-##### 导入jar包：log4j-core-2.13.0.jar和log4j-api-2.13.0.jar
+# 目录
 
-##### 在src目录下配置log4j2.xml文件
+[TOC]
+
+## 导入依赖
+
+导入jar包：log4j-core-2.13.0.jar和log4j-api-2.13.0.jar
+
+## 在src目录下配置log4j2.xml文件
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 对配置状态进行关闭，不把打印的细节在控制台中输出 -->
+<!-- 对配置状态进行关闭,不把打印的细节在控制台中输出 -->
 <!-- 该配置状态分为8个级别：高->低：OFF、FATAL、ERROR、WARN、INFO、DEBUG、TRACE、ALL -->
 <Configuration status="OFF">
     <Appenders>
@@ -15,20 +21,20 @@
 
         <!-- 日志输出分为6个级别：高->低：FATAL、ERROR、WARN、INFO、DEBUG、TRACE -->
         <!-- Debug调试级别 -->
-        <!-- 这里根据你的个人习惯来写就好了，不细分的话写一个File就好了 -->
+        <!-- 这里根据你的个人习惯来写就好了,不细分的话写一个File就好了 -->
         <!-- 输出日志文件,位置自动保存在项目根目录下的logs文件夹中 -->
         <File name="MyDebugFile" fileName="logs/debug.log">
-            <!-- 我这么写是为了把不同级别的日志筛选开来，便于查看 -->
-            <!-- Filter过滤器，以此设置日志级别，进行不同程度的日志区分，如果不这样细分，可把Filter去掉 -->
+            <!-- 我这么写是为了把不同级别的日志筛选开来,便于查看 -->
+            <!-- Filter过滤器,以此设置日志级别,进行不同程度的日志区分,如果不这样细分,可把Filter去掉 -->
             <!-- 比如这样设置：<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>  -->
             <Filters>
-                <!-- 第一步 onMatch="DENY"：匹配到info及更高级别就DENY过滤掉，其他的NEUTRAL保留 -->
+                <!-- 第一步 onMatch="DENY"：匹配到info及更高级别就DENY过滤掉,其他的NEUTRAL保留 -->
                 <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL"/>
-                <!-- 第二步 onMatch="ACCEPT"：匹配到debug及更高级别就ACCEPT保留，其他的DENY过滤掉 -->
-                <!-- 经过两步过滤，把debug以上的和以下的级别全部过滤，最终剩下debug级别 -->
+                <!-- 第二步 onMatch="ACCEPT"：匹配到debug及更高级别就ACCEPT保留,其他的DENY过滤掉 -->
+                <!-- 经过两步过滤,把debug以上的和以下的级别全部过滤,最终剩下debug级别 -->
                 <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
-            <!-- 对打印语句的格式进行设置，这个太多放在后面讲 -->
+            <!-- 对打印语句的格式进行设置,这个太多放在后面讲 -->
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-6level [%t] (%F:%L) - %msg%n"/>
         </File>
 
@@ -66,7 +72,7 @@
         </File>
     </Appenders>
 
-    <!-- 定义Loggers，只有定义了Loggers并引入刚才的appender配置，配置才会生效 -->
+    <!-- 定义Loggers,只有定义了Loggers并引入刚才的appender配置,配置才会生效 -->
     <Loggers>
         <Root level="trace">
             <!-- Only events at DIAG level or more specific are sent to the console. -->
@@ -81,7 +87,7 @@
 </Configuration>
 ```
 
-#### 运行代码
+## 运行代码
 
 ```java
 package com.java.servlet;

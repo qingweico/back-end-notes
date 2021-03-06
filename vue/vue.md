@@ -47,7 +47,7 @@ template: `
 
 ```javascript
 //全局注册即为父组件在所有vue实例中都可以使用
-//在实例中注册的组件即为子组件，只可以在当前组件中使用
+//在实例中注册的组件即为子组件,只可以在当前组件中使用
 const cpn =  Vue.extend({
 template: `
 <div>

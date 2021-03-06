@@ -2,7 +2,9 @@
 
 [TOC]
 
-## SpringBoot（v2.3.2.RELEASE）
+# SpringBoot（v2.3.2.RELEASE）
+
+## SpringBoot配置
 
 ### 场景启动器
 
@@ -36,7 +38,7 @@ spring-boot-start
 
 - @Import({AutoConfigurationImportSelector.class})
 
-  - AutoConfigurationImportSelector 将需要导入的组件以全类名的方式返回并添加到容器中，即给容器中导入很多的自动配置类
+  - AutoConfigurationImportSelector 将需要导入的组件以全类名的方式返回并添加到容器中,即给容器中导入很多的自动配置类
 
 ```java
 /*AutoConfigurationImportSelector.class*/
@@ -142,17 +144,19 @@ public class Person {
 
 @ConfigurationProperties默读取全局配置文件
 
-相同点都是可以从配置文件中读取值并注入到字段中
+相同点都是可以从配置文件中读取值并注入到字段中(前提是字段所属的类一定要在ioc容器中)
 
-@ConfigurationProperties批量注入配置文件中的数据，而@Value则是一次一次注入
+@ConfigurationProperties批量注入配置文件中的数据,而@Value则是一次一次注入
 
 前者支持松散绑定语法(下划线转驼峰),而后者不支持
 
-前者不支持SPEL，后者支持
+前者不支持SPEL,后者支持
 
-前者支持数据校验，后者不支持
+前者支持数据校验,后者不支持
 
-前者支持复杂数据类型的封装，后者不支持
+前者支持复杂数据类型的封装,后者不支持
+
+前者支持注入静态类型的变量,后者不支持(当使用set方法时也可以完成为静态变量注入,注意set方法不可以是静态的)
 
 ### PropertySouce和ImportResouce注解的区别
 
@@ -170,7 +174,7 @@ public class Person {
 
 SpringBoot不能自动识别自定义的配置文件,需要手动导入
 
-SpringBoot不推荐用此方式向Spring容器中添加组件，可以自定义一个配置类代替配置文件，使用`@Bean`注解方式向容器中加入组件
+SpringBoot不推荐用此方式向Spring容器中添加组件,可以自定义一个配置类代替配置文件,使用`@Bean`注解方式向容器中加入组件
 
 ### 配置文件占位符
 
@@ -243,7 +247,7 @@ classpath:/config/xxx.properties
 classpaht:/xxx.properties
 ```
 
-SpringBoot会全部加载这四个位置的配置文件，高优先级的配置文件会覆盖优先级低的相同配置文件
+SpringBoot会全部加载这四个位置的配置文件,高优先级的配置文件会覆盖优先级低的相同配置文件
 
 ```properties
 #等号之间不要加空格
@@ -265,11 +269,11 @@ server.servlet.context-path=/test
 - 命令行
 
 ```properties
-#运行jar文件时指定端口号 运行路径，等号之间不要加空格 多个配置空额隔开
+#运行jar文件时指定端口号 运行路径,等号之间不要加空格 多个配置空额隔开
 java -jar hello-0.0.1-SNAPSHOT.jar --server.port=8848 --server.servlet.context-path=/test
 ```
 
-- 优先加载带profile的文件，再加载不带profile的文件
+- 优先加载带profile的文件,再加载不带profile的文件
 - 从jar包外向内加载
 
 ### SpringBoot访问静态资源
@@ -714,7 +718,7 @@ org.springframework.boot.autoconfigure.jdbc
 - **DataSourceConfiguration** 
 
 ```properties
-配置各种数据源，也可以自定义数据源
+配置各种数据源,也可以自定义数据源
 在配置文件中指定spring.datasouce.type=xxx 指定自定义数据源
 ```
 
@@ -951,7 +955,7 @@ spring:
     maxWait: 60000
     # 配置获取连接等待超时的时间
     timeBetweenEvictionRunsMillis: 60000
-    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    # 配置一个连接在池中最小生存的时间,单位是毫秒
     minEvictableIdleTimeMillis: 300000
     # 验证数据库连接的查询语句
     validationQuery: SELECT 1 FROM DUAL
@@ -959,9 +963,9 @@ spring:
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
-    # 是否缓存preparedStatement，
+    # 是否缓存preparedStatement,
     poolPreparedStatements: true
-    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    # 配置监控统计拦截的filters,去掉后监控界面sql无法统计,'wall'用于防火墙
     filters: stat,wall,log4j2
     maxPoolPreparedStatementPerConnectionSize: 20
     # 合并多个DruidDataSource的监控数据
@@ -1785,9 +1789,9 @@ void running(ConfigurableApplicationContext context) {
 
 ## SpringBoot缓存
 
-![image-20200807145952386](https://pic.downk.cc/item/5f33369814195aa594d8bd36.png)
+![image-20200807145952386](https://img.imgdb.cn/item/6043572d360785be54a8d7ed.png)
 
-CachingManager管理多个Cache组件，而每个组件都有自己的唯一一个名称
+CachingManager管理多个Cache组件,而每个组件都有自己的唯一一个名称
 
 ```java
 /*StudentService*/
@@ -1908,7 +1912,7 @@ org.springframework.boot.autoconfigure.cache.NoOpCacheConfiguration
 @Conditional(CacheCondition.class)
 class SimpleCacheConfiguration {
    @Bean
-    /*给容器中注册了ConcurrentMapCacheManager，可以用来获取和创建ConcurrentMapCache类型的缓存组件*/
+    /*给容器中注册了ConcurrentMapCacheManager,可以用来获取和创建ConcurrentMapCache类型的缓存组件*/
    ConcurrentMapCacheManager cacheManager(CacheProperties cacheProperties,
          CacheManagerCustomizers cacheManagerCustomizers) {
       ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager();
@@ -1950,7 +1954,7 @@ public Cache getCache(String name) {
 }
 ```
 
-目标方法运行之前会先去查询缓存组件,根据cacheNames查询，第一次查询cache为空则创建cache并放在ConcurrentMap中
+目标方法运行之前会先去查询缓存组件,根据cacheNames查询,第一次查询cache为空则创建cache并放在ConcurrentMap中
 
 ```java
 /*ConcurrentMapCache*/
@@ -1960,7 +1964,7 @@ protected Cache createConcurrentMapCache(String name) {
 }
 ```
 
-根据key（默认方法参数的值 ，若参数有多个则传入多个参数包装的对象）来查询value，若value为空则调用目标方法
+根据key（默认方法参数的值 ,若参数有多个则传入多个参数包装的对象）来查询value,若value为空则调用目标方法
 
 ```java
 /*ConcurrentMapCache*/
@@ -1983,7 +1987,7 @@ public void put(Object key, @Nullable Object value) {
 
 ### @CachePut注解
 
-用于更新数据   先调用目标方法，再将方法的返回值更新到缓存中（不仅可以更新数据库中的数据还可以更新缓存中的数据）
+用于更新数据   先调用目标方法,再将方法的返回值更新到缓存中（不仅可以更新数据库中的数据还可以更新缓存中的数据）
 
 ```java
 /*注意:key的值要和查询方法key的值保持一致(保持数据一致性)*/
@@ -1996,9 +2000,9 @@ public Student update(Student student){
 }
 ```
 
-@Cacheable是先根据key查询缓存，若该key对应的值为null再调用目标方法，最后才将数据put进缓存中
+@Cacheable是先根据key查询缓存,若该key对应的值为null再调用目标方法,最后才将数据put进缓存中
 
-@CachePut则是直接调用目标方法，再将方法的值put进缓存中，会覆盖key对应的值
+@CachePut则是直接调用目标方法,再将方法的值put进缓存中,会覆盖key对应的值
 
 ### @CacheEvict注解
 
@@ -2010,9 +2014,9 @@ public void deleteCacheById(Integer id){
 }
 ```
 
-`allEntries属性默认为false即根据只key来删除相对应的缓存，而true即代表删除该缓存组件中所有的缓存`
+`allEntries属性默认为false即根据只key来删除相对应的缓存,而true即代表删除该缓存组件中所有的缓存`
 
-`beforeInvocation属性默认为false，代表方法执行完后清除缓存 true代表方法执行前删除缓存,无论方法非正常执行完都要清除缓存`
+`beforeInvocation属性默认为false,代表方法执行完后清除缓存 true代表方法执行前删除缓存,无论方法非正常执行完都要清除缓存`
 
 ### Caching注解
 
@@ -2047,7 +2051,7 @@ public Student findNameById(Student student){
 
 ### @CacheConfig注解
 
-标注在类上，指定该类中方法共有的缓存属性
+标注在类上,指定该类中方法共有的缓存属性
 
 ```java
 @Target(ElementType.TYPE)
@@ -2148,7 +2152,7 @@ public RedisCacheConfiguration prefixKeysWith(String prefix) {
 }
 ```
 
-- 当容器中存在多个cacheManager时，需要在目标方法的类上使用`@CacheConfig`注解指明cacheManager
+- 当容器中存在多个cacheManager时,需要在目标方法的类上使用`@CacheConfig`注解指明cacheManager
 
 - 直接在组件方法上使用`@Primary`注解表明这是默认的cacheManager
 

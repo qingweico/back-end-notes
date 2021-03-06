@@ -6,7 +6,7 @@
 
 ### 实例方法
 
-Object实例对象，就是定义在Object原型对象上的方法，可以直接被Object实例直接使用
+Object实例对象,就是定义在Object原型对象上的方法,可以直接被Object实例直接使用
 
 ```javascript
 Object.prototype.print = function () {
@@ -15,9 +15,9 @@ Object.prototype.print = function () {
 Object().print(); //Object {}
 ```
 
-Object本身是一个函数，通过Object()可以把任何数据类型转换为对象
+Object本身是一个函数,通过Object()可以把任何数据类型转换为对象
 * 将原始数据类型包装为相应的包装对象是实例
-* 当参数为空时，或者为undefined   null 返回的是空对象
+* 当参数为空时,或者为undefined   null 返回的是空对象
 
 instanceof运算符用来判断一个对象是否是某个构造函数的实例
 
@@ -40,13 +40,13 @@ console.log(date.toLocaleString());//2020/7/11 上午10:32:40
 
 ### 构造函数
 
-new Object(value)表示新生成一个对象，并且它的值是value,而Object(value)则是将value转换为一个对象,二者的语义是不同的
+new Object(value)表示新生成一个对象,并且它的值是value,而Object(value)则是将value转换为一个对象,二者的语义是不同的
 ### 静态方法
 
 #### Object.keys();
 
 ```javascript
-Object.keys();                 //参数为一个对象，方法会返回一个由一个给定对象的自身可枚举属性组成的数组
+Object.keys();                 //参数为一个对象,方法会返回一个由一个给定对象的自身可枚举属性组成的数组
 ```
 
 #### Object.getOwnPropertyNames(); 
@@ -58,7 +58,7 @@ Object.getOwnPropertyNames();  //用法和Object().keys()类似 但是该方法�
 #### Object.prototype.valueOf(); 
 
 ```javascript
-Object.prototype.valueOf();    //返回该对象的值，默认的是返回其本身
+Object.prototype.valueOf();    //返回该对象的值,默认的是返回其本身
 ```
 
 #### Object.prototype.toString();
@@ -67,10 +67,10 @@ Object.prototype.valueOf();    //返回该对象的值，默认的是返回其�
 Object.prototype.toString();   //返回该对象的字符串形式
 ```
 
-对一个对象调用toString()方法时，会返回[object,Object]
+对一个对象调用toString()方法时,会返回[object,Object]
 
 ```javascript
-//可以对任何值调用toString()方法，而不会受自定义 toString()方法的影响
+//可以对任何值调用toString()方法,而不会受自定义 toString()方法的影响
 Object.prototype.toString.call({}); //[object Object]
 Object.prototype.toString.call([]); //[object Array]
 ```
@@ -93,7 +93,7 @@ Object.prototype.hasOwnProperty(property);//判断该对象是否具有该属性
 #### Object.getOwnPropertyDescriptor()
 
 ```javascript
-Object.getOwnPropertyDescriptor();//方法可以获取属性的描述对象，第一个参数是目标对象，第二个参数是一个字符串，为该对象的属性
+Object.getOwnPropertyDescriptor();//方法可以获取属性的描述对象,第一个参数是目标对象,第二个参数是一个字符串,为该对象的属性
 ```
 
 ```javascript
@@ -120,12 +120,12 @@ Object.defineProperty();
 
 ```javascript
 let object = Object.defineProperty({},"p",{
-    //get(){return "这里是get方法";},     //注意get方法和value不能同时定义 且get方法存在时，writable的值只能是false
+    //get(){return "这里是get方法";},     //注意get方法和value不能同时定义 且get方法存在时,writable的值只能是false
     value: "我是属性p属性描述对象的value",  
     writable: true,                       //表示属性值是否可以改变
     enumerable: true,                     //表示该数属性是否可以遍历
-    configurable: false                   //表示可配置性，false可以阻止操作改写该属性，包括删除该属性，或者该属性的属性                                          描述对象(但是value除外)
-});                                       //以上都为Boolean类型，且默认都为true
+    configurable: false                   //表示可配置性,false可以阻止操作改写该属性,包括删除该属性,或者该属性的属性                                          描述对象(但是value除外)
+});                                       //以上都为Boolean类型,且默认都为true
 ```
 
 ```javascript
@@ -158,7 +158,7 @@ console.log(newObject.p3);//我是属性p1中值---我是属性p2中的值
 console.log(newObject.propertyIsEnumerable("p3"));   //true  该方法用来判断对象中某个属性是否可以遍历
 ```
 
-如果原型独对象的某个属性的属性描述对象writable的值为false，那么子对象将无法自定义这个属性
+如果原型独对象的某个属性的属性描述对象writable的值为false,那么子对象将无法自定义这个属性
 
 ```javascript
 let proto = Object.defineProperty({},"foo",{value: "我是属性foo的值",writable:false}); //这里是原型对象
@@ -166,7 +166,7 @@ let sub = Object.create(proto);                                                 
 console.log(sub.foo);          //我是属性foo的值
 sub.foo = "我是子对象foo属性的值";
 console.log(sub.foo);          //我是属性foo的值
-/*该属性值已被锁定，子对象无法修改  但是可以通过子对象属性描述对象对父类的覆盖，此时会完全忽视原型链*/
+/*该属性值已被锁定,子对象无法修改  但是可以通过子对象属性描述对象对父类的覆盖,此时会完全忽视原型链*/
 ```
 
 ```javascript
@@ -196,7 +196,7 @@ let o = {
     },
     set p(value){
         if(value > this.value){return this.value = value;}
-        else throw new Error("新的值必须大于5，请重新输入");
+        else throw new Error("新的值必须大于5,请重新输入");
     }
 };
 o.p = 10;
@@ -215,7 +215,7 @@ console.log(o.p = 4);  //报错
             set(value)
             {
                 if(value > this.value){this.value = value;}
-                else throw new Error("新的值必须大于5，请重新输入");
+                else throw new Error("新的值必须大于5,请重新输入");
             }
         }
     };
@@ -237,7 +237,7 @@ let copy = function (newObj,oldObj){
 };
 ```
 
-若遇到含有存储器的对象，需要使用Object.defineProperty()方法来拷贝对象
+若遇到含有存储器的对象,需要使用Object.defineProperty()方法来拷贝对象
 
 ```javascript
 let extend = function(to, from){
@@ -259,7 +259,7 @@ console.log(to.get()); //我被修改成了Hello World
 console.log(to.foo);   //Hello World
 ```
 
-注意get() 与 get foo()是不一样的 前者是对象中的一个普通的方法，而后者则是属性foo的属性描述对象中的存储器
+注意get() 与 get foo()是不一样的 前者是对象中的一个普通的方法,而后者则是属性foo的属性描述对象中的存储器
 
 ### 控制对象状态
 
@@ -285,7 +285,7 @@ Object.defineProperty(demoObj,"p",{value:123});//报错 Uncaught TypeError: can'
 
 #### Object.seal()
 
-该方法无法向对象中添加新属性，也无法删除旧的属性  实质是把属性描述对象的configurable变为false 同样可以改变属性的值
+该方法无法向对象中添加新属性,也无法删除旧的属性  实质是把属性描述对象的configurable变为false 同样可以改变属性的值
 
 #### Object.isSealed() 
 
@@ -299,7 +299,7 @@ Object.defineProperty(sealObject,"speed",{value:120,configurable:true});/ can't 
 
 #### Object.freeze()  
 
- 使对象无法添加新的属性，也无法删除旧的属性，而且也无法修改属性的值，使得该对象变成了常量
+ 使对象无法添加新的属性,也无法删除旧的属性,而且也无法修改属性的值,使得该对象变成了常量
 
 #### Object.isFrozen()
 
@@ -317,4 +317,4 @@ console.log(protoObject);    //但就protoObject对象本身而言仍然是个�
 console.log(Object.keys(createObject));   //Array [ "p" ]
 ```
 
-还有一件事就是如果对象的属性仍然是对象的话那么这些方法只能冻结属性指向的对象，而无法冻结对象本身的内容，就像const一样，虽然不能改变变量的内存地址但是仍然可以会改变其内容
+还有一件事就是如果对象的属性仍然是对象的话那么这些方法只能冻结属性指向的对象,而无法冻结对象本身的内容,就像const一样,虽然不能改变变量的内存地址但是仍然可以会改变其内容

@@ -34,7 +34,7 @@ nohup sh bin/mqbroker -n localhost:9876 &
 tail -f ~/logs/rocketmqlogs/broker.log 
 ```
 
-若启动mq失败，可以使用命令`cat nohup.out`查看具体原因
+若启动mq失败,可以使用命令`cat nohup.out`查看具体原因
 
 使用云服务器连接rocketmq若显示内网连接异常则修改conf文件夹下broker.conf文件
 

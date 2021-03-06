@@ -8,10 +8,10 @@
 
 - NOT NULL　         非空　保证包字段的不为为空
 - DEFAULT                默认    同于保证该字段具有默认值
-- PRIMARY KEY        主键    用于保证该字段的值具有唯一性，且非空
-- UNIQUE                  唯一   用于保证该字段的值具有唯一性 可以为空
-- CHECK                    检查约束（mysql不支持） 检查年龄 性别等等
-- FOREIGN KEY        外键    用于限制两个表的关系，用于保证该字段的值必须来自于主表所关联列的值
+- PRIMARY KEY      主键    用于保证该字段的值具有唯一性,且非空
+- UNIQUE                   唯一   用于保证该字段的值具有唯一性 可以为空
+- CHECK                     检查约束（mysql不支持） 检查年龄 性别等等
+- FOREIGN KEY        外键    用于限制两个表的关系,用于保证该字段的值必须来自于主表所关联列的值
 
 -----
 
@@ -96,7 +96,7 @@ show index from account;
 
 ```mysql
 #查看sql语句执行时的性能
-#根据id查询只需查询一行，而根据非主键（没有索引）查询需要遍历整个表
+#根据id查询只需查询一行,而根据非主键（没有索引）查询需要遍历整个表
 EXPLAIN select name from book WHERE id = 12;
 ```
 
@@ -130,16 +130,3 @@ auto_increment  自增
 alter table account MODIFY COLUMN id int auto_increment;
 #删除直接将auto_increment去掉即可
 ```
-
-
-
-
-
- 
-
-
-
-
-
-
-

@@ -19,9 +19,9 @@ Dom树的叶子
 浏览器提供原生document节点,代表整个文档, 而整个文档的第一层有两个节点,第一个是文档类型的节点(<!doctype html>)
 而第二个节点正是<html>标签 其中<html>标签构成了树结构的根节点,其他html标签节点都是他的下级节点
        //文档节点        nodeType表示节点的类型 返回的是一个整数  //Node对象定义了几个常量对应这些类型的值
-       document.nodeType===Node.DOCUMENT_NODE                         //9
+       document.nodeType === Node.DOCUMENT_NODE                         //9
        //元素节点
-       Element.nodeType ===Node.ELEMENT_NODE                          //1
+       Element.nodeType === Node.ELEMENT_NODE                          //1
        //属性节点
        Attr.nodeType === Node.ATTRIBUTE_NODE                          //2
        //文本节点
@@ -119,7 +119,7 @@ Dom树的叶子
         document.getElementById("div").childElementCount
         //返回第一个子元素（不包括文本节点和注释节点	）
        document.getElementById("div").firstElementChild;
-        //返回第一个子元素（如果父元素和子元素之间有空格或回车则会返回文本节点，得不到正确结果）
+        //返回第一个子元素（如果父元素和子元素之间有空格或回车则会返回文本节点,得不到正确结果）
        document.getElementById("div").firstChild;
     </script>
 </body>
@@ -143,3 +143,24 @@ document.getElementById("div").removeAttribute("class")//直接移出div中的cl
 | document.querySelector("p")                  | 文档中匹配指定的CSS选择器的***一个元素*** |
 | document.querySelectorAll("p")[0]            | NodeList                                  |
 
+### 表单
+
+```html
+<form action="" method="get" name="form">
+    <input type="text">
+    <input type="password">
+    <input type="submit" value="提交">
+</form>
+```
+
+```javascript
+let form = document.forms   //返回一个HTMLCollection集合 取得页面中所有表单,通过索引或者name来取得具体的表单
+document.forms[name]
+document.forms[0]           //返回具体表单具体内容的引用
+form.elements;              //返回表单中所有元素的集合 是一个有序列表,可以通过索引或者name属性来选取特定的表单字段
+form.element[1]             //<input type="password">
+```
+
+### 文本域表单有两种分别为input输入框和textarea
+
+可以通过form.elements[name].value="" 来设置文本域的初始值

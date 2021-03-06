@@ -2,7 +2,7 @@
 
 [TOC]
 
-## Servlet
+### Servlet
 
 ```java
 public interface Servlet {
@@ -94,7 +94,7 @@ session.getAttribute("message");
 
 ### ServletRequest和ServletConfig
 
-都是接口，且都含有ServletContext
+都是接口,且都含有ServletContext
 
 ### servlet的生命周期
 
@@ -136,7 +136,7 @@ public class HelloServlet implements Servlet {
 }
 ```
 
-Tomcat服务器启动时会创建servlet对象(通过反射创建)，且只会创建一次，该对象是单例的，当服务器关闭时，destroy方法会执行
+Tomcat服务器启动时会创建servlet对象(通过反射创建),且只会创建一次,该对象是单例的,当服务器关闭时,destroy方法会执行
 
 ```java
 package com.java.servlet;
@@ -155,7 +155,7 @@ public class ReflectCreateObject {
 }
 ```
 
-## jsp
+### jsp
 
 ### 九大内置对象
 
@@ -182,11 +182,11 @@ public class ReflectCreateObject {
 
 #### 重定向和请求转发之间的区别(sendRedirect和RequestDispatcher)
 
-首先请求转发是将同一个请求传给下一个页面 而重定向将一个新的请求传给页面，之前的请求生命周期已结束
+首先请求转发是将同一个请求传给下一个页面 而重定向将一个新的请求传给页面,之前的请求生命周期已结束
 
-请求转发是在同一个请求在服务器之间传递，即浏览器的地址栏不变，也叫服务器跳转 
+请求转发是在同一个请求在服务器之间传递,即浏览器的地址栏不变,也叫服务器跳转 
 
-重定向则是浏览器重新发送一个请求来访问跳转之后的资源，浏览器地址栏发生变化，也叫客户端跳转   
+重定向则是浏览器重新发送一个请求来访问跳转之后的资源,浏览器地址栏发生变化,也叫客户端跳转   
 
 #### session
 
@@ -231,9 +231,9 @@ response.addCookie(cookie);
 
 #### session和cookie的周期
 
-session会随着服务器的重启而销毁，也就是一次会话结束。客户端的关闭也会立即销毁session对象 
+session会随着服务器的重启而销毁,也就是一次会话结束。客户端的关闭也会立即销毁session对象 
 
-cookie不会随着服务器的重启而销毁，而默认是关闭客户端则会立即销毁，可以通过设置setMaxAge()来设置销毁时间，即使关闭客户端cookie也不会销毁 
+cookie不会随着服务器的重启而销毁,而默认是关闭客户端则会立即销毁,可以通过设置setMaxAge()来设置销毁时间,即使关闭客户端cookie也不会销毁 
 
 ### Jsp内置对象作用域  
 
@@ -273,9 +273,9 @@ ${applicationScope.name}
 //通过设置相应的域对象的范围来取得相应的值
 ```
 
-如果EL表达式要取得对象的内容应该使用.或者是[]，这里和js里对象的属性取得是一样的，如果属性是变量或者属性中含有空格或特殊字符，此时应该使用[]而不是.
+如果EL表达式要取得对象的内容应该使用.或者是[],这里和js里对象的属性取得是一样的,如果属性是变量或者属性中含有空格或特殊字符,此时应该使用[]而不是.
 
-**EL表达式只能在jsp页面中使用，无法在servlet中使用，也无法在HTML中单独使用**
+**EL表达式只能在jsp页面中使用,无法在servlet中使用,也无法在HTML中单独使用**
 
 ### JSTL表达式
 
@@ -289,7 +289,7 @@ Jsp Standard Tag Library   ***jsp 标准标签库***
 <%@ taglib prefix="c" tagdir="jar包地址"%>
 ```
 
-***prefix表示前缀，即匹配以c开头的语法***
+***prefix表示前缀,即匹配以c开头的语法***
 
 #### JSTL的优点
 
@@ -338,8 +338,8 @@ ${error}
 
 - Filter接口包括三个方法  default void init()  ,void foFilter() , default void destroy()  
 - 主要的方法就是doFilter() 且在实现该接口的类中必须重写该方法 而其他的两种方法可以不用重写(被default修饰) 
-- 和Servlet一样，每次服务器启动时都会通过反射机制且通过无参构造函数创建一个实例对象  
-- init方法和destroy方法只会执行一次，而doFilter则会执行多次 
+- 和Servlet一样,每次服务器启动时都会通过反射机制且通过无参构造函数创建一个实例对象  
+- init方法和destroy方法只会执行一次,而doFilter则会执行多次 
 
 #### Filter的主要功能 
 
@@ -372,7 +372,7 @@ ${error}
    
 3. 控制用户的访问权限  
 
-   ***description:***  用户请求下载资源时会检查用户是否登陆，若以登录则允许下载否则跳转到登陆页面
+   ***description:***  用户请求下载资源时会检查用户是否登陆,若以登录则允许下载否则跳转到登陆页面
 
    **Filter**
 
@@ -1095,7 +1095,7 @@ public class CharacterFilter implements Filter {
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
         <property name="jdbcUrl">jdbc:mysql://localhost/test?useSSL=false&amp;serverTimezone=UTC</property>
 
-        <!--若数据库中连接数不足时，一次向数据库服务器申请请求多个连接-->
+        <!--若数据库中连接数不足时,一次向数据库服务器申请请求多个连接-->
         <property name="acquireIncrement">5</property>
         <!--初始化数据库连接池的连接数量-->
         <property name="initialPoolSize">5</property>
@@ -1131,7 +1131,7 @@ public class DataSourceTest {
 
 首先导入jar包
 
-***ResultSetHandler接口是用来处理结果集，可以将查询到的结果转换为java对象***
+***ResultSetHandler接口是用来处理结果集,可以将查询到的结果转换为java对象***
 
 - BeanHandler          将结果映射成java对象 
 - BeanListHandler    将结果映射成List集合 

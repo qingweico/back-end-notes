@@ -10,7 +10,7 @@ NoSQL ： Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
 
 单进程
 
-redis默认16个库，下表从开始，初始化使用0号库
+redis默认16个库,下表从开始,初始化使用0号库
 
 大数据时代的三V ：Volume(海量) Variety(多样) Velocity(实时)
 
@@ -21,7 +21,7 @@ redis默认16个库，下表从开始，初始化使用0号库
 ```properties
 RDBMS:高度组织化结构化的数据
       结构化查询语言(SQL)
-      数据操纵语言，数据定义语言
+      数据操纵语言,数据定义语言
       严格的一致性
       基础事务
 NoSQL:代表的不仅仅是SQL
@@ -36,11 +36,11 @@ NoSQL:代表的不仅仅是SQL
 
 ### 分布式
 
-不同的多台服务器上面部署不同的服务模块(工程)，他们之间通过RPC(Remote Procedure Call  远程过程调用)/RMI之间通信和调用，对外提供服和组内协作
+不同的多台服务器上面部署不同的服务模块(工程),他们之间通过RPC(Remote Procedure Call  远程过程调用)/RMI之间通信和调用,对外提供服和组内协作
 
 ### 集群
 
-不同的多台服务器上面部署相同的服务模块，通过分布式调度软件进行统一的调度，对外提供访问和服务
+不同的多台服务器上面部署相同的服务模块,通过分布式调度软件进行统一的调度,对外提供访问和服务
 
 ### 分布式数据库中的CAP和BASE
 
@@ -102,7 +102,7 @@ type k          //查看k的数据类型
 
 ### String(字符串)（一key单value）
 
-string是redis最基本的类型，一个key对应一个value string是二进制安全的，redis的string可以包含任何数据，一个redis的string的value最多可以是512M
+string是redis最基本的类型,一个key对应一个value string是二进制安全的,redis的string可以包含任何数据,一个redis的string的value最多可以是512M
 
 ```java
 del k1           //删除k1
@@ -158,7 +158,7 @@ expire k 10;
 ```
 
 ```java
-setnx k 10 v;             //设置不存在的键的过期时间，若存在则设置失败
+setnx k 10 v;             //设置不存在的键的过期时间,若存在则设置失败
 ```
 
 -----
@@ -172,13 +172,13 @@ mget k1 k2 k3             //一次性获取多个值
 ```
 
 ```java
-msetnx k1 v1 k5 v5        //若存在已有的键，则设置失败，一个都不会生效
+msetnx k1 v1 k5 v5        //若存在已有的键,则设置失败,一个都不会生效
 ```
 
 ### set（集合) （无序且唯一  一key多value）
 
 ```java
-sadd set 1 2 1 2 3 3 //会去重，保证元素的唯一性
+sadd set 1 2 1 2 3 3 //会去重,保证元素的唯一性
 smember set
     =>
 1) "1"
@@ -313,7 +313,7 @@ ZRANGEBYSCORE zset  2 3 //获取元素按指定的score范围
 ZRANGEBYSCORE zset  2 (3     "(" 不包括xiabi
     =>
 1) "v2"
-ZRANGEBYSCORE zset  2 3 limit 0 1 //从结果集的下标0开始，选择一个元素
+ZRANGEBYSCORE zset  2 3 limit 0 1 //从结果集的下标0开始,选择一个元素
     =>
 1) "v2"
 ZREM zset v3  //删除元素
@@ -334,7 +334,6 @@ ZSCORE zset v1 //获取v1对应的score
 "1"
 ZREVRANK zset v2 //逆序获得元素的下标
 "0"
-ZREVRANGEBYSCORE zset 2 1 //逆序获取元素按照指定的score范围
-    
+ZREVRANGEBYSCORE zset 2 1 //逆序获取元素按照指定的score范围    
 ```
 

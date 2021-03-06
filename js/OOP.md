@@ -4,11 +4,11 @@
 
 ## oop
 
-javascript语言的对象体系不是基于类的，而是基于构造函数(constructor)和原型链(prototype)  一个构造函数可以生成多个实例对象
+javascript语言的对象体系不是基于类的,而是基于构造函数(constructor)和原型链(prototype)  一个构造函数可以生成多个实例对象
 
 构造函数有一下两个特点
 
-- 函数体内部使用this关键字，代表了所要生成的实例对象
+- 函数体内部使用this关键字,代表了所要生成的实例对象
 - 生成对象是时候要使用new命令                   
 
 ```javascript
@@ -23,7 +23,7 @@ console.log(vehicle.price);//100
 
 ### new命令
 
-为了保证构造函数与new命令一起使用，下面有两种解决办法
+为了保证构造函数与new命令一起使用,下面有两种解决办法
 
 ```javascript
 /*第一种使用严格模式*/
@@ -36,7 +36,7 @@ Student(); //此时会报错
 ```
 
 ```javascript
-/*第二种则是在在构造函数内部判断是否使用了new命令，如果没有则返回一个实例对象*/
+/*第二种则是在在构造函数内部判断是否使用了new命令,如果没有则返回一个实例对象*/
 function Student(name, age){
     if(!(this instanceof Student)){return new Student(name, age); }
     this.name = name;
@@ -45,7 +45,7 @@ function Student(name, age){
 ```
 
 ```javascript
-/*如果构造函数内部有return语句，且返回的不是对象，那么new命令则会忽略该return语句，返回this对象*/
+/*如果构造函数内部有return语句,且返回的不是对象,那么new命令则会忽略该return语句,返回this对象*/
 function People(){
     this.age=21;
     return {age:22}
@@ -94,8 +94,8 @@ let o = {
     foo:f,
     x:4
 };
-f();      //2 f函数单独执行，执行的环境为全局环境 this指的是window环境，所以this.x = window.x = 2
-o.foo();  //4 o.foo()执行的环境为对象o，所以this指代是对象o，所以this.x指的是o.x = 4
+f();      //2 f函数单独执行,执行的环境为全局环境 this指的是window环境,所以this.x = window.x = 2
+o.foo();  //4 o.foo()执行的环境为对象o,所以this指代是对象o,所以this.x指的是o.x = 4
 ```
 
 ### this使用场合
@@ -112,7 +112,7 @@ let way = {
         console.log(this); //该this会指向当前函数的运行环境即对象way
     }
 };
-way.get();//{get: ƒ}   this只能指向上一层的对象，而不能继承更多的层
+way.get();//{get: ƒ}   this只能指向上一层的对象,而不能继承更多的层
 ```
 
 ```javascript
@@ -153,7 +153,7 @@ solveObj.f1();  //{f1: ƒ} {f1: ƒ}
 ```
 
 ```javascript
-/*在严格模式下，如果函数内部的this变量指向了window，就会报错*/
+/*在严格模式下,如果函数内部的this变量指向了window,就会报错*/
 let count = 0;
 let inc = function(){
      //'use strict'; 报错
@@ -246,7 +246,7 @@ solveArr.f();
 
 #### Function.prototype.call()
 
-函数实例的方法用来绑定函数内部this的指向，即函数执行时所在的作用域，然后在指定的作用域内调用该函数
+函数实例的方法用来绑定函数内部this的指向,即函数执行时所在的作用域,然后在指定的作用域内调用该函数
 
 ```javascript
 let call = {};
@@ -258,14 +258,14 @@ console.log(callFunction.call(call) === call);//true  将当前函数的作用�
 ```
 
 ```javascript
-call函数的参数应该是一个对象，如果参数为空或者为null和undefined则默认传入全局对象
-call函数可以传入多个参数，第一个参数为对象，而其他则是函数调用时所用的参数
+call函数的参数应该是一个对象,如果参数为空或者为null和undefined则默认传入全局对象
+call函数可以传入多个参数,第一个参数为对象,而其他则是函数调用时所用的参数
 call的另一个应用是调用对象的原生方法
 ```
 
 #### Function.prototype.apply()
 
-apply方法和call方法差不多，唯一的区别是参数的传入，第一个参数都是this所要指向的那个对象 而apply剩下的所有的参数都以一个数组的形式作为参数传入
+apply方法和call方法差不多,唯一的区别是参数的传入,第一个参数都是this所要指向的那个对象 而apply剩下的所有的参数都以一个数组的形式作为参数传入
 
 ```javascript
 /*下面是利用apply方法找出数组元素最大值的例子*/
@@ -294,8 +294,8 @@ Array.prototype.slice.apply({0:1,length:1});
 
 #### Function.prototype.bind()
 
-如果回调函数是对象的方法，那么此时方法中的this不再指向对象所在的环境，而是指向的全局环境
-而如果非要指向对象环境，使用bind方法绑定即可
+如果回调函数是对象的方法,那么此时方法中的this不再指向对象所在的环境,而是指向的全局环境
+而如果非要指向对象环境,使用bind方法绑定即可
 
 ```javascript
     //绑定前
@@ -359,7 +359,7 @@ console.log(newAdd());         //20
 
 ### 对象的继承
 
-javascript的继承是通过原型对象(prototype)来实现的，而非是class类来完成
+javascript的继承是通过原型对象(prototype)来实现的,而非是class类来完成
 
 ```javascript
 function Animal(name){
@@ -372,7 +372,7 @@ new Animal("小白").walk();
 Animal.prototype.color = "white";//可以被所有实例共享
 ```
 
-原型链的终点是null，通过Object.getPrototypeOf()可以返回参数对象的原型
+原型链的终点是null,通过Object.getPrototypeOf()可以返回参数对象的原型
 
 #### constructor()构造器属性
 
@@ -414,7 +414,7 @@ console.log(new Sub().color);   //red
 
 #### javascript多重继承
 
-在js中不允许一个对象继承多个对象，但可以通过变通的方法来实现
+在js中不允许一个对象继承多个对象,但可以通过变通的方法来实现
 
 ```javascript
 function M1(){
@@ -441,8 +441,8 @@ console.log(s.world); //world
 #### Object对象相关的方法
 
 ```javascript
-# Object.getPrototypeOf()获取参数对象的原型，这是获取原型对象的标准方法
-# Object.setPrototypeOf()接受两个参数，前者是现有对象，后者是原型对象，为参数对象设置原型
+# Object.getPrototypeOf()获取参数对象的原型,这是获取原型对象的标准方法
+# Object.setPrototypeOf()接受两个参数,前者是现有对象,后者是原型对象,为参数对象设置原型
 # new命令可以使用Object.setPrototypeOf()方法模拟
 ```
 
@@ -459,7 +459,7 @@ console.log(setObject.foo); //foo
 ```
 
 ```javascript
-//只要实例对象处在参数对象的原型链上，就会返回true，除了直接继承null的对象
+//只要实例对象处在参数对象的原型链上,就会返回true,除了直接继承null的对象
 Object.prototype.isPrototypeOf(Object.create(null));//false
 ```
 
@@ -486,7 +486,7 @@ A.getName(); // 张三
 B.getName(); // 李四
 ```
 
-原型链可以使用`__proto__`很直观的表示 但它是一个内部属性，不应该对使用者暴露 应该使用getPrototypeOf和setPrototypeOf对原型对象的读写操作
+原型链可以使用`__proto__`很直观的表示 但它是一个内部属性,不应该对使用者暴露 应该使用getPrototypeOf和setPrototypeOf对原型对象的读写操作
 
 #### 获取实例对象obj的原型对象的方法有三种
 
@@ -510,14 +510,14 @@ console.log(p.constructor.prototype);
 console.log(c.constructor.prototype);
 console.log(p.constructor.prototype.constructor);
 console.log(c.constructor.prototype.constructor);
-//C的原型对象被改成了p 但实例对象c.constructor.prototype却没有指向p，所以在改变原型对象时，也要设置constructor的值，所以推荐使用第三种方法获取
+//C的原型对象被改成了p 但实例对象c.constructor.prototype却没有指向p,所以在改变原型对象时,也要设置constructor的值,所以推荐使用第三种方法获取
 ```
 
 #### Object.getOwnPropertyNames()
 
-<font style="color:purple;font-size:20px">Object.getOwnPropertyNames() 返回参数对象本身的所有属性（包括可遍历和不可遍历的），不包括继承的属性 而Object.keys() 只能返回可遍历的属性</font>
+<font style="color:purple;font-size:20px">Object.getOwnPropertyNames() 返回参数对象本身的所有属性（包括可遍历和不可遍历的）,不包括继承的属性 而Object.keys() 只能返回可遍历的属性</font>
 
-下面是一个获取参数对象所有的属性(包括本身的还时继承的，不可遍历的还是可以遍历的)
+下面是一个获取参数对象所有的属性(包括本身的还时继承的,不可遍历的还是可以遍历的)
 
 ```javascript
 function inheritedPropertyNames(obj){
@@ -553,7 +553,7 @@ function copyPropertiesForm(target,source){
 }
 ```
 
-下面是一种更简单的写法，是ES2017才引入的Object.getOwmPropertyDescriptors()
+下面是一种更简单的写法,是ES2017才引入的Object.getOwmPropertyDescriptors()
 
 ```javascript
 function copy(orig){
@@ -583,7 +583,7 @@ let funModel = (function(){
 })();
 let Bird = function(){};
 let bird = new Bird();
-funModel.isWalking(bird);//funModel此时会立即执行，返回一个对象
+funModel.isWalking(bird);//funModel此时会立即执行,返回一个对象
 bird.walk();             //He is can walk
 ```
 

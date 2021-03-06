@@ -10,9 +10,9 @@
 
 ### 常用的流
 
-流根据方向可以分为输入流和输出流（相对内存而言），输入流也叫Read(读),输出流也叫Writer(写)
+流根据方向可以分为输入流和输出流（相对内存而言）,输入流也叫Read(读),输出流也叫Writer(写)
 
-流根据类型分为字节流和字符流，前者一次读取一个字节，后者一次读取两个字节
+流根据类型分为字节流和字符流,前者一次读取一个字节,后者一次读取两个字节
 
 - FileInputStream
 - FileOutputStream
@@ -60,7 +60,7 @@ public class ByteStream {
     public static void main(String[] args) {
         FileInputStream fis = null;
         try {
-           String filePath = "src/io/temp.txt";//可以是相对路径，也可以是绝对路径
+           String filePath = "src/io/temp.txt";//可以是相对路径,也可以是绝对路径
            fis = new FileInputStream(filePath);
            int temp;
            while ((temp = fis.read()) != -1){
@@ -83,7 +83,7 @@ public class ByteStream {
 
 #### int read(byte[] bytes)
 
-读取数据之前在内存中准备一个字节数组，一次读取多个字节存入字节数组中，效率高。返回每次读取到数据的字节长度
+读取数据之前在内存中准备一个字节数组,一次读取多个字节存入字节数组中,效率高。返回每次读取到数据的字节长度
 
 ```java
 package io;
@@ -112,7 +112,7 @@ public class ByteStream {
 
 *![image-20200607142356003](https://pic.downk.cc/item/5ef3034214195aa594c461ab.png)*
 
-由于每次读到内存中的byte数组中的数据不会刷新而会覆盖，当读到最后的数据不足字节数组的长度时则会出现数据重复，因而可以使用方法new String(byte[] bytes,int offset,int length);来获取每次读到的有效数据长度
+由于每次读到内存中的byte数组中的数据不会刷新而会覆盖,当读到最后的数据不足字节数组的长度时则会出现数据重复,因而可以使用方法new String(byte[] bytes,int offset,int length);来获取每次读到的有效数据长度
 
 #### new String(byte[] bytes,int offset)
 
@@ -148,7 +148,7 @@ import java.io.IOException;
 public class ByteStream {
     public static void main(String[] args) throws IOException {
         String filePath = "src/io/temp";       //文件不存在则自动创建
-        FileOutputStream fos = new FileOutputStream(filePath,true);//true表示追加写，默认为false覆盖写
+        FileOutputStream fos = new FileOutputStream(filePath,true);//true表示追加写,默认为false覆盖写
         String s = "Hello World";
         byte[] bytes = s.getBytes();
         fos.write(bytes);
@@ -324,7 +324,7 @@ public class CharStream {
 }
 ```
 
-BufferedWriter和FileWriter使用方法差不多，前者可以换行
+BufferedWriter和FileWriter使用方法差不多,前者可以换行
 
 ### 使用BuffferedReader和BufferedWriter
 
@@ -373,7 +373,7 @@ BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(new FileOutputStrea
 
 ### PrintStream
 
-标准的输出流，默认以字节的方式打印到控制台
+标准的输出流,默认以字节的方式打印到控制台
 
 ```java
 PrintStream ps = System.out;
@@ -599,17 +599,17 @@ public class Io_ByteArray {
 - 网络操作：Socket
 - 新的输入/输出：NIO
 
-复制图片，视频，音频等：只能用字节流,而不能使用字符流
+复制图片,视频,音频等：只能用字节流,而不能使用字符流
 
 复制纯文本可以使用字符流.
 
-用字节流向文件中写入数据时，必须要转换为字节类型或用字节数组，比如字符串是直接写不进去的
+用字节流向文件中写入数据时,必须要转换为字节类型或用字节数组,比如字符串是直接写不进去的
 
 而用字符流时用字符串和字符都行
 
 字节流在使用后没有关闭写数据管道时仍然可以成功写入数据（带有缓冲区的除外）
 
-字符流在使用后没有关闭写数据管道时，此时写入数据失败，系统就会认为还有数据一直在等待中，使用flush方法强行写入
+字符流在使用后没有关闭写数据管道时,此时写入数据失败,系统就会认为还有数据一直在等待中,使用flush方法强行写入
 
 ### 通过键盘输入的两种方法
 

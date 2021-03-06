@@ -9,7 +9,7 @@
 ```
 
 ```shell
-#重新加载nginx配置文件，即在nginx启动时运行此命令才有效
+#重新加载nginx配置文件,即在nginx启动时运行此命令才有效
 [root@mycentos sbin] ./nginx -s reload
 ```
 

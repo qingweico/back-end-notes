@@ -8,13 +8,13 @@
 
 ### 什么是ioc（控制反转）
 
-首先IOC是Inversion of Controller即控制反转 它并不是一种新的技术而是一种新的编设计思想。原来创建对象的话需要使用关键字new，需要程序主动去寻找能够让程序正常运行的类 ，从而造成了类与类之间有很强的依赖关系，代码不够灵活，修改一个类可能会涉及很多类的修改。ioc的出现把创建对象的主动权交给了第三方即ioc容器，程序需要什么对象，ioc就给你什么对象，程序从原来的主动寻找对象到现在被提供对象，原来的依赖关系就没有了，现在类与类之间都依赖于ioc容器，靠ioc容器来建立它们之间的关系。
+首先IOC是Inversion of Controller即控制反转 它并不是一种新的技术而是一种新的编设计思想。原来创建对象的话需要使用关键字new,需要程序主动去寻找能够让程序正常运行的类 ,从而造成了类与类之间有很强的依赖关系,代码不够灵活,修改一个类可能会涉及很多类的修改。ioc的出现把创建对象的主动权交给了第三方即ioc容器,程序需要什么对象,ioc就给你什么对象,程序从原来的主动寻找对象到现在被提供对象,原来的依赖关系就没有了,现在类与类之间都依赖于ioc容器,靠ioc容器来建立它们之间的关系。
 
 ### DI（依赖注入）
 
-DI即Dependency Injection DI其实就是在程序运行期间动态地向某个对象提供它所需要的其他对象，而Spring正是使用反射来实现注入的
+DI即Dependency Injection DI其实就是在程序运行期间动态地向某个对象提供它所需要的其他对象,而Spring正是使用反射来实现注入的
 
-**虽然通过反射创建对象的方式的效率没有使用new关键字直接创建对象高，但是降低了程序之间的耦合性，即解耦，它使得 程序之间松散耦合，这样也方便测试，利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活。**
+**虽然通过反射创建对象的方式的效率没有使用new关键字直接创建对象高,但是降低了程序之间的耦合性,即解耦,它使得 程序之间松散耦合,这样也方便测试,利于功能复用,更重要的是使得程序的整个体系结构变得非常灵活。**
 
 ----
 
@@ -88,8 +88,8 @@ AnnotationConfigApplicationContext    //通过注解来创建ioc容器
 ioc核心容器的两大接口 ApplicationContext  BeanFactory
 
 ```properties
-ApplicationContext在创建ioc核心容器时采用立即加载的方式，即读取完配置文件之后就会立即创建对象
-BeanFactory在创建ioc核心容器时采用延迟加载的方式，即什么时候用到才会创建对象，读取完配置文件之后不会创建对象
+ApplicationContext在创建ioc核心容器时采用立即加载的方式,即读取完配置文件之后就会立即创建对象
+BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时候用到才会创建对象,读取完配置文件之后不会创建对象
 ```
 
 ### 三种创建bean对象的方式
@@ -140,7 +140,7 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式，即什么时
 
 ### bean的生命周期
 
-- 单例对象随着ioc容器的创建而创建随着容器的销毁而销毁(需要手动关闭ioc容器（使用close方法），销毁方法才会执行)
+- 单例对象随着ioc容器的创建而创建随着容器的销毁而销毁(需要手动关闭ioc容器（使用close方法）,销毁方法才会执行)
 
   ```java
   ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
@@ -150,7 +150,7 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式，即什么时
   applicationContext.close();
   ```
 
-- 多例对象则是ioc容器创建时不会创建对象，当什么时候用到时才会创建对象，而当对象没有引用时则被gc回收
+- 多例对象则是ioc容器创建时不会创建对象,当什么时候用到时才会创建对象,而当对象没有引用时则被gc回收
 
 -----
 
@@ -283,7 +283,7 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式，即什么时
 <context:annotation-config/>
 ```
 
-- @Component 用于把当前类注入Spring容器中（衍生以下三个注解，功能和作用一摸一样）
+- @Component 用于把当前类注入Spring容器中（衍生以下三个注解,功能和作用一摸一样）
 
   - @Controller    一般用在表现层
   - @Service         一般用在业务层
@@ -337,9 +337,9 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式，即什么时
 
   ![image-20200620211710439](https://pic.downk.cc/item/5f0ace9314195aa594182ac7.png)
 
-  当使用`@Autowried`注入数据时，但此时容器中存在两个数据类型都为AccountDao的Bean，此时会报错，当数据类型相同时，`@Autowried`会根据变量的名称来匹配相应的Bean，匹配成功则注入
+  当使用`@Autowried`注入数据时,但此时容器中存在两个数据类型都为AccountDao的Bean,此时会报错,当数据类型相同时,`@Autowried`会根据变量的名称来匹配相应的Bean,匹配成功则注入
 
-- @Qualifier(value = "")   指定注入bean的id 不能单独使用，必须要与@Autowired一起使用
+- @Qualifier(value = "")   指定注入bean的id 不能单独使用,必须要与@Autowired一起使用
 
 - @Resource(name = "")   直接注入bean的id 可以单独使用  （name不能省略）
 
@@ -558,7 +558,7 @@ public class TransactionManager {
 
 ### 动态代理
 
-特点:字节码随用随创建，随用随加载
+特点:字节码随用随创建,随用随加载
 
 作用:在不修改源码的基础上对已有方法进行增强
 
@@ -668,7 +668,7 @@ return (AccountService)Proxy.newProxyInstance(accountService.getClass().getClass
 
 ### AOP (Aspect Oriented Programmer 面向切面编程)
 
-作用: ***将程序中重复的代码抽取出来，在需要执行的时候使用动态代理技术，对在不修改源码的基础上对已有方法进行增强***
+作用: ***将程序中重复的代码抽取出来,在需要执行的时候使用动态代理技术,对在不修改源码的基础上对已有方法进行增强***
 
 优势：
 

@@ -15,3 +15,5 @@ Statistic
 Translation
 
 GoogleTranslation
+
+Fira Code

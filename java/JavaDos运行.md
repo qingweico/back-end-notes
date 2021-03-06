@@ -20,9 +20,9 @@ javac命令后面跟的是全限定类名
 
 然后再输入java 全限定类名  即可运行
 
-<font style="color:purple;font-size:20px">一定要返回上级目录才可以正常运行，因为一个类名的全称是包名+类名 所以当编译过后JVM会按照当前目录下寻找字节码文件(如果没有配置CLASSPATH路径)，而如果不返回上级目录，则会路径重复JVM会报出找不到或无法加载主类的错误 </font>
+<font style="color:purple;font-size:20px">一定要返回上级目录才可以正常运行,因为一个类名的全称是包名+类名 所以当编译过后JVM会按照当前目录下寻找字节码文件(如果没有配置CLASSPATH路径),而如果不返回上级目录,则会路径重复JVM会报出找不到或无法加载主类的错误 </font>
 
-<font style="color:purple;font-size:20px">如果配置了CLASSPATH路径，则jvm只会到环境变量下的路径寻找字节码文件，找不到则报错，不配置的话则会在当前目录下寻找，一般情况下没有必要配置CLASSPATH</font>
+<font style="color:purple;font-size:20px">如果配置了CLASSPATH路径,则jvm只会到环境变量下的路径寻找字节码文件,找不到则报错,不配置的话则会在当前目录下寻找,一般情况下没有必要配置CLASSPATH</font>
 
   <font style="color:red;font-size:20px">javap -c 源文件 反编译</font> 
 

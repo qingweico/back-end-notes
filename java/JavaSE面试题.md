@@ -15,7 +15,7 @@ public class Test{
     public static void main(String[] args)  {
        String a = "hello";
        String b = "hello";
-       System.out.println(a == b);  //true 直接赋值字符串时会把字符串储存在字符串常量池中，当再次赋值时会到常量池中寻找，找到会指向堆中的地址，找不到会在堆中重新开辟一块空间
+       System.out.println(a == b);  //true 直接赋值字符串时会把字符串储存在字符串常量池中,当再次赋值时会到常量池中寻找,找到会指向堆中的地址,找不到会在堆中重新开辟一块空间
        System.out.println(a.equals(b)); //true
    }
 }
@@ -42,18 +42,18 @@ public class String_Java {
         String s = "hello";                   
         String s1 = "he";
         String s2 = "llo";
-        String s3 = "he"+"llo";      //"he" 和"llo"都为字符串常量，在预编译时期“+”被优化
+        String s3 = "he"+"llo";      //"he" 和"llo"都为字符串常量,在预编译时期“+”被优化
         System.out.println(s == s3); //true 相当于直接把两个字符串常量自动合成为一个字符串常量
         System.out.println(s1 == (s2 + s1));//false
         //因为字符串+操作就是在程序运行时new了StringBuilder对象
-        //然后调用append()方法，拼接完成后再调用toString()方法返回一个String对象
+        //然后调用append()方法,拼接完成后再调用toString()方法返回一个String对象
     }
 }
 ```
 
 - 字符串和字符串常量是两个不同的概念
 
-- 字符串常量是储存在本地方法区，而字符串则储存在堆里(heap)
+- 字符串常量是储存在本地方法区,而字符串则储存在堆里(heap)
 
 ### lambad表达式
 
@@ -92,7 +92,7 @@ public class Test{
 }
 ```
 
-int包装类Integer的缓存区只有一个字节大小（-128~127），超过一个字节会重新开辟一块空间
+int包装类Integer的缓存区只有一个字节大小（-128~127）,超过一个字节会重新开辟一块空间
 
 ### 跳出多重循环
 
@@ -112,15 +112,13 @@ public class Test{
 
 ### native修饰符
 
-native代表java访问其他语言遍写的代码
-
-*![1589950395886](https://pic.downk.cc/item/5ef2f94214195aa594c2a1c8.png)*
+native代表java访问其他语言(C/C++)编写的代码
 
 ### &和&&的区别
 
-&& ：逻辑与 ，短路与  当第一个条件为false时，第二个条件不会再执行
+&& ：逻辑与 ,短路与  当第一个条件为false时,第二个条件不会再执行
 
-& ：无论第一个条件是否为false，都会执行第二个条件
+& ：无论第一个条件是否为false,都会执行第二个条件
 
 ```java
 public class Test{
@@ -141,17 +139,17 @@ public class Test{
 
 任何浮点类型不管占用多大的字节都要比整型容量大
 
-char和short虽然所占的字节数一样，因为char类型没有负数，可以取得比short更大的整数
+char和short虽然所占的字节数一样,因为char类型没有负数,可以取得比short更大的整数
 
 当byte,char,short没有超过各自的字面值大小时可以直接赋值
 
 当byte,char,short混合运算时都会转换为int类型再做运算
 
-多种数据类型混合运算时，先转换为最大的那种类型再做运算
+多种数据类型混合运算时,先转换为最大的那种类型再做运算
 
 #### 强制转换
 
-将大容量的数据类型转换为小容量的数据类型称为强制转换，会发生精度丢失
+将大容量的数据类型转换为小容量的数据类型称为强制转换,会发生精度丢失
 
 ```java
 public class Test{
@@ -174,16 +172,16 @@ System.out.println((byte)a); //127
 
 正数的反码和补码是其本身
 
-负数的反码是除符号位全部取反，补码为反码加一
+负数的反码是除符号位全部取反,补码为反码加一
 
-在计算机系统中，数值一律采用补码的形式储存
+在计算机系统中,数值一律采用补码的形式储存
 
 计算(byte)数值的原码：8  直接计算 0000 1000
 
 计算负数的原码：
 
-- 先计算补码    该负数对应的正数的原码所有位都取反包括最高位，再加一，得到该负数补码
-- 然后补码减一，除了最高位全部取反即可
+- 先计算补码    该负数对应的正数的原码所有位都取反包括最高位,再加一,得到该负数补码
+- 然后补码减一,除了最高位全部取反即可
 
 ```java
 public class Test{
@@ -191,7 +189,7 @@ public class Test{
         byte a = -68;
         if(a < 0){;
            a += 256;           /*byte类型的256为0 等价于    a = (byte) (a  + 256) +=操作符 会进行自动强制转换
-                               byte与int混合运算时byte类型的a会转换为int类型的不会发生精度丢失即还是-68加上256即为                                  188，此时188为int类型 原码为00000000 00000000 00000000 1011 1100
+                               byte与int混合运算时byte类型的a会转换为int类型的不会发生精度丢失即还是-68加上256即为                                  188,此时188为int类型 原码为00000000 00000000 00000000 1011 1100
                                强转为byte类型为1011 1100(补码)
                                              1011 1011(反码)
                                              1100 0100(原码) 即为-68*/
@@ -207,22 +205,22 @@ public class Test{
 
 byte < short(char) < int < long < float < double
 
-### 静态变量，静态方法和静态代码块以及构造方法的执行顺序
+### 静态变量,静态方法和静态代码块以及构造方法的执行顺序
 
-静态变量最先执行，然后执行静态代码块，接着执行静态方法，最后执行构造方法
+静态变量最先执行,然后执行静态代码块,接着执行静态方法,最后执行构造方法
 
 ### StringBuffer和StringBuilder的区别
 
-***StringBuffer线程安全 但是执行速度慢(相对于StringBuilder而言)***
-***StringBuilder线程不安全 但是执行速度快(相对于StringBuffer而言)***    
+StringBuffer线程安全 但是执行速度慢(相对于StringBuilder而言)
+StringBuilder线程不安全 但是执行速度快(相对于StringBuffer而言)    
 
 ##### 执行效率StringBuilder>StringBuffer>String  
 
-***单线程操作字符串缓冲区下操作大量数据使用StringBuilder*** 
+单线程操作字符串缓冲区下操作大量数据使用StringBuilder 
 
-***多线程下字符串缓冲区下操作大量数据使用StringBuffer***
+多线程下字符串缓冲区下操作大量数据使用StringBuffer
 
-***StringBuffer内部被synchronized关键字修饰，执行效率会慢于StringBuilder***
+StringBuffer内部被synchronized关键字修饰,执行效率会慢于StringBuilder
 
 ### 常见的加密算法有哪些？并说明一种
 
@@ -259,11 +257,11 @@ System.out.println("明文" + plainText + "加密之后的密文是" + cipherTex
 
 ### java内存结构
 
-- 栈内存：用于储存局部变量，数据使用完后，空间会自动释放
+- 栈内存：用于储存局部变量,数据使用完后,空间会自动释放
 
 - 堆内存：用来储存引用类型变量的内容
 
-- 方法区：静态成员，构造函数，常量池和线程池
+- 方法区：静态成员,构造函数,常量池和线程池
 
 - 本地方法区：系统占用
 

@@ -12,16 +12,16 @@ str = str.charAt(0); //"h" 获取索引为0的元素
 ```javascript
 str = str.slice(1,6); "ello"     
 =>
-str = str.substring(1,6); "ello"  //获取索引1到6之间的元素，不包括6 ，且都不会改变原来的字符串
+str = str.substring(1,6); "ello"  //获取索引1到6之间的元素,不包括6 ,且都不会改变原来的字符串
 ```
 
 ```javascript
 str = str.toLowerCase(); //大写所有的字符
-str = str.toUpperCase(); //小写所有的字符，且都不改变原来的字符串
+str = str.toUpperCase(); //小写所有的字符,且都不改变原来的字符串
 ```
 
 ```javascript
-str = str.trim();//移出字符串前面的空格，不改变原有的字符串
+str = str.trim();//移出字符串前面的空格,不改变原有的字符串
 ```
 
 ```javascript
@@ -32,7 +32,7 @@ let day = new Date().getDate();       //得到当前日期
 
 ```javascript
 let arr = [];
-arr = str.split("");//将字符串分割为字符数组，且不会改变原来的字符串
+arr = str.split("");//将字符串分割为字符数组,且不会改变原来的字符串
 str;//"hello"
 arr;//Array(5) [ "h", "e", "l", "l", "o" ]
 ```
@@ -51,7 +51,7 @@ String.fromCharCode(97); //a  返回该UniCode编码对应的字符
 ```javascript
 /*字符串匹配*/
 let str="Lisa Jim Tom";
-str.match("Tom")//Tom    匹配成功则返回该子串，否则返回null
+str.match("Tom")//Tom    匹配成功则返回该子串,否则返回null
 /*匹配正则*/
 let regexp = /Jim/;
 str.match(regexp);//Jim
@@ -79,5 +79,5 @@ function removeRepeat(str){
 ### slice()  substr() substring() 参数为负的情况
 
 - slice参数为负的情况下将负的参数加上字符串长度 
-- substr会将第一个负的参数加上字符串长度，第二个负的参数变为0 
+- substr会将第一个负的参数加上字符串长度,第二个负的参数变为0 
 - substring会将所有的负的参数变为0 

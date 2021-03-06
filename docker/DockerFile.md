@@ -6,14 +6,14 @@
 
 ### dockerFile
 
-dockerFile是用来构建docker镜像的构建文件，是由一系列命令或者参数构成的脚本
+dockerFile是用来构建docker镜像的构建文件,是由一系列命令或者参数构成的脚本
 
 ### docker语法规则
 
 - 每条保留字指令都必须是大写字母且后面至少要跟一个参数
 - 指令按照从上到下顺序执行
 - `#`表示注释
-- 每条指令都会创建一个新的镜像层，并对镜像层提交
+- 每条指令都会创建一个新的镜像层,并对镜像层提交
 
 ### docker体系结构
 
@@ -28,7 +28,7 @@ dockerFile是用来构建docker镜像的构建文件，是由一系列命令或�
 - ADD                 将宿主机目录下的文件复制到镜像中并可以自动解压tar包和处理URL
 - COPY               复制文件或目录到镜像中
 - COLUME         容器数据卷用来数据保存和持久化工作
-- CMD                指定一个容器启动时要运行的命令且DockerFile中可以有多个CMD命令，但只有最后一个生效；CMD命令会被docker  run后面的命令替换
+- CMD                指定一个容器启动时要运行的命令且DockerFile中可以有多个CMD命令,但只有最后一个生效；CMD命令会被docker  run后面的命令替换
 
 ```java
 CMD ["catalina.sh", "run"]
@@ -39,7 +39,7 @@ CMD ["catalina.sh", "run"]
 docker run -it tomcat ls -l 
 ```
 
-- ENTRYPOINT  和CMD作用样但是会在原来的命令上追加命令，即所有的命令会一起起作用
+- ENTRYPOINT  和CMD作用样但是会在原来的命令上追加命令,即所有的命令会一起起作用
 - ONBUILD        被继承镜像的(父镜像)dockerFile会在子镜像运行时被触发一系列命令
 
 dockerFile_father

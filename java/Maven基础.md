@@ -83,7 +83,7 @@ MAVEN_HOME: E:\maven\apache-maven-3.6.3
 Path: E:\maven\apache-maven-3.6.3\bin
 ```
 
-- 在Maven根目录下conf文件下找到settings设置本地仓库，默认是在用户目录下.m2文件夹下
+- 在Maven根目录下conf文件下找到settings设置本地仓库,默认是在用户目录下.m2文件夹下
 
   ```xml
   <localRepository>E:\maven\repository</localRepository>
@@ -138,7 +138,7 @@ Path: E:\maven\apache-maven-3.6.3\bin
      </profiles>
    ```
    
-- Maven内置的Tomcat是tomcat6，如果JDK版本过低的话会出现运行不兼容的情况而报错
+- Maven内置的Tomcat是tomcat6,如果JDK版本过低的话会出现运行不兼容的情况而报错
 
   - 在pom.xml中引入tomcat7或以上版本的依赖
   - 或者在pom.xml中引入jdk8及其以上的依赖
@@ -175,4 +175,4 @@ Path: E:\maven\apache-maven-3.6.3\bin
 
 - 其次一定要把c3p0-config.xml文件放在src的根目录下
 
-- 最后最重要的一点是一定要把src目录设置为Source root 因为Maven工程在创建后的src文件夹并不会被默认为java源文件，所以需要手动设置，不然会因为找不到src源文件下的c3p0-config.xml文件而报错
+- 最后最重要的一点是一定要把src目录设置为Source root 因为Maven工程在创建后的src文件夹并不会被默认为java源文件,所以需要手动设置,不然会因为找不到src源文件下的c3p0-config.xml文件而报错

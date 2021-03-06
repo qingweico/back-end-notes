@@ -1,5 +1,6 @@
 ```shell
 #start.sh
+#/bin/bash
 nohup java -jar /home/java/o2o-0.0.1-SNAPSHOT.war &
 ```
 
