@@ -99,7 +99,7 @@ int包装类Integer的缓存区只有一个字节大小（-128~127）,超过一�
 ```java
 public class Test{
     public static void main(String[] args) {
-        flag:
+       flag:
        for(int i = 1;i < 10;i++){
            for(int j = 0;j < 10;j++){
                System.out.println(j);
@@ -214,7 +214,7 @@ byte < short(char) < int < long < float < double
 StringBuffer线程安全 但是执行速度慢(相对于StringBuilder而言)
 StringBuilder线程不安全 但是执行速度快(相对于StringBuffer而言)    
 
-##### 执行效率StringBuilder>StringBuffer>String  
+#### 执行效率StringBuilder>StringBuffer>String  
 
 单线程操作字符串缓冲区下操作大量数据使用StringBuilder 
 

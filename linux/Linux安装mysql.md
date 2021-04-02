@@ -66,10 +66,16 @@ chown mysql:mysql /var/lib/mysql -R
 [root@mycentos ~] systemctl enable mysqld
 ```
 
+### 开启mysql服务
+
+```bash
+service mysqld start
+```
+
 ### 查看数据库密码
 
 ```shell
-cat /var/log/mysqld.log | grep password  ccth!RNF.9VE
+cat /var/log/mysqld.log | grep password
 ```
 
 ### 登陆数据库（第一次登陆使用系统生成的密码,不便于记忆）
@@ -145,13 +151,22 @@ vim /etc/profile
 ```
 
 ```shell
-#配置环境变量
-JAVA_HOME=/use/local/java/jdk-11.0.8
-PATH=/use/local/java/jdk-11.0.8/bin:$PATH
+# java variable
+JAVA_HOME=/usr/local/java/jdk-11.0.8
+PATH=/usr/local/java/jdk-11.0.8/bin:$PATH
 export JAVA_HOME PATH
 ```
 
 ```shell
-#让配置生效
+# 让配置生效
 source /etc/profile
 ```
+
+### 安装maven
+
+```bash
+# maven variable
+MAVEN_HOME=/usr/local/apache-maven-3.6.3
+export PATH=${MAVEN_HOME}/bin:${PATH}
+```
+

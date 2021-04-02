@@ -23,21 +23,24 @@ yum install centos-release-scl
 ```
 
 ```shell
-yum install devtoolset-7-gcc*
+yum install devtoolset-7 -y
 ```
 
 设置devtoolset-7 为默认的gcc编译器
 
 ```shell
+# 临时切换系统的gcc版本
 scl enable devtoolset-7 bash
 ```
 
 ```shell
-vim /etc/profile
+# 永久切换系统的gcc版本
+echo "source /opt/rh/devtoolset-9/enable" >>/etc/profile
 ```
 
-```shell
-source /opt/rh/devtoolset-7/enable
+```bash
+# 让配置生效
+source /etc/profile
 ```
 
 在redis-6.0.5目录下更改redis.conf配置文件,找到general下的deamonize,将`no`修改为`yes`（以后台方式运行）,保存退出

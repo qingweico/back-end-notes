@@ -39,7 +39,7 @@ fi
 ```
 
 ```shell
-# /bin/bash
+#/bin/bash
 c=10
 cat file.txt|
 while read line

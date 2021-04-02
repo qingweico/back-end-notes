@@ -6,10 +6,15 @@
 
 docker:解决了运行环境和配置问题的软件容器,方便做持续继承并有助于整体发布的<font style="color:purple;font-size:20px">容器虚拟化技术</font>
 
-```java
-//查看Linux内核版本
+```bash
+# 查看Linux系统版本
 cat /etc/redhat-release
 //CentOS Linux release 7.8.2003 (Core)
+```
+
+```bash
+# 查看Linux内核版本
+uname -r
 ```
 
 ### docker的基本组成
