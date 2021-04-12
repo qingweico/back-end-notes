@@ -257,7 +257,7 @@ console.log(callFunction() === window);       //true
 console.log(callFunction.call(call) === call);//true  将当前函数的作用域绑定到call对象上
 ```
 
-```javascript
+```properties
 call函数的参数应该是一个对象,如果参数为空或者为null和undefined则默认传入全局对象
 call函数可以传入多个参数,第一个参数为对象,而其他则是函数调用时所用的参数
 call的另一个应用是调用对象的原生方法

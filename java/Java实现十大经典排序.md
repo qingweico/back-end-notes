@@ -35,6 +35,26 @@ public class BubbleSort {
     }
 ```
 
+```c++
+void bubble_sort(vector<int> &nums, int n) {
+    bool swapped;
+    for (int i = 1; i < n; ++i) {
+        swapped = false;
+        for (int j = 1; j < n - i + 1; ++j) {
+            if (nums[j] < nums[j - 1]) {
+                swap(nums[j], nums[j - 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) {
+            break;
+        }
+    }
+}
+```
+
+
+
 <font style="color:purple;font-size:20px">时间复杂度为：O(n2) 空间复杂度：O(1)  非稳定排序  原地排序</font>
 
 ----
@@ -69,7 +89,7 @@ public class SelectSort {
 
 ### 插入排序
 
-核心思想：将数组分为两部分。左边为有序的部分，而右边为无序的部分。第一次将第一个元素和后面的元素分开，开始从无序的部分开始遍历，即从数组的第二的元素开始遍历(从右向左遍历)，若当前元素小于前一个元素则交换。然后从数组的第三个元素开始遍历，倒数第一个元素结束
+核心思想：将数组分为两部分。左边为有序的部分，而右边为无序的部分。第一次将第一个元素和后面的元素分开，开始从无序的部分开始遍历，即从数组的第二的元素开始遍历(从右向左遍历)，若当前元素小于前一个元素则交换。然后从数组的第三个元素开始遍历，··倒数第一个元素结束
 
 ```java
 public class InsertSort {
@@ -88,6 +108,16 @@ public class InsertSort {
         }
     }
 ```
+
+```c++
+for (int i = 0; i < n; ++i) {
+	for (int j = i; j > 0 && nums[j] < nums[j-1]; --j) {
+		swap(nums[j], nums[j-1]);
+	}
+}
+```
+
+
 
 <font style="color:purple;font-size:20px">时间复杂度为：O(n2) 空间复杂度：O(1) 稳定排序  原地排序</font>
 
@@ -163,6 +193,29 @@ public class MergeSort {
     }
 ```
 
+```c++
+void merge_sort(vector<int>& nums, int l, int r ,vector<int>& tmp) {
+    if(l + 1 >= r) return;
+    int m = l + ((r - l) >> 1);
+    meger_sort(nums, l, m, tmp);
+    meger_sort(nums, m, r, tmp);
+
+    int p = l, q = m, i = l;
+    while(p < m || q < r) {
+        if(q >= r || (p < m && nums[p] <= nums[q])) {
+            tmp[i++] = nums[p++];
+        }else {
+            tmp[i++] = nums[q++];
+        }
+    }
+    for(int i = l;i < r;i++) {
+        nums[i] = tmp[i];
+    }
+}
+```
+
+
+
 <font style="color:purple;font-size:20px">时间复杂度为：O(nlogn) 空间复杂度：O(n) 稳定排序 非原地排序</font>
 
 -----
@@ -196,7 +249,25 @@ public class QuickSort {
     }    
 ```
 
-<font style="color:purple;font-size:20px">时间复杂度为：O(nlogn) 空间复杂度：O(logn) 非稳定排序 原地排序</font>
+```c++
+void quick_sort(vector<int>& nums, int l , int r) {
+    if(l + 1 >= r) return;
+    int first = l, last = r - 1, key = nums[first];
+    while(first < last) {
+        while(first < last && nums[last] >= key) {
+            last--;
+        }
+        nums[first] = nums[last];
+        while(first < last && nums[first] <= key) {
+            first++;
+        }
+        nums[last] = nums[first];
+    }
+    nums[first] = key;
+    quick_sort(nums, l, first);
+    quick_sort(nums,first + 1, r);
+}
+```
 
-----
+<font style="color:purple;font-size:20px">时间复杂度为：O(nlogn) 空间复杂度：O(logn) 非稳定排序 原地排序</font>
 

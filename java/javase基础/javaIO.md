@@ -14,6 +14,8 @@
 
 流根据类型分为字节流和字符流,前者一次读取一个字节,后者一次读取两个字节
 
+按照流是否直接与特定的地方（如磁盘、内存、设备等）相连,分为节点流和处理流两类
+
 - FileInputStream
 - FileOutputStream
 - FileReader
@@ -571,7 +573,7 @@ public class Io_LineNumberReader {
 
 ### ByteArrayOutputStream
 
-内存操作流：数据在内存中转一圈
+内存操作流:数据在内存中转一圈
 
 ```java
 package io;
@@ -592,14 +594,14 @@ public class Io_ByteArray {
 }
 ```
 
-- 磁盘操作：File
-- 字节操作：InputStream 和 OutputStream
-- 字符操作：Reader 和 Writer
-- 对象操作：Serializable
-- 网络操作：Socket
-- 新的输入/输出：NIO
+- 磁盘操作:File
+- 字节操作:InputStream 和 OutputStream
+- 字符操作:Reader 和 Writer
+- 对象操作:Serializable
+- 网络操作: Socket
+- 新的输入/输出:NIO
 
-复制图片,视频,音频等：只能用字节流,而不能使用字符流
+复制图片,视频,音频等:只能用字节流,而不能使用字符流
 
 复制纯文本可以使用字符流.
 

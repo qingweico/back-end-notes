@@ -291,9 +291,9 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 `mv` 重命名文件或者移动文件
 
-当在同一个目录下移动文件就是重命名  `mv oldFileName   newFileName`
+当在同一个目录下移动文件就是重命名  `mv oldFileName newFileName`
 
-当前后目录不同时就是移动文件夹  `mv  oldFileName   /root/`；将oldFileName移动到root目录下  
+当前后目录不同时就是移动文件夹  `mv oldFileName /root/`;将oldFileName移动到root目录下  
 
 #### 查看文件
 
@@ -355,15 +355,15 @@ less指令
 
 #### head&tail
 
-`head 文件 `             查看文件的前（默认）10行
+`head 文件 `               查看文件的前（默认）10行
 
 `head -n N 文件`  查看文件的前N行
 
-`tail 文件`            查看文件的后（默认）10行
+`tail 文件`               查看文件的后（默认）10行
 
-`tail -n M 文件` 查看文件的后M行
+`tail -n M 文件`  查看文件的后M行
 
-`tail -f  文件`  ***实时追踪该文档的所有更新   工作中很常用***   
+`tail -f  文件`     ***实时追踪该文档的所有更新   工作中很常用***   
 
 #### ln指令 （软连接）
 
@@ -554,6 +554,13 @@ find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下
 `tar -cjf   压缩后的文件名   源文件`  生成.tar.bz2的压缩文件
 
 `tar -xjf` 解压以.tar.bz2结尾的压缩文件
+
+### 排序类
+
+```bash
+# ip.txt,每行一条ip记录,共若干行,已排好序,统计出现次数最多的前3个ip及其次数
+uniq -c ip.txt | sort -nr | head -n 3
+```
 
 ## Linux组管理
 
@@ -793,9 +800,9 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 ### 监控网络状态
 
-`netstat -anp` : 查看系统所有的网络服务       `-an`:按一定顺序排列输出 `-p` :显示哪个进程在调用
+`netstat -anp` : 查看系统所有的网络服务 `-an`:按一定顺序排列输出 `-p` :显示哪个进程在调用
 
-`netstat -anp | grep 网络服务名称`   :查看单个网络服务
+`netstat -anp | grep 网络服务名称`: 查看单个网络服务
 
 ## rpm
 
