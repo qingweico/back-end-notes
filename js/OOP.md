@@ -335,7 +335,7 @@ counter.inc();               //此时this指向了counter对象
 console.log(counter.count);  //1 count = 0;
 
 let f = counter.inc;
-f()                       //此时this却指向了window
+f()                         //此时this却指向了window
 console.log(count);         //1  counter.count = 0;
 
 let bind = counter.inc.bind(counter);

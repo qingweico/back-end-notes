@@ -431,6 +431,8 @@ source ~/.bashrc
 
 `cal 年份` 显示一年的日历
 
+`timedatectl set-time 2018-01-03 23:00:00` 设置当前系统时间
+
 ### 搜寻查找类
 
 `find 【目录】 查找类型 文件名`   
@@ -629,7 +631,7 @@ rwx作用目录
 
 `chmod u=rwx,g=rx,o=x  文件目录名`  将该文件的权限修改为 rwxr-x--x
 
-`chmod  o+w 文件目录名`  增加其他人对该文件读的权限
+`chmod o+w 文件目录名`  增加其他人对该文件读的权限
 
 `chmod a-x ` 移出所有人对该文件的执行权限
 
@@ -714,6 +716,8 @@ rwx作用目录
 `setup` 配置网络
 
 `mount` 挂载命令
+
+`tcpdump -nn -i eth0 port 80  `      对网络上的数据包进行截获的包分析工具
 
 ## 进程管理
 
@@ -800,7 +804,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 ### 监控网络状态
 
-`netstat -anp` : 查看系统所有的网络服务 `-an`:按一定顺序排列输出 `-p` :显示哪个进程在调用
+`netstat -anp` : 查看系统所有的网络服务 `-an`:按一定顺序排列输出 `-p` :显示哪个进程在调用  `-t ` : 显示TCP传输协议的连线状况
 
 `netstat -anp | grep 网络服务名称`: 查看单个网络服务
 
@@ -813,7 +817,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 ```shell
 rpm -qa | grep 包名;查询rpm安装包
 rpm -e --nodeps 包名;强行卸载rpm安装包  erase
-rpm -ivh rmp 包全名;安装rpm文件
+rpm -ivh rmp包全名;安装rpm文件
 ```
 
 `-i`代表安装(install)

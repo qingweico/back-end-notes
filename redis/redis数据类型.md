@@ -12,9 +12,15 @@ NoSQL ： Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
 
 redis默认16个库,下表从开始,初始化使用0号库
 
-大数据时代的三V ：Volume(海量) Variety(多样) Velocity(实时)
+大数据时代的三V : Volume(海量) Variety(多样) Velocity(实时)
 
 互联网三高：高性能 高可用 高扩展 
+
+高性能:响应(低延迟) 吞吐(高吞吐量 高并发)
+
+TPS QPS
+
+amdahl定律
 
 ### RDBMS和NoSQL的区别
 

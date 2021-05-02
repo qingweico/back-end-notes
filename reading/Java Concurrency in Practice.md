@@ -68,13 +68,24 @@ Java内存模型要求,变量的读取操作和写入操作都必须是原子操
 
 加锁的含义不仅仅局限于互斥行为,还包括内存可见性,所有执行读操作或者写操作的线程都必须在同一个锁上同步
 
-volatile变量:telephone_receiver::当把变量声明为volatile类型后,编译器和运行时都会注意到这个变量是共享的,因此不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会缓存在寄存器或者对其他处理器不可见的地方,因此在读取volatil类型的变量时总会返回最新写入的值
+volatile的特性:
+
+- 保证了不同线程对这个变量进行操时的可见性, 即一个线程修改了某个变量的值, 这个新值对其他线程来说是立即可见的(实现可见性)
+- 禁止进行指令重排序(实现有序性)
+
+volatile变量:telephone_receiver::当把变量声明为volatile类型后,编译器和运行时都会注意到这个变量是共享的,因此不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会缓存在寄存器或者对其他处理器不可见的地方,因此在读取volatile类型的变量时总会返回最新写入的值
+
+volatile变量的内存可见性是基于内存屏障(Merry Barrier)实现的, JMM内部会有指令重排, 并且会有as-if-serial和happen-before的理念来保证指令的正确性
+
+内存屏障就是基于4个基于汇编级别的关键字来禁止指令重排序的
 
 volatile变量不会造成线程阻塞,因此volatile是一种比synchronized关键字更轻量级的同步机制
 
 在当前大多数处理器架构上, 读取volatile变量的开销只比读取非volatile变量的开销略高一些
 
 synchronized在内存可见性上的作用比volatile变量更强
+
+加锁 （synchronized 悲观锁 互斥锁）并发执行 --------> 序列化执行
 
 怎么理解volatile变量(volatile是怎么保证多个线程对被修饰变量的可见性): 从内存可见性的角度来看,写入volatile变量相当于退出同步代码块(即monitorexit 将本地缓存的变量值刷新到主存),而读取volatile变量就相当于进入同步代码块(即monitorenter 从主存中读取最新的值到本地缓存中)
 
@@ -145,6 +156,15 @@ newFixedThreadPool和newSingleThreadPool在默认情况下将使用一个无界�
 
 newCachedThreadPool工厂方法中使用了SynchronousQueue
 
+CPU工作线程数(线程池中的线程数量)设多少合适?
+N<sub>threads</sub> = N<sub>CPU</sub>  * U<sub>CPU</sub>  * (1 + W/C)
+
+- N<sub>CPU</sub> 是处理器的核数目, 可以通过Runtime.getRuntimr().availableProcessors()得到
+
+- U<sub>CPU</sub>是期望的CPU利用率(该值应该介于0-1之间)
+
+- W/C是等待时间与计算时间的比率
+
 ## 13. 显式锁
 
 在jdk5.0之前,在协调对共享对象的访问时可以使用的机制只有synchronized和volatile 在jdk5.0之后增加了一种新的机制: ReentrantLock
@@ -165,11 +185,11 @@ Lock提供了一种可轮询、无条定时的以及可中断的锁获取操作
 
 独占锁是一种悲观技术 
 
-硬件对并发的支持:ng_man:: cas操作 cpu本身有指令支持   `cmpxchg ` , 其不支持原子性, OS和JVM使用这些指令来实现锁和并发的数据结构, 但是在JDK5之前 Java还不能直接使用这些指令
+硬件对并发的支持:ng_man:: cas操作 cpu本身有指令支持   `cmpxchg ` (汇编指令), 其不支持原子性, OS和JVM使用这些指令来实现锁和并发的数据结构, 但是在JDK5之前 Java还不能直接使用这些指令
 
 cas: 借助冲突检查机制来判断在更新过程中是否存在来自其他线程的干扰, 如果存在, 这个操作将失败,并且可以重试(也可以不重试)
 
-cas是一种乐观的技术
+cas(Compare And Set / Compare And Swap)是一种乐观的技术
 
 关于cas失败重试问题: 如果cas失败时不执行任何操作, 那么是一种明智的做法,当cas失败时,意味着其他线程已经完成了你想要执行的操作
 
@@ -178,6 +198,25 @@ cas是一种乐观的技术
 cas不一定就比悲观锁效率高,取决于单个线程的执行时间以及等待线程的数量
 
 cas的主要缺点是: 它将使调用者处理竞争问题(通过重试、回退、放弃),而在锁中能自动处理竞争问题(线程在获得锁之前将一直阻塞)
+
+cas存在的问题: ABA问题
+
+- 版本号(AtomticStampedReference)
+-  使用 Boolean(AtomticMarkableReference)标记
+
+LOCK_IF_MP cmpxchg === lock cmpxchg 
+
+单个cpu不用加lock
+
+lock优先锁定cache line 其次锁定北桥信号
+
+能用synchronized解决问题的 优先使用synchronized
+
+CFS(操作系统线程调度算法)
+
+JDK1.5之后synchronized内部有锁升级的过程 ,偏向锁 --->自旋锁(轻量级cas锁)---->重量级锁（悲观排队锁）
+
+内存屏障 (memory barrier) lfency sfency mfency
 
 JVM对cas的支持: 在原子变量类(java.util.concurrent.atomic)中使用了这些底层的JVM支持为数字类型和引用类型提供一种高效的cas操作,而在java.util.concurrent中的大多数类在实现时则直接或者间接地使用了这些原子变量
 
