@@ -14,7 +14,7 @@ g++ -o HelloWorld.o -c HelloWorld.s
 ```
 
 ```shell
-#连接器阶段
+#链接器阶段
 gcc -o Helloworld.exe HelloWorld.o
 ```
 
