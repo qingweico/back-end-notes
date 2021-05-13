@@ -28,7 +28,7 @@ yum remove git
 
 ```bash
 # cd
-cd git-2.30.0.tar.gz
+cd cd git-2.30.0
 ```
 
 ```bash
