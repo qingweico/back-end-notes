@@ -292,7 +292,7 @@ SELECT COUNT(*),MIN(salary),sex from job where `name` REGEXP '[^c]' GROUP BY sex
 #### 等值连接 （取两表及两表以上交集的部分）(sql92)
 
 ```mysql
-SELECT  country,employee_tbl.`name` from employee_tbl,websites WHERE                employee_tbl.id=websites.id; //如果两张表都含有相同的字段的话需要加表名限制                       
+SELECT country,employee_tbl.`name` from employee_tbl,websites WHERE                employee_tbl.id=websites.id; //如果两张表都含有相同的字段的话需要加表名限制                       
 ```
 
 #### 内连接（sql99）

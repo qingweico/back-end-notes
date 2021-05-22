@@ -78,7 +78,7 @@ service mysqld start
 cat /var/log/mysqld.log | grep password
 ```
 
-### 登陆数据库（第一次登陆使用系统生成的密码,不便于记忆）
+### 登陆数据库(第一次登陆使用系统生成的密码,不便于记忆)
 
 ```mysql
 mysql -u root -p;

@@ -157,7 +157,7 @@ docker logs -ft tail 3 容器ID   //查看容器日志
 
 `-t`:加入时间戳
 
-`tail  数字`：显示最后多少条
+`tail  数字`:显示最后多少条
 
 ### docke运行tomcat
 

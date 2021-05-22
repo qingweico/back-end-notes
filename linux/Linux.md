@@ -449,7 +449,7 @@ find /home -user admin //查找用户名为admin的文件
 ```
 
 ```java
-find /  -size +20M  //查找当前系统下大于20M的文件  -20M（小于20M的文件）   20M（等于20M的文件）  （M大写 k可以小写 不可以大写）
+find / -size +20M  //查找当前系统下大于20M的文件  -20M（小于20M的文件）   20M（等于20M的文件）  （M大写 k可以小写 不可以大写）
 ```
 
 ``` java
@@ -651,6 +651,8 @@ rwx作用目录
 
 `crontab -r` 删除当前用户下所有的crontab任务
 
+`tail -f /var/log/cron` 查看定时任务的执行日志
+
 `*/1 * * * * ls-l >/tmp/to.txt`:    每小时的每分钟执行`ls-l >/tmp/to.txt `命令
 
 ### 5个占位符说明
@@ -717,7 +719,7 @@ rwx作用目录
 
 `mount` 挂载命令
 
-`tcpdump -nn -i eth0 port 80  `      对网络上的数据包进行截获的包分析工具
+`tcpdump -nn -i eth0 port 80  `  对网络上的数据包进行截获的包分析工具
 
 ## 进程管理
 

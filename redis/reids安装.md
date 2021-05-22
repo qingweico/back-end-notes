@@ -35,7 +35,7 @@ scl enable devtoolset-7 bash
 
 ```shell
 # 永久切换系统的gcc版本
-echo "source /opt/rh/devtoolset-9/enable" >>/etc/profile
+echo "source /opt/rh/devtoolset-7/enable" >>/etc/profile
 ```
 
 ```bash
