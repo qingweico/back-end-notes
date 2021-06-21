@@ -1,8 +1,4 @@
-# 目录
-
-[TOC]
-
-## 字符串
+# 字符串
 
 ```javascript
 let str = "hello world";

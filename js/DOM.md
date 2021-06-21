@@ -1,4 +1,4 @@
-# 目录
+# DOM
 
 [TOC]
 
@@ -19,19 +19,19 @@ Dom树的叶子
 浏览器提供原生document节点,代表整个文档, 而整个文档的第一层有两个节点,第一个是文档类型的节点(<!doctype html>)
 而第二个节点正是<html>标签 其中<html>标签构成了树结构的根节点,其他html标签节点都是他的下级节点
        //文档节点        nodeType表示节点的类型 返回的是一个整数  //Node对象定义了几个常量对应这些类型的值
-       document.nodeType === Node.DOCUMENT_NODE                         //9
+       document.nodeType === Node.DOCUMENT_NODE                        // 9
        //元素节点
-       Element.nodeType === Node.ELEMENT_NODE                          //1
+       Element.nodeType === Node.ELEMENT_NODE                          // 1
        //属性节点
-       Attr.nodeType === Node.ATTRIBUTE_NODE                          //2
+       Attr.nodeType === Node.ATTRIBUTE_NODE                           //2
        //文本节点
-       Text.nodeType === Node.TEXT_NODE                               //3
+       Text.nodeType === Node.TEXT_NODE                                //3
        //文档片段节点
-       DocumentFragment.nodeType === Node.DOCUMENT_FRAGMENT_NODE      //11
+       DocumentFragment.nodeType === Node.DOCUMENT_FRAGMENT_NODE       //11
        //文档类型节点
-       DocumentType.nodeType === Node.DOCUMENT_TYPE_NODE              //10
+       DocumentType.nodeType === Node.DOCUMENT_TYPE_NODE               //10
        //注释节点
-       Comment.nodeType === Node.COMMENT_NODE                         //8 
+       Comment.nodeType === Node.COMMENT_NODE                          //8 
        //------------------------------------------------------------------------------------
        Node.prototype.nodeName()  //返回节点的名称
        Node.prototype.nodeValue() //属性返回一个字符串,表示当前节点本身的文本值 该属性可读写
@@ -143,7 +143,7 @@ document.getElementById("div").removeAttribute("class")//直接移出div中的cl
 | document.querySelector("p")                  | 文档中匹配指定的CSS选择器的***一个元素*** |
 | document.querySelectorAll("p")[0]            | NodeList                                  |
 
-### 表单
+## 表单
 
 ```html
 <form action="" method="get" name="form">
@@ -161,6 +161,6 @@ form.elements;              //返回表单中所有元素的集合 是一个有�
 form.element[1]             //<input type="password">
 ```
 
-### 文本域表单有两种分别为input输入框和textarea
+文本域表单有两种分别为input输入框和textarea
 
 可以通过form.elements[name].value="" 来设置文本域的初始值

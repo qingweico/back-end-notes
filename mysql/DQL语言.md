@@ -8,7 +8,7 @@
 
 - show database(); 用来展示所有的数据库 
 - use 库名; 进入库     语句二 
-- show tables; 展示所有的表     语句三 ： 
+- show tables; 展示所有的表     语句三 : 
 - show tables from 库名;  查看库名中的所有的表(并没有进入该库)
 - select database();  查看当前位置在哪个库
 - create database 库名;  创建一个新的数据库
@@ -38,10 +38,10 @@ MYSQL单行注释为# 或--- 多行注释为/*  */
 
 #### crud  语句 
 
--  增：  insert into 表名(key,key....) values (value,value.......) ; 当插入多行数据 也可以省略键名  
--  删： delete from 表名 where  key =....  ;                                 删除key所在的一行 
--  改：update 表名  set value=... where key =.... ;                    根据值来修改键 当然而也可以根据键来修改值  
--  查：select * from 表名 where .....  ;                                        可以查看表中的任意值  
+-  增:  insert into 表名(key,key....) values (value,value.......) ; 当插入多行数据 也可以省略键名  
+-  删: delete from 表名 where  key =....  ;                                 删除key所在的一行 
+-  改:update 表名  set value=... where key =.... ;                    根据值来修改键 当然而也可以根据键来修改值  
+-  查:select * from 表名 where .....  ;                                        可以查看表中的任意值  
 
 ***select version(); 查看当前MYSQL的版本 或者进入dos窗口输入mysql --version 或mysql -V*** 
 
@@ -71,7 +71,7 @@ SELECT  CONCAT(username,"----",password) as UserInfo FROM UserInfo;
 ### 条件查询
 
 - 按条件表达式筛选
-  - 条件运算符 ： <  > ***<>*** = != <= >=
+  - 条件运算符 : <  > ***<>*** = != <= >=
 - 按逻辑表达式筛选 
   - 逻辑运算符: && || !  ***and or not***
 - 模糊查询

@@ -27,11 +27,11 @@ uname -r
 
 ### docker镜像基本命令
 
-```java
+```bash
 docker --help //获取帮助命令
 ```
 
-```java
+```bash
 docker images //查看本机的docker镜像
 ```
 
@@ -45,7 +45,7 @@ docker images //查看本机的docker镜像
 
 `--no-trunc`显示完整的镜像信息
 
-```java
+```bash
 docker search 镜像名称 //查找所有的目标镜像
 ```
 
@@ -53,17 +53,17 @@ docker search 镜像名称 //查找所有的目标镜像
 
 `-s  点赞数` 查找大于点赞数的所有目标镜像
 
-```java
+```bash
 docker pull 镜像名称【:版本号】//下载镜像（默认拉取最新的镜像,可以在镜像后面跟着相应的版本号下载对应的版本）
 ```
 
-```java
+```bash
 docker rmi  镜像名称【:版本号】 //删除目标镜像（默认删除最新镜像,可以在镜像后面跟着相应的版本号删除对应的版本）
 ```
 
 `-f`强制删除
 
-```java
+```bash
 docker rmi 镜像名称 镜像名称     //删除多个镜像
 ```
 
@@ -71,13 +71,13 @@ docker rmi 镜像名称 镜像名称     //删除多个镜像
 docker rmi $(docker images -q) //删除所有的镜像
 ```
 
-```java
+```bash
 docker commit -m="提交的描述信息" -a="作者" 容器ID 新的镜像名称:版本号 //提交容器使之成为一个新的镜像
 ```
 
 ### docker容器基本命令
 
-```java
+```bash
 docker run [options] 镜像名称
 ```
 
@@ -88,7 +88,7 @@ docker run [options] 镜像名称
 
 `--name`自定义要运行容器的名称
 
-```java
+```bash
 docker ps //列出当前正在运行的容器
 ```
 
@@ -101,19 +101,19 @@ docker ps //列出当前正在运行的容器
 
 `-n 3` 查看之前3次运行过的容器
 
-```java
+```bash
 exit                           //直接结束容器的运行
 ctrl + P + Q                   //离开容器并不结束后台运行
 docker attach 容器ID            //重新进入容器
-docker exec -t 容器ID 操作      //直接将在容器的执行结果返回宿主机
-docker start 容器名称或者容器ID  //重启容器(后台方式运行容器)  
-docker stop  容器名称或者容器ID  //停止容器   
-docker kill  容器名称或者容器ID  //强制停止容器   
+docker exec -t 容器ID 操作       //直接将在容器的执行结果返回宿主机
+docker start 容器名称或者容器ID   //重启容器(后台方式运行容器)  
+docker stop  容器名称或者容器ID   //停止容器   
+docker kill  容器名称或者容器ID   //强制停止容器   
 ```
 
 `attach和exec的区别` 前者并不会开启新的进程,而后者会开启新的进程
 
-```java
+```bash
 [root@centos ~]# docker exec -t 08e5b25ce2a9 ls -l /tmp 
 total 8
 -rwx------. 1 root root 1379 Jun 11 02:35 ks-script-585nin8f
@@ -122,18 +122,18 @@ failed to resize tty, using default size
 [root@centos ~]# 
 ```
 
-```java
+```bash
 docker rm 容器名称或者容器ID     //删除历史运行过的容器记录
 docker rm -f 容器名称或ID       //强制删除正在运行的容器
 docker rm -f $(docker ps -q)   //强制删除所有正在运行的容器
 ```
 
-```java
+```bash
 docker rm $(docker ps -aq)     //一次性删除多个历史容器记录
 docker ps -qa | xargs docker rm 
 ```
 
-```java
+```bash
 docker run -d 镜像名称          //以守护进程方式运行容器
 ```
 
@@ -141,16 +141,16 @@ docker run -d 镜像名称          //以守护进程方式运行容器
 docker top 容器ID               //查看容器内运行的进程
 ```
 
-```java
+```bash
 docker inspect 容器ID           //查看容器内部细节
 ```
 
-```java
+```bash
 docker cp 镜像ID:容器文件路径 宿主机目标路径//将容器中的文件复制到宿主机中
 ```
 
-```java
-docker logs -ft tail 3 容器ID   //查看容器日志
+```bash
+docker logs -ft --tail=3 容器ID   //查看容器日志
 ```
 
 `-f`:跟随最新的日志打印
@@ -161,7 +161,7 @@ docker logs -ft tail 3 容器ID   //查看容器日志
 
 ### docke运行tomcat
 
-```java
+```bash
 docker run -it -p 8848:8080 tomcat //以交互式运行tomcat 
 ```
 
@@ -169,7 +169,7 @@ docker run -it -p 8848:8080 tomcat //以交互式运行tomcat
 
 `-P` 随机指定docker映射tomcat访问端口
 
-```java
+```bash
 docker run -d -p 8848:8080 tomcat  //以守护进程的方式启动tomcat
 ```
 

@@ -1,8 +1,8 @@
-# 目录
+# JSON
 
 [TOC]
 
-### 什么是JSON
+## 什么是JSON
 
 - JSON是一种数据交换格式 
 
@@ -12,7 +12,7 @@
 
 **数据交换格式**就是用于在不同的平台或系统间交换数据的文本,而表示法(专业术语)就是一个用于表示诸如数字或者单词等数据的字符系统,而且json具有可移植性,即以一种双方系统都兼容的方式在平台间传递信息
 
-### JSON的语法
+## JSON的语法
 
 ```json
 {
@@ -33,7 +33,7 @@
 - JSON数据类型中没有undefined
 - JSON文件使用.json扩展名
 
-#### 不可以正常使用的代码
+### 不可以正常使用的代码
 
 ```json
 {
@@ -41,7 +41,7 @@
 }
 ```
 
-#### 可以正常使用的代码
+### 可以正常使用的代码
 
 ```json
 //需要使用反斜线对字符串进行转义
@@ -53,7 +53,7 @@
 }
 ```
 
-#### 不可以通过验证的JSON
+### 不可以通过验证的JSON
 
 ```json
 {
@@ -62,7 +62,7 @@
 }
 ```
 
-#### 不合法的JSON
+### 不合法的JSON
 
 ```json
 {
@@ -71,7 +71,7 @@
 }
 ```
 
-#### 合法的JSON
+### 合法的JSON
 
 ```json
 {
@@ -80,13 +80,13 @@
 }
 ```
 
-### 语法验证
+## 语法验证
 
 [JSON Formatter & Validator](https://jsonformatter.curiousconcept.com/) 
 
 [JSON Editor Online]( https://onlinejsoneditor.com/)
 
-### 媒体类型
+## 媒体类型
 
 媒体类型包括
 
@@ -98,7 +98,7 @@
 
 JSON的MIME类型式application/json
 
-### 对象和数组的区别
+## 对象和数组的区别
 
 对象是键值对构成的列表或集合 数组是值构成的列表或集合
 
@@ -106,7 +106,7 @@ JSON的MIME类型式application/json
 
 （虽然数组中具有不同的数据是合法的 但是在JSON中并不建议这么做。因为***JSON***是一种数据交换格式 而而如果将数据传递给一个不使用JavaScript的系统,那么在解析时很可能会出错）
 
-### JSON Schema
+## JSON Schema
 
 数据交换的一种虚拟的"合同"
 
@@ -153,7 +153,7 @@ JSON的MIME类型式application/json
 
 ---
 
-#### 合法的JSON
+### 合法的JSON
 
 ```
 {
@@ -163,13 +163,13 @@ JSON的MIME类型式application/json
 }
 ```
 
-#### required
+### required
 
 含有required字段的Schema 要求required数组中的属性必须出现在JSON中 如果没有required字段的话
 
 那么JSON为空也是合法的
 
-#### 不可以通过验证的JSON
+### 不可以通过验证的JSON
 
 ```json
 {
@@ -181,9 +181,9 @@ JSON的MIME类型式application/json
 ```
 
 
-### JSON的安全问题
+## JSON的安全问题
 
-####  跨站请求伪造(CSRF)(cross-site-request forgery)
+###  跨站请求伪造(CSRF)(cross-site-request forgery)
 
 是一种站点对用户浏览器信任而发起攻击的方式
 
@@ -221,7 +221,7 @@ JSON的MIME类型式application/json
 
 ***也不要在JSON中使用顶层数组***
 
-####  注入攻击(向网站注入恶意代码)
+###  注入攻击(向网站注入恶意代码)
 
 **跨站脚本攻击(cross-site scripting XSS)** 是注入攻击的一种 在使用JavaScript从服务器获取到一段JSON字符串时并将转为JavaScript对象时发生
 
@@ -245,7 +245,7 @@ alert(myObject.animal);
 
 ***JSON.parse()函数只会执行JSON代码 因此使用JSON.parse()更安全***
 
-#### 不规矩的JSON
+### 不规矩的JSON
 
 ```json
 {
@@ -286,7 +286,7 @@ htmlEscape('{"message":"<div onmouseover=\\"alert(\'gotcha!\')\\">hover here.</d
 //&ltdiv onmouseover=&quotalert('gotcha!')&quot&gthover here.&lt/div&gt
 ```
 
-### 总结
+## 总结
 
 - 跨站请求伪造
 

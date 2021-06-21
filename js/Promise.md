@@ -1,10 +1,8 @@
-# 目录
+# Promis
 
 [TOC]
 
-## Promise
-
-### 任务队列和事件循环
+## 任务队列和事件循环
 
 ```properties
 首先js只在一个线程上运行(主线程) 但不代表js只有一个线程,而js引擎有多个线程 其他线程都是在后台配合
@@ -16,9 +14,9 @@ js会去执行所有的同步任务,等到全部的同步任务全部执行完,�
 一但任务队列清空,那么该程序也就结束了
 ```
 
-### 异步操作的基本流程控制
+## 异步操作的基本流程控制
 
-#### 嵌套回调
+### 嵌套回调
 
 ```javascript
 /*六个回调函数的嵌套,一共需要花费6s,不仅写起来麻烦,还容易出错,还难以维护*/
@@ -42,7 +40,7 @@ async(1,function(value){
 });
 ```
 
-#### 串行执行
+### 串行执行
 
 ```javascript
 /*串行执行*/
@@ -68,7 +66,7 @@ function series(item) {
 series(items.shift());
 ```
 
-#### 并行执行
+### 并行执行
 
 ```javascript
 /*并行执行*/
@@ -92,7 +90,7 @@ items.forEach(function (item) {
 });
 ```
 
-#### 并行与串行的结合
+### 并行与串行的结合
 
 ```javascript
 /*并行与串行的结合*/
@@ -127,7 +125,7 @@ function launcher(){
 launcher();
 ```
 
-### 定时器
+## 定时器
 
 ```properties
 setTimeout()函数的第一个参数是所要推迟执行的函数或一段代码 注意这里的一段代码要以字符串的形式出现
@@ -145,7 +143,7 @@ setInterval()用法和setTimeout()完全一致,只是前者会每隔一段时间
 clearInterval()和clearTimeout() 取消对象的定时器
 ```
 
-#### setTimeout()
+### setTimeout()
 
 ```javascript
 /*用户在每次输入文本后,会立刻将字符转换为大写*/
@@ -171,7 +169,7 @@ function func() {
 timer = setTimeout(func, 0);
 ```
 
-#### sleep() 函数
+### sleep() 函数
 
 ```javascript
 function sleep(ms){
@@ -180,7 +178,7 @@ function sleep(ms){
 }
 ```
 
-### promise
+## promise
 
 ```javascript
 Promise对象通过自身的状态来控制异步操作,Promise实例共有3种状态

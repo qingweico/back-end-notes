@@ -4,13 +4,13 @@
 
 ## MySQL约束
 
-六大约束：
+六大约束:
 
-- NOT NULL　         非空　保证包字段的不为为空
-- DEFAULT                默认    同于保证该字段具有默认值
-- PRIMARY KEY      主键    用于保证该字段的值具有唯一性,且非空
-- UNIQUE                   唯一   用于保证该字段的值具有唯一性 可以为空
-- CHECK                     检查约束（mysql不支持） 检查年龄 性别等等
+- NOT NULL　         非空　   保证包字段的不为为空
+- DEFAULT            默认    同于保证该字段具有默认值
+- PRIMARY KEY        主键    用于保证该字段的值具有唯一性,且非空
+- UNIQUE             唯一    用于保证该字段的值具有唯一性 可以为空
+- CHECK              检查约束（mysql不支持） 检查年龄 性别等等
 - FOREIGN KEY        外键    用于限制两个表的关系,用于保证该字段的值必须来自于主表所关联列的值
 
 -----
@@ -18,21 +18,21 @@
 - zerofill                    零填充
 - unsigned                无符号
 
-添加约束的时间：
+添加约束的时间:
 
 - 创建表时
 - 修改表时
 
-约束的添加分类：
+约束的添加分类:
 
-- 表级约束  ： 除了非空和默认其他都支持
-- 列级约束 ：  对外键约束没有效果
+- 表级约束 :  除了非空和默认其他都支持
+- 列级约束 :  对外键约束没有效果
 
 #### 创建表时添加约束
 
 ```mysql
 create TABLE Course(
-Cno char(3) PRIMARY KEY,  # 列级约束   列级约束不可以自定义约束名称 主键默认的约束名为PRIMARY
+Cno char(3) PRIMARY KEY,        # 列级约束   列级约束不可以自定义约束名称 主键默认的约束名为PRIMARY
 Cname VARCHAR(20),
 Cpno char(3),
 Ccredit TINYINT,

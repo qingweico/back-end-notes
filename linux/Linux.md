@@ -31,7 +31,7 @@
 
 ### 插入
 
-`: set numer/nu`  设置行号
+`:set numer/nu`  设置行号
 
 `:set nonu` 取消行号
 
@@ -515,13 +515,13 @@ find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下
 
 ### 解压和压缩类
 
-`gzip 文件`   :压缩    
+`gzip 文件` : 压缩    
 
-`gunzip  文件.gz` 解压(不常用)  使用`gzip`命令压缩文件时不会保留源文件且不可以对目录压缩
+`gunzip 文件.gz` 解压(不常用)  使用`gzip`命令压缩文件时不会保留源文件且不可以对目录压缩
 
 ----
 
-`zip 【选项】 文件  压缩目录`          压缩        选项可以为 `-r` 递归压缩整个目录 文件是压缩后的文件名
+`zip 【选项】文件 压缩目录`              压缩        选项可以为 `-r` 递归压缩整个目录 文件是压缩后的文件名
 
 `unzip【选项】解压目录 文件`            解压        选项可以为`-d<目录>` 指定解压后存放的目录  文件是解压前的文件名
 
@@ -539,7 +539,7 @@ find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下
 
 `x` 解压.tar文件
 
-`tar -zcvf 压缩后的文件名  目标文件名/目录`                                     压缩文件
+`tar -zcvf 压缩后的文件名 目标文件名/目录`                                        压缩文件
 
 `tar -zxvf 将要解压的文件 解压到的目录`                                               解压文件
 
@@ -553,9 +553,13 @@ find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下
 
 ----
 
-`tar -cjf   压缩后的文件名   源文件`  生成.tar.bz2的压缩文件
+`tar -cjf 压缩后的文件名 源文件`  生成.tar.bz2的压缩文件
 
 `tar -xjf` 解压以.tar.bz2结尾的压缩文件
+
+`tar -tvf backup.tar ` 查看tar文件的内容而不提取
+
+`tar -zxvf backup.tar -C /usr/local` 解压到其他目录
 
 ### 排序类
 
@@ -697,21 +701,24 @@ rwx作用目录
 
 `last` 查看目前和过去所有登陆过系统的用户的信息
 
-`lastlog -u 用户id号`  查看具体用户登陆的详细信息
+`lastlog -u 用户id号` 查看具体用户登陆的详细信息
 
 `traceroute 主机` 查看数据包到路径之间的路径   
 
 `netstat` 显示网络有关的信息
 
+- `-a` 显示所有选项 默认不显示LISTEN相关
+
 - `-t` TCP协议
-- `-u` UDP协议 ***UDP 是User Datagram Protocol的简称, 中文名是用户数据报协议***
+- `-u` UDP协议 UDP 是User Datagram Protocol的简称, 中文名是用户数据报协议
 - `-l`  监听
 - `-r` 路由
 - `-n` 显示IP和端口号
+- `-p` 显示建立相关链接的程序名
 
-`netstat -tlun`查看本机监听的端口
+`netstat -tlun` 查看本机监听的端口
 
-`netstat -an`查看本机所有的网路连接
+`netstat -an` 查看本机所有的网路连接
 
 `netstat -rn` 查看本机路由表
 
@@ -719,7 +726,11 @@ rwx作用目录
 
 `mount` 挂载命令
 
-`tcpdump -nn -i eth0 port 80  `  对网络上的数据包进行截获的包分析工具
+`tcpdump -nn -i eth0 port 80  ` 对网络上的数据包进行截获的包分析工具
+
+`route -n` 显示和查看路由表  `-n`表示不解析名字
+
+`arp -n` 显示和修改ARP
 
 ## 进程管理
 
@@ -812,7 +823,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 ## rpm
 
-***安装未安装的rpm包时,使用rpm包全名且后跟rpm包的路径,而查询或者卸载时直接使用包名,系统会从数据库中寻找该rpm包的信息,所以可以在任意位置查询或卸载该rpm包***
+安装未安装的rpm包时,使用rpm包全名且后跟rpm包的路径,而查询或者卸载时直接使用包名,系统会从数据库中寻找该rpm包的信息,所以可以在任意位置查询或卸载该rpm包
 
 *![1589100480404](https://pic.downk.cc/item/5ef2e8a614195aa594bff3e6.png)*
 
@@ -822,7 +833,7 @@ rpm -e --nodeps 包名;强行卸载rpm安装包  erase
 rpm -ivh rmp包全名;安装rpm文件
 ```
 
-`-i`代表安装(install)
+`-i` 代表安装(install)
 
 `-v` 代表显示详细信息 verbose
 
@@ -836,11 +847,11 @@ rpm -ivh rmp包全名;安装rpm文件
 
 `rpm -qR 包名` 查询已安装包的依赖
 
-`rpm -qRp 包全名` 查询未安装包的依赖   R    requires
+`rpm -qRp 包全名` 查询未安装包的依赖 R requires
 
 ## yum
 
-**yum只是在线管理rpm包的命令,并不存在yum包,可以解决包和包之间的依赖**
+***yum只是在线管理rpm包的命令,并不存在yum包,可以解决包和包之间的依赖***
 
 `yum list | grep 包名` 查看系统是否存在该rpm包
 

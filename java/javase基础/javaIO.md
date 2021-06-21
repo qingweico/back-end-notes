@@ -469,7 +469,7 @@ public class File_ListFiles {
 ```java
 package io;
 import java.io.File;
-public class FileList_Java {
+public class FileList_Jav {
     public static void fileList(File target) {
         if (target.isFile()) {
             return;

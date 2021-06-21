@@ -1,10 +1,8 @@
-# 目录
+# 对象
 
 [TOC]
 
-## 对象
-
-### 实例方法
+## 实例方法
 
 Object实例对象,就是定义在Object原型对象上的方法,可以直接被Object实例直接使用
 
@@ -28,7 +26,7 @@ function isObject(value) {
 isObject({}); //true
 ```
 
-#### toLocaleString
+### toLocaleString
 
 toLocaleString返回本地字符串形式    Array 和Number Date用自己定义的toLocaleString形式,而与toString返回的值不一样 下面就是Date的一个实例对象例子返回不一样
 
@@ -38,30 +36,30 @@ console.log(date.toString());      //Sat Jul 11 2020 10:32:40 GMT+0800 (中国�
 console.log(date.toLocaleString());//2020/7/11 上午10:32:40
 ```
 
-### 构造函数
+## 构造函数
 
 new Object(value)表示新生成一个对象,并且它的值是value,而Object(value)则是将value转换为一个对象,二者的语义是不同的
-### 静态方法
+## 静态方法
 
-#### Object.keys();
+### Object.keys();
 
 ```javascript
 Object.keys();                 //参数为一个对象,方法会返回一个由一个给定对象的自身可枚举属性组成的数组
 ```
 
-#### Object.getOwnPropertyNames(); 
+### Object.getOwnPropertyNames(); 
 
 ```javascript
 Object.getOwnPropertyNames();  //用法和Object().keys()类似 但是该方法还会遍历不可枚举类型的属性.返回一个数组
 ```
 
-#### Object.prototype.valueOf(); 
+### Object.prototype.valueOf(); 
 
 ```javascript
 Object.prototype.valueOf();    //返回该对象的值,默认的是返回其本身
 ```
 
-#### Object.prototype.toString();
+### Object.prototype.toString();
 
 ```javascript
 Object.prototype.toString();   //返回该对象的字符串形式
@@ -84,13 +82,13 @@ function type(value) {
 console.log(type(null)); //null
 ```
 
-#### Object.prototype.hasOwnProperty(property)
+### Object.prototype.hasOwnProperty(property)
 
 ```javascript
 Object.prototype.hasOwnProperty(property);//判断该对象是否具有该属性(property) 返回Boolean类型
 ```
 
-#### Object.getOwnPropertyDescriptor()
+### Object.getOwnPropertyDescriptor()
 
 ```javascript
 Object.getOwnPropertyDescriptor();//方法可以获取属性的描述对象,第一个参数是目标对象,第二个参数是一个字符串,为该对象的属性
@@ -112,7 +110,7 @@ Object.prototype.print = function(){
 console.log(Object.keys(Object.prototype)); //Array [ "print" ]
 ```
 
-#### Object.defineProperty()
+### Object.defineProperty()
 
 ```
 Object.defineProperty();
@@ -186,7 +184,7 @@ console.log(Object.keys(a)); //Array []
 length: 1*/
 ```
 
-#### 存储器 相当与java中private修饰变量时使用get和set方法
+### 存储器 相当与java中private修饰变量时使用get和set方法
 
 ```javascript
 let o = {
@@ -224,7 +222,7 @@ console.log(o.p = 4);  //报错
     console.log(o.p.set(4));//4
 ```
 
-#### 对象的拷贝
+### 对象的拷贝
 
 ```javascript
 let copy = function (newObj,oldObj){
@@ -261,9 +259,9 @@ console.log(to.foo);   //Hello World
 
 注意get() 与 get foo()是不一样的 前者是对象中的一个普通的方法,而后者则是属性foo的属性描述对象中的存储器
 
-### 控制对象状态
+## 控制对象状态
 
-#### Object.preventExtensions() 
+### Object.preventExtensions() 
 
 防止对象再添加其他的属性   但可以删除旧的属性    但仍可以改变属性的值
 
@@ -279,15 +277,15 @@ console.log(demoObj);    //Object { foo: "我是属性foo的值", country: "Chin
 Object.defineProperty(demoObj,"p",{value:123});//报错 Uncaught TypeError: can't define property "p": Object is not extensible
 ```
 
-#### Object.isExtensible()  
+### Object.isExtensible()  
 
  检查是否可以向对象中添加新属性
 
-#### Object.seal()
+### Object.seal()
 
 该方法无法向对象中添加新属性,也无法删除旧的属性  实质是把属性描述对象的configurable变为false 同样可以改变属性的值
 
-#### Object.isSealed() 
+### Object.isSealed() 
 
 检查对象是否使用了seal方法
 
@@ -297,18 +295,18 @@ Object.seal(sealObject);
 Object.defineProperty(sealObject,"speed",{value:120,configurable:true});/ can't define property "speed": Object is not extensible
 ```
 
-#### Object.freeze()  
+### Object.freeze()  
 
  使对象无法添加新的属性,也无法删除旧的属性,而且也无法修改属性的值,使得该对象变成了常量
 
-#### Object.isFrozen()
+### Object.isFrozen()
 
 检查对象是否使用了freeze方法
 
-#### 上面三种方法的局限性就是可以通过改变原型对象来给对象增加属性
+上面三种方法的局限性就是可以通过改变原型对象来给对象增加属性
 
 ```javascript
-et protoObject = Object();
+let protoObject = Object();
 Object.freeze(protoObject);
 let createObject = Object.getPrototypeOf(protoObject);
 createObject.p = "value";

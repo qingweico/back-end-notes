@@ -2,14 +2,14 @@
 
 [TOC]
 
-### 安装wget
+## 安装wget
 
 ```shell
 #centos 7.x
 yum -y install wget
 ```
 
-### 安装PCRE库
+## 安装PCRE库
 
 ```shell
 cd /usr/local/
@@ -20,7 +20,7 @@ cd pcre-8.00
 make && make install
 ```
 
-### 安装openSSL库
+## 安装openSSL库
 
 ```shell
 cd /usr/local/
@@ -31,7 +31,7 @@ cd openssl-1.0.1j
 make && make install
 ```
 
-### 安装zlib库
+## 安装zlib库
 
 ```shell
 cd /usr/local/
@@ -42,7 +42,7 @@ cd zlib-1.2.11
 make && make install
 ```
 
-### 安装nginx
+## 安装nginx
 
 ```shell
 cd /usr/local/
@@ -54,7 +54,7 @@ make && make install
 #ln -s /lib64/libpcre.so.1.2.0 /lib64/libpcre.so.0
 ```
 
-### 启动nginx
+## 启动nginx
 
 ```shell
 cd /usr/local/nginx/sbin

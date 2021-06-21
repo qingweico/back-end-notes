@@ -1,13 +1,15 @@
 # RocketMQ
 
-### 安装（阿里云Centos7.x环境）
+[TOC]
+
+## 安装（阿里云Centos7.x环境）
 
 ```shell
 unzip rocketmq-all-4.7.1-bin-release.zip
 cd rocketmq-all-4.7.1-bin-release.zip
 ```
 
-### 修改配置文件（修改 JVM 内存设置）
+## 修改配置文件（修改 JVM 内存设置）
 
 ```shell
 cd bin
@@ -21,7 +23,7 @@ vim runbroker.sh
 #JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m"
 ```
 
-### 启动
+## 启动
 
 ```shell
 #Start Name Server
@@ -46,7 +48,7 @@ brokerIP1=公网ip
 nohup sh bin/mqbroker -c conf/broker.conf &
 ```
 
-### 关闭
+## 关闭
 
 ```shell
 cd bin

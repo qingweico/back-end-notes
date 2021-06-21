@@ -1,4 +1,4 @@
-## console
+# console
 
 ```javascript
 /*%c CSS格式的字符串  下面的例子显示为黄低红字*/

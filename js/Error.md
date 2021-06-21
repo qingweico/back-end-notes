@@ -1,10 +1,10 @@
-# 目录
+# Error
 
 [TOC]
 
-## Error
 
-### js错误处理机制 
+
+## js错误处理机制 
 
 js原生提供Error构造函数 所有抛出的错误都是这个构造函数的实例
 
@@ -13,7 +13,7 @@ let error = new Error("出错了");
 console.log(error);  //出错了
 ```
 
-### Error派生6大错误对象
+## Error派生6大错误对象
 
 - SyntaxError         语法错误
 - ReferenceError   引用错误
@@ -25,7 +25,7 @@ console.log(error);  //出错了
 
 该六大类都为构造函数
 
-### 自定义错误
+## 自定义错误
 
 ```javascript
  function UserError(message) {
@@ -39,7 +39,7 @@ console.log(error);  //出错了
  /*对于javascript引擎来说 遇到throw 程序就终止了*/
 ```
 
-### finally语句
+## finally语句
 
 ```javascript
 let count = 0;

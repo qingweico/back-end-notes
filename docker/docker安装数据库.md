@@ -9,14 +9,16 @@ docker pull mysql                #拉取最新版的mysql镜像
 ```
 
 ```shell
-mkdir -p /docker/docker_mysql    #在根目录下创建docker目录，docker_mysql目录
+mkdir -p /docker/docker_mysql    #在根目录下创建docker目录,docker_mysql目录
 cd /docker/docker_mysql          #进入目录
 ```
 
+### 运行mysql
+
 ```shell
 docker run --name MYSQL   
-    -v $PWD/conf:/etc/mysql/conf.d   #$PWD代表当前路径
-    -v $PWD/logs:/logs 
+    -v $PWD/conf:/etc/mysql/my.cnf   #$PWD代表当前路径
+    -v $PWD/logs:/logs               # -v 挂载
     -v $PWD/data:/var/lib/mysql 
     -e MYSQL_ROOT_PASSWORD=123456    #初始化msql密码
     -d -i -p 3307:3306 mysql         #后台启动 linux下3307端口映射docker容器中mysql默认的3306端口
@@ -27,7 +29,7 @@ docker exec -it mysql容器ID或名称 /bin/bash    #进入mysql容器中
 ```
 
 ```shell
-mysql -u root -p 123456                       #登陆mysql
+mysql -u root -p 123456                      #登陆mysql
 ```
 
 ### 开启远程访问
@@ -45,7 +47,7 @@ flush privileges;                                                               
 ```
 
 ```mysql
-docker logs -f --tail 10 容器ID                                                    #查看日志
+docker logs -f --tail 10 容器ID                                                     #查看日志
 ```
 
 ## docker安装redis
@@ -82,6 +84,6 @@ docker run --name MYSQL
     -v $PWD/logs:/logs 
     -v $PWD/data:/var/lib/mysql 
     -e MYSQL_ROOT_PASSWORD=123456    
-    -d -i -p 3307:3306 mysql         
+    -d -i -p 3307:3306 mysql          
 ```
 

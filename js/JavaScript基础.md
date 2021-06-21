@@ -1,10 +1,8 @@
-# 目录
+# JavaScript基础
 
 [TOC]
 
-## JavaScript基础
-
-### JavaScript数据类型
+## JavaScript数据类型
 
 - number
 - string
@@ -14,7 +12,7 @@
 - object
 - Symbol（ES6）
 
-### typeof运算符
+## typeof运算符
 
 typeof运算符可以用来返回一个值的数据类型
 
@@ -27,7 +25,7 @@ console.log(typeof {});             //object
 console.log(typeof null);           //object
 ```
 
-### 布尔值
+## 布尔值
 
 js中布尔值为false的只有6个,其他的都为true 
 
@@ -38,17 +36,17 @@ js中布尔值为false的只有6个,其他的都为true
 - "" 或者''(空串)
 -   NaN 
 
-### 数值
+## 数值
 
 JavaScript 内部,所有数字都是以64位浮点数形式储存,即使整数也是如此。
 
-#### 数值精度
+### 数值精度
 
 ```javascript
 Math.pow(2, 53);      //9007199254740992     浮点数的大小范围在2的53次方到-2的53次方
 ```
 
-#### 数值范围
+### 数值范围
 
 ```javascript
 Math.pow(2, 1024); // Infinity
@@ -67,7 +65,7 @@ Number.MAX_VALUE;  //1.7976931348623157e+308
 Number.MIN_VALUE;  //5e-324
 ```
 
-#### 数值的表示法
+### 数值的表示法
 
 当小数点前的数字多于21位或者小数点后的0的个数多于5个会采用科学计数发表示,其他均采用字面值
 
@@ -77,7 +75,7 @@ Number.MIN_VALUE;  //5e-324
 0.0000003 // 3e-7
 ```
 
-#### Math
+## Math
 
 ```javascript
 Math.trunc(2.2);//去掉小数部分
@@ -87,7 +85,7 @@ Math.trunc(2.2);//去掉小数部分
 Math.cbrt(8);//立方根
 ```
 
-### NaN（非数字）
+## NaN（非数字）
 
 - 字符串解析成数字失败时
 
@@ -114,9 +112,9 @@ typeof NaN // 'number'
 
 - `NaN`与任何数（包括它自己）的运算,得到的都是`NaN`。
 
-### 与数值转换有关的全局方法
+## 与数值转换有关的全局方法
 
-#### parseInt() 
+### parseInt() 
 
 将字符串转换为整数,如果参数不是字符串类型,则会先将参数先转换为字符串再转换为整数
 
@@ -138,7 +136,7 @@ parseInt('8a')   // 8
 parseInt('0x10') // 16
 ```
 
-#### parseInt()的进制转换
+### parseInt()的进制转换
 
 parseInt()还可以加第二个进制参数(范围是2~36),表示指定参数的进制
 
@@ -155,11 +153,11 @@ parseInt(String(0o11),2);
 parseInt('9',2);//数值9为非法二进制数,所以返回NaN
 ```
 
-#### parseFloat() 
+### parseFloat() 
 
 parseFloat用法和parseInt差不多,parseFloat会将空串转换为NaN,而使用Number结果则为0
 
-#### isNaN()
+### isNaN()
 
 用来判断参数是否是NaN,只对数值有效,若参数不是数值,则会先转换为数值
 
@@ -177,9 +175,9 @@ function IsNaN(value) {
 
 其中isNaN函数是将null和true和空串当作0来处理
 
-### 字符串
+## 字符串
 
-#### Base64转码
+### Base64转码
 
 - `btoa()`：任意值转为 Base64 编码
 - `atob()`：Base64 编码转为原来的值
@@ -188,20 +186,20 @@ function IsNaN(value) {
 
 `encodeURIComponent`() 将非ASCII字符转化为ASCII字符
 
-### 对象
+## 对象
 
 ```javascript
 Object.keys(obj);//查看一个对象本身的所有属性
 delete obj.p;    //删除指定对象的属性 返回boolean类型·
 ```
 
-#### 对象的for...in...方法
+### 对象的for...in...方法
 
 该方法会遍历对象所有的可以遍历的属性,包括自身的属性还包括继承的属性
 
 for..in..方法配合Object.hasOwnPropety()方法可以排除掉继承的属性
 
-### 函数
+## 函数
 
 声明函数的三种方式
 
@@ -282,11 +280,11 @@ typeof number.valueOf(); //number
 
 Array Date String等等都是函数类型function 而使用它们创建的对象就是object类型
 
-#### 内存泄漏（Memery Leak） 
+### 内存泄漏（Memery Leak） 
 
 指程序中已分配的堆内存由于某种原因没有释放或者无法释放 ,造成系统内存的浪费,而导致程序运行速度减慢甚至系统崩溃等严重后果
 
-  #### js中关于两类函数创建方式的区别
+  ### js中关于两类函数创建方式的区别
 
   ```javascript
   function F(){consile.log("Hello World")};
@@ -316,11 +314,11 @@ js中函数本身也是对象,可以拥有自己的属性
  f.value(); //Go
 ```
 
-#### 函数中如果没有return语句 则会返回undefined
+### 函数中如果没有return语句 则会返回undefined
 
 闭包是指有权访问另一个函数作用域中变量的函数,常见闭包的创建方式就是在另一个函数的内部创建函数
 
-### 有关对数组的整体性操作的问题 
+## 有关对数组的整体性操作的问题 
 
 - 将一个数组赋值给另外一个数组
 

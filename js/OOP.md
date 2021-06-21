@@ -1,8 +1,6 @@
-# 目录
+# OOP
 
 [TOC]
-
-## oop
 
 javascript语言的对象体系不是基于类的,而是基于构造函数(constructor)和原型链(prototype)  一个构造函数可以生成多个实例对象
 
@@ -21,7 +19,7 @@ console.log(vehicle.price);//100
 /*如果不使用new命令 此时会变成普通函数  不会生成实例对象 而此时this会指向全局对象*/
 ```
 
-### new命令
+## new命令
 
 为了保证构造函数与new命令一起使用,下面有两种解决办法
 
@@ -74,7 +72,7 @@ let person = {
 console.log(person.describe());
 ```
 
-### 函数执行环境
+## 函数执行环境
 
 ```javascript
 let func = function (){
@@ -98,7 +96,7 @@ f();      //2 f函数单独执行,执行的环境为全局环境 this指的是wi
 o.foo();  //4 o.foo()执行的环境为对象o,所以this指代是对象o,所以this.x指的是o.x = 4
 ```
 
-### this使用场合
+## this使用场合
 
 ```javascript
 全局环境下 this === window  即this指向顶层对象window
@@ -194,7 +192,7 @@ points.dist=function(){
 console.log(points.dist());
 ```
 
-### 避免数组处理方法中的this
+## 避免数组处理方法中的this
 
 ```javascript
 let Arr = {
@@ -242,9 +240,9 @@ let solveArr = {
 solveArr.f();
 ```
 
-### 绑定this的三种方法
+## 绑定this的三种方法
 
-#### Function.prototype.call()
+### Function.prototype.call()
 
 函数实例的方法用来绑定函数内部this的指向,即函数执行时所在的作用域,然后在指定的作用域内调用该函数
 
@@ -263,7 +261,7 @@ call函数可以传入多个参数,第一个参数为对象,而其他则是函�
 call的另一个应用是调用对象的原生方法
 ```
 
-#### Function.prototype.apply()
+### Function.prototype.apply()
 
 apply方法和call方法差不多,唯一的区别是参数的传入,第一个参数都是this所要指向的那个对象 而apply剩下的所有的参数都以一个数组的形式作为参数传入
 
@@ -292,7 +290,7 @@ Array.prototype.slice.apply({0:1,length:1});
 
 绑定回调函数的对象
 
-#### Function.prototype.bind()
+### Function.prototype.bind()
 
 如果回调函数是对象的方法,那么此时方法中的this不再指向对象所在的环境,而是指向的全局环境
 而如果非要指向对象环境,使用bind方法绑定即可
@@ -357,7 +355,7 @@ let newAdd = add.bind(addObject,5,5);
 console.log(newAdd());         //20
 ```
 
-### 对象的继承
+## 对象的继承
 
 javascript的继承是通过原型对象(prototype)来实现的,而非是class类来完成
 
@@ -374,7 +372,7 @@ Animal.prototype.color = "white";//可以被所有实例共享
 
 原型链的终点是null,通过Object.getPrototypeOf()可以返回参数对象的原型
 
-#### constructor()构造器属性
+### constructor()构造器属性
 
 ```javascript
 let myArr = function(){};
@@ -390,7 +388,7 @@ console.log(mine instanceof Array);      //true
 
 constructor()属性的作用是可以知道实例对象到底是哪个构造器生成的
 
-#### 构造函数的继承
+### 构造函数的继承
 
 ```javascript
 Object.create()  /*创建实例对象 被创建的对象可以继承模板对象的属性和方法*/
@@ -412,7 +410,7 @@ Sub.prototype.constructor = Sub;
 console.log(new Sub().color);   //red
 ```
 
-#### javascript多重继承
+### javascript多重继承
 
 在js中不允许一个对象继承多个对象,但可以通过变通的方法来实现
 
@@ -438,7 +436,7 @@ console.log(s.hello); //hello
 console.log(s.world); //world
 ```
 
-#### Object对象相关的方法
+### Object对象相关的方法
 
 ```javascript
 # Object.getPrototypeOf()获取参数对象的原型,这是获取原型对象的标准方法
@@ -488,7 +486,7 @@ B.getName(); // 李四
 
 原型链可以使用`__proto__`很直观的表示 但它是一个内部属性,不应该对使用者暴露 应该使用getPrototypeOf和setPrototypeOf对原型对象的读写操作
 
-#### 获取实例对象obj的原型对象的方法有三种
+### 获取实例对象obj的原型对象的方法有三种
 
 - `obj.__proto__`
 - obj.constructor.prototype
@@ -513,7 +511,7 @@ console.log(c.constructor.prototype.constructor);
 //C的原型对象被改成了p 但实例对象c.constructor.prototype却没有指向p,所以在改变原型对象时,也要设置constructor的值,所以推荐使用第三种方法获取
 ```
 
-#### Object.getOwnPropertyNames()
+### Object.getOwnPropertyNames()
 
 <font style="color:purple;font-size:20px">Object.getOwnPropertyNames() 返回参数对象本身的所有属性（包括可遍历和不可遍历的）,不包括继承的属性 而Object.keys() 只能返回可遍历的属性</font>
 
@@ -534,7 +532,7 @@ console.log(Object.keys(Date));
 console.log(inheritedPropertyNames(Date));
 ```
 
-#### 对象的拷贝
+### 对象的拷贝
 
 拷贝后的对象应该和原对象具有相同的原型和相同的实例属性
 
@@ -564,7 +562,7 @@ function copy(orig){
 }
 ```
 
-### IIFE立即执行函数表达式
+## IIFE立即执行函数表达式
 
 ```javascript
 let funModel = (function(){
