@@ -19,7 +19,7 @@ rpm -qa | grep mariadb
 ### 如果存在,则使用yum命令卸载
 
 ```shell
-rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
+rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64
 ```
 
 ### 依次安装MySQL的组件
@@ -61,9 +61,9 @@ mysqld --initialize
 ```shell
 chown mysql:mysql /var/lib/mysql -R
 #开启mysql服务
-[root@mycentos ~] systemctl start mysqld.service
+systemctl start mysqld.service
 #设置开机自启mysql服务
-[root@mycentos ~] systemctl enable mysqld
+systemctl enable mysqld
 ```
 
 ### 开启mysql服务
@@ -112,6 +112,8 @@ alter user 'root'@'localhost' identified with mysql_native_password by 新密码
 /*二种方法都可以*/
 update user set host = "%" where user = "root";
 create user 'root'@'%' identified with mysql_native_password by "远程登陆密码";         #密码一定要加引号
+
+flush privileges;
 ```
 
 ```mysql

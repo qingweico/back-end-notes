@@ -626,17 +626,18 @@ spirng拦截器和过滤器的区别：
 
 ```java
 public class MyInterceptor implements HandlerInterceptor {
+    // 拦截请求,访问controller之前
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("我是拦截器的预处理方法...");
         request.getRequestDispatcher("upload.jsp").forward(request,response);
         return true;  //true表示放行 false表示不放行
     }
-
+	// 请求访问到controller之后, 渲染视图之前
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
        System.out.println("我是拦截器的后处理方法...");
        request.getRequestDispatcher("upload.jsp").forward(request,response);
     }
-
+	// 请求访问到controller之后, 渲染视图之后
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         System.out.println("我是拦截器的最后处理方法...");
     }

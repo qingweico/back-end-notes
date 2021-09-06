@@ -707,8 +707,6 @@ public class MyListener implements ServletContextListener {
 </dependency>
 ```
 
-
-
 ## 数据访问
 
 ### SpringBoot JDBC自动配置原理

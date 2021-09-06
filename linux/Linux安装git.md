@@ -69,7 +69,7 @@ vim /etc/hosts
 
 ```bash
 199.232.69.194 github.global.ssl.fastly.net  
-140.82.113.3 github.com 
+140.82.112.3 github.com 
 ```
 
 ```bash

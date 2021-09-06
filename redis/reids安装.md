@@ -43,7 +43,13 @@ echo "source /opt/rh/devtoolset-7/enable" >>/etc/profile
 source /etc/profile
 ```
 
-在redis-6.0.5目录下更改redis.conf配置文件,找到general下的deamonize,将`no`修改为`yes`（以后台方式运行）,保存退出
+在redis-6.0.5目录下更改redis.conf配置文件,找到general下的deamonize,将`no`修改为`yes`(以后台方式运行),保存退出
+
+```bash
+#redis.conf
+#redis密码
+requirepass 123456
+```
 
 ```mysql
 #以配置文件方式启动
@@ -53,6 +59,12 @@ cd src
 
 ```mysql
 ./redis-cli -p 6379
+ping
+#(error) NOAUTH Authentication required.
+# 密码认证即可
+auth 123456
+ping
+PONG
 ```
 
 ## 图形化界面连接redis

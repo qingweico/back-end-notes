@@ -12,7 +12,7 @@ tar -zxvf curl-7.55.1.tar.gz -C /usr/local
 
 ```bash
 # 安装
-cd /usr/local
+cd /usr/local/curl-7.55.1
 ./configure
 make && make install
 ```
