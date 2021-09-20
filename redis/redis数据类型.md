@@ -4,9 +4,9 @@
 
 ## redis基本知识
 
-redis：一种分布式的内存数据库缓存
+redis: 一种分布式的内存数据库缓存
 
-NoSQL ： Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
+NoSQL: Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
 
 单进程
 
@@ -14,7 +14,7 @@ redis默认16个库,下表从开始,初始化使用0号库
 
 大数据时代的三V : Volume(海量) Variety(多样) Velocity(实时)
 
-互联网三高：高性能 高可用 高扩展 
+互联网三高:高性能 高可用 高扩展 
 
 高性能:响应(低延迟) 吞吐(高吞吐量 高并发)
 
@@ -52,9 +52,9 @@ NoSQL:代表的不仅仅是SQL
 
 #### CAP
 
-- C：Consistency（强一致性）
-- A：Availability（可用性）
-- P：Partition tolerance（分区容错性）
+- C:Consistency（强一致性）
+- A:Availability（可用性）
+- P:Partition tolerance（分区容错性）
 
 #### BASE
 

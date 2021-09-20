@@ -2,7 +2,7 @@
 
 [TOC]
 
-### 安装zsh
+## 安装zsh
 
 ```bash
 # 安装zsh
@@ -35,7 +35,7 @@ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install
 vim ~/.zshrc
 ```
 
-### 设置主题
+## 设置主题
 
 ```bash
 # 默认主题
@@ -47,7 +47,7 @@ ZSH_THEME="random"
 vim ~/.oh-my-zsh/themes
 ```
 
-### 安装插件
+## 安装插件
 
 ```bash
 # 安装语法高亮插件

@@ -335,3 +335,4 @@ js中函数本身也是对象,可以拥有自己的属性
 - Array.splice(index,len,newElement); 当删除长度为0时 即len=0 可以为数组添加元素
 
 - Array.sort() ; 该方法默认是按字典顺序排序 使用时应该重写compare方法
+

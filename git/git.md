@@ -33,6 +33,13 @@ git init //进入一个空白的仓库  初始化生成一个有关仓库配置�
 
 *![git-repo](https://pic.downk.cc/item/5ef2eb7b14195aa594c0631f.jpg)*
 
+### 配置全局变量
+
+```bash
+git config --global user.name "name"
+git config --global user.email "email"
+```
+
 ### 将文件添加到暂存区
 
 ```java

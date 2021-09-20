@@ -28,7 +28,7 @@
 - 表级约束 :  除了非空和默认其他都支持
 - 列级约束 :  对外键约束没有效果
 
-#### 创建表时添加约束
+### 创建表时添加约束
 
 ```mysql
 create TABLE Course(
@@ -42,7 +42,7 @@ CONSTRAINT fk_1 FOREIGN key (Cpno) REFERENCES Course(Cno) # 表级约束 自定�
 );
 ```
 
-#### 修改表时添加约束
+### 修改表时添加约束
 
 ```mysql
 #向字段中添加非空 字段的类型不可以省略 column可以省略
@@ -70,7 +70,7 @@ alter table studentinfo add PRIMARY key();
 ALTER TABLE ADD CONSTRAINT fk_1 FOREIGN KEY (Sno) REFERENCES student(Sno);
 ```
 
-#### 修改表时删除约束
+### 修改表时删除约束
 
 ```mysql
 # 删除主键
@@ -100,7 +100,7 @@ show index from account;
 EXPLAIN select name from book WHERE id = 12;
 ```
 
-####  键和唯一的区别
+###  键和唯一的区别
 
 主键不可以为null 而唯一可以  但是一列中null也只能有一个
 
@@ -108,7 +108,7 @@ EXPLAIN select name from book WHERE id = 12;
 
 主键和唯一都可以进行组合 但是不推荐   `primary key(id,name,...);`
 
-#### 外键的要求
+### 外键的要求
 
 - 添加外键的列所在的表为从表 外键所引用的列所在的表为主表
 - 添加外键的列与关联列的数据类型要一致或者兼容
@@ -116,7 +116,7 @@ EXPLAIN select name from book WHERE id = 12;
 - 删表是应该先删从表再删主表
 - 建表时应该先建主表再建从表
 
-#### 标识列
+### 标识列
 
 auto_increment  自增
 

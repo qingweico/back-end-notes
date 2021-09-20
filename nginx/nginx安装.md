@@ -42,6 +42,11 @@ cd zlib-1.2.11
 make && make install
 ```
 
+```bash
+# 也可直接yum安装以上内容
+#yum -y install make zlib-devel gcc-c++ libtool openssl openssl-devel
+```
+
 ## 安装nginx
 
 ```shell

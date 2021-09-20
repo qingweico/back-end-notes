@@ -73,17 +73,3 @@ docker run -d --name redis -p 6379:6379
     -v /docker/docker_redis/data:/data redis
     redis-server --appendonly yes                        #开启aof持久化
 ```
-
-```shell
-docker exec -it 容器ID redis-cli                          #启动redis客户端
-```
-
-```
-docker run --name MYSQL   
-    -v $PWD/conf:/etc/mysql/conf.d   
-    -v $PWD/logs:/logs 
-    -v $PWD/data:/var/lib/mysql 
-    -e MYSQL_ROOT_PASSWORD=123456    
-    -d -i -p 3307:3306 mysql          
-```
-

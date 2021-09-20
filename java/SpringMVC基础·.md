@@ -478,9 +478,9 @@ public void modelAttribute(Map<String, Account> map,String username) {
 
 ```java
 @RequestMapping("/testAjax")
-    /*@RequestBody 会将请求的json数据（String类型）格式转换为java对象封装到Student对象中*/
-    /*ResponseeBody  会将javaBean转换为json响应到前端*/
-    public @ResponseBody Student ajax(@RequestBody Student student) {
+/*@RequestBody 会将请求的json数据（String类型）格式转换为java对象封装到Student对象中*/
+/*ResponseeBody  会将javaBean转换为json响应到前端*/
+public @ResponseBody Student ajax(@RequestBody Student student) {
     System.out.println(student);
     student.setName("张三");
     student.setNumber(7);
@@ -512,15 +512,15 @@ form表单的要求 enctype属性必须是"multipart/form-data" method属性必�
 
 ```java
 @RequestMapping("/upload")
-    public String upload(HttpServletRequest request) throws Exception{
+public String upload(HttpServletRequest request) throws Exception{
     System.out.println("文件上传中...");
     String path = request.getSession().getServletContext().getRealPath("/upload/");
     DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
     ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
     List<FileItem> items = servletFileUpload.parseRequest(request);
     for(FileItem item : items){
-    String fileName = item.getName();
-    item.write(new File(path,fileName));
+        String fileName = item.getName();
+        item.write(new File(path,fileName));
     }
     System.out.println("文件上传成功...");
     return "success";
