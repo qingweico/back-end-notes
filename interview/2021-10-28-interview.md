@@ -1,0 +1,1090 @@
+[TOC]
+
+
+
+## Buffer的原理和使用场景: 
+
+缓冲的本质是排队 流的本质是是数据
+
+没有缓冲: 拒绝服务 性能低下
+
+有缓冲: 排队处理、批量处理
+
+- 排队处理请求避免拒绝服务
+- 批量写入磁盘快过多次写入
+- 批量执行sql快过多次执行
+
+数据拷贝的成本: 
+
+- 网卡 ---> 内核空间(DMA)
+- 内核空间 --->  用户空间缓冲区
+- 用户空间缓冲区  ---> 处理线程
+
+?为什么不将设备的数据直接拷贝到用户空间
+
+- 进程的隔离
+- 内核是连接设备和进程的桥梁 用户程序直接沟通设备非常危险
+
+缓冲区的实现原理:
+
+单向缓冲区:
+
+- P: Position 下一个可写入的位置
+- L: Limit 缓冲区实际的写入限制
+- C: Capactiy 缓冲区物理的写入限制
+
+flip反转操作:将读操作转换写操作　Position变为0 Limit变为Position的位置
+
+clear清空缓冲区操作:Position置为零 Limit置为Capacity
+
+rewind操作: 重新读操作 将Position置为0
+
+## 反射的概念
+
+反射(reflection) 运行时查看、反观程序内部结构、甚至修改
+
+- 运行时数据(通常称为元数据MetaData)   模块、类、函数、注解、源代码
+- 反观自身
+  - 通过字符串找到一个类 并调用某个方法
+  - 查看类的属性、方法
+  - 查看注解
+- 运行是修改   运行时修改的是Bytecode
+
+面向切面编程(Aspect Oriented Programming)
+
+- 关注点分离原则(Seperation of Concern) 
+- 如何理解切面(Aspect) 
+  - 程序有一个关注点 + 多个其他关注点(Aspect)
+  - 可以配置主关注点和其他关注点一起工作
+
+## 异常
+
+常见的RuntimeException异常
+
+- IllegalMonitorStateException
+- NulPointerException
+- ClassCasrException
+- IllegalArgumentException
+- IndexOutOfBoundsException
+- NumberFormatException
+- ArrayStoreException
+- UnsupportedOperationException
+
+非RuntimeException
+
+- ClassNotFoundException
+- IOException
+
+常见的Error
+
+UnsupportedClassVersionError
+
+NoClassDefFoundError
+
+StackOverflowError
+
+OutOfMemoryError
+
+Spring中所有的异常基于org.springframework.core.NestedRuntimeException
+
+try-catch的性能
+
+Java异常处理消耗性能的地方
+
+- try-catch块影响JVM的优化
+- 异常对象实例需要保存栈快照等信息
+
+Java的异常处理机制
+
+- 抛出异常: 创建异常对象 交由运行时系统处理
+- 捕获异常: 寻找合适的异常处理器处理异常 否者终止运行
+
+Java异常处理原则
+
+具体明确: 抛出的异常应能通过异常类名和message准确说明异常的类型和产生异常的原因
+
+提早抛出: 应尽可能早的发现并抛出异常 便于精准定位问题
+
+延迟捕获: 异常的捕获和处理应尽可能延迟 让掌握更多信息的作用域来处理异常
+
+## Map
+
+```java
+// jdk14 HashMap::putVal
+if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+    treeifyBin(tab, hash);
+break;
+```
+
+```java
+// jdk14 ConcurrentHashMap::putVal
+if (binCount >= TREEIFY_THRESHOLD)
+    treeifyBin(tab, i);
+```
+
+```java
+// jdk14 HashMap
+static final int tableSizeFor(int cap) {
+    int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
+    return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+}
+
+@HotSpotIntrinsicCandidate
+public static int numberOfLeadingZeros(int i) {
+    // HD, Count leading 0's
+    if (i <= 0)
+        return i == 0 ? 32 : 0;
+    int n = 31;
+    if (i >= 1 << 16) { n -= 16; i >>>= 16; }
+    if (i >= 1 <<  8) { n -=  8; i >>>=  8; }
+    if (i >= 1 <<  4) { n -=  4; i >>>=  4; }
+    if (i >= 1 <<  2) { n -=  2; i >>>=  2; }
+    return n - (i >>> 1);
+}
+@Native public static final int   MIN_VALUE = 0x80000000;
+public static int highestOneBit(int i) {
+    return i & (MIN_VALUE >>> numberOfLeadingZeros(i));
+}
+```
+
+```java
+// jdk7 HashMap
+private static int roundUpToPowerOf2(int number) {
+    // assert number >= 0 : "number must be non-negative";
+    return number >= MAXIMUM_CAPACITY
+        ? MAXIMUM_CAPACITY
+        : (number > 1) ? Integer.highestOneBit((number - 1) << 1) : 1;
+}
+public static int highestOneBit(int i) {
+        // HD, Figure 3-1
+        i |= (i >>  1);
+        i |= (i >>  2);
+        i |= (i >>  4);
+        i |= (i >>  8);
+        i |= (i >> 16);
+        return i - (i >>> 1);
+}
+```
+
+### HashMap: put方法的逻辑(jdk14)
+
+- 如果HashMap未被初始化过 则初始化
+- 对key求hash 计算下标
+- 如果没有碰撞 直接放入桶中
+- 如果发生碰撞 以链表的方式链接单后面
+- 如果链表长度超过阈值 则树化
+- 如果链表长度低于6 则链表化
+- 如果节点已存在则替换旧值
+- 如果桶满了(threshold = 容量 * 加载因子) 则扩容 resize 2倍
+
+如何有效减少碰撞
+
+- 使用扰动函数 促使元素位置分布均匀 减少碰撞几率
+- 使用final对象并采用合适的equals()和hashCode()方法
+
+扩容问题
+
+- 多线程环境下  调整大小会存在条件竞争 容易造成死锁
+- rehashing是一个比较耗时的过程
+
+### ConcurrentHashMap: put方法的逻辑(jdk14)
+
+- 判断Node[]数组是否初始化 没有则进行初始化
+- 通过hash定位数组的索引坐标 是否有Node节点 如果没有则使用CAS进行添加(链表的头节点) 添加失败则进入下一次循环
+- 若检查到内部正在扩容 则帮助它一块扩容(helpTransfer)
+- 如果链表的头节点不为空 则使用synchronized锁住头节点(链表、红黑二叉树的头元素)
+  - 如果是Node(链表结构) 则执行链表的添加操作
+  - 如果是TreeNode(树形结构) 则执行树添加操纵
+  - 如果ReservationNode(和ConcurrentHashMap的本地缓存相关) 则抛出异常
+- 判断链表长度已经达到临界值8 若是则树化
+
+CAS + synchronized 比jdk7使用Segment 锁拆的更细 性能提升了很多
+
+首先使用无锁操作CAS插入头节点 失败则循环重试
+
+若头节点已存在 则尝试获取头节点的同步锁 再进行操作
+
+ConcurrentHashMap博大精深(50多个内部类)
+
+注意点: 
+
+- ConcurrentHashMap中的size()方法和mappingCount()方法的异同 两者计算是否准确
+- 多线程下如何进行扩容
+
+## J.U.C知识梳理
+
+JUC包的分类
+
+- 线程执行器executors
+- 锁locks
+- 原子变量atomic
+- 并发工具类tools
+- 并发集合collections
+
+### tools
+
+- CountDownlLatch
+- CyclicBarrier
+- Semaphore
+- Executors
+- Exchanger
+
+### locks
+
+- Lock
+  - ReentrantLock
+  - ReentrantReadWriteLock.ReadLock
+  - ReentrantReadWriteLock.WriteLock
+
+- Condition
+- ReadWriteLock
+  - ReentrantReadWriteLock
+- LockSupport
+
+### atomic
+
+- AtomicBoolean
+- AtomicInteger
+- AtomicIntegerArray
+- AtomicIntegerFieldUpdater
+- AtomicLong
+- AtomicLongArray
+- AtomicLongFieldUpdater
+- AtomicMarkableReference
+- AtomicReference
+- AtiomicReferenceArray
+- AtiomicReferenceFieldUpdater
+- AtomicStampedReference
+
+### collections
+
+- Queue
+  -  ConcurrentLinkedQueue
+  - BlockingQueue
+    - ArrayBlockQueue
+    - DelayQueue
+    - LinkeBlockingQueue
+    - PriorityBlockingQueue
+    - SynchronousQueue
+  - Deque
+    - ArrayDeque
+    - LinkedList
+    - BlockingDeque
+      - LinkedBlockingQueue
+- CopyOnWriteArrayList
+- CopyOnWriteArraySet
+- ConcurrentSkipSet
+- ConcurrentMap
+  - ConcurrentHashMap
+  - ConcurrentNavigableMap
+    - ConcurrentSkipListMap
+
+### executor
+
+- Future
+  - RunnableFuture
+    - RunnableScheduleFuture
+    - FutureTask
+  - ScheduledFuture
+- Callable
+- Executor
+  - ExecutorService
+    - ScheduledExecutorService
+      - ScheduledThreadPoolExecutor
+    - ThreadPoolExecutor
+- CompletionService
+  - ExecutorCompletionService
+- RejectedExecutionHandler
+  - ThreadPoolExecutor.DiscardPolicy
+  - ThreadPoolExecutor.DiscardOldestPolicy
+  - ThreaPoolExecutor.CallerRunsPolicy
+  - ThreadPoolExecutor.AbortPolicy
+- TimeUnit
+
+## Java的IO机制
+
+ServerSocket是一个文件 存放着所有连进来的client FD
+
+### I/O多路复用
+
+调用系统级别的select/poll/epoll
+
+select、poll、epoll的区别
+
+|        | 支持一个进程所能打开的最大连接数                             | FD剧增后带来的IO效率问题                                     | 消息传递方式                                    |
+| ------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
+| select | 单个进程所能打开的最大连接数由FD_SETSIZE宏定义 其大小是32个整数的大小(在32位机器上大小是32＊32, 64位机器则是32 * 64) 可以对其进行修改 但是需要重新编译内核 其性能也无法保证 | 因为每次调用时都会对连接进行线性遍历 所以随着FD的增加会造成遍历速度的线性下降的性能问题 | 内核需要将消息传递到用户空间 需要内核的拷贝动作 |
+| poll   | 本质和select没有区别 但是它没有最大连接数的限制 其原因是它是基于链表来储存的 | 同上                                                         | 同上                                            |
+| epoll  | 虽然连接数有上限 但是很大 1G内存的机器可以打开10万左右的连接 | 由于epoll是根据每个FD上的回调函数来实现的 只有活跃的的socket才会主动调用callback 所以在活跃socket较少的情况下 使用epoll不会有线性下降的性能问题 但是所有socket都活跃的情况下 可能会有性能问题 | 通过内核和用户空间共享一块内存来实现 性能较高   |
+
+单个线程处理多个Scoket
+
+- 核心问题: 内核分发消息
+- select模型: 线程维护一个Socket FD的列表
+- epoll模型: 内核维护一个高效的二叉搜索树
+
+性能提升归根结底是算法和数据结构 并不是同步异步以及阻塞和非阻塞的原因
+
+### BIO
+
+Block-IO InputStream和OutputStream Reader和Writer
+
+同步阻塞
+
+API设计: 操作会阻塞线程(让线程休眠)
+
+原理 利用CPU的中断
+
+- 阻塞的线程进入休眠 将执行权限交给其他线程
+- 优点 阻塞时不会占用系统资源 程序好理解
+- 缺点: 高并发场景需要更多的线程资源 线程的休眠唤醒需要成本
+
+适用范围 一般的高并发场景可以考虑(并行量特别大的场景除外)
+
+### NIO
+
+![20211018151300](https://cdn.qingweico.cn/blog/20211018151300.png)
+
+jdk1.4中引入了NIO
+
+NonBlock-IO 构建多路复用的 同步非阻塞的IO操作
+
+API设计: 操作不会阻塞线程 读不到就返回null
+
+特点: 程序需要不断地去主动询问内核数据是否已准备好
+
+NIO的核心
+
+- Channels
+- Buffers
+- Selectors
+
+Channel
+
+- FileChannel
+  - transferTo 把FileChannel中的数据拷到另外一个Channel
+  - transferFrom 把另外一个Channel中的数据拷贝到FileChannel
+- DatagramChannel
+- SocketChannel
+- ServerSocketChannel
+
+避免了两次用户态到内核态的切换 即"零拷贝" 效率高
+
+Buffers
+
+- 八大数据类型除了String外都有各自对应的Buffer
+- MappedByteBuffer 内存映射文件
+
+Selectors
+
+### AIO
+
+![image-20211020124829333](C:\Users\周庆伟\AppData\Roaming\Typora\typora-user-images\image-20211020124829333.png)
+
+原理: 由专门的数据结构负责统计发生的I/O 再允许程序监听变更
+
+API设计: 异步编程 基于Future
+
+原理 利用线程池技术、协程技术调度所有Future计算
+
+本质: 异步转同步
+
+通常结合epoll和directmemory技术
+
+directmemory: DirectMaping
+
+由内核创建一个堆外的内存 再将堆外的内存给到JVM进程 当数据到达网卡时 由内核将数据拷贝至堆外缓冲区
+
+本质: 堆外的缓冲区 优点: 减少一次拷贝
+
+![image-20211020124448009](https://cdn.qingweico.cn/blog/image-20211020124448009.png)
+
+## 数据结构
+
+链表是一种抽象(有很多的实现)的数据结构聚合(数据和操作的容器)
+
+## JVM
+
+栈的作用是配合执行程序 提供执行程序的必须内存空间
+
+栈储存程序执行时的临时数据
+
+### 吞吐量
+
+吞吐量(Throughput): 程序工作时间占比(没有STW: GC没有占用CPU的时间)
+
+多线程GC不一定能够提高Throughput
+
+```properties
+# JVM参数 控制吞吐量
+-XX: GCTimeRatio=99
+```
+
+JVM参数
+
+- 标准参数  -classpath
+- -X 扩展参数(非标准 不保证每个JVM都支持) -Xmx256m 设置堆的最大大小
+- -XX 开发用(比如打印详细日志) -XX: +PrintGCDetails
+
+### Latency
+
+指GC造成的停顿时间(STW时间)
+
+- Pause Time 一次STW的时间
+- 吞吐量大并不一定代表延迟就低 取决于Latency是否集中
+- 多线程可以减少Latency
+- 内存更大也可以减少Latency
+
+### FootPrint
+
+指最终应用对内存的需求
+
+内存使用100M/s 回收速度80M/s 每10s一次GC(STW全部回收)  ---> FootPrint: 200M
+
+假如GC可以无限使用CPU ---> FootPrint 可以很低 而延迟却很高
+
+假如每次GC可以不中断 ---> 高延迟
+
+阿姆达定律是衡量并行计算的重要依据
+
+### 垃圾回收器
+
+#### serial
+
+使用的算法是Root Tracing & Mark-Sweep 单线程
+
+-XX: +UseSerialGC
+
+适用的场景 
+
+- 吞吐量小 内存回收量不大
+- 容忍延迟 不在意卡顿
+- 单核 内存小 0~100M
+
+#### Parallel(并行) 
+
+提供最大的Throughput
+
+多线程
+
+-XX:UseParallelGC
+
+算法: Root Tracing & Mark - Sweep
+
+场景: 吞吐量要求 > 延迟要求
+
+#### Concurrent Mark Sweep(CMS)
+
+减少Pause Time
+
+### JVM调试工具
+
+#### Jmeter
+
+#### jps
+
+#### jstat
+
+Java Virtual Machine statistics monitoring tool Java统计监控工具
+
+eg
+
+- man jstat
+
+- jstat -gcutil  pid: 显示关于垃圾收集的摘要 统计数据  
+
+#### jstatd
+
+jstat的守护进程 
+
+RMI服务器应用程序
+
+[[政策文件语法](http://docs.oracle.com/javase/1.5.0/docs/guide/security/PolicyFiles.html)](https://docs.oracle.com/javase/1.5.0/docs/guide/security/PolicyFiles.html)
+
+#### jcmd
+
+eg
+
+- jcmd  pid GC.heap_info
+- jcmd pid VM.flags -all 查看虚拟机参数
+
+#### jmap
+
+- Java Memory Map
+- 打印JVM实例的共享对象映射、堆内详细信息(支持远程调试)
+
+eg:
+
+- jmap -dump:live,format=b,file=heap.bin pid
+- jhat heap.bin(Started HTTP server on port 7000)
+
+#### jhat
+
+分析java堆的命令, 可以将堆中的对象以html的形式显示出来 配合jmap命令使用
+
+#### jinfo 
+
+- Java Configuration Info
+- 查看修改虚拟机配置(支持远程)
+
+eg: 
+
+- jinfo pid 查看pid参数配置
+- jinfo -flag -XX:InitialHeapSize=536870912=536870912 pid(flag '-XX:InitialHeapSize' cannot be changed)
+
+#### jstack
+
+- Java Stack Tace
+- 打印Java的Srtack(支持远程调试)
+
+eg:
+
+- jstack pid 
+
+#### jconsole
+
+### invoke调用
+
+- invokespecial call super(), private, inint()
+- invokedynamic call lambda +- 可以绕过检查、限制 提高性能
+- invokestatic call static method
+- invokevirtual
+  - 虚函数 可以重写的函数
+  - static private final 除外
+- invokeinterface call interface
+
+### 对象的生命周期
+
+- load 
+
+  - ClassLoader
+
+  - static initializer/ static fields
+
+  - ```java
+    static {}
+    ```
+
+  - 触发原因: new/访问静态资源/loader加载等
+
+  - finish --- > loaded
+
+- create
+
+  - allocate memory
+  - constructor
+  - finish ---> created
+
+- live
+
+  - in use  GC Root可以找到 且被使用
+  - invisible 泄漏 GC Root 可以找到 但是没被使用
+  - unreachable GC Root 不可达(会被回收)
+
+- destory/gc
+
+  - collected
+  - finalize(终结)
+  - deallocated
+
+
+
+## 网络
+
+TCP中滑动窗口解决了可靠性以及传输速率问题
+
+## 线程池的作用
+
+- 降低资源消耗 通过池化技术重复利用已创建的线程 降低线程创建和销毁造成的损耗
+- 提高响应速度 任务到达时 无需等待线程创建即可立即执行
+- 提高线程的可管理性 线程是稀缺资源 如果无限制的创建 不仅会消耗系统资源还会因为线程的不合理分布导致资源调度失衡 降低系统的稳定性 使用线程池可以进行统一的分配、调优和监控
+- 提供更多更强大的功能 线程池具备可扩展性 允许开发人员向其中增加更多的功能
+
+不建议使用Executors: 因为默认的Executors线程池底层是基于ThreadPoolExecutor构造函数封装的 采用无界队列存放缓存任务 会无限缓存任务容易发生内存溢出 会导致最大的线程数失效
+
+## MQ
+
+### mq的作用
+
+- 异步处理
+- 实现解耦
+- 流量削峰
+
+### MQ与多线程实现异步的区别
+
+- 多线程方式实现异步会消耗cpu资源 可能会影响业务线程执行 会发生cpu竞争的问题
+- MQ方式实现异步解耦是完全解耦 适合于大型项目
+- 小的项目可以使用多线程实现异步
+
+### mq如何避免消息堆积的问题
+
+产生背景: 生产者投递消息的速率与消费者消费的速率完全不匹配
+
+前者大于后者 导致消息堆积的问题
+
+注意: rabbitmq中如果消息被消费成功 则小消息会被立即删除 而kafka和rocketmq中消息被消费成功则不会立即删除
+
+解决: A 提高消费者消费的速率 B: 消费者应该以批量的形式获取消息 减少网络传输的次数
+
+MQ如何保证消息不丢失
+
+- MQ服务器端将消息持久化到硬盘
+- 生产者确保消息投递到mq服务器端 使用消息确认机制
+- 消费者必须确认消息消费成功(rabbitmq才会将消息删除 kafka或者rocketmq才会提交offset)
+
+### 生产者投递消息 mq宕机了如何处理
+
+生产者投递消息会将msg消息内容记录下来 若发生消息投递失败 可以根据该日志记录实现补偿机制(获取到msg日志消息内容实现重试)
+
+### mq如何保证消息顺序一致性
+
+产生背景: mq服务器集群或者mq采用分区模型架构存放消息 每个分区对于一个消费者消费消息
+
+解决·: 消息一定要投递到同一个ma、同一个分区模型、最终被同一个消费者消费
+
+核心原理: 设定相同的消息key 根据相同的消息key 计算hash 存放在同一个分区中
+
+大多数的项目是不需要保证mq消息顺序一致性的问题 只有在一些特定的场景中可能会需要 比如MySQL和Redis实现异步同步数据
+
+若保证了消息的顺序一致性 则会降低消费者消费的速率
+
+### mq如何保证消息幂等性
+
+- 消费者获取消息 如果消费消息失败 mq服务器则会间隔的形式实现重试策略
+- 重试过程中  需要保证业务幂等性问题 保证业务不能够重复执行
+- 可以通过全局的消息id 提前查询 如果该业务逻辑已经执行过 则不会重复执行
+- 也需要在db层保证幂等性问题 唯一主键约束、乐观锁等
+
+### MySQL与Redis如何保证数据一致性
+
+产生背景:
+
+在分布式领域中同步数据 很难保证强一致性策略 都是采用最终一致性思想 短暂的数据延迟是允许的 但是最终数据必须要保证一致性
+
+- 直接删除Resis缓存 (延迟双删策略 适合小项目)
+- 基于MQ异步同步更新
+- 基于canal框架订阅binlog同步
+
+### 基于canal框架订阅binlog同步
+
+- canal服务器伪装成mysql从节点订阅mysql主节点的binlog文件
+- 当mysql主节点binlog文件发生变化时 则会给canal服务器端
+- canal服务器将binlog文件转化为json的格式给MQ
+- 消费者订阅MQ消息实现以异步的形式将数据同步到redis
+
+## 线程
+
+Java从1.1开始就不再采用用户级线程
+
+## java中线程的状态
+
+- NEW
+- RUNNABLE
+- WAITING
+- TIME_WAITING
+- BLOCKED
+- TERMINATED
+
+Threrd.join() : WAITING
+
+Thread.sleep() : TIME_WAITING
+
+网络请求: BLOCKED
+
+![a524e12c79382f8eacd0d84b6babbc2b](http://cdn.qingweico.cn/blog/a524e12c79382f8eacd0d84b6babbc2b.png)
+
+临界区(critical section): 发生竞争的区域(访问共享资源)
+
+### 解决竞争的办法
+
+- 减少竞争
+- 实现原子操作
+- TAS指令: 可以看作是cas的一个特例(只支持0到1的更新)
+- 互斥
+
+### 什么是同步
+
+- 执行同步
+- 数据同步
+
+### synchronized和ReentrantLock的区别
+
+- Non-Blocking的算法(tryLock) + 支持timeout
+- 后者使用更灵活
+- ReentrantLock提供中断能力(lock.lockInterruptibly())
+- synchronized经过性能优化: 早期Java没有轻量级锁的设计
+
+### synchronized关键字的设计
+
+> 一种不完全的实现方案
+
+```java
+
+enter(&lcok) {
+    while(!cas(&lock, 0, 1)) {
+        //休眠
+    }
+}
+leave(&lock) {
+    lock = 0;
+}
+enter(&lock);
+// 临界区
+leave(&lock);
+```
+
+对休眠的三种理解: 
+
+- 休眠少量的CPU周期(自旋锁)
+- 定时休眠 (Thread.sleep)
+- 信号休眠  信号唤醒(wait/notify)
+
+> 改版
+
+- 尝试获取锁 ---> 自旋少量次数获取锁 ? 得到锁 : 休眠  ---(唤醒) > 尝试获取锁
+- 优势: 提高在竞争较少时的性能
+- 怎么实现唤醒一个线程的功能(操作系统API修改线程的状态以及JVM知道那些线程在休眠)
+
+synchronized需要实现的功能
+
+- 需要实现加锁和解锁的逻辑
+- 需要自旋锁到休眠的升级逻辑
+- API设计:每个对象都可以上锁
+- 线程可以在竞争不到资源时休眠
+- 释放资源时唤醒休眠线程
+
+> monitor
+
+每个对象都关联一个monitor
+
+偏向锁、轻量级锁以及重量级锁
+
+### AQS简介
+
+java同步器整体架构
+
+<img src="http://cdn.qingweico.cn/blog/fc66d0fafe49a6ba9cccae041cc9b286.png" alt="fc66d0fafe49a6ba9cccae041cc9b286"  />
+
+Java提供的同步器开发框架
+
+作用: 将用户和真正意义上的底层隔离: 用户实现同步控制算法时不再需要使用JVM提供的最底层的API 
+
+AQS区别于synchronized(built-in or intrinsic lock) Java提供的另一个实现同步的体系
+
+![d609a8ff2bc13468e341259d43aa70aa](http://cdn.qingweico.cn/blog/d609a8ff2bc13468e341259d43aa70aa.png)
+
+AQS的功能特性
+
+- 基于Java实现
+- 提供同步原语和高性能生产消费者结构
+- 提供Non-Blocking能力(cas和tryLock)
+- 提供定时能力
+- 提供中断能力
+- 提供线程间协作(Condition)
+- 提供扩展数据结构的能力
+- 内部提供整数状态
+- 封装cas操作(acquire和release都是基于cas状态)以及内部封装高性能CLH队列(cas失败自动进入队列 条件等待自动进入队列)
+
+信号量(Semaphore)的实现
+
+```java
+queue = {};
+int state = 3;
+
+
+
+int localState = state;
+do {
+    localState = state;
+    if(localState == 0) {
+        queue.add(Thread.currentThread());
+        LockSupport.park();
+    }
+    
+}while(!Unsafe.cas(&state, localState, localState - 1))
+// 临界区
+while(!Unsafe.cas(&state, state, state + 1)) {
+    LockSupport.unpark(queue.remove());
+}
+```
+
+spin_lock并不是cas loop
+
+但是cas_loop是spin_loop
+
+CLH的解决方案:
+
+尾部插入 头部删除
+
+避免了双向链表且单链表性能好
+
+说出6个Java的同步器
+
+- ReentrantLock
+- Semaphore
+- CyclicBarrier
+- CountDownLatch
+- Phaser
+- Exchanger
+
+### Reenstrant与synchroized的相似点
+
+- 临界区保护 提供加锁和解锁的能力
+- 都可重入
+- 都提供线程之间的协作
+- 提供锁的升级逻辑
+  - monitor: 偏向锁 -> 轻量级锁 -> 重量级锁
+  - AQS: cas -> 休眠-> 排队竞争
+- 都提供等待队列
+  - monitor: EnterList WaitSet
+  - AQS: CLH队列
+
+### Reenstrant与synchroized的区别
+
+- 基于AQS vs 基于monitor
+- Java生态 vs 非Java生态
+- 相应线程中断(InterruptedExcepion) vs 不响应
+- 提供tryLock vs 不提供
+- 跨block vs 单block
+- 可配置公平性 vs 不可配置
+
+### Semaphore
+
+信号量的作用是什么: 控制并发量
+
+实现场景: 可以实现生产者消费者
+
+为什么ArrayBlockingQueue不用Semaphore实现: 因为条件变量性能更好
+
+### CyclicBarrier
+
+ CyclicBarrier解决了什么问题:
+
+- 多个线程协作(通信)处理任务的问题: 实现了一套协作机制(循环 + 屏障)
+
+CoundDownLatch也是解决了同样的问题, 不过只是一次CyclicBarrier周期
+
+为什么不用ReentrantLock  + 条件变量? 
+
+因为CyclicBarrier的场景具有通用性 抽象成数据结构更有价值 比如处理大量的数据和任务
+
+### Pharse
+
+### Exchanger
+
+ 用于线程之间交换数据
+
+场景: 利用Exchanger在生产者和消费者之间交换数据
+
+解决了什么问题: 线程间交换数据(交换是一个高效的操作) 但是只能用于两个线程之间
+
+总结
+
+同步器解决了什么问题
+
+- 同步
+- 协作模式
+
+## 并发
+
+### 内存一致性
+
+绝对意义上的并行并不存在
+
+绝对意义上的并行: 指令A和指令B绝对意义上同时执行并且同时产生结果
+
+不存在同一个时刻某个变量有多种状态(比如两个写内存的指令 不可能写完之后内存处于两种不同的状态)
+
+- 线性一致: 任何时刻都一致
+  - Sequential Consistency
+  - 单线程环境中永远线性一致
+- 弱一致性: 部分时刻一致 (partial) 
+  - Weak Consistency
+  - 需要同步原语(primitives): 锁、信号量 happens-before原则、volatile 若不使用原语工具 Java是弱一致性
+- 没有一致性
+
+内存不一致的原因(相对于不同的观察者线程来说是不一致的):
+
+- 分级缓存策略
+- 指令重排
+
+### volatile关键字
+
+- 确保语义上对变量的读、写操作顺序被观察到
+  - 对volatile变量的读、写不会被重排到对它后续的读写之后(阻止指令重排)
+  - 保证写入的只可以马上同步到CPU缓存中(写入后要求CPU马上刷新缓存等价于synchronized的monitorexit的作用)
+  - 保证读取到最新版本的数据(读l3、主存甚至使用内存屏障 不同的CPU架构会有不同的实现方式)
+- 如果逻辑上变量的写在读之前发生 那么确保观察到的结果 写也在读之前发生
+  - 即happens-before原则
+  - 确保有序性和可见性
+
+符合happens-before规则
+
+- 单线程规则: 单线程对内存的访问符合happens-before规则
+- Monitor规则: synchronized对锁的释放happens-before对锁的获取
+- volatile规则: volatile 变量的操作happens-before对它的后续操作且周围的指令不会重排序
+- AtomicReference
+- Thread-Start规则: start()调用前的操作happens-before线程内的程序
+- Thread.join()规则: 线程的最后一条指令happens-before join后的第一条指令
+- happens-before具有传递性 若A happens-before B、B happens-before  C 则A happens-before C
+
+happens-before不是时间关系
+
+- happens-before是发生顺序和观察到的结果关系
+- A happens-before B 指的是若A在B之前发生 那么A带来的变化在B可以观察到
+- happens-before是partial ordering(参考AtomicReference) 重要的顺序保证 其他仍然可以重排
+
+并发编程三要素
+
+- 原子性
+- 有序性
+- 可见性
+
+### 解释一下volatile?
+
+- volatile变量读写是会增加内存屏障
+- volatile变量读写时会禁用局部指令重排
+- 保证对volatile的操作happens-before另一个操作
+
+读屏障就是在读取volatile变量之前增加一条将变量内容从内存读入CPU缓存的指令
+
+写屏障就是在volatile变量写入之后 将变量的值从CPU缓存写入内存中
+
+指令重排是一种CPU策略 通过交换指令执行顺序获得最佳性能
+
+### 阻塞队列
+
+延迟队列
+
+作用: 控制流速
+
+为什么要控制: 大量任务来领 系统负载超过临界点
+
+- 线程切换频繁
+-  虚拟内存频繁交换
+- I/O资源竞争
+
+方案:
+
+- 延迟队列
+- 支持反向压力:  阻塞任务的提交者
+- 访问拒绝 拒绝任务的提交者
+
+
+
+## 锁
+
+什么是悲观锁
+
+站在mysql的角度分析: 当多个线程对同一行数据实现修改的时候 最后只有一个线程才能修改成功 若某个线程获取到行锁 则其他线程不能够对该数据做任何修改操作 切实阻塞状态
+
+站在java的角度分析: 如果没有获取到锁 则会阻塞等待 后期唤醒锁的成本就会非常高
+
+什么是乐观锁
+
+乐观锁比较乐观 通过预期值或者版本号比较 如果不一致的情况则通过循环控制修改 当前线程不会被阻塞  效率比较高 但是乐观锁比较消耗CPU的资源
+
+锁的重入性: 在同一个线程中锁可以不断传递 可以直接获取
+
+## 无锁编程
+
+### Lock-Free
+
+定义: 线程之间互相隔离  一个线程的延迟、阻塞、故障不会影响其他线程 同一时刻至少有一个线程可以进步
+
+场景: 
+
+- CLH 队列 -----> 线程通过cas竞争加入队列
+- SynchronousQueue cas竞争实现transfer操作(双向栈后者双向队列 )
+
+自旋锁(spinlock)不是LockFree
+
+```java
+spin_lock();
+i++;
+spin_unlock();
+```
+
+### Obstruction Free
+
+- 线程间隔离(一个线程的延迟不影响其他线程的进步)
+- 不要求一定有线程进步
+- 线程最终可以进步
+
+Lock Free是在Obstruction Free的基础上保证至少有一个线程进步
+
+### Wait Free
+
+- 在Lock Free的基础上保证所有线程同时进步
+- 比Lock Free有更强的限制条件
+- 场景: CopyOnWrite的读线程
+  - 先拷贝o1 --> o2
+  - 更新o2
+  - 替换指向o1的引用
+
+### Lockless(不用锁) 和 LockFree(无锁)的区别
+
+不用锁的算法通常都是Lockless 线程之间可能回互相影响 例如阻塞队列(本质还是排队)
+
+## ThreadLocal
+
+哪些地方用到: 
+
+- Spring事务模板
+- Spring MVC获取HttpRequest
+- AOP LCN分布式事务、分布式服务追踪框架源码
+
+ThreadLocal与synchronized区别
+
+ 都可以实现在多线程环境中保证线程安全
+
+不同
+
+- 前者在每个线程中都有自己独立的局部变量 空间换时间 变量之间相互隔离 相对来说效率比synchronized高
+- 后者当多个线程竞争到同一个资源的时候 最终只能有一个线程访问 采用时间换空间的方式 保证线程的安全问题
+
+### 谈谈你对ThreadLocal的理解
+
+ThreadLocal提供了线程本地变量 它可以保证访问到的变量属于当前线程 每个线程都保存一个变量副本 每个线程的变量都不同 ThreadLocal相当于提供了一种线程隔离 将变量与线程相绑定 实现传递数据 线程隔离
+
+ThreadLocal底层实现原理
+
+- 每个线程中都有自立独立的ThreadLocalMap对象
+- 如果当前线程对应的ThreadLocalMap对象为空的情况下 则创建该ThreadLocalMap对象 并且赋值键值对
+- key为当前线程所创建的ThreadLocal对象  value就是object变量值
+
+### 为什么线程缓存的是ThreadLocalMap对象
+
+因为每个ThreadLocal对象只能缓存一个变量
+
+而每个线程中可能会缓存有多个变量即多个ThreadLocal对象  而ThreadLocalMap可以存放n多个不同的ThreadLocal对象
+
+强、软、弱、虚引用的区别
+
+### 强引用 软引用 弱引用 虚引用
+
+强引用: 当内存不足时 JVM开始进行GC 对于强引用对象 就算是出现了OOM也不会对该引用斤进行回收
+
+软引用: 当系统内存充足的时候不会被回收 而当系统内存不足时就会被回收 软引用通常用在对内存敏感的程序中 比如高速缓存就用到软引用 内存够用时就保留 不够时就回收
+
+弱引用: 弱引用需要用到java.lang.ref.WeakReference来来实现 它比软引用生命周期更短 对于只有弱引用的对象来说 只要有GC 不管JVM的内存空间够不够用都会回收该对象占用的空间
+
+虚引用: 虚引用需要java.lang.ref.PhantomReference类来实现 虚引用就是形同虚设 与其他几种引用不同 虚引用并不会决定对象的生命周期
+
+### ThreadLocal为何会引发内存泄漏
+
+内存泄漏: 申请了内存 但是内存得不到释放
+
+内存泄漏溢出:  申请内存时 发现申请内存不足 就会报错
+
+原因:每个线程中都有自己独立的ThreadLocalMap对象 key为ThreadLocal对象 value是变量的值 
+
+key为ThreadLocal作为Entry对象的key 是***弱引用*** 而当ThreadLocal指向null的时候 Entry对象中的key变为空 该对象一直无法被GC回收 一直占用系统内存 有可能发生内存泄漏的问题
+
+### 如何防御ThreadLocal内存泄漏的问题
+
+- 调用remove方法将不用的数据移出
+
+ThreadLocalMap与当前线程的生命周期一致
+
+尽量不要使用全局的ThreadLocal

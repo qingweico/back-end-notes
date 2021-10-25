@@ -21,8 +21,8 @@ docker run -it -v 宿主机绝对路径目录:容器内目录 镜像名
 
 当容器停止运行并且退出后,主机修改数据后,当容器重启时数据仍然同步
 
-```java
-docker run -it -v 宿主机绝对路径目录:容器内目录:ro 镜像名 //容器只可读数据不可写数据
+```bash
+docker run -it -v 宿主机绝对路径目录:容器内目录:ro 镜像名 # 容器只可读数据不可写数据
 ```
 
 #### DockerFile添加
@@ -101,16 +101,16 @@ Successfully tagged mycentos:lates
 
 作用：实现容器间的传递共享
 
-```java
-docker run -it --name c1  mycentos                  //生成容器c1
+```bash
+docker run -it --name c1  mycentos                  # 生成容器c1
 ```
 
-```java
-docker run -it --name c2 --volumes-from c1 mycentos //生成容器c2并继承容器c1
+```bash
+docker run -it --name c2 --volumes-from c1 mycentos # 生成容器c2并继承容器c1
 ```
 
-```java
-docker run -it --name c3 --volumes-from c1 mycentos //生成容器c3并继承容器c1
+```bash
+docker run -it --name c3 --volumes-from c1 mycentos #生成容器c3并继承容器c1
 ```
 
 三个容器中拥有相同的两个数据卷container1和container2,此时在该数据卷中所做的任何读写操作都能在容器之间中同步实现

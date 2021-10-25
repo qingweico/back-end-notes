@@ -9,7 +9,7 @@ wget https://archive.apache.org/dist/hadoop/common/hadoop-3.1.4/hadoop-3.1.4.tar
 
 ## 环境配置
 
-```bash
+```shell
 $hadoop/sbin/start-dfs.hs
 HDFS_DATANODE_USER=root
 HADOOP_DATANODE_SECURE_USER=hdfs
@@ -17,7 +17,7 @@ HDFS_NAMENODE_USER=root
 HDFS_SECONDARYNAMENODE_USER=root
 ```
 
-```bash
+```shell
 $hadoop/sbin/stop-dfs.hs
 HDFS_DATANODE_USER=root
 HADOOP_DATANODE_SECURE_USER=hdfs
@@ -149,10 +149,9 @@ bin/hadoop jar exec/WordCount.jar /user/root/input/1M-Word.txt ouput
 bin/hdfs dfs -cat /user/root/ouput/part-r-00000
 ```
 
-![hadoop](https://pic.imgdb.cn/item/60d01a76844ef46bb20bfcbb.pn)
-
 ```bash
 # 或者将hfs中的文件复制到本地
 bin/hdfs dfs -get /user/root/ouput ouput
 ```
 
+![image-20211023141132735](https://cdn.qingweico.cn/blog/image-20211023141132735.png)

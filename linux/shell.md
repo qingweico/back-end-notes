@@ -28,7 +28,7 @@ tail -n+10 file.txt | head -1
 ```
 
 ```shell
-#/bin/bash
+# /bin/bash
 count=`cat file.txt | wc -l`
 out=`cat file.txt | head -10 | tail -1`
 if [ $count -lt 10 ]
@@ -39,7 +39,7 @@ fi
 ```
 
 ```shell
-#/bin/bash
+# /bin/bash
 c=10
 cat file.txt|
 while read line

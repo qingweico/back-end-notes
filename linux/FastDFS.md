@@ -28,7 +28,7 @@ fastdfs-6.04.tar.gz
 
 ```bash
 cd libfastcommon-1.0.42/
- #编译安装
+# 编译安装
 ./make.sh && ./make.sh install
 ```
 
@@ -36,9 +36,9 @@ cd libfastcommon-1.0.42/
 
 ```bash
 cd fastdfs-6.04/
-#编译安装
+# 编译安装
 ./make.sh && ./make.sh install
-将conf目录下所有配置文复制(移动)到/etc/fdfs/
+# 将conf目录下所有配置文复制(移动)到/etc/fdfs/
 ```
 
 ```bash
@@ -69,7 +69,7 @@ http.server_port=8888
 
 ```bash
 # 启动storage服务
-/usr/bin/fdfs_启动storaged /etc/fdfs/storage.conf
+/usr/bin/fdfs_storaged /etc/fdfs/storage.conf
 ```
 
 ## 安装fastdfs-nginx-module
@@ -81,7 +81,7 @@ cp /usr/local/dfs/fastdfs-nginx-module-1.22/src/mod_fastdfs.conf /etc/fdfs
 ## nginx
 
 ```bash
-#添加fastdfs-nginx-module模块
+# 添加fastdfs-nginx-module模块
 ./configure --add-module=/usr/local/dfs/fastdfs-nginx-module-1.22/src/
 # 编译安装
 make && make install

@@ -21,6 +21,8 @@
 
 -----
 
+## nano编辑器
+
 ## vi 和vim模式的切换
 
 命令行下输入  `vim`  文件名     进入一般模式(正常模式) 可以创建新文件也可以修改已有文件
@@ -157,7 +159,7 @@
 
 `who` : 查看用户登陆信息
 
-![1588911447007](https://pic.downk.cc/item/5ef2e89f14195aa594bff21f.png)
+![1588911447007](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff21f.png)
 
 第一个root 代表服务器启动时root登陆
 
@@ -171,7 +173,7 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 `w` :查看用户登陆的详细信息
 
-![1588911970296](https://pic.downk.cc/item/5ef2e89f14195aa594bff221.png)
+![1588911970296](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff221.png)
 
 `uptime` 查看用户登陆一些基本信息
 
@@ -209,9 +211,9 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 ### 用户和组的相关的文件
 
-`/etc/passwd`  :用户的配置文件 记录用户的各种信息
+`/etc/passwd` : 用户的配置文件 记录用户的各种信息
 
-`/etc/shadow` :口令的配置文件
+`/etc/shadow` : 口令的配置文件
 
 `/etx/group` : 组的配置文件 记录linux包含组的信息
 
@@ -243,11 +245,17 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 ## 实用指令
 
+`usr` : unix system resource
+
+`var` : Variable Data File 存储运行时数据
+
+`dev` : echo "..." > /dev/null 可以向其中写入任何东西(好比垃圾桶)
+
 ### 文件目录类
 
 `pwd`:  显示当前工作目录的绝对路径
 
-`ls   [选项] 【文件或目录】`
+`ls [选项] 【文件或目录】`
 
 选项包括 `a`, `l`
 
@@ -257,7 +265,7 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 `ls -d` 显示当前目录的信息
 
-`ls -i` 查看文件的inode号
+`ls -F` 查看文件的类型
 
 #### 创建目录和删除
 
@@ -271,9 +279,17 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 #### 创建空的文件
 
+man touch:  touch - change file timestamps
+
+确实tocuh的作用是改变文件的时间戳 如果没有则创建文件
+
 `touch 文件名` 
 
 #### 复制文件
+
+`scp file_source file_target` 用于Linux之间复制文件和目录
+
+eg: `scp local_file remote_username@remote_ip:remote_folder ` 从本地复制到远程
 
 `cp resource target`   将resource复制到目标目录下
 
@@ -297,7 +313,11 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 #### 查看文件
 
-`cat 【选项】文件名 | more `  :只读的方式|分页的形式查看文件  选项为 `-n`: 可以显示行号 
+cat用于连接文件并打印到标准输出设备上
+
+查看日志文件不要使用cat 如果日志文件过大会卡死 应该使用less命令
+
+`cat 【选项】文件名 | more `  :只读的方式 | 分页的形式查看文件  选项为 `-n`: 可以显示行号 
 
 more指令
 
@@ -405,7 +425,7 @@ fi
 ```
 
 ```bash
-#让配置生效
+# 让配置生效
 source ~/.bashrc
 ```
 
@@ -437,23 +457,23 @@ source ~/.bashrc
 
 `find 【目录】 查找类型 文件名`   
 
-```java
-find /home -name hello.txt  //查找home目录下文件名为hello.txt的文件\
+```bash
+find /home -name hello.txt  # 查找home目录下文件名为hello.txt的文件
 * 匹配任何字符
 ？匹配任意字符
 -iname 不区分大小写
 ```
 
-```java
-find /home -user admin //查找用户名为admin的文件
+```bash
+find /home -user admin # 查找用户名为admin的文件
 ```
 
-```java
-find / -size +20M  //查找当前系统下大于20M的文件  -20M(小于20M的文件)   20M(等于20M的文件)  (M大写 k可以小写 不可以大写)
+```bash
+find / -size +20M  # 查找当前系统下大于20M的文件  -20M(小于20M的文件)   20M(等于20M的文件)  (M大写 k可以小写 不可以大写)
 ```
 
-``` java
-find /etc -cmin -5;在etc目录下查找5分钟内被修改过文件属性的文件和目录
+``` bash
+find /etc -cmin -5;# 在etc目录下查找5分钟内被修改过文件属性的文件和目录
 -amin  访问时间  access
 -cmin 文件属性   change
 -mmin 文件内容   modify
@@ -465,24 +485,24 @@ find /etc -cmin -5;在etc目录下查找5分钟内被修改过文件属性的文
 
 `-type 【选项】` 【选项】:`-f` 普通文件  `-d` 目录  `-l` 软连接
 
-```java
-find /etc -size +20M -a -size -50M -type f         //查找etc目录下文件大小在20M~50M之间的文件
+```bash
+find /etc -size +20M -a -size -50M -type f          # 查找etc目录下文件大小在20M~50M之间的文件
 ```
 
-```java
-find /etc -name *init* -exec 执行操作命令 {} \;      //对搜索结果进行操作(严格区分空格)
+```bash
+find /etc -name *init* -exec 执行操作命令 {} \;      # 对搜索结果进行操作(严格区分空格)
 ```
 
-```java
-find /etc -name *init* -ok 执行操作命令 {} \;        //带有询问
+```bash
+find /etc -name *init* -ok 执行操作命令 {} \;        # 带有询问
 ```
 
-*![1588829333905](https://pic.downk.cc/item/5ef2e89f14195aa594bff21d.png)*
+*![1588829333905](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff21d.png)*
 
 找到test目录下java的文件且带有询问的删除
 
-```java
-find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下的文件
+```bash
+find . -inum inod号 -exec rm -rf {} \; # 根据inode号来删除当前目录下的文件
 ```
 
 #### locate
@@ -495,9 +515,17 @@ find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下
 
 #### grep和管道符
 
+管道是进程中通信的手段 也是一个文件 
+
+`mkfifo filename `创建一个管道文件
+
+`ls / | tee file | wc -l`
+
 `grep` 过滤查找
 
-`|`  将前一个命令查找的结果输出传递给后一个命令查找
+`grep password filename` 在文件中过滤查找
+
+`|`  将前一个命令查找的结果输出传递给后一个命令输入
 
 `cat hello.txt| grep -n hello`  查找hello.txt文件 并且在该文件中查找hello并显示所在的行号
 
@@ -512,6 +540,12 @@ find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下
 `which` 用来查看命令的文件路径以及是否有别名
 
 `whereis` 用来查看命令所在的目录以及帮组文档的路径
+
+#### 高阶查找
+
+xargs  配合管道符一块使用
+
+find 文件目录 -name "*.java" | xargs -I {} cat {} | wc -l 查看目录中以java结尾的文件中所有的行数
 
 ### 解压和压缩类
 
@@ -539,7 +573,7 @@ find . -inum inod号 -exec rm -rf {} \; //根据inode号来删除当前目录下
 
 `x` 解压.tar文件
 
-`tar -zcvf 压缩后的文件名 目标文件名/目录`                                        压缩文件
+`tar -zcvf 压缩后的文件名 目标文件名/目录`                                         压缩文件
 
 `tar -zxvf 将要解压的文件 解压到的目录`                                               解压文件
 
@@ -596,9 +630,9 @@ uniq -c ip.txt | sort -nr | head -n 3
 
 ### 权限
 
-*![1588306848988](https://pic.downk.cc/item/5ef2e89114195aa594bfed34.png)*
+*![1588306848988](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed34.png)*
 
-*![1588307060227](https://pic.downk.cc/item/5ef2e89114195aa594bfed37.png)*
+*![1588307060227](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed37.png)*
 
 从左到右:
 
@@ -671,9 +705,9 @@ rwx作用目录
 
 ## 磁盘查询指令
 
-`df- lh` :查询系统整体磁盘使用的情况	
+`df- lh` : 查询系统整体磁盘使用的情况	
 
-`du-h /目录` :查询指定目录的磁盘占用情况  默认为当前目录
+`du-h /目录` : 查询指定目录的磁盘占用情况  默认为当前目录
 
 - -s 指定目录占用大小总汇
 - -h带计量单位
@@ -683,21 +717,25 @@ rwx作用目录
 
 ### 统计目录下文件的个数
 
-`ls -l /home |grep "^-"| wc -l` :统计home目录下文件的个数
+`man wc ` 查看wc命令的用法
+
+`ls -l /home |grep "^-"| wc -l` 统计home目录下文件的个数
 
 ### 统计目录下目录的个数
 
-`ls -l /home |grep "^d"| wc -l` :统计home目录下目录的个数
+`ls -l /home |grep "^d"| wc -l` 统计home目录下目录的个数
 
 ### 统计目录下所有的文件个数(包括子文件)
 
-`ls -lR /home |grep "^-"| wc -l` :统计home目录下所有的文件个数
+`ls -lR /home |grep "^-"| wc -l` 统计home目录下所有的文件个数
 
 ### 统计目录下所有的目录个数(包括子目录)
 
-`ls -lR /home |grep "^d"| wc -l` :统计home目录下所有的目录个数
+`ls -lR /home |grep "^d"| wc -l` 统计home目录下所有的目录个数
 
 ## 网络命令
+
+`ip`
 
 `last` 查看目前和过去所有登陆过系统的用户的信息
 
@@ -708,13 +746,14 @@ rwx作用目录
 `netstat` 显示网络有关的信息
 
 - `-a` 显示所有选项 默认不显示LISTEN相关
-
 - `-t` TCP协议
 - `-u` UDP协议 UDP 是User Datagram Protocol的简称, 中文名是用户数据报协议
 - `-l`  监听
 - `-r` 路由
 - `-n` 显示IP和端口号
 - `-p` 显示建立相关链接的程序名
+
+`netstat -ntlp` 查看本机监听的端口及应用名称
 
 `netstat -tlun` 查看本机监听的端口
 
@@ -732,7 +771,13 @@ rwx作用目录
 
 `arp -n` 显示和修改ARP
 
+`dig`
+
+`curl www.baidu.com -I` 查看http的头部信息
+
 ## 进程管理
+
+在linux中 服务命令中带有d(daemon)表示后台进程 ---> mysqld
 
 ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状况,可以不加任何参数
 
@@ -742,7 +787,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 `ps -x`: 显示后台进程运行的参数
 
-![1588383393872](https://pic.downk.cc/item/5ef2e89114195aa594bfed39.png)
+![1588383393872](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed39.png)
 
 - user:用户名
 - PID:进程的id
@@ -766,7 +811,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 `ps -ef`: 以全格式显示当前所有的进程,查看进程的父进程 `-e`:显示所有进程 `-f` :全格式
 
-![1588384476648](https://pic.downk.cc/item/5ef2e89114195aa594bfed3b.png)
+![1588384476648](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed3b.png)
 
 - UID :用户ID
 - PID:进程ID
@@ -779,9 +824,9 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 强制非法用户下线
 
-![1588386912261](https://pic.downk.cc/item/5ef2e89114195aa594bfed3d.png)
+![1588386912261](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed3d.png)
 
-*![1588387069698](https://pic.downk.cc/item/5ef2e89f14195aa594bff219.png)*
+*![1588387069698](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff219.png)*
 
 `killall 进程名称` :            通过名称终止多个进程
 
@@ -805,7 +850,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 `top -u 用户名`: 监视特定用户
 
-![1588392949656](https://pic.downk.cc/item/5ef2e89f14195aa594bff21b.png)
+![1588392949656](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff21b.png)
 
 `top 回车 k 回车 进程号 `: 选择要终止的进程
 
@@ -817,20 +862,20 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 ### 监控网络状态
 
-`netstat -anp` : 查看系统所有的网络服务 `-an`:按一定顺序排列输出 `-p` :显示哪个进程在调用  `-t ` : 显示TCP传输协议的连线状况
+`netstat -anp` 查看系统所有的网络服务 `-an`:按一定顺序排列输出 `-p` :显示哪个进程在调用  `-t ` :显示TCP传输协议的连线状况
 
-`netstat -anp | grep 网络服务名称`: 查看单个网络服务
+`netstat -anp | grep 网络服务名称` 查看单个网络服务
 
 ## rpm
 
 安装未安装的rpm包时,使用rpm包全名且后跟rpm包的路径,而查询或者卸载时直接使用包名,系统会从数据库中寻找该rpm包的信息,所以可以在任意位置查询或卸载该rpm包
 
-*![1589100480404](https://pic.downk.cc/item/5ef2e8a614195aa594bff3e6.png)*
+*![1589100480404](https://cdn.qingweico.cn/blog/5ef2e8a614195aa594bff3e6.png)*
 
-```shell
-rpm -qa | grep 包名;查询rpm安装包
-rpm -e --nodeps 包名;强行卸载rpm安装包  erase
-rpm -ivh rmp包全名;安装rpm文件
+```bash
+rpm -qa | grep 包名;  # 查询rpm安装包
+rpm -e --nodeps 包名 ;# 强行卸载rpm安装包  erase
+rpm -ivh rmp包全名;   # 安装rpm文件
 ```
 
 `-i` 代表安装(install)
@@ -1042,14 +1087,14 @@ $10 = j
 
 #### 判断整数
 
-| 判断参数 | 含义     |      |
-| :------- | -------- | ---- |
-| -eq      | 相等     |      |
-| -ne      | 不等     |      |
-| -gt      | 大于     |      |
-| -lt      | 小于     |      |
-| -ge      | 大于等于 |      |
-| -le      | 小于等于 |      |
+| 判断参数 | 含义     |
+| :------- | -------- |
+| -eq      | 相等     |
+| -ne      | 不等     |
+| -gt      | 大于     |
+| -lt      | 小于     |
+| -ge      | 大于等于 |
+| -le      | 小于等于 |
 
 #### 判断字符串
 

@@ -6,7 +6,7 @@
 
 下载redis [redis官网](http://www.redis.io)  /opt目录下解压
 
-```java
+```bash
 tar -zxvf redis-6.0.5.tar.gz
 ```
 
@@ -18,22 +18,22 @@ tar -zxvf redis-6.0.5.tar.gz
 
 CentOS7默认gcc版本4.8.5
 
-```shell
+```bash
 yum install centos-release-scl
 ```
 
-```shell
+```bash
 yum install devtoolset-7 -y
 ```
 
 设置devtoolset-7 为默认的gcc编译器
 
-```shell
+```bash
 # 临时切换系统的gcc版本
 scl enable devtoolset-7 bash
 ```
 
-```shell
+```bash
 # 永久切换系统的gcc版本
 echo "source /opt/rh/devtoolset-7/enable" >>/etc/profile
 ```
@@ -46,21 +46,21 @@ source /etc/profile
 在redis-6.0.5目录下更改redis.conf配置文件,找到general下的deamonize,将`no`修改为`yes`(以后台方式运行),保存退出
 
 ```bash
-#redis.conf
-#redis密码
+# redis.conf
+# redis密码
 requirepass 123456
 ```
 
-```mysql
-#以配置文件方式启动
+```bash
+# 以配置文件方式启动
 cd src
 ./redis-server ../redis.conf
 ```
 
-```mysql
+```bash
 ./redis-cli -p 6379
 ping
-#(error) NOAUTH Authentication required.
+# (error) NOAUTH Authentication required.
 # 密码认证即可
 auth 123456
 ping
@@ -72,32 +72,33 @@ PONG
 ### 修改redis.conf配置文件
 
 ```properties
-#注释掉redis与本地服务器的绑定关系
+# 注释掉redis与本地服务器的绑定关系
 bind 127.0.0.1
 ```
 
 ```properties
-#关闭受保护模式
+# 关闭受保护模式
 protected-mode no
 ```
 
 ### 开放3306端口
 
-```shell
-#测试window是否可以连通Linux中redis端口
+```bash
+# 测试window是否可以连通Linux中redis端口
 telnet 192.168.1.105 6379
 ```
 
-```shell
+```bash
 firewall-cmd --zone=public --add-port=3306/tcp --permanent;
 ```
 
-```shell
+```bash
 systemctl restart firewalld;
 ```
 
-```shell
+```bash
 firewall-cmd --reload
 ```
 
 ### 重启redis
+

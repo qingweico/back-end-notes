@@ -4,7 +4,7 @@
 
 # JVM
 
-*![](https://img.imgdb.cn/item/601773e53ffa7d37b3a530f6.png)*
+*![](https://cdn.qingweico.cn/blog/601773e53ffa7d37b3a530f6.png)*
 
 ## 1 类加载器
 
@@ -13,9 +13,9 @@
 - 加载
 
 ```properties
-1:通过一个类的全限定名称获取此类的二进制字节流
-2:将这个字节流所代表的静态存储结构转换为方法区的运行时数据结构
-3:在内存中生成一个代表这个类的java.lang.Class对象, 作为方法区这个类的各种数据的访问入口
+1: 通过一个类的全限定名称获取此类的二进制字节流
+2: 将这个字节流所代表的静态存储结构转换为方法区的运行时数据结构
+3: 在内存中生成一个代表这个类的java.lang.Class对象, 作为方法区这个类的各种数据的访问入口
 ```
 
 - 链接
@@ -29,14 +29,16 @@
 执行类构造器方法<clinit>()
 此方法不需要定义, 是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来
 构造器方法中指令按语句在源文件中出现的顺序执行
-<clinit>不同于类的构造器（关联: 构造器是虚拟机视角下的<init>()）
+<clinit>不同于类的构造器(关联: 构造器是虚拟机视角下的<init>())
 若该类具有父类, JVM会保证子类的<clinit>()执行前, 父类的<clinit>()已经执行完毕
 虚拟机必须保证一个类的<clinit>()方法在多线程下被同步加锁
 ```
 
 ### 1.2 类加载器的分类
 
-- 引导类加载器(BootStrap Class Loader) : 包括系统类加载器(System Class Loader) 和扩展类加载器(Extension Class Loader)
+- 引导类加载器(Bootstrap Class Loader) : 
+  - 系统类加载器(System(Application) Class Loader)         classpath
+  - 扩展类加载器(Extension Class Loader)                           jre目录下 lib/ext
 - 自定义类加载器(User-Defined Class Loader)
 
 **将所有派生于抽象类ClassLoader的类加载器都划分为自定义类加载器(不包括引导类加载器)**
@@ -44,6 +46,8 @@
 引导类加载器：使用C/C++代码实现, 嵌套在JVM内部
 
 系统类加载器(AppClassLoader)：程序中通过默认的类加载器
+
+OSGi模型
 
 ### 1.3 双亲委派机制
 
@@ -102,7 +106,7 @@ CPU时间片即CPU分配给各个程序的时间, 每个线程被分配一个时
 
 虚拟机栈的 **优点**是: 指令集小, 编译器容易实现 **缺点**是性能下降, 实现同样的功能需要更多的指令
 
-作用：主管Java程序的运行, 它保存方法的局部变量、部分结果, 并参与方法的调用和返回
+作用: 主管Java程序的运行, 它保存方法的局部变量、部分结果, 并参与方法的调用和返回
 
 生命周期: 生命周期和线程一致
 
@@ -134,7 +138,7 @@ CPU时间片即CPU分配给各个程序的时间, 每个线程被分配一个时
 - 局部变量表(Local Variables)
 - 操作数栈(Operand Stack)(或表达式栈)
 - 动态链接(Dynamic Linking)(或指向运行时常量池的方法引用)
-- 方法返回地址(Return Address）(或方法正常退出或者异常退出的定义)
+- 方法返回地址(Return Address)(或方法正常退出或者异常退出的定义)
 - 一些附加信息
 
 #### 2.2.2 局部变量表
@@ -152,7 +156,7 @@ CPU时间片即CPU分配给各个程序的时间, 每个线程被分配一个时
 ```properties
 1> JVM会为局部变量表中的每一个Slot都分配一个访问索引, 通过这个索引1即可成功访问到局部变量表中指定的局部变量值
 2> 当一个实例方法调用的时候, 它的方法参数和方法体内部定义的局部变量将会按照顺序被复制到局部变量表中的每一个Slot上
-3> 如果需要访问局部变量表中的一个64bit的局部变量值时, 只需要使用前一个索引即可（注:32位以内的类型只占一个和slot（包括returnAddress）, 64位的类型（long和double占用两个slot））
+3> 如果需要访问局部变量表中的一个64bit的局部变量值时, 只需要使用前一个索引即可(注:32位以内的类型只占一个和slot(包括returnAddress), 64位的类型(long和double占用两个slot))
 4> 如果当前帧是由构造方法或者实列方法创建的, 那么该对象引用this将会存放在index为0的slot处, 其余的参数按照参数顺序表顺序继续排列
 ```
 
@@ -198,7 +202,7 @@ CPU时间片即CPU分配给各个程序的时间, 每个线程被分配一个时
 
 - 普通调用指令
   - invokestatic: 调用静态方法, 解阶段确定唯一方法版本
-  - invokespecial: 调用<ini t>方法、私有方法以及父类方法, 解析阶段确定唯一方法版本
+  - invokespecial: 调用<init>方法、私有方法以及父类方法, 解析阶段确定唯一方法版本
   - invokevirtual: 调用所有的虚方法
   - invokeinterface: 调用接口方法
 - 动态调用指令
@@ -208,7 +212,7 @@ CPU时间片即CPU分配给各个程序的时间, 每个线程被分配一个时
 
 ##### 2.2.4.4 关于invokedynamic指令
 
-invokedynamic指令于Java7添加, 是为了能够让Java支持动态类型语言而做的一种改进（使用Lamabda表达式可以直接生成）
+invokedynamic指令于Java7添加, 是为了能够让Java支持动态类型语言而做的一种改进(使用Lamabda表达式可以直接生成)
 
 Java7中增加的动态类型语言支持的本质是对Java虚拟机规范的修改, 而不是对Java语言规则的修改
 
@@ -258,11 +262,11 @@ Java是静态类型的语言
 - Java堆内存的JVM启动的时候即被创建, 其空间大小也就确定了。堆区是JVM管理的最大一块内存空间(堆内存的大小是可以调节的)
 - 《JVM虚拟机规范》规定, 堆可以处于物理上不连续的内存空间, 但是在逻辑上它应该被视为连续的
 - 所有的的线程共享Java堆, 在这里还可以划分为线程私有的缓冲区(Thread Local Allocation Buffer TLAB)
-- 堆, 是GC(Garbage Collecion 垃圾回收器) 执行垃圾回收的重点区域
+- 堆, 是GC(Garbage Collection 垃圾回收器) 执行垃圾回收的重点区域
 - 在方法结束后, 堆中的对象不会马上被移除, 仅仅在垃圾收集的时候才会移出(GC的启动也需要消耗系统资源, 所以GC并不会频繁的启动)
 
 ```properties
-#打印虚拟机参数(加号表示启用 减号表示不启用)
+# 打印虚拟机参数(加号表示启用 减号表示不启用)
 java -XX:+PrintFlagsFinal | wc -l 
 ```
 
@@ -290,9 +294,9 @@ java -XX:+PrintFlagsFinal | wc -l
 - 查看设置堆空间的参数的详细信息
 
   ```properties
-  #方式一
+  # 方式一
   1> jps
-  2> jstat -gc 进程id
+  2> jstat -gc pid
   #方式二
   -XX:PrintGCDetails
   ```
@@ -317,12 +321,12 @@ java -XX:+PrintFlagsFinal | wc -l
 - 查看默认年轻代和老年代在堆结构的占比
 
   ```properties
-  #显示当前所有java进程pid
+  # 显示当前所有java进程pid
   jps
-  #查看默认年轻代和老年代在堆结构的占比为2(新生代占1.老年代占2)
-  jinfo -flag NewRatio 进程pid
+  # 查看默认年轻代和老年代在堆结构的占比为2(新生代占1.老年代占2)
+  jinfo -flag NewRatio pid
   >>> -XX:NewRatio=2
-  #查看Eden空间和另外两个Survivor空间缺省所占的比例(默认Eden空间占8份)
+  # 查看Eden空间和另外两个Survivor空间缺省所占的比例(默认Eden空间占8份)
   jinfo -flag SurvivorRatio 进程pid
   >>> -XX:SurvivorRatio=8
   ```
@@ -519,23 +523,23 @@ Java中对象就是聚合量
 #### 2.5.2 设置方法区大小的参数
 
 ```properties
-#设置永久代空间的大小
+# 设置永久代空间的大小
 -XX:PermSize
-#设置永久代空间的最大值
+# 设置永久代空间的最大值
 -XX:MaxPermSize
-#默认元空间的初始值大小
+# 默认元空间的初始值大小
 jps
-jinfo -flag MetaspaceSize 进程id
+jinfo -flag MetaspaceSize pid
 >>> -XX:MetaspaceSize=21807104
-#默认元空间的最大值
-jinfo -flag MaxMetaspaceSize 进程id
+# 默认元空间的最大值
+jinfo -flag MaxMetaspaceSize pid
 >>> -XX:MaxMetaspaceSize=18446744073709486080
 ```
 
 ```properties
-#设置元空间的初始值大小
+# 设置元空间的初始值大小
 -XX:MetaspaceSize=10m
-#设置元空间的最大值
+# 设置元空间的最大值
 -XX:MaxMetaspaceSize=100m
 ```
 
@@ -591,7 +595,7 @@ jinfo -flag MaxMetaspaceSize 进程id
 - 常量池表(Constant Pool Table) 是Class文件的一部分, 用于存放编译期生成的各种字面量与符号引用, **这部分内容将在类加载后存放到方法区的运行时常量池中**
 - 运行时常量池, 在加载类和接口到虚拟机后, 就会创建对应的运行时常量池
 - JVM为每个已加载的类型(类或者接口)都维护一个常量池。池中的数据项像数组项一样, 是通过索引访问的
-- 运行时常量池中包含多种不统的常量, 包括编译期就已经明确的数值常量, 也包括到运行期解析后才能够获得的方法或者字段引用, 此时不再是常量池中的符号地址了, 这里换为真实地址
+- 运行时常量池中包含多种不同的常量, 包括编译期就已经明确的数值常量, 也包括到运行期解析后才能够获得的方法或者字段引用, 此时不再是常量池中的符号地址了, 这里换为真实地址
 - 运行时常量池具有动态性
 - 当创建类或者接口的运行时常量池时, 如果构造运行时常量池所需的内存空间超过了方法区所能提供的最大值, JVM将会抛出OOM
 
@@ -643,7 +647,7 @@ Java虚拟机被允许对满足以上三个条件的无用类进行回收, 这�
 
 JDK7中将StringTable放到了堆空间中。因为永久代的回收效率很低, 在full gc时才会触发。而full gc是老年代的空间不足、永久代不足时才会触发, 这就导致StringTable回收效率不高, 而我们开发中会有大量的字符串被创建, 回收效率低, 导致永久代内存不足。放到堆里, 能够及时回收内存。
 
-![JVM](https://img.imgdb.cn/item/604e1e0d5aedab222c229f9b.png)
+![JVM](https://cdn.qingweico.cn/blog/604e1e0d5aedab222c229f9b.png)
 
 ### 2.6 对象的创建
 
@@ -702,7 +706,17 @@ JDK7中将StringTable放到了堆空间中。因为永久代的回收效率很�
 - 运行时元数据(Mark Word)
   - 哈希值
   - GC分代年龄
-  - 锁状态标志
+  - 锁状态标志(3位)
+    - 是否上锁
+    - 轻量级锁
+    - 重量级锁
+    - 是否被GC标记
+    - 是否偏向
+  - Lock Records Address
+    - 轻量级锁(指向栈中的锁记录)
+    - 检查Mark Word是否指向当前线程的栈
+  - Monitor Address
+  - Forwarding Address
   - 线程持有的锁
   - 偏向线程ID
   - 偏向时间戳
@@ -725,7 +739,7 @@ JDK7中将StringTable放到了堆空间中。因为永久代的回收效率很�
 
 由于HotSpot VM的自动内存管理系统要求对象起始地址必须是8字节的整数倍, 即任何对象的大小都必须是8字节的整数倍, 如果对象实例数据部分没有对其的话, 就要通过字节填齐来补全
 
-![](https://img.imgdb.cn/item/603658cc5f4313ce25534991.png)
+![](https://cdn.qingweico.cn/blog/603658cc5f4313ce25534991.png)
 
 #### 2.7.4 工具: JOL = Java Object Layout
 
@@ -812,7 +826,7 @@ Space losses: 0 bytes internal + 0 bytes external = 0 bytes total
 
 - 句柄访问
 
-![](https://img.imgdb.cn/item/60379b175f4313ce25471152.png)
+![](https://cdn.qingweico.cn/blog/60379b175f4313ce25471152.png)
 
 ```properties
 句柄访问的缺点: 1> 需要在内存中开辟额外的空间供句柄池存储数据 2> 访问对象需要经过多次地址寻址
@@ -823,7 +837,7 @@ Space losses: 0 bytes internal + 0 bytes external = 0 bytes total
 
 使用直接指针来访问最大的好处就是速度更快,它节省了一次指针定位的时间开销
 
-![](https://img.imgdb.cn/item/60379b0f5f4313ce25470a05.png)
+![](https://cdn.qingweico.cn/blog/60379b0f5f4313ce25470a05.png)
 
 ### 2.9 直接内存(堆外内存)
 
@@ -918,7 +932,7 @@ AOT编译器: GNU Compiler for Java(GCJ)、 Excelsior JET
 - 方法调用计数器
 
 ```properties
-#热度衰减
+# 热度衰减
 - 这个计数器就用于统计方法被调用的次数, 它的默认阈值在Client模式下是1500次, 在Server模式下是10000次。超过这个阈值就会触发JIT编译
 - 这个阈值可以通过虚拟机参数 -XX:CompileThreshold来设置
 - 当一个方法被调用时,会检查该方法是否存在被JIT编译过的版本,如果存在,则优先使用编译后的本地代码来执行。如果不存在已被编译过的版本,则将此方法的调用计数器值加1,然后判断方法调用计数器与回边计数器之和是否超过方法调用计数器的阈值。如果已超过阈值,那么将会向即时编译器提交一个该方法的代码编译请求
@@ -937,9 +951,9 @@ AOT编译器: GNU Compiler for Java(GCJ)、 Excelsior JET
 #### 3.5.1 设置HotSpot的执行模式
 
 ```properties
-#开启解释执行模式
+# 开启解释执行模式
 java -Xint -version
-#开启编译执行模式
+# 开启编译执行模式
 java -Xcomp -version
 ```
 
@@ -975,15 +989,15 @@ java -Xcomp -version
 自JDK10起, HotSpot加入了一个全新的即时编译器: Graal编译器
 
 ```properties
-#激活Graal的虚拟机参数
+# 激活Graal的虚拟机参数
 -XX:+UnlockExperimentalVMOptions -XX:+UseJVMCICompiler
 ```
 
 JDK9引入了AOT编译器(静态提前编译器, Ahead Of Compiler)
 
-JDK9引入了实验性AOT编译工具jaotc。它借助了Graal编译器, 将所输入的Java类文件转换为机器码, 并存放至生成的动态共享库之中
+JDK9引入了实验性AOT编译工具jaotc 它借助了Graal编译器, 将所输入的Java类文件转换为机器码, 并存放至生成的动态共享库之中
 
-所谓的AOT编译, 是与即使编译相对立的一个概念。即时编译是指在程序运行过程中将字节码转换为可在硬件上直接运行的机器码, 并部署至托管环境中的过程。 而AOT编译指的是在程序运行之前, 便将字节码转换为机器码的过程
+所谓的AOT编译, 是与即使编译相对立的一个概念 即时编译是指在程序运行过程中将字节码转换为可在硬件上直接运行的机器码, 并部署至托管环境中的过程。 而AOT编译指的是在程序运行之前, 便将字节码转换为机器码的过程
 
 优点: 
 
@@ -1004,7 +1018,7 @@ JDK9引入了实验性AOT编译工具jaotc。它借助了Graal编译器, 将所�
 - uintx StringTableSize=10 is outside the allowed range [ 128 ... 16777216 ]
 
 ```properties
-#默认字符串常池的大小(JDK12)
+# 默认字符串常池的大小(JDK12)
 jps
 jinfo -flag StringTableSize java进程id
 >>> -XX:StringTableSize=65536

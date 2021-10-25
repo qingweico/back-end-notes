@@ -27,7 +27,7 @@ pom:Project Object Model  项目对象模型
 
 ### 常用的Maven命令
 
-- mvn clean： 清理
+- mvn clean：清理
 - mvn compile：编译主程序
 - mvn test-compile：编译测试程序
 - mvn test：执行测试程序
@@ -144,7 +144,7 @@ Path: E:\maven\apache-maven-3.6.3\bin
   - 或者在pom.xml中引入jdk8及其以上的依赖
 
 ```xml
-#IDEA中设置maven工程下LanguageLevel运行级别
+<!--IDEA中设置maven工程下LanguageLevel运行级别-
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>

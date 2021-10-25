@@ -6,19 +6,19 @@
 
 ### rpm安装
 
-```mysql
+```bash
 mysql-8.0.20-1.el7.x86_64.rpm-bundle.tar
 ```
 
 ### 检测本地是否有mariadb已存在的包
 
-```shell
+```bash
 rpm -qa | grep mariadb
 ```
 
 ### 如果存在,则使用yum命令卸载
 
-```shell
+```bash
 rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64
 ```
 
@@ -26,25 +26,25 @@ rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64
 
 - **mysql-community-common**
 
-```shell
+```bash
 rpm -ivh mysql-community-common-8.0.20-1.el7.x86_64.rpm
 ```
 
 - **mysql-community-libs**
 
-```shell
+```bash
 rpm -ivh mysql-community-libs-8.0.20-1.el7.x86_64.rpm
 ```
 
 - **mysql-community-client**
 
-```shell
+```bash
 rpm -ivh mysql-community-client-8.0.20-1.el7.x86_64.rpm
 ```
 
 - **mysql-community-server**
 
-```shell
+```bash
 #libaio.so.1()(64bit) is needed by MySQL-server
 #yum install libaio
 rpm -ivh mysql-community-server-8.0.20-1.el7.x86_64.rpm
@@ -52,15 +52,15 @@ rpm -ivh mysql-community-server-8.0.20-1.el7.x86_64.rpm
 
 ### 初始化MySQL
 
-```shell
+```bash
 mysqld --initialize
 ```
 
 ### 授权防火墙
 
-```shell
+```bash
 chown mysql:mysql /var/lib/mysql -R
-#开启mysql服务
+# 开启mysql服务
 systemctl start mysqld.service
 #设置开机自启mysql服务
 systemctl enable mysqld
@@ -74,13 +74,13 @@ service mysqld start
 
 ### 查看数据库密码
 
-```shell
+```bash
 cat /var/log/mysqld.log | grep password
 ```
 
 ### 登陆数据库(第一次登陆使用系统生成的密码,不便于记忆)
 
-```mysql
+```bash
 mysql -u root -p;
 ```
 
@@ -126,17 +126,17 @@ flush privileges;
 
 ### 开放3306端口
 
-```shell
-#开放3306端口
+```bash
+# 开放3306端口
 firewall-cmd --zone=public --add-port=3306/tcp --permanent;
 ```
 
-```shell
-#重启防火墙
+```bash
+# 重启防火墙
 systemctl restart firewalld;
 ```
 
-```shell
+```bash
 firewall-cmd --reload
 ```
 
@@ -148,7 +148,7 @@ set global time_zone = '+8:00';
 
 ### 安装jdk
 
-```shell
+```bash
 vim /etc/profile
 ```
 
@@ -159,7 +159,7 @@ PATH=/usr/local/java/jdk-11.0.8/bin:$PATH
 export JAVA_HOME PATH
 ```
 
-```shell
+```bash
 # 让配置生效
 source /etc/profile
 ```

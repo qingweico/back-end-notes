@@ -2,7 +2,7 @@
 
 ### 安装
 
-```shell
+```bash
 # 下载activemq至/opt
 wget https://archive.apache.org/dist/activemq/5.16.0/apache-activemq-5.16.0-bin.tar.gz
 # 解压

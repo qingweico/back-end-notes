@@ -5,7 +5,7 @@
 ## 安装wget
 
 ```shell
-#centos 7.x
+# centos 7.x
 yum -y install wget
 ```
 
@@ -44,7 +44,7 @@ make && make install
 
 ```bash
 # 也可直接yum安装以上内容
-#yum -y install make zlib-devel gcc-c++ libtool openssl openssl-devel
+# yum -y install make zlib-devel gcc-c++ libtool openssl openssl-devel
 ```
 
 ## 安装nginx
@@ -56,7 +56,7 @@ tar -zxvf nginx-1.18.0.tar.gz
 cd nginx-1.18.0
 ./configure
 make && make install
-#ln -s /lib64/libpcre.so.1.2.0 /lib64/libpcre.so.0
+# ln -s /lib64/libpcre.so.1.2.0 /lib64/libpcre.so.0
 ```
 
 ## 启动nginx

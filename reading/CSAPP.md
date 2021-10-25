@@ -1,22 +1,22 @@
 ## 第一章
 
 ```shell
-#预处理器阶段
+# 预处理器阶段
 g++ -o HelloWorld.i -E HelloWorld.cpp
 ```
 
 ```shell
-#编译期阶段
+# 编译期阶段
 g++ -o HelloWorld.s -S HelloWorld.i
 ```
 
 ```shell
-#汇编器阶段
+# 汇编器阶段
 g++ -o HelloWorld.o -c HelloWorld.s
 ```
 
 ```shell
-#连接器阶段
+# 连接器阶段
 gcc -o Helloworld.exe HelloWorld.o
 ```
 

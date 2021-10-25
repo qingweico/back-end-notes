@@ -9,7 +9,7 @@ docker:解决了运行环境和配置问题的软件容器,方便做持续继承
 ```bash
 # 查看Linux系统版本
 cat /etc/redhat-release
-//CentOS Linux release 7.8.2003 (Core)
+# CentOS Linux release 7.8.2003 (Core)
 ```
 
 ```bash
@@ -28,11 +28,11 @@ uname -r
 ### docker镜像基本命令
 
 ```bash
-docker --help //获取帮助命令
+docker --help # 获取帮助命令
 ```
 
 ```bash
-docker images //查看本机的docker镜像
+docker images # 查看本机的docker镜像
 ```
 
 参数列表：
@@ -46,7 +46,7 @@ docker images //查看本机的docker镜像
 `--no-trunc`显示完整的镜像信息
 
 ```bash
-docker search 镜像名称 //查找所有的目标镜像
+docker search 镜像名称 # 查找所有的目标镜像
 ```
 
 参数列表：
@@ -54,25 +54,25 @@ docker search 镜像名称 //查找所有的目标镜像
 `-s  点赞数` 查找大于点赞数的所有目标镜像
 
 ```bash
-docker pull 镜像名称【:版本号】//下载镜像（默认拉取最新的镜像,可以在镜像后面跟着相应的版本号下载对应的版本）
+docker pull 镜像名称【:版本号】# 下载镜像（默认拉取最新的镜像,可以在镜像后面跟着相应的版本号下载对应的版本）
 ```
 
 ```bash
-docker rmi  镜像名称【:版本号】 //删除目标镜像（默认删除最新镜像,可以在镜像后面跟着相应的版本号删除对应的版本）
+docker rmi  镜像名称【:版本号】# 删除目标镜像（默认删除最新镜像,可以在镜像后面跟着相应的版本号删除对应的版本）
 ```
 
 `-f`强制删除
 
 ```bash
-docker rmi 镜像名称 镜像名称     //删除多个镜像
-```
-
-```java
-docker rmi $(docker images -q) //删除所有的镜像
+docker rmi 镜像名称 镜像名称     # 删除多个镜像
 ```
 
 ```bash
-docker commit -m="提交的描述信息" -a="作者" 容器ID 新的镜像名称:版本号 //提交容器使之成为一个新的镜像
+docker rmi $(docker images -q) # 删除所有的镜像
+```
+
+```bash
+docker commit -m="提交的描述信息" -a="作者" 容器ID 新的镜像名称:版本号 # 提交容器使之成为一个新的镜像
 ```
 
 ### docker容器基本命令
@@ -89,7 +89,7 @@ docker run [options] 镜像名称
 `--name`自定义要运行容器的名称
 
 ```bash
-docker ps //列出当前正在运行的容器
+docker ps # 列出当前正在运行的容器
 ```
 
 参数列表：
@@ -102,13 +102,13 @@ docker ps //列出当前正在运行的容器
 `-n 3` 查看之前3次运行过的容器
 
 ```bash
-exit                           //直接结束容器的运行
-ctrl + P + Q                   //离开容器并不结束后台运行
-docker attach 容器ID            //重新进入容器
-docker exec -t 容器ID 操作       //直接将在容器的执行结果返回宿主机
-docker start 容器名称或者容器ID   //重启容器(后台方式运行容器)  
-docker stop  容器名称或者容器ID   //停止容器   
-docker kill  容器名称或者容器ID   //强制停止容器   
+exit                                 # 直接结束容器的运行
+ctrl + P + Q                         # 离开容器并不结束后台运行
+docker attach 容器ID                  # 重新进入容器
+docker exec -t 容器ID 操作            # 直接将在容器的执行结果返回宿主机
+docker start 容器名称或者容器ID        # 重启容器(后台方式运行容器)  
+docker stop  容器名称或者容器ID        # 停止容器   
+docker kill  容器名称或者容器ID        # 强制停止容器   
 ```
 
 `attach和exec的区别` 前者并不会开启新的进程,而后者会开启新的进程
@@ -123,34 +123,34 @@ failed to resize tty, using default size
 ```
 
 ```bash
-docker rm 容器名称或者容器ID     //删除历史运行过的容器记录
-docker rm -f 容器名称或ID       //强制删除正在运行的容器
-docker rm -f $(docker ps -q)   //强制删除所有正在运行的容器
+docker rm 容器名称或者容器ID      # 删除历史运行过的容器记录
+docker rm -f 容器名称或ID        # 强制删除正在运行的容器
+docker rm -f $(docker ps -q)    # 强制删除所有正在运行的容器
 ```
 
 ```bash
-docker rm $(docker ps -aq)     //一次性删除多个历史容器记录
+docker rm $(docker ps -aq)     # 一次性删除多个历史容器记录
 docker ps -qa | xargs docker rm 
 ```
 
 ```bash
-docker run -d 镜像名称          //以守护进程方式运行容器
-```
-
-```java
-docker top 容器ID               //查看容器内运行的进程
+docker run -d 镜像名称          # 以守护进程方式运行容器
 ```
 
 ```bash
-docker inspect 容器ID           //查看容器内部细节
+docker top 容器ID               # 查看容器内运行的进程
 ```
 
 ```bash
-docker cp 镜像ID:容器文件路径 宿主机目标路径//将容器中的文件复制到宿主机中
+docker inspect 容器ID           # 查看容器内部细节
 ```
 
 ```bash
-docker logs -ft --tail=3 容器ID   //查看容器日志
+docker cp 镜像ID:容器文件路径 宿主机目标路径 # 将容器中的文件复制到宿主机中
+```
+
+```bash
+docker logs -ft --tail=3 容器ID # 查看容器日志
 ```
 
 `-f`:跟随最新的日志打印
@@ -162,7 +162,7 @@ docker logs -ft --tail=3 容器ID   //查看容器日志
 ### docke运行tomcat
 
 ```bash
-docker run -it -p 8848:8080 tomcat //以交互式运行tomcat 
+docker run -it -p 8848:8080 tomcat # 以交互式运行tomcat 
 ```
 
 `-p` 指定docker映射tomcat访问端口
@@ -170,6 +170,6 @@ docker run -it -p 8848:8080 tomcat //以交互式运行tomcat
 `-P` 随机指定docker映射tomcat访问端口
 
 ```bash
-docker run -d -p 8848:8080 tomcat  //以守护进程的方式启动tomcat
+docker run -d -p 8848:8080 tomcat  # 以守护进程的方式启动tomcat
 ```
 

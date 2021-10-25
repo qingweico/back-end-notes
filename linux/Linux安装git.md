@@ -67,7 +67,7 @@ vim /etc/hosts
 
 将`github.global.ssl.fastly.net  `和`github.com `这两个网址解析得到的ip分别填入hosts文件中即可
 
-```bash
+```properties
 199.232.69.194 github.global.ssl.fastly.net  
 140.82.112.3 github.com 
 ```

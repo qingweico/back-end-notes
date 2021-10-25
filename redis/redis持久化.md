@@ -10,16 +10,17 @@
 
 #### SNAPSHOTTING快照
 
-```java
-dbfilename dump.rdb   //默认持久化到dump.rdb文件中 
-save 900 1            //15分钟内保存一次即修改一次
-save 300 10           //5分钟内保存一次即修改十次
-save 60 10000         //1分钟内保存一次即修改一万次
-stop-writes-on-bgsave-error yes  //	保存出错停止写入
-rdbcompression yes    //数据压缩
-rdbchecksum yes       //数据校验
-dir ./                //config get dir //获取redis启动路径
-save                  //手动备份
+```bash
+dbfilename dump.rdb   # 默认持久化到dump.rdb文件中 
+save 900 1            # 15分钟内保存一次即修改一次
+save 300 10           # 5分钟内保存一次即修改十次
+save 60 10000         # 1分钟内保存一次即修改一万次
+stop-writes-on-bgsave-error yes  # 保存出错停止写入
+rdbcompression yes    # 数据压缩
+rdbchecksum yes       # 数据校验
+dir ./                
+config get dir  # 获取redis启动路径
+save                  # 手动备份
 ```
 
 RDB适合大规模的数据恢复,而且对数据的完整性和一致性要求不高

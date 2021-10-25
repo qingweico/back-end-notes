@@ -469,7 +469,7 @@ public class File_ListFiles {
 ```java
 package io;
 import java.io.File;
-public class FileList_Jav {
+public class FileList {
     public static void fileList(File target) {
         if (target.isFile()) {
             return;
@@ -497,7 +497,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-public class Io_ChangeName {
+public class ChangeName {
    public static void copy(File file,File newFile)throws IOException {
       BufferedInputStream  fis = new BufferedInputStream(new FileInputStream(file));
       BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(newFile,true));
@@ -535,7 +535,7 @@ package io;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-public class Io_Scanner {
+public class Scanner {
     public static void main(String[] args){
         try{
             File file = new File("src/io/temp");
@@ -558,7 +558,7 @@ package io;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
-public class Io_LineNumberReader {
+public class LineNumberReader {
    public static void main(String[] args) throws IOException {
      LineNumberReader  lnr = new LineNumberReader(new FileReader("src/io/temp"));
      String s;
@@ -580,7 +580,7 @@ package io;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-public class Io_ByteArray {
+public class ByteArray {
    public static void main(String[] args) throws IOException {
    ByteArrayOutputStream baos = new ByteArrayOutputStream();
    baos.write("hello".getBytes());
