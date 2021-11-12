@@ -37,11 +37,13 @@ public interface Servlet {
 ```java
 /*基于注解的WebServlet*/
 @WebServlet("/servlet")
-public class MyServlet implements Servlet {}
+public class MyServlet implements Servlet {
+    ServletConfig servletConfig
+}
 ```
 
 ```java
-/*基于注解的WebServlet会返回Servlet的名称 带的包的类名*/
+/*基于注解的WebServlet会返回Servlet的名称: 带的包的类名*/
 servletConfig.getServletName() 
 ```
 
@@ -61,15 +63,17 @@ Enumeration<String> enumeration = servletConfig.getInitParameterNames();
 while(enumeration.hasMoreElements()){
     /*根据键来遍历值*/
     String result = enumeration.nextElement();
-    System.out.println(result + "----" + servletConfig.getInitParameter(result));
+    System.out.println(result + ": " + servletConfig.getInitParameter(result));
 }
 ```
 
 ```java
-/*返回ServletContext对象 是Servlet的上下文*/
+/* 返回ServletContext对象 是Servlet的上下文 */
 servletConfig.getServletContext();
-/*返回参数所在的项目的绝对路径*/
+/* 返回参数所在的项目打包后(~out\artifacts\Web_war_exploded\file\)的绝对路径 */
 servletConfig.getServletContext().getRealPath("/file/");
+// 二者应该等价
+request.getServletContext().getRealPath("/file/");
 ```
 
 ### ServletContext与ServletConfig的区别
@@ -155,9 +159,7 @@ public class ReflectCreateObject {
 }
 ```
 
-### jsp
-
-### 九大内置对象
+### Jsp九大内置对象
 
 1. request
 2. response 
@@ -237,10 +239,10 @@ cookie不会随着服务器的重启而销毁,而默认是关闭客户端则会�
 
 ### Jsp内置对象作用域  
 
-- page :对应的内置对象是pageContext 只在当前页面内有效 
-- request：对应的内置对象是request 在一次请求内有效 
-- session：对应的内置的对象是session 在一次会话内有效 
-- application：对应的内置对象是application 在整个WEB应用中都有效 
+- page: 对应的内置对象是pageContext 只在当前页面内有效 
+- request: 对应的内置对象是request 在一次请求内有效 
+- session: 对应的内置的对象是session 在一次会话内有效 
+- application: 对应的内置对象是application 在整个WEB应用中都有效 
 
 #### 访问量统计 
 
@@ -359,7 +361,7 @@ ${error}
           filterChain.doFilter(servletRequest,servletResponse);
        }
    }
-   //Servlet
+   // Servlet
    @WebServlet("/test")
    public class Test extends HttpServlet {
        @Override
@@ -372,7 +374,7 @@ ${error}
    
 3. 控制用户的访问权限  
 
-   ***description:***  用户请求下载资源时会检查用户是否登陆,若以登录则允许下载否则跳转到登陆页面
+   description: 用户请求下载资源时会检查用户是否登陆,若以登录则允许下载否则跳转到登陆页面
 
    **Filter**
 
@@ -393,12 +395,14 @@ ${error}
            String password = request.getParameter("password");
            HttpSession session = request.getSession();
            String name = (String)session.getAttribute("name");
-           if(name == null){    //用户信息不存在则立即返回登陆界面
+           // 用户信息不存在则立即返回登陆界面
+           if(name == null){    
                HttpServletResponse response = (HttpServletResponse) servletResponse;
                response.sendRedirect("login.jsp");
            }
            else{
-               filterChain.doFilter(request,servletResponse);//取消拦截 用户可以访问下载页面
+               // 取消拦截 用户可以访问下载页面
+               filterChain.doFilter(request,servletResponse);
            }
    
        }
@@ -426,7 +430,8 @@ public class Test extends HttpServlet {
         if(username.equals("admin") && password.equals("123456")){
             HttpSession session = req.getSession();
             session.setAttribute("name",username);
-            resp.sendRedirect("Download.jsp");//登陆成功则进入下载界面
+            // 登陆成功则进入下载界面
+            resp.sendRedirect("Download.jsp");
         }
         else{
             resp.sendRedirect("login.jsp");
@@ -512,9 +517,9 @@ public class Upload extends HttpServlet {
             List<FileItem> items = fileUpload.parseRequest(req);
             for (FileItem item : items) {
                 InputStream inputStream = item.getInputStream();
-                /*获取上传的文件名*/
+                /* 获取上传的文件名 */
                 String fileName  = item.getName();
-                /*获取file文件夹的绝对路径*/
+                /* 获取file文件夹的绝对路径 */
                 String path = req.getServletContext().getRealPath("/file/" + fileName);
                 OutputStream outputStream = new FileOutputStream(path);
                 int len;
@@ -534,7 +539,7 @@ public class Upload extends HttpServlet {
    ```
 
 ```java
-/*简单一点的方法*/
+/* 简单一点的方法 */
 package com.java.servlet;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -601,6 +606,7 @@ package com.java.servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
@@ -621,9 +627,9 @@ public class Download extends HttpServlet {
                 fileName = "1.txt";
                 break;
         }
-        resp.setHeader("Content-Disposition" ,"attachment;filename;filename" + fileName);
+        resp.setHeader("Content-Disposition" ,"attachment;filename;filename" + URLEncoder.encode(fileName));
         OutputStream outputStream = resp.getOutputStream();
-        /*获取目标资源在服务器的绝对路径*/
+        /* 获取目标资源在服务器的绝对路径 */
         String path = req.getServletContext().getRealPath("file/" + fileName);
         InputStream inputStream = new FileInputStream(path);
         int len;
@@ -1023,9 +1029,9 @@ public class StudentServlet extends HttpServlet {
 </head>
 <body>
 <form action="/mysql?method=update" method="post">
-    编号：<input type="text" name="id" value="${student.id}" readonly><br>
-    姓名：<input type="text" name="name" value="${student.name}"><br>
-    学号：<input type="text" name="number" value="${student.number}"><br>
+    编号:<input type="text" name="id" value="${student.id}" readonly><br>
+    姓名:<input type="text" name="name" value="${student.name}"><br>
+    学号:<input type="text" name="number" value="${student.number}"><br>
     <input type="submit" value="修改">
 </form>
 </body>
@@ -1058,7 +1064,7 @@ public class StudentServlet extends HttpServlet {
 </html>
 ```
 
-#### 过滤器（避免中文乱码）
+#### 过滤器(避免中文乱码)
 
 ```java
 package com.java.servlet;
@@ -1095,7 +1101,7 @@ public class CharacterFilter implements Filter {
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
         <property name="jdbcUrl">jdbc:mysql://localhost/test?useSSL=false&amp;serverTimezone=UTC</property>
 
-        <!--若数据库中连接数不足时,一次向数据库服务器申请请求多个连接-->
+        <!--若数据库中连接数不足时 一次向数据库服务器申请请求多个连接-->
         <property name="acquireIncrement">5</property>
         <!--初始化数据库连接池的连接数量-->
         <property name="initialPoolSize">5</property>
@@ -1125,13 +1131,13 @@ public class DataSourceTest {
 }
 ```
 
-***ComboPooledDataSource有参构造函数传的参数应该XML文件中named-config name属性 而不是XML文件名***
+ComboPooledDataSource有参构造函数传的参数应该XML文件中named-config name属性 而不是XML文件名
 
 ### DBUtils
 
 首先导入jar包
 
-***ResultSetHandler接口是用来处理结果集,可以将查询到的结果转换为java对象***
+ResultSetHandler接口是用来处理结果集,可以将查询到的结果转换为java对象
 
 - BeanHandler          将结果映射成java对象 
 - BeanListHandler    将结果映射成List集合 

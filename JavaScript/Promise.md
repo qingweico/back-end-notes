@@ -182,9 +182,9 @@ function sleep(ms){
 
 ```javascript
 Promise对象通过自身的状态来控制异步操作,Promise实例共有3种状态
- 1： pending    异步操作未完成 
- 2： fulfilled  异步操作成功
- 3： rejected   异步操作失败
+ 1: pending    异步操作未完成 
+ 2: fulfilled  异步操作成功
+ 3: rejected   异步操作失败
  (fulfilled和rejected统称为resolved(已定型,该状态已不能再发生改变))
 let promise = new Promise(function(resolved,rejected){
     if("异步操作成功"){

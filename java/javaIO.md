@@ -4,9 +4,9 @@
 
 ## IO
 
-![未命名文件](https://pic.downk.cc/item/5f7ea8f91cd1bbb86ba8c15c.png)
+![未命名文件](https://cdn.qingweico.cn/blog/5f7ea8f91cd1bbb86ba8c15c.png)
 
-![CharStream](https://pic.downk.cc/item/5ef3034f14195aa594c4649d.png)
+![CharStream](https://cdn.qingweico.cn/blog/5ef3034f14195aa594c4649d.png)
 
 ### 常用的流
 
@@ -16,12 +16,33 @@
 
 按照流是否直接与特定的地方（如磁盘、内存、设备等）相连,分为节点流和处理流两类
 
+节点流
+
 - FileInputStream
 - FileOutputStream
 - FileReader
 - FileWriter
 
 
+
+- StringReader
+- StringWriter
+
+
+
+- ByteArrayInputStream
+- ByteArrayOutputStream
+- CharArrayReader
+- CharArrayWriter
+
+- PipedInputStream
+- PipedOutputStream
+- PipedReader
+- PipedWriter
+
+
+
+处理流
 
 - BufferedInputStream
 - BufferedOutputStream
@@ -40,8 +61,6 @@
 - ObjectOutputStream
 - DataInputStream
 - DataOutputStream
-
-
 
 - PrintStream
 - PrintWriter
@@ -562,7 +581,8 @@ public class LineNumberReader {
    public static void main(String[] args) throws IOException {
      LineNumberReader  lnr = new LineNumberReader(new FileReader("src/io/temp"));
      String s;
-     lnr.setLineNumber(100);              //设置起当前行数
+      //设置起当前行数
+     lnr.setLineNumber(100);              
      while((s = lnr.readLine()) != null) {
        System.out.println(lnr.getLineNumber()+":"+s);
      }

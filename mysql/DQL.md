@@ -65,7 +65,7 @@ SELECT DISTINCT age from job;
 - **连接两个及以上的字符串只能使用concat() 函数**
 
 ```mysql
-SELECT  CONCAT(username,"----",password) as UserInfo FROM UserInfo;
+SELECT CONCAT(username,"----",password) as UserInfo FROM UserInfo;
 ```
 
 ### 条件查询
@@ -78,7 +78,7 @@ SELECT  CONCAT(username,"----",password) as UserInfo FROM UserInfo;
   - like ,between and , is null ,in	
 
 ```MYSQL
-SELECT *  FROM job WHERE NOT(sex ="女") or salary>10000;
+SELECT * FROM job WHERE NOT(sex ="女") or salary>10000;
 ```
 
 Like 查询 通常与通配符一块使用
@@ -97,13 +97,13 @@ SELECT * FROM job where name LIKE "%L%";
 当匹配的字符中含有通配符时应该使用转义字符 也可以自定义转义字符
 
 ```mysql
-SELECT * FROM  job WHERE age LIKE "$_4" ESCAPE '$';   #定义$为转义字符
+SELECT * FROM job WHERE age LIKE "$_4" ESCAPE '$';   #定义$为转义字符
 ```
 
 between and
 
 ```mysql
-SELECT * FROM  job where salary BETWEEN 10000 AND 12000;# 包括左端点和右端点
+SELECT * FROM job where salary BETWEEN 10000 AND 12000;# 包括左端点和右端点
 ```
 
 注意10000和12000之间的顺序不能颠调
@@ -199,7 +199,7 @@ SELECT REPLACE("learn mysql","mysql","java");
     END as 新工资 FROM job;     #年龄为24时薪水*3
     ```
 
-    ![1584279343229](https://img.imgdb.cn/item/60435cb1360785be54ab6149.png)
+    ![1584274392635](https://cdn.qingweico.cn/blog/1584274392635.png)
 
   - ```mysql
     SELECT *,CASE

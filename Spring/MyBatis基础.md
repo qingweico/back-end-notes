@@ -4,7 +4,7 @@
 
 ## MyBatis
 
-![mybatis](https://pic.downk.cc/item/5ea6ab97c2a9a83be5655477.png)
+![mybatis](https://cdn.qingweico.cn/blog/5ea6ab97c2a9a83be5655477.png)
 
 Mybatis是一个持久层框架,使用java编写,它封装了JDBC的很多的细节,使开发者只关注sql语句本身,而不用关注使用原生jdbc时应该具有的注册驱动,创建连接,关闭连接等繁杂的过程,它使用了ORM的思想实现了结果集的封装。
 

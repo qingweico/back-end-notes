@@ -14,7 +14,7 @@ Math.random();  //产生0到1的随机浮点数,包括0不包括1
 ### 大整数和大浮点数
 
 ```java
-BigInteger i = new BigInteger("2147483648");                //大整数
+BigInteger i = new BigInteger("2147483648");                 //大整数
 ```
 
 ```java

@@ -2,7 +2,7 @@
 
 [TOC]
 
-![spring](https://pic.downk.cc/item/5ea52f33c2a9a83be5c03a12.jpg)
+![spring](https://cdn.qingweico.cn/blog/5ea52f33c2a9a83be5c03a12.jpg)
 
 ## Spring IOC
 
@@ -324,10 +324,10 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
   ```java
   @Service(value ="accountService")
   public class AccountServiceImpl implements AccountService {
+      // 若使用变量名称accountDao1 会输出 "保存了账户111"
+      // 若使用变量名称accountDao2 会输出 "保存的账户222"
       @Autowired
       private AccountDao accountDao;
-      //若使用变量名称accountDao1 会输出 "保存了账户111"
-      //若使用变量名称accountDao2 会输出 "保存的账户222"
       @Override
       public void saveAccount() {
           accountDao.saveAccount();
@@ -335,13 +335,13 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
   }
   ```
 
-  ![image-20200620211710439](https://pic.downk.cc/item/5f0ace9314195aa594182ac7.png)
+  ![image-20200620211710439](https://cdn.qingweico.cn/blog/5f0ace9314195aa594182ac7.png)
 
-  当使用`@Autowried`注入数据时,但此时容器中存在两个数据类型都为AccountDao的Bean,此时会报错,当数据类型相同时,`@Autowried`会根据变量的名称来匹配相应的Bean,匹配成功则注入
+  当使用`@Autowried`注入数据时,但此时容器中存在两个数据类型都为AccountDao的Bean,此时会报错,当数据类型相时,`@Autowried`会根据变量的名称来匹配相应的Bean,匹配成功则注入
 
 - @Qualifier(value = "")   指定注入bean的id 不能单独使用,必须要与@Autowired一起使用
 
-- @Resource(name = "")   直接注入bean的id 可以单独使用  （name不能省略）
+- @Resource(name = "")   直接注入bean的id 可以单独使用(name不能省略）
 
 - ```properties
   以上三种注解只能注入bean类型的数据 而基本类型的数据和String等则不能使用且集合类型的数据只能通过xml来配置
@@ -442,10 +442,10 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
 
 - @Bean(name = "")  将当前方法的返回值存入到ioc容器中 name 表示bean的id  默认为方法名
 
-### spring整合junit
+### Spring整合junit
 
 ```xml
-<!--导入依赖-->
+<!-- 导入依赖 -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-test</artifactId>
@@ -472,17 +472,17 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
 
 ### 事务控制
 
-***自定义工具类ConnectionUtils  TransactionManager实现事务控制***
+自定义工具类ConnectionUtils  TransactionManager实现事务控制
 
 ```java
-/*连接的工具类  实现从当前数据源中获取一个连接  并实现和当前线程的绑定*/
+// 连接的工具类  实现从当前数据源中获取一个连接 并实现和当前线程的绑定
 public class ConnectionUtils {
     private ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
     private DataSource dataSource;
     public void setDataSource(DataSource dataSource){
         this.dataSource = dataSource;
     }
-    //获取当前线程上的连接
+    // 获取当前线程上的连接
     public Connection getThreadConnection(){
         Connection connection = tl.get();
          try {
@@ -495,7 +495,7 @@ public class ConnectionUtils {
          }
          return connection;
     }
-    /*将连接和线程解绑*/
+    // 将连接和线程解绑*
     public void removeConnection(){
         tl.remove();
     }
@@ -893,13 +893,16 @@ jdbcTemplate的crud语句
 ```java
 ApplicationContext applicationContext = new  ClassPathXmlApplicationContext("template.xml");
 JdbcTemplate jt= applicationContext.getBean(JdbcTemplate.class);
-/*cud语句都使用update语句*/
-jt.update(String sql,Object...args);
-/*查询语句*/
-jt.query(String sql,new BeanPropertyRowMapper<T>(Class<?> T),...args);//args是用来替换sql语句占位符?的参数
-/*返回一行一列*/
+// cud语句都使用update语句
+// args是用来替换sql语句占位符?的参数 
+jt.update(String sql, Object...args);
+// 查询语句
+// 返回多行
+// T为返回参数的类型 args是用来替换sql语句占位符?的参数
+List<T> res = jt.query(String sql,new BeanPropertyRowMapper<T>(Class<?> T),...args);
+// 返回一行一列
 jt.queryForObject(String sql,resultType<T>,...args);
-/*查询所有*/
+// 查询所有
  List<Map<String,Object>> accounts = jt.queryForList("select * from account");
 ```
 
@@ -912,7 +915,8 @@ public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
         List<T> list = getJdbcTemplate().query(String sql, new BeanPropertyRowMapper<T>(Class<?> T));     
    }
 }
-/*AccountDaoImpl继承了jdbcDaoSupport类 而父类中有setDataSorce方法 所以在为子类创建Bean对象时应该使用set方法DataSource注入依赖*/
+/*AccountDaoImpl继承了jdbcDaoSupport类 而父类中有setDataSorce方法 
+所以在为子类创建Bean对象时应该使用set方法DataSource注入依赖*/
 ```
 
 ### Spring中基于xml的声明式事务控制(Sping自带的事务控制)
@@ -967,27 +971,27 @@ public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
 #### 配置事务的属性
 
 - 在事务通知aop:advice标签的内部
-- isolation :用于指定事务的隔离级别 默认是default 式数据库默认的隔离级别
-- propagation ：用于指定事务的传播行为 默认是required 表示一定有事务的增删改 如果查询的话使用supports
-- read-only 用于指定事务是否只读 只有查询方法才能设置为true 默认值为false
-- timeout  用于事务的超时时间 默认是-1 表示永不超时 如果指定了单位 则以秒为单位
-- rollback-for  用于指定一个异常 当产生该异常时 事务回滚 产生其他异常时 事务不会回滚 如果没有默认值 表示任何异常都回滚
-- no-rollback-for 与rollback-for相反  如果没有默认值 表示任何异常都回滚
+- isolation: 用于指定事务的隔离级别 默认是default 式数据库默认的隔离级别
+- propagation: 用于指定事务的传播行为 默认是required 表示一定有事务的增删改 如果查询的话使用supports
+- read-only; 用于指定事务是否只读 只有查询方法才能设置为true 默认值为false
+- timeout: 用于事务的超时时间 默认是-1 表示永不超时 如果指定了单位 则以秒为单位
+- rollback-for: 用于指定一个异常 当产生该异常时 事务回滚 产生其他异常时 事务不会回滚 如果没有默认值 表示任何异常都回滚
+- no-rollback-for: 与rollback-for相反  如果没有默认值 表示任何异常都回滚
 
 ### Spring中基于注解的声明式事务控制(Sping自带的事务控制)
 
 ```xml
-<!--开启注解扫描-->
+<!-- 开启注解扫描 -->
 <context:component-scan base-package="cn.qingweico"/>
-<!--开启spring对注解事务的支持-->  
+<!-- 开启spring对注解事务的支持 -->  
 <tx:annotation-driven transaction-manager="transactionManager"/>
 ```
 
-@Transactional 对需要事务支持的类使用该注解
+@Transactional 对需要事务支持的类使用该注解(该注解也可以标注在类上)
 
 ````java
-//可以对单个查询方法进行配置
-@Transactional(propagation = Propagation.SUPPORTS,readOnly = true)
+// 可以对单个查询方法进行配置
+@Transactional(propagation =  Propagation.SUPPORTS,readOnly = true)
 ````
 
 ```xml
@@ -999,11 +1003,11 @@ public class AccountDaoImpl extends JdbcDaoSupport implements AccountDao {
 ### Spring中使用纯注解的声明式事务控制
 
 ```java
-@EnableTransactionManagement  //开启spring对注解的支持
+@EnableTransactionManagement  // 开启spring对注解的支持
 ```
 
 ```java
-//用于创建事务管理器对象并加入ioc容器中
+// 用于创建事务管理器对象并加入ioc容器中
 @Bean(name = "transactionManager")
 public PlatformTransactionManager createTransactionManager(DataSource dataSource){
     return new DataSourceTransactionManager(dataSource);

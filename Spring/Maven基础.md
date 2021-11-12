@@ -2,7 +2,7 @@
 
 [TOC]
 
-### Maven的核心概念(Apache Maven 3.6.3)
+## Maven的核心概念(Apache Maven 3.6.3)
 
 - 约定的目录结构
 - POM
@@ -15,7 +15,7 @@
 
 pom:Project Object Model  项目对象模型
 
-### Maven工程坐标与仓库中路径的关系关系
+## Maven工程坐标与仓库中路径的关系关系
 
 ```xml
 <groudId>org.springframework</groudId>
@@ -25,7 +25,7 @@ pom:Project Object Model  项目对象模型
 
 对应于: ***org/spring-framework/spring-core/4.0.0.RELEASE/spring-core-4.0.0.RELEASE.jar***
 
-### 常用的Maven命令
+## 常用的Maven命令
 
 - mvn clean：清理
 - mvn compile：编译主程序
@@ -35,9 +35,9 @@ pom:Project Object Model  项目对象模型
 - mvn install：安装
 - mvn site：生成站点
 
-### java依赖的范围（默认的都是compile）
+## java依赖的范围（默认的都是compile）
 
-#### test范围依赖 （比如junit）
+### test范围依赖 （比如junit）
 
 - 对主程序是否有效 ：无效
 - 对测试程序是否有效：有效
@@ -46,7 +46,7 @@ pom:Project Object Model  项目对象模型
 
 --------------
 
-#### compile依赖范围
+### compile依赖范围
 
 - 对主程序是否有效： 有效
 - 对测试程序是否有效：有效
@@ -55,7 +55,7 @@ pom:Project Object Model  项目对象模型
 
 --------
 
-#### provide依赖范围（比如servlet-api jsp-api）
+### provide依赖范围（比如servlet-api jsp-api）
 
 - 对主程序是否有效：有效
 - 对测试是否有效 ： 有效
@@ -64,17 +64,17 @@ pom:Project Object Model  项目对象模型
 
 -----
 
-###  runtime依赖的范围
+runtime依赖的范围
 
 - 对于主程序是否有效： 无效
 - 对于测试是否有效：有效
 - 对于运行是否有效：有效
 
-### Maven程序的目录结构（Web项目）
+## Maven程序的目录结构（Web项目）
 
 ----
 
-### 在IDEA中构建Maven项目
+## 在IDEA中构建Maven项目
 
 - 首先配置好Maven在本地的环境变量 path和MAVEN_HOME
 
@@ -144,19 +144,19 @@ Path: E:\maven\apache-maven-3.6.3\bin
   - 或者在pom.xml中引入jdk8及其以上的依赖
 
 ```xml
-<!--IDEA中设置maven工程下LanguageLevel运行级别-
+<!--IDEA中设置maven工程下LanguageLevel运行级别-->
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>
     <version>2.3.2</version>
     <configuration>
-    <source>1.8</source>
-    <target>1.8</target>
+        <source>1.8</source>
+        <target>1.8</target>
     </configuration>
 </plugin>
 ```
 
-### 关于Maven工程下c3p0报错问题
+## 关于Maven工程下c3p0报错问题
 
 - 首先在pom.xml文件中引入c3p0依赖和辅助包依赖
 
