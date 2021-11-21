@@ -5,12 +5,12 @@
 ## docker安装mysql
 
 ```shell
-docker pull mysql                #拉取最新版的mysql镜像
+docker pull mysql                # 拉取最新版的mysql镜像
 ```
 
 ```shell
-mkdir -p /docker/docker_mysql    #在根目录下创建docker目录,docker_mysql目录
-cd /docker/docker_mysql          #进入目录
+mkdir -p /docker/docker_mysql    # 在根目录下创建docker目录,docker_mysql目录
+cd /docker/docker_mysql          # 进入目录
 ```
 
 ### 运行mysql
@@ -53,7 +53,7 @@ docker logs -f --tail 10 容器ID                                               
 ## docker安装redis
 
 ```shell
-docker pull redis                   #拉取最新版本的redis镜像
+docker pull redis                   # 拉取最新版本的redis镜像
 ```
 
 ```shell
@@ -64,12 +64,12 @@ cd /docker/docker_redis
 ```shell
 mkdir $PWD/conf
 cd conf
-vim redis.conf                      #在宿主机上创建redis配置文件
+vim redis.conf                      # 在宿主机上创建redis配置文件
 ```
 
 ```shell
 docker run -d --name redis -p 6379:6379
-    -v /docker/docker_redis/conf/redis.conf:/redis.conf  #同步主机的redis配置文件
+    -v /docker/docker_redis/conf/redis.conf:/redis.conf  # 同步主机的redis配置文件
     -v /docker/docker_redis/data:/data redis
-    redis-server --appendonly yes                        #开启aof持久化
+    redis-server --appendonly yes                        # 开启aof持久化
 ```

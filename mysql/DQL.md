@@ -7,15 +7,14 @@
 ### 基本语句
 
 - show database(); 用来展示所有的数据库 
-- use 库名; 进入库     语句二 
-- show tables; 展示所有的表     语句三 : 
+- use 库名; 进入库
+- show tables; 展示所有的表
 - show tables from 库名;  查看库名中的所有的表(并没有进入该库)
 - select database();  查看当前位置在哪个库
 - create database 库名;  创建一个新的数据库
-- create table 表名(内容); 
-  -  name varchar(20), #回车 
-  -   age   int );       #回车     
-  -  创建一个student的表  
+- create table 表名(
+  -  -> name varchar(20), #回车 
+  -  -> age   int );                #回车     创建一个student的表  
 - insert into 表名(key,key) value (值,值);  向表中添加新的数据 
 - update 表名 set value=... where key=...; 修改表中的数据,可以根据键值来修改值,反之亦可 
 - delete from 表名 where key=...; 删除key所在的一行   
@@ -202,10 +201,10 @@ SELECT REPLACE("learn mysql","mysql","java");
     ![1584274392635](https://cdn.qingweico.cn/blog/1584274392635.png)
 
   - ```mysql
-    SELECT *,CASE
-    WHEN salary>14000 THEN 'A'   #根据员工的薪水显示员工的工资等级
-    WHEN salary>12000 THEN 'B'
-    WHEN salary>10000 THEN 'C'
+    SELECT *, CASE
+    WHEN salary > 14000 THEN 'A'   #根据员工的薪水显示员工的工资等级
+    WHEN salary > 12000 THEN 'B'
+    WHEN salary > 10000 THEN 'C'
     ELSE 'D'
     END as 工资级别 FROM job;
     ```
@@ -218,7 +217,7 @@ SELECT REPLACE("learn mysql","mysql","java");
 - min 最小
 
 ```mysql
-select sum(salary)as 和,MAX(salary) 最大,AVG(salary) 平均 from job;
+select sum(salary)as 和, MAX(salary) 最大, AVG(salary) 平均 from job;
 ```
 
 上面4种函数都不会计算null
@@ -227,7 +226,7 @@ select sum(salary)as 和,MAX(salary) 最大,AVG(salary) 平均 from job;
 
 ```mysql
 select count(DISTINCT salary) 工资的种类,count(salary) 工资种数 from job;
-//avg max min都有同样的用法
+# avg max min都有同样的用法
 ```
 
 ```mysql
@@ -237,7 +236,7 @@ SELECT COUNT(*) 行数 FROM job;
 ### 分组查询
 
 ```mysql
-SELECT MAX(salary) 最高工资,sex from job GROUP BY sex;#查询男员工和女员工的最高工资
+SELECT MAX(salary) 最高工资, sex from job GROUP BY sex; # 查询男员工和女员工的最高工资
 ```
 
 #### 筛选后分组 
@@ -246,7 +245,7 @@ SELECT MAX(salary) 最高工资,sex from job GROUP BY sex;#查询男员工和女
 
 ```mysql
 select COUNT(*),age,sex from job where name LIKE "%a%" GROUP BY sex;
-#查询姓名中包含字母a的男女员工各有几人
+# 查询姓名中包含字母a的男女员工各有几人
 ```
 
 #### 分组后筛选
@@ -255,19 +254,19 @@ select COUNT(*),age,sex from job where name LIKE "%a%" GROUP BY sex;
 
 ```mysql
 select count(*) ,age from job group BY age having COUNT(*) >2;
-#查询年龄相同且个数大于2的年龄
+# 查询年龄相同且个数大于2的年龄
 ```
 
 |            | 关键字 | 筛选的表   | 位置            |
 | ---------- | ------ | ---------- | --------------- |
 | 分组前筛选 | where  | 原始表     | group by 的前面 |
-| 分组后筛选 | having | 分组后的表 | group by的后面  |
+| 分组后筛选 | having | 分组后的表 | group by 的后面 |
 
 #### 分组后筛选再分组
 
 ```mysql
 SELECT COUNT(*),MIN(salary),sex from job where `name` REGEXP '[^c]' GROUP BY sex having MIN(salary)>4000;
-//查询姓名中不包含字母c的男女员工各自最低工资大于4000的员工
+# 查询姓名中不包含字母c的男女员工各自最低工资大于4000的员工
 ```
 
 ### 连接查询
@@ -322,11 +321,11 @@ right关键字右边的是主表 而左边的是丛表 👉外连接就是内连
 ### 子查询
 
 ```mysql
-#按出现的位置
+# 按出现的位置
 select 后面
 from 后面
 where或having后面
-#按结果集的行和列不同
+# 按结果集的行和列不同
  标量子查询  一行一列        > < <> =
  列子查询    一列多行       in  any some all
  行子查询    一行多列
@@ -348,7 +347,7 @@ select * from student limit (page-1)*size,size;
 ### 联合查询
 
 ```mysql
-#两条语句之间的关系是or
+# 两条语句之间的关系是or
 select * from job where salary>6000
 UNION
 select * from job where name LIKE '%j%';

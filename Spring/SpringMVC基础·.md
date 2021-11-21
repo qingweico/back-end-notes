@@ -4,16 +4,12 @@
 
 ## SpringMVC
 
-### SpringMVC在三层架构的位置
-
-![springmvc](https://cdn.qingweico.cn/blog/5ea52f39c2a9a83be5c03ece.png)
-
 ### SpringMVC环境搭建
 
 #### pom.xml
 
 ```xml
-<!--导入SpringMVC开发环境所要的依赖-->
+<!--导入Spring MVC开发环境所要的依赖-->
 <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
@@ -40,7 +36,7 @@
         <!--服务器初始化时加载类路径下springmvc.xml的配置文件-->
         <param-value>classpath:springmvc.xml</param-value>
     </init-param>
-    <!--一般情况下当有请求时服务器才会创建Servlet对象-->
+    <!--一般情况下当有请求时服务器才	会创建Servlet对象-->
     <!--此时应该当服务器完成初始化时就要创建Servlet对象,完成对springmvc配置文件的加载,完成注解扫描-->
     <load-on-startup>1</load-on-startup>
 </servlet>
@@ -141,7 +137,7 @@ View Resolver负责将处理的结果生成视图。View Resolver首先根据逻
 @RequestMapping(path = '')   //用于建立请求URL和请求方法之间的对应关系
 #放在类上表示请求的一级目录,放在方法上表示请求的二级目录
 @RequestMapping(value = '')  //path和value表示相同的作用,即请求的URL地址,当只有URL时可以省略
-@RequestMapping(value = '',method = RequestMethod.GET) 
+@RequestMapping(value = '', method = RequestMethod.GET) 
 method:表示请求的方式 (GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS,TRACE)
 params:表示指定限制请求参数的条件
 headers：用于指定限制请求消息头的条件
@@ -153,7 +149,7 @@ headers：用于指定限制请求消息头的条件
 - 基本数据类型和String类型
 
   ```java
-  @RequestMapping(path = "/hello",method = RequestMethod.GET)
+  @RequestMapping(path = "/hello", method = RequestMethod.GET)
   public String hello(String username, int password) {
       System.out.println("你好" + username + "!" + " 你的密码是" + password);
       return "success";
@@ -165,7 +161,7 @@ headers：用于指定限制请求消息头的条件
   <a href="hello?username=jack&password=21">登陆</a>
   ```
 
-- javaBean
+- JavaBean
 
   ```java
   @RequestMapping(value = "/test", method = {RequestMethod.POST})

@@ -3,7 +3,7 @@
 [TOC]
 
 ```properties
-#centos7
+# centos7
 # step 1: 安装必要的一些系统工具
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 # Step 2: 添加软件源信息
@@ -16,7 +16,7 @@ sudo service docker start
 ```
 
 ```properties
-#安装验证
+# 安装验证
 docker version
 ```
 

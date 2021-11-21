@@ -126,5 +126,5 @@ auto_increment  自增
 ```mysql
 # 添加自增长列
 alter table account MODIFY COLUMN id int auto_increment;
-#删除直接将auto_increment去掉即可
+# 删除直接将auto_increment去掉即可
 ```

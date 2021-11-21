@@ -8,7 +8,7 @@
 
 ### 什么是ioc（控制反转）
 
-首先IOC是Inversion of Controller即控制反转 它并不是一种新的技术而是一种新的编设计思想。原来创建对象的话需要使用关键字new,需要程序主动去寻找能够让程序正常运行的类 ,从而造成了类与类之间有很强的依赖关系,代码不够灵活,修改一个类可能会涉及很多类的修改。ioc的出现把创建对象的主动权交给了第三方即ioc容器,程序需要什么对象,ioc就给你什么对象,程序从原来的主动寻找对象到现在被提供对象,原来的依赖关系就没有了,现在类与类之间都依赖于ioc容器,靠ioc容器来建立它们之间的关系。
+首先IOC是Inversion of Controller即控制反转 它并不是一种新的技术而是一种新的编设计思想。原来创建对象的话需要使用关键字new,需要程序主动去寻找能够让程序正常运行的类 ,从而造成了类与类之间有很强的依赖关系,代码不够灵活,修改一个类可能会涉及很多类的修改 ioc的出现把创建对象的主动权交给了第三方即ioc容器,程序需要什么对象,ioc就给你什么对象,程序从原来的主动寻找对象到现在被提供对象,原来的依赖关系就没有了,现在类与类之间都依赖于ioc容器,靠ioc容器来建立它们之间的关系
 
 ### DI（依赖注入）
 
@@ -81,7 +81,7 @@ ApplicationContext的三个实现类
 
 ```java
 ClassPathXmlApplicationContext        //加载类路径下的配置文件
-FileSystemXmlApplication              //加载磁盘任意路径下的配置文件
+FileSystemXmlApplicationContext       //加载磁盘任意路径下的配置文件
 AnnotationConfigApplicationContext    //通过注解来创建ioc容器
 ```
 
@@ -176,7 +176,7 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
   </beans>
   ```
 
-- set方法注入（需要有默认的无参构造函数）
+- set方法注入(需要有默认的无参构造函数)
 
   ```java
   private String name;
@@ -193,7 +193,7 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
   ```xml
    <bean id="accountService" class="cn.qingweico.service.impl.AccountServiceImpl">
       <property name="name" value="姓名"/>   //String类型
-      <property name="data" ref = "date"/>  //引用类型
+      <property name="data" ref = "date"/>   //引用类型
     </bean>
     <bean id="date" class = "java.util.Date"/>
   ```

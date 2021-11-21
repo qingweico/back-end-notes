@@ -23,7 +23,7 @@ mysql中默认的事务隔离级别是repeatable read
 ### 开始事务
 
 ```mysql
-set autocommit = 0;#开始事务
+set autocommit = 0;# 开始事务
 ```
 
 ### 查看隔离级别

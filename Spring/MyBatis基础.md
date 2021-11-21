@@ -6,9 +6,9 @@
 
 ![mybatis](https://cdn.qingweico.cn/blog/5ea6ab97c2a9a83be5655477.png)
 
-Mybatis是一个持久层框架,使用java编写,它封装了JDBC的很多的细节,使开发者只关注sql语句本身,而不用关注使用原生jdbc时应该具有的注册驱动,创建连接,关闭连接等繁杂的过程,它使用了ORM的思想实现了结果集的封装。
+Mybatis是一个持久层框架,使用java编写,它封装了JDBC的很多的细节,使开发者只关注sql语句本身,而不用关注使用原生jdbc时应该具有的注册驱动,创建连接,关闭连接等繁杂的过程,它使用了ORM的思想实现了结果集的封装
 
-ORM ：Object Relational Mappering 对象关系映射
+ORM: Object Relational Mapping 对象关系映射
 
 就是把数据库表的字段和实体类属性对应起来,从而对实体类进行操作就可以完成对数据库表的操作
 
@@ -974,13 +974,13 @@ public void basedOne2ManyAnnotations() throws IOException {
     SqlSessionFactory sqlSessionFactory  = sqlSessionFactoryBuilder.build(inputStream);
     SqlSession sqlSession = sqlSessionFactory.openSession();
     ClassRepository classRepository = sqlSession.getMapper(ClassRepository.class);
-    //只查询二班的名称
+    // 只查询二班的名称
     System.out.println(classRepository.findStudentListByClassId(2).getClassName());
 }
 ```
 
 ```xml
-<!--开启延迟加载-->
+<!-- 开启延迟加载 -->
 ==>  Preparing: select * from tb_class where class_id = ? 
 ==> Parameters: 2(Integer)
 <==    Columns: class_id, class_name
@@ -993,7 +993,7 @@ public void basedOne2ManyAnnotations() throws IOException {
 
 ```xml
 <settings>
-    <!-- MyBatis自带的缓存 使用第三方缓存时不用开启 开启二级缓存-->
+    <!-- MyBatis自带的缓存 使用第三方缓存时不用开启 开启二级缓存 -->
     <setting name="cacheEnabled" value="true"/>
 </settings>
 ```

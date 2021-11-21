@@ -75,5 +75,7 @@ vim /etc/hosts
 ```bash
 # 重启网络刷新dns网络
 service network restart
+# window 刷新本地的DNS缓存 
+ipconfig /flushdns
 ```
 

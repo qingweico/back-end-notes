@@ -13,7 +13,7 @@
 
 #### 直接命令添加
 
-```java
+```bash
 docker run -it -v 宿主机绝对路径目录:容器内目录 镜像名
 ```
 
@@ -29,7 +29,7 @@ docker run -it -v 宿主机绝对路径目录:容器内目录:ro 镜像名 # 容
 
 构建dockerFile文件
 
-```java
+```shell
 From centos
 VOLUME ["/container1","/container2"]
 CMD echo "finished ------------------------->success!"
@@ -38,7 +38,7 @@ CMD /bin/bash
 
 build生成新的镜像
 
-```java
+```bash
 docker build -f /docker/dockerFile -t mycentos .
 ```
 
@@ -48,7 +48,7 @@ docker build -f /docker/dockerFile -t mycentos .
 
 `.`代表当前目录
 
-```java
+```bash
 [root@centos docker]# docker build -f /docker/dockerFile -t mycentos .
 Sending build context to Docker daemon  2.048kB
 Step 1/4 : From centos
@@ -69,12 +69,12 @@ Successfully built 93872055e998
 Successfully tagged mycentos:lates
 ```
 
-```java
+```shell
 "Mounts": [
     {
         "Type": "volume",
         "Name": "7dba20d30f6fe342a199bb94ea8f2eeee35571f2e808895428ccfce045ce107a",
-        "Source":  #默认宿主机地址   与container1数据同步
+        "Source":  # 默认宿主机地址   与container1数据同步
             "/var/lib/docker/volumes/7dba20d30f6fe342a199bb94ea8f2eeee35571f2e808895428ccfce045ce107a/_data",
         "Destination": "/container1",
         "Driver": "local",
@@ -85,7 +85,7 @@ Successfully tagged mycentos:lates
     {
         "Type": "volume", 
         "Name": "6949ba7c7ec80acd15f4aea79e3823d61b89a823b9769f9512f41866b360754e",
-        "Source":  #默认宿主机地址   与container2数据同步           "/var/lib/docker/volumes/6949ba7c7ec80acd15f4aea79e3823d61b89a823b9769f9512f41866b360754e/_data",
+        "Source":  ## 默认宿主机地址   与container2数据同步           "/var/lib/docker/volumes/6949ba7c7ec80acd15f4aea79e3823d61b89a823b9769f9512f41866b360754e/_data",
         "Destination": "/container2",
         "Driver": "local",
         "Mode": "",
