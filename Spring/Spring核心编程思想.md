@@ -689,11 +689,11 @@ Spring 依赖注入的来源有哪些
 | session     | 将 Spring Bean 储存在 HttpSession上下文中                 |
 | application | 将 Spring Bean 储存在 ServletContext 上下文中             |
 
-### prototype Bean作用域
+### prototype Bean 作用域
 
 Spring 容器 没有办法管理 prototype Bean 的完整的生命周期 也没有办法记录实例的存在 销毁回调方法将不会执行 可以利用 BeanPostProcessor 进行清扫工作
 
-### requets Bean作用域
+### requets Bean 作用域
 
 配置
 
@@ -786,3 +786,80 @@ singleton Bean 在一个应用中是否是唯一的
 application Bean 是否被其他方案替代?
 
 可以的 实际上 application Bean 与 singleton Bean 没有本质区别
+
+## Spring Bean 生命周期
+
+### Spring Bean 元信息配置阶段
+
+面向资源
+
+- XML 配置
+- Properties 资源配置
+
+面向注解
+
+面向 API
+
+### Spring BeanDefinition 合并阶段
+
+BenaDefinition 合并
+
+AbstractBeanFactory#getMergedBeanDefinition
+
+- 父子 BeanDefinition 合并
+  - 当前BeanFactory 查找
+  - 层次 BeanFactory 查找
+
+### Spring Bean Class 加载阶段
+
+- ClassLoader 类加载: 使用Java 传统的ClassLoader加载
+- Java Security 安全控制
+- ConfigurationBeanFactory 临时 ClassLoader
+
+AbstractBeanFactory#doGetBean
+
+AbstractAutowireCapableBeanFactory#createBean
+
+AbstractBeanFactory#resolveBeanClass
+
+AbstractBeanFactory#doResolveBeanClass
+
+AbstractBeanDefinition#resolveBeanClass >> ClassUtils.forName(className, classLoader)
+
+### Spring Bean 实例化前阶段
+
+非主流生命周期 Bean 实例化前阶段
+
+InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation
+
+### Spring Bean 实例化阶段
+
+传统实例化方式
+
+- 实例化策略: InstantiationStrategy
+- 构造器依赖注入
+
+### Spring Bean 属性赋值前阶段
+
+Bean 属性值元信息
+
+- PropertyValue
+
+Bean 属性赋值回调
+
+- Spring 1.2 - 5.0: InstantiationAwareBeanPostProcessor#postProcessPropertyValues
+- Spring 5.1: InstantiationAwareBeanPostProcessor#postProcessProperties
+
+### Spring Bean Aware 接口回调阶段
+
+Spring Aware 接口
+
+- BeanNameAware
+- BeanClassLoaderAware
+- BeanFactoryAware
+- EnvironmentAware
+- EmbeddedValueResolverAware
+- ResourceLoaderAware
+- ApplicationEventPublisherAware
+- MessageSourceAware
+- ApplicationContextAware

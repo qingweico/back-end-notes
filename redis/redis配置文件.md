@@ -6,14 +6,14 @@
 
 ### United单位
 
-- 配置大小单位,支持bytes,不支持bit
+- 配置大小单位,支持byte,不支持bit
 
 - 对大小写不敏感
 
 ### INCLUDES包含
 
-```java
-//redis.conf配置文件作为总闸可以包含其他配置文件
+```shell
+# redis.conf配置文件作为总闸可以包含其他配置文件
 include /path/to/local.conf
 include /path/to/other.conf
 ```
@@ -28,37 +28,40 @@ include /path/to/other.conf
 
 #### Port
 
-```java
+```shell
 port 6379
 ```
 
 #### TCP-backlog
 
-```java
+```shell
 tcp-backlog 511
 ```
 
 #### Timeout
 
-```java
-timeout 0 //0代表客户端不关闭连接
+```shell
+ # 0代表客户端不关闭连接
+timeout 0
 ```
 
 #### Bind
 
-```java
-bind 127.0.0.1 //本机
+```shell
+# 本机
+bind 127.0.0.1 
 ```
 
 #### Tcp-keepalive
 
-```java
-tcp-keepalive 300 //单位为秒,代表以时间间隔进行keepalive检查 如果为0则代表不进行keepalive检查
+```shell
+# 单位为秒,代表以时间间隔进行keepalive检查 如果为0则代表不进行keepalive检查
+tcp-keepalive 300
 ```
 
 #### Loglevel
 
-```java
+```shell
 # debug (a lot of information, useful for development/testing)
 # verbose (many rarely useful info, but not a mess like the debug level)
 # notice (moderately verbose, what you want in production probably)
@@ -68,32 +71,36 @@ loglevel notice
 
 #### Logfile
 
-```java
-logfile "" //日志文件
+```shell
+# 日志文件
+logfile "" 
 ```
 
 #### Syslog-enabled
 
-```java
-syslog-enabled no  //是否把日志打印到syslog中
+```shell
+# 是否把日志打印到syslog中
+syslog-enabled no  
 ```
 
 #### Syslog-indent
 
-```java
-syslog-ident redis //指定syslog里的日志标志
+```shell
+# 指定syslog里的日志标志
+syslog-ident redis
 ```
 
 #### Syslog-facility
 
-```java
- syslog-facility local0 //指定syslog设备 local0~ocal7
+```shell
+# 指定syslog设备 local0~ocal7
+syslog-facility local0
 ```
 
 #### Database
 
-```java
-databases 16 //
+```shell
+databases 16 /
 ```
 
 ### SNAPSHOTTING快照

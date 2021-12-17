@@ -173,6 +173,6 @@ git branch -d dev
 ```
 
 ```bash
- git remote set-url origin https://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@github.com/qingweico/back-end-notes.git
+ git remote set-url origin https:// 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@github.com/qingweico/back-end-notes.git
 ```
 

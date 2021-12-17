@@ -4,19 +4,19 @@
 
 ## redis基本知识
 
-redis: 一种分布式的内存数据库缓存
+redis:  一种分布式的内存数据库缓存
 
-NoSQL: Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
+NoSQL:  Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
 
 单进程
 
 redis默认16个库,下表从开始,初始化使用0号库
 
-大数据时代的三V : Volume(海量) Variety(多样) Velocity(实时)
+大数据时代的三V :  Volume(海量) Variety(多样) Velocity(实时)
 
-互联网三高:高性能 高可用 高扩展 
+互联网三高: 高性能 高可用 高扩展 
 
-高性能:响应(低延迟) 吞吐(高吞吐量 高并发)
+高性能: 响应(低延迟) 吞吐(高吞吐量 高并发)
 
 TPS QPS
 
@@ -25,12 +25,12 @@ amdahl定律
 ### RDBMS和NoSQL的区别
 
 ```properties
-RDBMS:高度组织化结构化的数据
+RDBMS: 高度组织化结构化的数据
       结构化查询语言(SQL)
       数据操纵语言,数据定义语言
       严格的一致性
       基础事务
-NoSQL:代表的不仅仅是SQL
+NoSQL: 代表的不仅仅是SQL
       没有声明性查询语言
       没有预定义的模式
       键值存储 文档存储 列存储 图形存储
@@ -52,9 +52,9 @@ NoSQL:代表的不仅仅是SQL
 
 #### CAP
 
-- C:Consistency（强一致性）
-- A:Availability（可用性）
-- P:Partition tolerance（分区容错性）
+- C: Consistency（强一致性）
+- A: Availability（可用性）
+- P: Partition tolerance（分区容错性）
 
 #### BASE
 
@@ -64,32 +64,32 @@ NoSQL:代表的不仅仅是SQL
 
 ### Key
 
-```java
+```bash
 set k1 v1
-set k2 v2       //设置键值
+set k2 v2       # 设置键值
 get k1
-get k2          //获取键值
-set k1 value1   //会覆盖当前的值
+get k2          # 获取键值
+set k1 value1   # 会覆盖当前的值
 ```
 
-```java
-move k1 2;      //将键k1的值移动到2号库
+```bash
+move k1 2;      # 将键k1的值移动到2号库
 ```
 
-```java
-exists k1       //判断某个键是否存在
+```bash
+exists k1       # 判断某个键是否存在
 ```
 
-```java
-expire k1 10    //设定键k1过期时间
+```bash
+expire k1 10    # 设定键k1过期时间(s)
 ```
 
-```java
-ttl k1          //查看键k1剩余过期时间  -1代表永不过期 -2代表已过期 过期即从当前库中移出该键值对
+```bash
+ttl k1          # 查看键k1剩余过期时间  -1代表永不过期 -2代表已过期 过期即从当前库中移出该键值对
 ```
 
-```java
-type k          //查看k的数据类型
+```bash
+type k          # 查看k的数据类型
 ```
 
 `dbsize` 查看当前数据库的key数量
@@ -114,7 +114,7 @@ string类型的内部编码有三种
 
 - int 储存八个字节的长整型
 - embstr 代表embstr格式的SDS(Simple Dynamic String) 简单动态字符串, 用来储存小于44个字节的字符串, 只分配一次内存空间(因为Redis和SDS是连续的)
-- raw: 储存大于44个字节的字符串, 需要分配两次内存空间
+- raw:  储存大于44个字节的字符串, 需要分配两次内存空间
 
 redis中浮点数和大整数怎么存
 
@@ -191,7 +191,7 @@ msetnx k1 v1 k5 v5        # 若存在已有的键,则设置失败,一个都不�
 
 ### set（集合) （无序且唯一  一key多value）
 
-实现: 字典
+实现:  字典
 
 ```bash
 smembers set              # 查看集合中所有的元素
@@ -220,7 +220,7 @@ sunion set set1 # 并集
 
 ### hash（哈希）（一key多value）
 
-实现: 哈希表
+实现:  哈希表
 
 ```bash
 hset student name "jack"        # student为键  name 和 "jack" 键值对为值
@@ -240,7 +240,7 @@ HSETNX student number 1         # 设置student中不存在的键值 若存在�
 
 ### list (列表) (字符串链表) (一key多value)
 
-结构: LinkedList
+结构:  LinkedList
 
 lrange
 
@@ -255,8 +255,8 @@ Lrange list 0 -1
 3) "3"
 4) "2"
 5) "1"
-Lpop list // "5"
-Rpop list // "1"    
+Lpop list #  "5"
+Rpop list #  "1"    
 ```
 
 ```bash

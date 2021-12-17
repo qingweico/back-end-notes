@@ -211,17 +211,17 @@ server:
   port: 8080
 spring:
   profiles:
-    active: dev  #不写激活默认环境（8080）
----              #---代表一个文档块
+    active: dev  # 不写激活默认环境（8080）
+---              # ---代表一个文档块
 server:
   port: 8081
 spring:
-  profiles: dev  #开发环境
+  profiles: dev  # 开发环境
 ---
 server:
   port: 8082
 spring:
-  profiles: prod #生产环境
+  profiles: prod # 生产环境
 ```
 
 #### 使用命令行参数
@@ -250,13 +250,13 @@ classpaht:/xxx.properties
 SpringBoot会全部加载这四个位置的配置文件,高优先级的配置文件会覆盖优先级低的相同配置文件
 
 ```properties
-#等号之间不要加空格
-#在项目打包时可以加载指定路径的配置文件
+# 等号之间不要加空格
+# 在项目打包时可以加载指定路径的配置文件
 --spring.config.location=xxx.properties
 ```
 
 ```properties
-#等号之间不要加空格
+# 等号之间不要加空格
 java -jar hello-0.0.1-SNAPSHOT.jar --spring.config.location=E:/application.properties
 ```
 
@@ -286,9 +286,15 @@ classpath:/static/
 /:
 ```
 
-```properties
-# 配置文件 自定义静态资源的路径
-spring.resources.static-locations=classpath:/hello,classpath:/test              
+```yaml
+
+spring:
+  mvc:
+  # 配置文件 自定义静态资源的f
+    static-path-pattern: /static/**
+  resources:
+  # 配置文件 自定义静态资源的路径
+    static-locations: classpath:/hello,classpath:/test
 ```
 
 #### 关于Spring Boot中使用request.getServletContext().getRealPath路径获取问题
@@ -402,6 +408,13 @@ public class MyMVCConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandleInterceptor()).addPathPatterns("/**").excludePathPatterns("/", "/login");
+    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations(
+                "classpath:/templates/",
+                "classpath:/static/",
+                "classpath:/resources/");
     }
 }
 ```

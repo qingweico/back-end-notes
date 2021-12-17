@@ -2,9 +2,15 @@ Alibaba Java Coding Guidelines
 
 CodeGlance
 
-Free Mybatis Plugin
+Codota AI Autocomplete for Java
+
+Free Mybatis plugin
 
 Grep Console
+
+jclasslib Bytecode Viewer
+
+maven-search
 
 Rainbow Brackets
 
@@ -15,5 +21,7 @@ Statistic
 Translation
 
 GoogleTranslation
+
+Translation
 
 Fira Code
