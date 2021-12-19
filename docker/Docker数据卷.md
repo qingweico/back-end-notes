@@ -42,11 +42,11 @@ build生成新的镜像
 docker build -f /docker/dockerFile -t mycentos .
 ```
 
-`-f` file 指明要构建的dockerFile文件 如果当目录下存在文件名为DockerFile的文件则可以不用指定dockerFile文件 `-f`也可以省略
+`-f`: file 指明要构建的dockerFile文件 如果当目录下存在文件名为DockerFile的文件则可以不用指定dockerFile文件 `-f`也可以省略
 
-`-t` 生成新的镜像名称空间
+`-t`: 生成新的镜像名称空间
 
-`.`代表当前目录
+`.`: 代表当前目录
 
 ```bash
 [root@centos docker]# docker build -f /docker/dockerFile -t mycentos .

@@ -854,12 +854,131 @@ Bean 属性赋值回调
 
 Spring Aware 接口
 
+AbstractAutowireCapableBeanFactory#invokeAwareMethods
+
+普通的BeanFactory回调只有三个
+
 - BeanNameAware
 - BeanClassLoaderAware
 - BeanFactoryAware
+
+AbstractApplicationContext#prepareBeanFactory
+
+ApplicationContextAwareProcessor#postProcessBeforeInitialization
+
+只有基于ApplicationContext才会触发以下回调(BeanFactory则不行)
+
 - EnvironmentAware
 - EmbeddedValueResolverAware
 - ResourceLoaderAware
 - ApplicationEventPublisherAware
 - MessageSourceAware
 - ApplicationContextAware
+
+### Spring Bean 初始化前阶段
+
+已完成
+
+- Bean 实例化
+- Bean 属性赋值
+- Bean Aware 接口回调
+
+方法回调
+
+- BeanPostProcessor#postProcessBeforeInitialization
+
+### Spring Bean 初始化阶段
+
+Bean 初始化 (Initialization)  >> AbstractAutowireCapableBeanFactory#initializeBean
+
+- @PostConstruct 标注方法(依赖于注解驱动)
+
+AbstractAutowireCapableBeanFactory#invokeInitMethods
+
+- 实现 InitializingBean 接口的 afterPropertiesSet()方法
+
+- 自定义初始化方法
+
+### Spring Bean 初始化后阶段
+
+方法回调
+
+- BeanPostProcessor#postProcessorAfterInitialization
+
+### Spring Bean 初始化完成阶段
+
+方法回调
+
+- Spring 4.1+: SmartInitializationSingleton#afterSingletonsInstantiated
+
+作用: 确保Bean已经完完全全地完整地初始化 防止Bean达到一些不确定的状态
+
+### Spring Bean 销毁前阶段
+
+方法回调
+
+InitDestroyAnnotationBeanPostProcessor#postProcessBeforeDestruction
+
+- DestructionAwareBeanPostProcessor#postProcessBeforeDestruction
+
+DisposableBeanAdapter#destroy
+
+### Spring Bean 销毁阶段
+
+见前面的`销毁 Spring Bean 内容`
+
+在 ApplicationContext环境中可以通过close()方法进行 Bean的销毁
+
+### Bean 垃圾回收
+
+见前面的`Bean 垃圾回收`
+
+### 面试题
+
+#### BeanPostProcessor的使用场景有哪些
+
+BeanPostProcessor 提供SpringBean初始化前和初始化后的生命周期回调 分别对应 postProcessorBeforeInitialization 以及 postProcessAfterInitialization 方法 允许对Bean进行扩展甚至是替换; 其中 ApplicationContext 相关的 Aware 回调也是基于 BeanPostProcessor 实现, 即 ApplicationContextAwareProcessor
+
+#### BeanFactoryPostProcessor 与 BeanPostProcessor 的区别
+
+BeanFactoryPostProcessor  是 Spring BeanFactory (实际上为 ConfigurableListableBeanFactory) 的后置处理器, 用于扩展 BeanFactory 或通过 BeanFactory 进行依赖查找或者依赖注入
+
+BeanFactoryPostProcessor 必须有 Spring ApplicationContext 执行, BeanFactory 无法与其直接交互
+
+而 BeanPostProcessor 则直接与 BeanFactory 关联 属于 N对1的关系
+
+#### BeanFactory 是怎样处理 Bean 生命周期的呢
+
+BeanFactory 的默认实现为 DefaultListableBeanFactory 其中 Bean 生命周期与方法映射如下
+
+- BeanDefinition 注册阶段 >> registerBeanDefinition
+- BeanDefinition 合并阶段 >> getMergedBeanDefinition
+- Bean 实例化前阶段 >> resolceBeforeInstantiation
+- Bean 实例化阶段 >> createBeanInstance
+- Bean 实例化后阶段 >> populateBean
+- Bean 属性赋值前阶段 >> populateBean
+- Bean 属性赋值阶段 >> populateBean
+- Bean Aware 接口回调阶段 >> initializeBean
+- Bean 初始化前阶段 >> initializeBean
+- Bean 初始化阶段 >> initializeBean
+- Bean初始化后阶段 >> initializeBean
+- Bean 销毁前阶段 >> destroyBean
+- Bean 销毁阶段 >> destroyBean
+
+## Spring 配置元信息
+
+- Spring Bean 配置元信息 >> BeanDefinition
+- Spring Bean 属性元信息 >> PropertyValues
+- Spring 容器配置元信息
+- Spring 外部化配置元信息 >> PropertySource
+- Spring Profile 元信息 >> @Profile (Environment接口相关)
+
+###  Bean 配置元信息
+
+- GenericBeanDefinition: 通用型 BeanDefinition
+- RootBeanDefinition: 无 Parent 的 BeanDefinition或者合并后 BeanDefinition
+- AnnotationBeanDefinition: 注解标注的 BeanDefinition
+
+StandardAnnotationMetadata: 基于 Java反射
+
+SimpleAnnotationMetadataReadingVisitor: 基于 ASM

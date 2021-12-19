@@ -15,8 +15,8 @@
 ## 支撑互联网的开源技术(LAMP)
 
    -    LINUX  操作系统
-   -    Apache  Web操作系统 
-   -    MySQL 数据库     
+   -    Apache Web操作系统 
+   -    MySQL  数据库     
    -    PHP    编程语言
 
 -----

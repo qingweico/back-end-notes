@@ -103,7 +103,7 @@ public class JmsProducerOnTopic {
     private static final String ACTIVEMQ_URL = "tcp://127.0.0.1:61616";
     private static final String TOPIC_NAME = "topic";
     private static final Integer MESSAGE_NUMBER = 6;
-    public static void main(String[] args) throws JMSException {
+    public static void main(String[] args) {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(ACTIVEMQ_URL);
         Connection connection = factory.createConnection();
         connection.start();

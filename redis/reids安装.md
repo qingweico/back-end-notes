@@ -10,7 +10,7 @@
 tar -zxvf redis-6.0.5.tar.gz
 ```
 
-进入redis-6.0.5目录中执行`make`命令进行编译,然后再执行`make install` 命令安装(默认安装在/usr/local/bin目录下)
+进入redis-6.0.5目录中执行`make`命令进行编译, 然后再执行`make install` 命令安装(默认安装在/usr/local/bin目录下)
 
 注意在使用`make`命令进行编译时可能会报错,gcc老版本不兼容redis6.0以上的版本(升级gcc即可) 查看gcc的版本 `gcc -v`
 
