@@ -23,7 +23,7 @@
 
 ### Web技术
 
-Web Servler技术栈
+Web Servlet技术栈
 
 - Spring MVC
 - WebSocket
@@ -49,7 +49,7 @@ Web Reactive 技术栈
 
 Java1.3 引入了动态代理
 
-Spring Boot1.x基于Spirng 4开发的 而SpringBoot 2.x是基于Spring 5开发的	
+Spring Boot1.x基于Spirng 4开发的 而SpringBoot 2.x是基于Spring 5开发的
 
 ## Java版本依赖与支持
 
@@ -94,7 +94,7 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 
 - 2011 JDK7 Diamond语法(<>)、多Catch、Try(ARM(Auto Resource Management)try-with-resources)
 
-- 2014 JDK8 Lambad语法、可重复注解、类型注解
+- 2014 JDK8 Lambda语法、可重复注解、类型注解
 
 - 2017 JDK9 模块化、接口私有方法
 
@@ -116,15 +116,15 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 ### Spring IOC 依赖查找
 
 - 根据Bean名称查找
-  - 实时查找
-  - 延迟查找
+    - 实时查找
+    - 延迟查找
 - 根据Bean类型查找
-  - 单个Bean对象
-  - 集合Bean对象
+    - 单个Bean对象
+    - 集合Bean对象
 - 根据Bean名称 + 类型查找
 - 根据Java注解查找
-  - 单个Bean对象
-  - 集合Bean对象
+    - 单个Bean对象
+    - 集合Bean对象
 
 ### Spring IOC 依赖注入
 
@@ -177,9 +177,9 @@ ApplicationContext除了IOC的角色 还提供了
 - 注解
 - Environment抽象
 
-BeanFactoyr是 Spring 底层 IOC容器
+BeanFactory是 Spring 底层 IOC容器
 
-ApplicationContext 是具备应用特性的BeanFactory超集 
+ApplicationContext 是具备应用特性的BeanFactory超集
 
 ### Spring Bean 基础
 
@@ -225,7 +225,7 @@ Bean 的名称
 
 - Bean的命名尽管没有限制 不过建议采用驼峰的方式 更符合Java的命名约定
 
-Bean名称生成器(BeanNameGenerator) 由Sping Framework 2.0.3引入 有两种实现
+Bean名称生成器(BeanNameGenerator) 由Spring Framework 2.0.3引入 有两种实现
 
 - DefaultBeanNameGenerator 默认通用的BeanNameGenerator实现
 - AnnotationBeanNameGenerator 基于注解扫描的BeanNameGenerator实现
@@ -265,28 +265,28 @@ Bean 实例化
 
 特殊方式
 
-- 通过 ServciceLoaderFactoryBean
+- 通过 ServiceLoaderFactoryBean
 - 通过AutowireCapableBeanFactory#createBean(Class, int, boolean)
-- 通过 BeanDefintionRegistry#registerBeanDefinition(Stirng, BeanDefinition)
+- 通过 BeanDefinitionRegistry#registerBeanDefinition(String, BeanDefinition)
 
 #### 初始化 Spring Bean
 
- Bean 初始化
+Bean 初始化
 
 - @PostConstruct 标注方法
 
 - 实现 InitializingBean 接口的 afterPropertiesSet()方法
 
 - 自定义初始化方法
-  - XML 配置:
-  
-    ```xml
-     <bean init-method="init" />
-    ```
-  
-  - Java 注解: @Bean(initMethod="")
-  
-  - Java API: AbstractBeanDefinition#setInitMethodName(String)
+    - XML 配置:
+
+      ```xml
+       <bean init-method="init" />
+      ```
+
+    - Java 注解: @Bean(initMethod="")
+
+    - Java API: AbstractBeanDefinition#setInitMethodName(String)
 
 #### 延迟初始化 Spring Bean
 
@@ -309,15 +309,15 @@ Bean 销毁
 - 实现 DisposableBean 接口的destroy() 方法
 
 - 自定义销毁方法
-  - XML 配置: 
-  
-    ```xml
-    <bean destroy=""/>
-    ```
-  
-  - Java 注解: @Bean(destroy="")
-  
-  - Java API: AbstractBeanDefinition#setDestroyMethodName(String）
+    - XML 配置:
+
+      ```xml
+      <bean destroy=""/>
+      ```
+
+    - Java 注解: @Bean(destroy="")
+
+    - Java API: AbstractBeanDefinition#setDestroyMethodName(String）
 
 #### Bean 垃圾回收
 
@@ -330,15 +330,15 @@ Spring IOC 依赖查找
 单一类型依赖查找
 
 - 根据 Bean 名称查找
-  - getBean(String)
-  - Spering 2.5 覆盖默认参数: getBean(String , Object...)
+    - getBean(String)
+    - Spring 2.5 覆盖默认参数: getBean(String , Object...)
 - 根据 Bean 类型查找
-  - 实时查找
-    - Spring 3.0 getBean(Class)
-    - Spring 4.1 覆盖默认参数: getBean(Class, Object...)
-  - Spring 5.1 延迟查找
-    - getBeanProvider(Class)
-    - getBeanProvider(Resolvable Type)
+    - 实时查找
+        - Spring 3.0 getBean(Class)
+        - Spring 4.1 覆盖默认参数: getBean(Class, Object...)
+    - Spring 5.1 延迟查找
+        - getBeanProvider(Class)
+        - getBeanProvider(Resolvable Type)
 - 根据 Bean 名称 + 类型查找: getBean(String,  Class)
 
 ## Spring IOC 依赖查找
@@ -350,19 +350,19 @@ Spring IOC 依赖查找
 根据 Bean 类型查找
 
 - 获取同类型 Bean 名称列表
-  - getBeanNamesForType(Class)
-  - Spring 4.2 getBeanNamesForType(ResolvableType)
+    - getBeanNamesForType(Class)
+    - Spring 4.2 getBeanNamesForType(ResolvableType)
 - 获取同类型Bean 实例列表
-  - getBeansOfType(Class) 以及重载方法
+    - getBeansOfType(Class) 以及重载方法
 
 通过注解类型查找
 
 - Spring 3.0 获取标注类型 Bean 名称列表
-  - getBeanNamesForAnnotation(Class<? extends Annotation>)
+    - getBeanNamesForAnnotation(Class<? extends Annotation>)
 - Spring 3.0 获取标注类型 Bean 实例列表
-  - getBeansWithAnnotation(Class<? extends Annotation>)
-- Spring 3.0 获取指定名称 + 标注类型 Bena 实例
-  - findAnnotationOnBean(String, Class<? extends Annotation>)
+    - getBeansWithAnnotation(Class<? extends Annotation>)
+- Spring 3.0 获取指定名称 + 标注类型 Bean 实例
+    - findAnnotationOnBean(String, Class<? extends Annotation>)
 
 ### 层次性依赖查找
 
@@ -374,10 +374,10 @@ Spring IOC 依赖查找
 
 - 根据 Bean 名称查找  基于 containsLocalBean 方法实现
 - 根据 Bean 类型查找实例列表
-  - 单一实例: BeanFactoryUtils#beanOfType
-  - 集合类型: BeanFactoryUtils#beansOfTypeIncludingAncestors
+    - 单一实例: BeanFactoryUtils#beanOfType
+    - 集合类型: BeanFactoryUtils#beansOfTypeIncludingAncestors
 - 根据 Java 注解查找名称列表
-  - BeanFactoryUtils#beanNamesForTypeIncludingAncestors
+    - BeanFactoryUtils#beanNamesForTypeIncludingAncestors
 
 ### 安全依赖查找
 
@@ -399,7 +399,7 @@ Spring 内建单例对象
 | --------------------------- | -------------------------------- | ----------------------- |
 | environment                 | Environment 对象                 | 外部化配置以及 Profiles |
 | systemProperties            | java.utilProperties 对象         | Java 系统属性           |
-| systemEnvironment           | javautil.Map 对象                | 操作系统环境变量        |
+| systemEnvironment           | java.util.Map 对象                | 操作系统环境变量        |
 | messageSource               | MessageSource 对象               | 国际化文案              |
 | lifecycleProcessor          | LifecycleProcessor 对象          | Lifecycle Bean 处理器   |
 | applicationEventMulticaster | ApplicationEventMulticaster 对象 | Spring 事件广播器       |
@@ -427,7 +427,7 @@ org.springframework.context.annotation.AnnotationConfigUtils类中
 | BeanCreationException           | 当 Bean 初始化过程中                  | Bean 初始化方法执行异常时                    |
 | BeanDefinitionStoreException    | 当 BeanDefinition 配置元信息非法时    | XML 配置资源无法打开时                       |
 
-ObjetcFactory 和 BeanFactory 的区别
+ObjectFactory 和 BeanFactory 的区别
 
 两者都提供了 依赖查找 的能力
 
@@ -472,7 +472,7 @@ Aware 系列接口回调
 | ApplicationContextAware      | 获取 Spring 应用上下文 ApplicationContext对象          |
 | EnvironmentLoaderAware       | 获取 Environment 对象                                  |
 | ResourceLoaderAware          | 获取资源加载对象  ResourceLoader                       |
-| BeanClassLoaderAware         | 获取加载当前 Bean Class 的 ClasssLoader                |
+| BeanClassLoaderAware         | 获取加载当前 Bean Class 的 ClassLoader                |
 | BeanNameAware                | 获取当前 Bean 的名称                                   |
 | MessageSourceAware           | 获取 MessageSource 对象 用于 Spring 国际化             |
 | ApplicationEventPublishAware | 获取 ApplicationEventPublishAware 对象 用于Spring 事件 |
@@ -488,7 +488,7 @@ Aware 系列接口回调
 ### 基础类型注入
 
 - 原生类型
-- 标量类型: Number、 Character、 Boolean、 Enum、 Locale、Charset   、Currency、Properties 、UUID
+- 标量类型: Number、 Character、 Boolean、 Enum、 Locale、Charset、Currency、Properties 、UUID
 - 常规类型: Object 、String 、TimeZone、Calendar、Optional
 - Spring 类型: Resource、InputSource、Formatter
 
@@ -578,11 +578,11 @@ CommonAnnotationBeanPostProcessor
 
 构造器注入好还是Setter注入好
 
-没有最好的方案 只有相对的合理
+没有最好的方案, 只有相对的合理
 
-两种依赖注入的方式均可使用 如果是必须依赖的话 推荐使用构造器注入 Setter用于可选依赖
+两种依赖注入的方式均可使用; 如果是必须依赖的话, 推荐使用构造器注入, Setter用于可选依赖
 
-如果依赖的参数比较少的话 推荐使用构造器注入 构造器注入可以保证线程安全 确保数据的一致性
+如果依赖的参数比较少的话, 推荐使用构造器注入, 构造器注入可以保证线程安全, 确保数据的一致性
 
 ## 依赖来源
 
@@ -598,7 +598,7 @@ Spring BeanDefinition
 
 - BeanDefinitionBuilder
 
-单例对象 
+单例对象
 
 - API实现
 
@@ -614,7 +614,7 @@ Spring BeanDefinition
 
 - BeanDefinitionBuilder
 
-单例对象 
+单例对象
 
 - API实现
 
@@ -670,7 +670,7 @@ Spring 容器管理和游离对象
 
 单例对象能在 IOC 容器启动后注册吗
 
-可以的 单例对象 与 BeanDefinition 不同 BeabDefinition 会被ConfigurableListableBeanFactory#freezeConfiguration()方法影响，从而冻结注册 单例对象则没有这个限制
+可以的 单例对象 与 BeanDefinition 不同 BeanDefinition 会被ConfigurableListableBeanFactory#freezeConfiguration()方法影响，从而冻结注册 单例对象则没有这个限制
 
 Spring 依赖注入的来源有哪些
 
@@ -693,7 +693,7 @@ Spring 依赖注入的来源有哪些
 
 Spring 容器 没有办法管理 prototype Bean 的完整的生命周期 也没有办法记录实例的存在 销毁回调方法将不会执行 可以利用 BeanPostProcessor 进行清扫工作
 
-### requets Bean 作用域
+### request Bean 作用域
 
 配置
 
@@ -719,17 +719,17 @@ Spring 容器 没有办法管理 prototype Bean 的完整的生命周期 也没�
    <bean class="" scope="session"/>
   ```
 
-- Java 注解 @SessionoScope 或者 @Scope(WebApplicationContext.SCOPE_SESSION)
+- Java 注解 @SessionScope 或者 @Scope(WebApplicationContext.SCOPE_SESSION)
 
 实现
 
-- API SessionScope 
+- API SessionScope
 
 ### application Bean作用域
 
 配置
 
-- XML 
+- XML
 
   ```xml
   <bean class="" scope="application "/>
@@ -764,7 +764,7 @@ Spring 容器 没有办法管理 prototype Bean 的完整的生命周期 也没�
   </bean>
   ```
 
-  
+
 
 ### 面试题
 
@@ -802,13 +802,13 @@ application Bean 是否被其他方案替代?
 
 ### Spring BeanDefinition 合并阶段
 
-BenaDefinition 合并
+BeanDefinition 合并
 
 AbstractBeanFactory#getMergedBeanDefinition
 
 - 父子 BeanDefinition 合并
-  - 当前BeanFactory 查找
-  - 层次 BeanFactory 查找
+    - 当前BeanFactory 查找
+    - 层次 BeanFactory 查找
 
 ### Spring Bean Class 加载阶段
 
@@ -953,7 +953,7 @@ BeanFactory 的默认实现为 DefaultListableBeanFactory 其中 Bean 生命周�
 
 - BeanDefinition 注册阶段 >> registerBeanDefinition
 - BeanDefinition 合并阶段 >> getMergedBeanDefinition
-- Bean 实例化前阶段 >> resolceBeforeInstantiation
+- Bean 实例化前阶段 >> resolveBeforeInstantiation
 - Bean 实例化阶段 >> createBeanInstance
 - Bean 实例化后阶段 >> populateBean
 - Bean 属性赋值前阶段 >> populateBean
@@ -961,7 +961,7 @@ BeanFactory 的默认实现为 DefaultListableBeanFactory 其中 Bean 生命周�
 - Bean Aware 接口回调阶段 >> initializeBean
 - Bean 初始化前阶段 >> initializeBean
 - Bean 初始化阶段 >> initializeBean
-- Bean初始化后阶段 >> initializeBean
+- Bean 初始化后阶段 >> initializeBean
 - Bean 销毁前阶段 >> destroyBean
 - Bean 销毁阶段 >> destroyBean
 

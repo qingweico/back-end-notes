@@ -120,9 +120,9 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
 - 使用普通工厂中的静态方法创建对象
 
   ```java
-  //工厂类
+  // 工厂类
   public static  AccountService getAccountService(){
-          return new AccountServiceImpl();
+  	return new AccountServiceImpl();
   }
   ```
 
@@ -192,8 +192,10 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
 
   ```xml
    <bean id="accountService" class="cn.qingweico.service.impl.AccountServiceImpl">
-      <property name="name" value="姓名"/>   //String类型
-      <property name="data" ref = "date"/>   //引用类型
+       <!-- String类型 -->
+      <property name="name" value="姓名"/>   / 
+       <!-- 引用类型 -->
+      <property name="data" ref = "date"/>   // 
     </bean>
     <bean id="date" class = "java.util.Date"/>
   ```

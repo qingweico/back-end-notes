@@ -243,7 +243,7 @@ Reentrant并不是一种替代内置锁的办法,而是当内置加锁机制不�
 
 Lock提供了一种无条件的、可轮询、定时的以及可中断的锁获取操作, 所有的加锁和解锁都是显示的
 
-与snchronized一样 ReenrtrantLock还提供了可重入的加锁语义
+与synchronized一样 ReenrtrantLock还提供了可重入的加锁语义
 
 #### 13.1.1 轮询锁与定时锁
 
