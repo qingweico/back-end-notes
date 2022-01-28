@@ -1,10 +1,12 @@
 Alibaba Java Coding Guidelines
 
+ANSI Highlighter
+
 CodeGlance
 
 Codota AI Autocomplete for Java
 
-Free Mybatis plugin
+Free MyBatis plugin
 
 Grep Console
 
@@ -25,3 +27,9 @@ GoogleTranslation
 Translation
 
 Fira Code
+
+SequenceDiagram
+
+Xcode Theme
+
+One Dark theme

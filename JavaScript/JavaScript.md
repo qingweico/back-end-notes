@@ -10,7 +10,7 @@
 - null
 - undefined
 - object
-- Symbol（ES6）
+- Symbol (ES6)
 
 ## typeof运算符
 

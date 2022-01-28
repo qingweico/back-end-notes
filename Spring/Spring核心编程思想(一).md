@@ -37,7 +37,7 @@ Web Reactive 技术栈
 
 ### 技术整合
 
-- 远程调用: RMI(Java标准的远程方法调用) Hessioan 开源协议 Dubbo基于该协议
+- 远程调用: RMI(Java标准的远程方法调用); Hessioan 开源协议, Dubbo基于该协议
 - Java消息服务(JMS)
 - Java连接架构(JCA)
 - Java管理扩展(JMX)
@@ -664,15 +664,15 @@ Spring 容器管理和游离对象
 
 ### 面试题
 
-注入和查找的依赖来源是否相同
+#### 注入和查找的依赖来源是否相同
 
 否 依赖查找的来源仅限于 Spring BeanDefinition 以及单例对象 而依赖注入的来源还包括 Resolvable Dependency 以及 @Value 所标注的外部化配置
 
-单例对象能在 IOC 容器启动后注册吗
+#### 单例对象能在 IOC 容器启动后注册吗
 
 可以的 单例对象 与 BeanDefinition 不同 BeanDefinition 会被ConfigurableListableBeanFactory#freezeConfiguration()方法影响，从而冻结注册 单例对象则没有这个限制
 
-Spring 依赖注入的来源有哪些
+#### Spring 依赖注入的来源有哪些
 
 - Spring BeanDefinition
 - 单例对象
@@ -768,7 +768,7 @@ Spring 容器 没有办法管理 prototype Bean 的完整的生命周期 也没�
 
 ### 面试题
 
-Spring 内建的 Bean 作用域有几种
+#### Spring 内建的 Bean 作用域有几种
 
 - singleton
 - prototype
@@ -777,13 +777,13 @@ Spring 内建的 Bean 作用域有几种
 - application
 - websocket
 
-singleton Bean 在一个应用中是否是唯一的
+#### singleton Bean 在一个应用中是否是唯一的
 
 否 singleton bean 仅在当前 Spring IOC 容器中(Bean Factory)是单例对象
 
 因为整个应用可能包含多个应用上下文, 比如 一个静态字段在JVM中是否唯一呢 答案也是否 因为一个静态字段对于加载它的ClassLoader是唯一的, 但是一个应用可以有多个ClassLoader
 
-application Bean 是否被其他方案替代?
+#### application Bean 是否被其他方案替代?
 
 可以的 实际上 application Bean 与 singleton Bean 没有本质区别
 
@@ -982,3 +982,247 @@ BeanFactory 的默认实现为 DefaultListableBeanFactory 其中 Bean 生命周�
 StandardAnnotationMetadata: 基于 Java反射
 
 SimpleAnnotationMetadataReadingVisitor: 基于 ASM
+
+## Spring 类型转换
+
+### Spring 内建类型转换器
+
+| 转换场景             | 实现类所在包名                               |
+| -------------------- | -------------------------------------------- |
+| 日期 时间相关        | org.springframework.format.datetime          |
+| Java 8 日期 时间相关 | org.springframework.format.datetime.standard |
+| 通用实现             | org.springframework.core.convert.support     |
+
+### Converter 接口的局限性
+
+局限一: 缺少 Source Type 和 Target Type 前置判断
+
+- 应对: 增加 org.springframework.core.convert.converter.ConditionalConverter
+
+局限二: 仅能转换单一的 Source Type 和 Target Type
+
+- 应对: 使用 org.springframework.core.convert.converter.GenericConverter 代替
+
+### GenericConverter 接口
+
+org.springframework.core.convert.converter.GenericConverter
+
+| 核心要素 | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| 使用场景 | 用于复合类型转换场景 比如 Collection Map 数组等              |
+| 转换范围 | Set<ConvertiblePair> getConvertibleTypes()                   |
+| 配对类型 | org.springframework.core.convert.converter.GenericConverter.ConvertiblePair |
+| 转换方法 | convert(@Nullable Object source, TypeDescriptor sourceType, TypeDescriptor targetType) |
+| 类型描述 | org.springframework.core.convert.TypeDescriptor              |
+
+### 优化 GenericConverter 接口
+
+GenericConverter 局限性
+
+- 缺少 Source Type 和 Target Type 前置判断
+- 单一类型转换实现复杂
+
+GenericConverter 优化接口 - ConditionalGenericConverter
+
+- 复合类型转换: org.springframework.core.convert.converter.GenericConverter
+- 类型条件判断: org.springframework.core.convert.converter.ConditionalConverter
+
+### 扩展 Spring 类型转换器
+
+实现转换器接口
+
+- org.springframework.core.convert.converter.Converter
+- org.springframework.core.convert.converter.ConverterFactory
+- org.springframework.core.convert.converter.GenericConverter
+
+注册转换器实现
+
+- 通过 org.springframework.context.support.ConversionServiceFactoryBean   (Spring Bean)
+- 通过 org.springframework.core.convert.ConversionService
+
+### 统一类型转换服务
+
+org.springframework.core.convert.ConversionService
+
+| 实现类型                                                     | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| GenericConversionService                                     | 通用 ConversionService 模板实现 不内置转换器实现             |
+| DefaultConversionService (extend GenericConversionService)   | 基础 ConversionService  实现 内置常用转换器实现              |
+| FormattingConversionService(extends GenericConversionService) | 通用 Formatter + GenericConversionService 实现 不内置转换器和 Formatter 实现 |
+| DefaultFormattingConversionService(extend FormattingConversionService) | DefaultConversionService + 格式化 实现(JSR-354 Money & Currency; JSR-310 Date-Time) |
+
+### ConversionService 作为依赖
+
+类型转换底层接口 - org.springframework.beans.TypeConverter
+
+- 起始版本: Spring 2.0
+- 核心方法 >> convertIfNecessary 重载方法
+- 抽象实现 >> org.springframework.beans.TypeConverterSupport
+- 简单实现 >> org.springframework.beans.SimpleTypeConverter
+
+类型转换器底层抽象实现 - org.springframework.beans.TypeConverterSupport
+
+- 实现接口 -  org.springframework.beans.TypeConverter
+- 扩展实现 - org.springframework.beans.PropertyEditorRegistrySupport
+- 委派实现 - org.springframework.beans.TypeConverterDelegate
+
+类型转换器底层委派实现 - org.springframework.beans.TypeConverterDelegate
+
+- 构造来源 - org.springframework.beans.AbstractNestablePropertyAccessor
+
+  > 实现: org.springframework.beans.BeanWrapperImpl
+
+- 依赖 - java.beans.PropertyEditor
+
+  > 默认内建实现 - org.springframework.beans.PropertyEditorRegistrySupport#registerDefaultEditors
+
+### 面试题
+
+#### Spring 类型转换实现有哪些
+
+- 基于 JavaBeans PropertyEditor 接口实现
+- Spring 3.0+ 通用类型转换实现
+
+#### Spring 类型转换器接口有哪些
+
+- 类型转换接口 >> org.springframework.core.convert.converter.Converter
+- 通用类型转换接口 >> org.springframework.core.convert.converter.GenericConverter
+- 类型条件接口 >> org.springframework.core.convert.converter.ConditionalConverter
+- 综合类型转换接口 >> org.springframework.core.convert.converter.ConditionalGenericConverter
+
+## Spring 泛型处理
+
+### Java 泛型基础
+
+泛型类型
+
+- 泛型类型是在类型上参数化的泛型类或者接口
+
+泛型使用场景
+
+- 编译时强制类型检查
+- 避免类型强转
+- 实现通用算法
+
+泛型类型擦写
+
+泛型被引入到 Java 语言中, 以便在编译时提供更严格的类型检查并支持泛型编程
+
+类型擦除确保不会为参数化类型创建新类, 因此泛型不会产生运行时开销
+
+为了实现泛型, 编译器将类型擦除应用于:
+
+- 将泛型类型中的所有类型参数替换为其边界;如果类型参数是无边界的, 则将其替换为 Object, 因此生成的字节码只包含普通类、接口和方法
+- 必要时插入类型转换以保持类型安全
+- 生成桥方法以保留扩展泛型类型中的多态性
+
+### Java 5 类型接口
+
+Java 5 类型接口 - java.lang.reflect.Type
+
+| 派生类或接口                        | 说明         |
+| ----------------------------------- | ------------ |
+| java.lang.Class                     | Java 类 API  |
+| java.lang.reflect.GenericArrayType  | 泛型数组类型 |
+| java.lang.reflect.ParameterizedType | 泛型参数类型 |
+| java.lang.reflect.TypeVariable      | 泛型类型变量 |
+| java.lang.reflect.WildcardType      | 泛型通配类型 |
+
+Java 泛型反射 API
+
+| 类型                           | API                                    |
+| ------------------------------ | -------------------------------------- |
+| 泛型信息(Generics Info)        | java.lang.Class#getGenericInfo()       |
+| 泛型参数(Parameters)           | java.lang.reflect.ParameterizedType    |
+| 泛型父类(Super Classes)        | java.lang.Class#getGenericSuperclass() |
+| 泛型接口(Interfaces)           | java.lang.Class#getGenericInterfaces() |
+| 泛型声明(Generics Declaration) | java.lang.reflect.GenericDeclaration   |
+
+### Spring泛型类型辅助类
+
+核心 API - org.springframework.core.GenericTypeResolver
+
+- 版本支持: [2.5.2)
+
+- 处理类型(Type)相关方法
+
+  > resolveReturnType
+  >
+  > resolveType
+
+- 处理泛型类型变量(TypeVariable) 相关方法
+
+  >getTypeVariableMap
+
+- 处理泛型参数类型(ParameterizedType) 相关方法
+
+  >resolveReturnTypeArgument
+  >
+  >resolveTypeArgument
+  >
+  >resolveTypeArguments
+
+### Spring 泛型集合类型辅助类
+
+核心 API - org.springframework.core.GenericCollectionTypeResolver
+
+- 版本支持: [2.0, 4.3]
+
+- 替换实现: org.springframework.core.ResolvableType
+
+- 处理 Collection 相关
+
+  > getCollection*Type
+
+- 处理 Map 相关
+
+  > getMapKey*Type
+  >
+  > getMapValue*Type
+
+### Spring 方法参数封装
+
+核心 API - org.springframework.core.MethodParameter
+
+- 起始版本: [2.0, )
+- 元信息
+  - 关联的方法 - Method
+  - 关联的构造器 - Constructor
+  - 构造器或方法参数索引 - parameterIndex
+  - 构造器或方法参数类型 - parameterType
+  - 构造器或方法参数泛型类型 - genericParameterType
+  - 构造器或方法参数参数名称 - parameterName
+  - 所在的类 - containingClass
+
+### Spring 4.0 泛型优化实现 - ResolvableType
+
+- 起始版本: [4.0, )
+- 扮演角色: GenericTypeResolver 和 GenericCollectionTypeResolver 替代者
+- 工厂方法: for*方法
+- 转换方法: as*方法
+- 处理方法: resolve*方法
+
+### ResolvableType 的局限性
+
+- ResolvableType 无法处理泛型擦写
+- ResolvableType 无法处理非具体化的 ParameterizedType
+
+### 面试题
+
+#### Java 泛型擦写发生在编译时还是运行时?
+
+运行时
+
+#### 请介绍 Java 5 Type 类型的派生类或者接口
+
+- java.lang.Class
+- java.lang.reflect.GenericArrayType
+- java.lang.reflect.ParameterizedType
+- java.lang.reflect.TypeVariable
+- java.lang.reflect.WildcardType
+
+####  请说明 ResolvableType 的设计优势
+
+- 简化 Java 5 Type API 开发, 屏蔽复杂 API 的运用, 如 ParameterizedTpe
+- 不变性设计
+- Fluent API 设计 (Builder 模式); 链式(流式)编程

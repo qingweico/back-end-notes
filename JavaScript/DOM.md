@@ -164,3 +164,15 @@ form.element[1]             //<input type="password">
 文本域表单有两种分别为input输入框和textarea
 
 可以通过form.elements[name].value="" 来设置文本域的初始值
+
+### 全局DOM对象
+
+| 对象名称  | 含义                       |
+| --------- | :------------------------- |
+| document  | 当前的 Web页面             |
+| history   | 用户以前访问过的页面列表   |
+| location  | 当前Web页面的 URL          |
+| navigator | 用户正在使用的Web浏览器    |
+| screen    | 浏览器和页面占用的屏幕区域 |
+| window    | 浏览器窗口                 |
+

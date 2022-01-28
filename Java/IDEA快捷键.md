@@ -43,3 +43,9 @@
 ### Ctrl + Alt + T: 快速插入try catch ...
 
 ### Ctrl + Shift + U: 大小写字母切换
+
+sysdm.cpl
+
+services.msc
+
+dxdiag

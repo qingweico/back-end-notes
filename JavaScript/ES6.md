@@ -706,3 +706,9 @@ arguments不会自动反映函数参数的变化
 不能使用fn.caller和fn.arguments获取函数调用的堆栈
 增加了保留字（比如protected、static和interface）
 ```
+
+### ES6 声明变量的六种方法
+
+ES5 只有两种声明变量的方法: var 命令和 function 命令
+
+ES6 除了添加 let 和 const 命令; 还有 import 和 class 命令
