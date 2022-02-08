@@ -424,8 +424,8 @@ BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream
 标准的输出流,默认以字节的方式打印到控制台
 
 ```java
-PrintStream ps=System.out;
-        ps.println("");--->System.out.println("");
+PrintStream ps = System.out;
+ps.println(""); ---> System.out.println("");
 ```
 
 ```java
