@@ -80,7 +80,7 @@ Spring 注解 - org.springframework.context.event.EventListener
 
 ### 注册 Spring AppicationListener
 
-- 方法一: AppicationListener作为 Spring Bean 注册
+- 方法一: ApplicationListener作为 Spring Bean 注册
 
 - 方法二: 通过 ConfigurableApplicationContext API 注册
 
@@ -295,5 +295,62 @@ Spring 模式注解
 
 - java.lang.annotation.Documented
 - java.lang.annotation.Inherited
--  java.lang.annotation.Repeatable
+- java.lang.annotation.Repeatable
 
+### Spring 模式注解 (Stereotype Annotations)
+
+@Component 的派生性
+
+元标注 @Component 的注解在 XML 元素 `<context:component-scan>`或注解 @ComponentScan 扫描中派生了 @Component 的特性, 并且从 Spring Framer work 4.0 开始支持多层次派生性
+
+@Component 派生的注解有
+
+- @Repository
+- @Service
+- @Controller
+- @Configuration
+- @SpringBootConfiguration
+
+@Component 派生性原理
+
+核心组件 - org.springframework.context.annotation.ClassPathBeanDefinitionScanner
+
+- 父类 - org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider
+
+资源处理 - org.springframework.core.io.support.ResourcePatternResolver
+
+资源转换成类元信息 - org.springframework.core.type.classreading.MetadataReaderFactory
+
+类元信息 - org.springframework.core.type.ClassMetadata
+
+- ASM 实现 - org.springframework.core.type.classreading.ClassMetadataReadingVisitor
+- 反射实现 - org.springframework.core.type.StandardClassMetadata 
+
+注解元信息 - org.springframework.core.type.AnnotationMetadata
+
+- ASM 实现 - org.springframework.core.type.classreading.AnnotationMetadataReadingVisitor
+- 反射实现 - org.springframework.core.type.StandardAnnotationMetadata
+
+@ComponentScan 处理过程(通过 ASM 扫描; 可以绕过类加载过程中的字节码的校验机制; 在 Spring 5.0引入了@indexed注解)
+
+ConfigurationClassParser#doProcessConfigurationClass(ConfigurationClass configClass, SourceClass sourceClass)
+
+ComponentScanAnnotationParser#parse(AnnotationAttributes componentScan, final String declaringClass)
+
+ClassPathBeanDefinitionScanner#doScan(String... basePackages)
+
+ClassPathScanningCandidateComponentProvider#findCandidateComponents(String basePackage)
+
+ClassPathScanningCandidateComponentProvider#scanCandidateComponents(String basePackage)
+
+ClassPathScanningCandidateComponentProvider#isCandidateComponent(MetadataReader metadataReader)
+
+ClassPathScanningCandidateComponentProvider(boolean useDefaultFilters)
+
+ClassPathScanningCandidateComponentProvider#registerDefaultFilters()
+
+### Spring 组合注解(Composed Annotations)
+
+基本定义: Spring 组合注解中的元素允许是 Spring 模式注解与其他 Spring 功能性注解的任意组合
+
+实现: org.springframework.core.annotation.AnnotationAttributes

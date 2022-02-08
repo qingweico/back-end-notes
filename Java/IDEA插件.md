@@ -33,3 +33,5 @@ SequenceDiagram
 Xcode Theme
 
 One Dark theme
+
+/tag:Theme
