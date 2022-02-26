@@ -737,6 +737,33 @@ public class MyListener implements ServletContextListener {
 </dependency>
 ```
 
+### 配置跨域请求
+
+```java
+package com.example.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class CorsConfig implements WebMvcConfigurer {
+    /**
+     * 页面跨域访问Controller过滤
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        WebMvcConfigurer.super.addCorsMappings(registry);
+        registry.addMapping("/**")
+                .allowedHeaders("*")
+                .allowedMethods("POST", "GET", "DELETE", "PUT")
+                .allowedOrigins("*");
+    }
+}
+```
+
+
+
 ## 数据访问
 
 ### SpringBoot JDBC自动配置原理
@@ -1920,7 +1947,7 @@ static class CacheConfigurationImportSelector implements ImportSelector {
 }
 ```
 
-```java
+```properties
 /*imports*/
 org.springframework.boot.autoconfigure.cache.GenericCacheConfiguration
 org.springframework.boot.autoconfigure.cache.JCacheCacheConfiguration
