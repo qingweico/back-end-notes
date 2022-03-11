@@ -1,17 +1,11 @@
-# Promis
+# Promise
 
 [TOC]
 
 ## 任务队列和事件循环
 
 ```properties
-首先js只在一个线程上运行(主线程) 但不代表js只有一个线程,而js引擎有多个线程 其他线程都是在后台配合
-js内部采用事件循环机制(Event Loop)
-js在运行时除了一个正在运行的主线程,js引擎还提供了一个任务队列(task queue), 里面放着各种需要当前程序
-处理的异步任务(其实根据异步任务的类型,存在多个任务队列,为了方便理解,这里只存在一个任务队列)
-js会去执行所有的同步任务,等到全部的同步任务全部执行完,就会去看任务队列里的异步任务,而如果有满足
-的异步任务 那么该异步任务就会进入主线程 成为同步任务 执行完后,下一个异步任务再进入主线程开始执行
-一但任务队列清空,那么该程序也就结束了
+首先js只在一个线程上运行(主线程), 但不代表js只有一个线程, 而js引擎有多个线程, 其他线程都是在后台配合; js内部采用事件循环机制(Event Loop); js在运行时除了一个正在运行的主线程, js引擎还提供了一个任务队列(task queue), 里面放着各种需要当前程序处理的异步任务(其实根据异步任务的类型, 存在多个任务队列, 为了方便理解, 这里只存在一个任务队列), js会去执行所有的同步任务,等到全部的同步任务全部执行完,就会去看任务队列里的异步任务,而如果有满足的异步任务, 那么该异步任务就会进入主线程, 成为同步任务, 执行完后, 下一个异步任务再进入主线程开始执行, 一但任务队列清空,那么该程序也就结束了
 ```
 
 ## 异步操作的基本流程控制
@@ -19,7 +13,7 @@ js会去执行所有的同步任务,等到全部的同步任务全部执行完,�
 ### 嵌套回调
 
 ```javascript
-/*六个回调函数的嵌套,一共需要花费6s,不仅写起来麻烦,还容易出错,还难以维护*/
+/*六个回调函数的嵌套, 一共需要花费6s, 不仅写起来麻烦, 还容易出错, 还难以维护*/
 function async(args, callback){
     console.log("参数为" + args + " 1秒后返回");
     setTimeout(function(){callback(args*2);},1000);
@@ -49,7 +43,7 @@ function async(args, callback){
     setTimeout(function(){callback(args*2);},1000);
 }
 function final(value){
-    console.log("完成 ",value);
+    console.log("完成 ", value);
 }
 let items = [1,2,3,4,5,6];
 let results = [];
@@ -70,7 +64,7 @@ series(items.shift());
 
 ```javascript
 /*并行执行*/
-/*所有异步函数同时执行,耗时少,但是占用系统资源,6s的用时缩短至1s*/
+/*所有异步函数同时执行, 耗时少, 但是占用系统资源, 6s的用时缩短至1s*/
 function async(args, callback){
     console.log("参数为"+args+" 1秒后返回");
     setTimeout(function(){callback(args*2);},1000);
@@ -94,7 +88,7 @@ items.forEach(function (item) {
 
 ```javascript
 /*并行与串行的结合*/
-/*下面代码最多运行2个异步任务,达到了资源与效率的最佳平衡*/
+/*下面代码最多运行2个异步任务, 达到了资源与效率的最佳平衡*/
 function async(args, callback){
     console.log("参数为"+args+" 1秒后返回");
     setTimeout(function(){callback(args*2);},1000);

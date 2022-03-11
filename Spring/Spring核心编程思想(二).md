@@ -1,3 +1,5 @@
+[TOC]
+
 ## Spring 事件
 
 ### Java 事件/监听器编程模型
@@ -27,7 +29,7 @@
 
 ### 面向注解的事件/监听器设计模式
 
- 是加你监听器注解场景举例
+ 事件监听器注解场景举例
 
 | Java 技术规范 | 事件注解                        | 监听器注解                            |
 | ------------- | ------------------------------- | ------------------------------------- |
@@ -354,3 +356,71 @@ ClassPathScanningCandidateComponentProvider#registerDefaultFilters()
 基本定义: Spring 组合注解中的元素允许是 Spring 模式注解与其他 Spring 功能性注解的任意组合
 
 实现: org.springframework.core.annotation.AnnotationAttributes
+
+## Spring 应用上下文声明周期
+
+- Spring 应用上下文启动准备阶段
+- BeanFactory 创建阶段
+- BeanFactory 准备阶段
+- BeanFactory 后置处理阶段
+- BeanFactory 注册 BeanPostProcessor阶段
+- 初始化内建 Bean: MessageSource
+- 初始化内建 Bean: Spring 事件广播器
+- Spring 应用上下文刷新阶段
+- Spring 事件监听器注册阶段
+- BeanFactory 初始化完成阶段
+- Spring  应用上下文启动完成阶段
+- Spring  应用上下文启动阶段
+- Spring  应用上下文停止阶段
+- Spring  应用上下文关闭阶段
+
+### BeanFactory 创建阶段
+
+AbstractApplicationContext#obtainFreshBeanFactory()方法
+
+刷新 Spring 应用上下文底层 BeanFactory - refreshBeanFactiry()
+
+- 销毁或者关闭 BeanFactory 如果存在的话
+- 创建 BeanFactory - createBeanFactory()
+- 设置 BeanFactory Id
+- 设置 是否允许 BeanDefinition 重复定义 - customizeBeanFactory
+- 设置 是否允许循环引用 - customizeBeanFactory
+- 加载 BeanDefinition
+- 关联新建 BeanFactory 到Spring 应用上下文
+
+返回 Spring 应用上下文底层 BeanFactory - getBeanFactory()
+
+### BeanFactory 准备阶段
+
+AbstractApplicationContext#prepareBeanFactory(ConfigurableListableBeanFactory beanFactory) 方法
+
+- 关联 ClassLoader
+- 设置 Bean 表达式处理器
+- 添加 PropertyEditorRegistrar 实现 - ResourceEditorRegistrar
+- 添加 Aware 回调接口 BeanPostProcessor 实现 - ApplicationContextAwareProcessor
+- 忽略 Aware 回调接口作为依赖注入接口
+- 注册 ResolvableDependency 对象 - BeanFactory;ResourceLoader;ApplicationEventPublisher; ApplicationContext
+- 注册 ApplicationListenerDetector 对象
+- 注册 LoadTimeWeaverAwareProcessor 对象(AOP)
+- 注册单例对象 - Environemnt、Java System Properties 以及 OS 环境变量
+
+### BeanFactory 后置处理阶段
+
+AbstractApplicationContext#postProcessorBeanFactory(ConfigurableListableBeanFactory) 方法
+
+- 由子类覆盖该方法
+
+AbstractApplicationContext#invokeBeanFactoryPostProcessor(ConfigurableListableBeanFactory)方法
+
+- 调用 BeanFactoryPostProcessor 或者 BeanDefinitionRegistry 后置处理方法
+- 注册 LoadTimeWeaverAwareProcesor 对象
+
+### BeanFactory 注册 BeanProcessor 阶段
+
+AbstractApplicationContext#registerBeanPostProcessor(ConfigurableListableBeanFactory) 方法
+
+- 注册 PriorityOrdered 类型的 BeanPostProcessor Beans
+- 注册 Ordered 类型的 BeanPostProcessor Beans
+- 注册普通 BeanPostProcessor Beans
+- 注册 MergedBeanDefinitionPostProcessor Beans
+- 注册 ApplicationListenerDetector 对象

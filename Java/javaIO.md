@@ -123,10 +123,8 @@ public class ByteStream {
         System.out.println(d);
         System.out.println(new String(bytes));
     }
-}
+}*
 ```
-
-*![image-20200607142356003](https://pic.downk.cc/item/5ef3034214195aa594c461ab.png)*
 
 由于每次读到内存中的byte数组中的数据不会刷新而会覆盖,当读到最后的数据不足字节数组的长度时则会出现数据重复,因而可以使用方法new String(byte[] bytes,int offset,int length)
 ;来获取每次读到的有效数据长度
@@ -151,8 +149,6 @@ public class ByteStream {
     }
 }
 ```
-
-*![image-20200607143429406](https://pic.downk.cc/item/5ef3034214195aa594c461af.png)*
 
 ### FileOutputStream
 

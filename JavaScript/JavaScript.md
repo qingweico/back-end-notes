@@ -293,14 +293,6 @@ Array Date String等等都是函数类型function 而使用它们创建的对象
   f();
   ```
 
-  变量f和F函数在内存中的结构
-
-![1583920411082](https://pic.downk.cc/item/5f33502214195aa594de1e90.png)
-
-  当F函数指向为null后变量和F函数的内存地址
-
-![1583920442344](https://pic.downk.cc/item/5f33502214195aa594de1e92.png)
-
 ---------------
 
 js中函数本身也是对象,可以拥有自己的属性

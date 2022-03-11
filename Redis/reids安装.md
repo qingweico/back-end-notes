@@ -89,6 +89,7 @@ telnet 192.168.1.105 6379
 ```
 
 ```bash
+# 若是云服务器设置安全组开放3306
 firewall-cmd --zone=public --add-port=3306/tcp --permanent;
 ```
 

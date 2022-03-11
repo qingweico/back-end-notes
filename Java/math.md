@@ -7,7 +7,6 @@
 ```java
 Random s=new Random();
 s.nextInt(20);  //指定随机数的范围
-
 Math.random();  //产生0到1的随机浮点数,包括0不包括1
 ```
 

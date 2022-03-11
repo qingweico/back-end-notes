@@ -286,7 +286,7 @@ htmlEscape('{"message":"<div onmouseover=\\"alert(\'gotcha!\')\\">hover here.</d
 //&ltdiv onmouseover=&quotalert('gotcha!')&quot&gthover here.&lt/div&gt
 ```
 
-## 总结
+## 总结t6
 
 - 跨站请求伪造
 

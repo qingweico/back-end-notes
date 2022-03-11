@@ -49,7 +49,7 @@ Web Reactive 技术栈
 
 Java1.3 引入了动态代理
 
-Spring Boot1.x基于Spirng 4开发的 而SpringBoot 2.x是基于Spring 5开发的
+Spring Boot1.x基于Spirng 4开发的, 而SpringBoot 2.x是基于Spring 5开发的
 
 ## Java版本依赖与支持
 
@@ -132,12 +132,12 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 
 根据 Bean 类型注入
 
-- 单个Bean 对象
-- 集合Bean 对象
+- 单个 Bean 对象
+- 集合 Bean 对象
 
 注入容器内建Bean 对象
 
-注入非Bean 对象
+注入非 Bean 对象
 
 注入类型
 
@@ -148,16 +148,16 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 
 Bean定义配置
 
-- 基于 XML文件
-- 基于 Properties文件
-- 基于 Java 注解
-- 基于Java API
+- 基于XML文件
+- 基于Properties文件
+- 基于Java注解
+- 基于JavaAPI
 
 IOC 容器配置
 
-- 基于 XML 文件
-- 基于 Java注解
-- 基于 Java API
+- 基于XML文件
+- 基于Java注解
+- 基于JavaAPI
 
 外部化属性配置
 
@@ -167,7 +167,7 @@ IOC 容器配置
 
 ApplicationContext和BeanFactory的关系
 
-ApplicationContext除了IOC的角色 还提供了
+ApplicationContext除了IOC的角色, 还提供了
 
 - 面向切面(AOP)
 - 配置元信息
@@ -177,9 +177,9 @@ ApplicationContext除了IOC的角色 还提供了
 - 注解
 - Environment抽象
 
-BeanFactory是 Spring 底层 IOC容器
+BeanFactory是 Spring 底层 IOC 容器
 
-ApplicationContext 是具备应用特性的BeanFactory超集
+ApplicationContext 是具备应用特性的 BeanFactory 超集
 
 ### Spring Bean 基础
 
@@ -190,9 +190,9 @@ ApplicationContext 是具备应用特性的BeanFactory超集
 BeanDefinition是Spring Framework 中定义Bean的配置元信息接口
 
 - Bean的类名
-- Bean行为配置元素 如作用域、自动绑定的模式、生命周期回调等
-- 其他Bean引用 又称为合作者或者依赖
-- 配置设置 比如Bean属性
+- Bean行为配置元素, 如作用域、自动绑定的模式、生命周期回调等
+- 其他Bean引用, 又称为合作者或者依赖
+- 配置设置, 比如Bean属性
 
 BeanDefinition元信息
 
@@ -217,15 +217,15 @@ BeanDefinition 构建
 
 Bean 的名称
 
-- 每个Bean 拥有一个或者多个标识符 这些标识符在Bean 所在的容器必须是唯一的 通常 一个Bean仅有一个标识符 如果需要额外的 可考虑使用别名来扩充
+- 每个 Bean 拥有一个或者多个标识符, 这些标识符在Bean 所在的容器必须是唯一的, 通常 一个Bean仅有一个标识符, 如果需要额外的 可考虑使用别名来扩充
 
-- 在基于XML的配置元信息中(基于XML配置不一定是基于XML文件 可以是网络中XML或者本地文件) 可使用id或者name属性来规定Bean的标识符 通常Bean的标识符由字母组成 允许出现特殊字符 如果要想引入Bean的别名的话 可在name属性使用`,` 或者`;` 来间隔
+- 在基于XML的配置元信息中(基于XML配置不一定是基于XML文件 可以是网络中XML或者本地文件)可使用id或者name属性来规定Bean的标识符, 通常Bean的标识符由字母组成, 允许出现特殊字符, 如果要想引入Bean的别名的话, 可在name属性使用`,` 或者`;` 来间隔
 
-- Bean的id或者name属性并非必须规定 如果留空的话 容器会为Bean自动生成一个唯一的名称
+- Bean的id或者name属性并非必须规定, 如果留空的话, 容器会为Bean自动生成一个唯一的名称
 
-- Bean的命名尽管没有限制 不过建议采用驼峰的方式 更符合Java的命名约定
+- Bean的命名尽管没有限制, 不过建议采用驼峰的方式, 更符合Java的命名约定
 
-Bean名称生成器(BeanNameGenerator) 由Spring Framework 2.0.3引入 有两种实现
+Bean名称生成器(BeanNameGenerator)由Spring Framework 2.0.3引入 有两种实现
 
 - DefaultBeanNameGenerator 默认通用的BeanNameGenerator实现
 - AnnotationBeanNameGenerator 基于注解扫描的BeanNameGenerator实现
@@ -244,12 +244,12 @@ Java 注解配置元信息
 
 - @Bean
 - @Component
-- Import
+- @Import
 
 Java API 配置元信息
 
 - 命名方式: BeanDefinitionRegistry#registerBeanDefinition(String, BeanDefinition)
-- 非命名方式 BeanDefinitionReaderUtils#(AbstractBeanDefinition definition, BeanDefinitionRegistry registry)
+- 非命名方式: BeanDefinitionReaderUtils#(AbstractBeanDefinition definition, BeanDefinitionRegistry registry)
 - 配置类方式: AnnotatedBeanDefinitionReader#register(Class<?>... componentClasses)
 
 #### 实例化 Spring Bean
@@ -258,10 +258,10 @@ Bean 实例化
 
 常规方式
 
-- 通过构造器(配置元信息: XML Java注解和Java API)
-- 通过静态工厂方法(配置元信息: XML Java注解和Java API)
-- 通过Bean 工厂方法(配置元信息: XML Java注解和Java API)
-- 通过 FactoryBean(配置元信息: XML Java注解和Java API)
+- 通过构造器(配置元信息: XML; Java注解; Java API)
+- 通过静态工厂方法(配置元信息: XML; Java注解; Java API)
+- 通过Bean 工厂方法(配置元信息: XML; Java注解; Java API)
+- 通过 FactoryBean(配置元信息: XML; Java注解; Java API)
 
 特殊方式
 
@@ -372,7 +372,7 @@ Spring IOC 依赖查找
 
 层次性查找
 
-- 根据 Bean 名称查找  基于 containsLocalBean 方法实现
+- 根据 Bean 名称查找 , 基于 containsLocalBean 方法实现
 - 根据 Bean 类型查找实例列表
     - 单一实例: BeanFactoryUtils#beanOfType
     - 集合类型: BeanFactoryUtils#beansOfTypeIncludingAncestors
@@ -419,25 +419,23 @@ org.springframework.context.annotation.AnnotationConfigUtils类中
 
 ### 依赖查找中的经典异常
 
-| 异常类型                        | 触发条件                              | 场景举例                                     |
-| ------------------------------- | ------------------------------------- | -------------------------------------------- |
-| NoSuchBeanDefinitionException   | 当查找Bean 不存在于 IOC 容器时        | BeanFactory#getBean; ObjectFactory#getObject |
-| NoUniqueBeanDefinitionException | 类型查找时 IOC 容器存在多个 Bean 实例 | BeanFactory#getBean(Class)                   |
-| BeanInstantiationException      | 当 Bean 所对应的类型为非具体类时      | BeanFactory#getBean                          |
-| BeanCreationException           | 当 Bean 初始化过程中                  | Bean 初始化方法执行异常时                    |
-| BeanDefinitionStoreException    | 当 BeanDefinition 配置元信息非法时    | XML 配置资源无法打开时                       |
+| 异常类型                        | 触发条件                              | 场景举例                                    |
+| ------------------------------- | ------------------------------------- | ------------------------------------------- |
+| NoSuchBeanDefinitionException   | 当查找Bean 不存在于 IOC 容器时        | BeanFactory#getBean;ObjectFactory#getObject |
+| NoUniqueBeanDefinitionException | 类型查找时 IOC 容器存在多个 Bean 实例 | BeanFactory#getBean(Class)                  |
+| BeanInstantiationException      | 当 Bean 所对应的类型为非具体类时      | BeanFactory#getBean                         |
+| BeanCreationException           | 当 Bean 初始化过程中                  | Bean 初始化方法执行异常时                   |
+| BeanDefinitionStoreException    | 当 BeanDefinition 配置元信息非法时    | XML 配置资源无法打开时                      |
 
 ObjectFactory 和 BeanFactory 的区别
 
 两者都提供了 依赖查找 的能力
 
-ObjectFactory仅关注一个或者一种类型的 Bean 依赖查找 且自身并不具备依赖查找的能力 能力则由 BeanFactory 输出
+ObjectFactory仅关注一个或者一种类型的 Bean 依赖查找, 且自身并不具备依赖查找的能力, 能力则由 BeanFactory 输出
 
 BeanFactory 则提供了单一类型、集合类型以及层次性等多种依赖查找方式
 
-BeanFactory.getBean 操纵是否线程安全
-
-BeanFactory.getBean 方法的执行是线程安全的 操作过程中会增加互斥锁(syn)
+BeanFactory.getBean 操纵是否线程安全: BeanFactory.getBean 方法的执行是线程安全的, 操作过程中会增加互斥锁(syn)
 
 ## Spring 依赖注入
 
@@ -666,11 +664,11 @@ Spring 容器管理和游离对象
 
 #### 注入和查找的依赖来源是否相同
 
-否 依赖查找的来源仅限于 Spring BeanDefinition 以及单例对象 而依赖注入的来源还包括 Resolvable Dependency 以及 @Value 所标注的外部化配置
+否, 依赖查找的来源仅限于 Spring BeanDefinition 以及单例对象, 而依赖注入的来源还包括 Resolvable Dependency 以及 @Value 所标注的外部化配置
 
 #### 单例对象能在 IOC 容器启动后注册吗
 
-可以的 单例对象 与 BeanDefinition 不同 BeanDefinition 会被ConfigurableListableBeanFactory#freezeConfiguration()方法影响，从而冻结注册 单例对象则没有这个限制
+可以的, 单例对象 与 BeanDefinition 不同, BeanDefinition 会被 ConfigurableListableBeanFactory#freezeConfiguration()方法影响，从而冻结注册, 单例对象则没有这个限制
 
 #### Spring 依赖注入的来源有哪些
 
@@ -691,7 +689,7 @@ Spring 容器管理和游离对象
 
 ### prototype Bean 作用域
 
-Spring 容器 没有办法管理 prototype Bean 的完整的生命周期 也没有办法记录实例的存在 销毁回调方法将不会执行 可以利用 BeanPostProcessor 进行清扫工作
+Spring 容器 没有办法管理 prototype Bean 的完整的生命周期, 也没有办法记录实例的存在, 销毁回调方法将不会执行, 可以利用 BeanPostProcessor 进行清扫工作
 
 ### request Bean 作用域
 
@@ -763,8 +761,6 @@ Spring 容器 没有办法管理 prototype Bean 的完整的生命周期 也没�
       </property>
   </bean>
   ```
-
-
 
 ### 面试题
 
