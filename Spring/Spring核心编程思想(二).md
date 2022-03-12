@@ -424,3 +424,100 @@ AbstractApplicationContext#registerBeanPostProcessor(ConfigurableListableBeanFac
 - 注册普通 BeanPostProcessor Beans
 - 注册 MergedBeanDefinitionPostProcessor Beans
 - 注册 ApplicationListenerDetector 对象
+
+### 初始化内建 Bean: MessageSource
+
+AbstractApplicationContext#initMessageSource()方法
+
+### 初始化内建 Bean: Spring 事件广播器
+
+AbstractApplicationContext#initApplicationEventMulticaster()方法
+
+见ApplicationEventPublisher 底层实现
+
+### Spring 应用上下文刷新阶段
+
+AbstractApplicationContext#onRefresh()方法
+
+```java
+protected void onRefresh() throws BeansException {
+	// For subclasses: do nothing by default.
+}
+```
+
+### Spring 事件监听器注册阶段
+
+AbstractApplicationContext#registerListeners()方法
+
+- 添加当前应用上下文所关联的 AplicationListener对象(集合)
+- 添加 BeanFactory 所注册的 ApplicationListener Beans
+- 广播早期 Spring 事件
+
+### BeanFactory 初始化完成阶段
+
+AbstractApplicationContext#finishBeanFactoryInitialization(ConfigurableListableBeanFactory)方法
+
+- BeanFactory 关联 ConversionService 如果存在
+- 添加 StringValueResolver 对象
+- 依赖查找 LoadTimeWeaverAware Bean
+- BeanFactory 临时 ClassLoader 置为 null
+- BeanFactory  冻结配置
+- BeanFactory  初始化非延迟单例 Beans
+
+### Spring 应用上下文刷新完成阶段
+
+AbstractApplicationContext#finishRefresh()方法
+
+- 清除 ResourceLoader 缓存  - clearResourceCaches() @since 5.0
+- 初始化 LifecycleProcessor对象 - initLifecycleProcessor()
+- 调用 LifecycleProcessor#onRefresh()方法
+- 发布 Spring 应用上下文已刷新事件 - ContextRefreshedEvent
+- 向 MBeanServer 托管 Live Beans
+
+### Spring 应用上下文启动阶段
+
+AbstractApplicationContext#start()方法
+
+- 启动 LifecycleProcessor: 依赖查找 Lifecycle Beans
+- 启动 Lifecycle Beans
+
+发布 Spring 应用上下文已启动事件 - ContextStartedEvent
+
+### Spring 应用上下文停止阶段
+
+AbstractApplicationContext#start()方法
+
+- 停止 LifecycleProcessor: 依赖查找 Lifecycle Beans; 停止 Lifecycle Beans
+
+发布 Spring 应用上下文已停止事件 - ContextStoppedEvent
+
+### Spring 应用上下文关闭阶段
+
+AbstractApplicationContext#close()方法
+
+- 状态标识: active(false) close(true)
+- Live Bean JMX 托管: LiveBeansView.unregisterApplicationContext(ConfigurableApplicationContext);
+- 发布 Spring 应用上下文已关闭事件 - ContextClosedEvent
+- 关闭 LifecycleProcessor:  依赖查找 Lifecycle Beans; 停止 Lifecycle Beans
+- 销毁 Spring Beans
+- 关闭 BeanFactory
+- 回调 onClose()
+- 注册 Shutdown Hook 线程(如果注册过)
+
+### 依赖查找(注入)的 Bean 会被缓存吗
+
+单例 Bean 会被缓存
+
+缓存位置: org.springframework.beans.factory.support.DefaultSingletonBeanRegistry#singletonObjects
+
+原型 Bean 不会
+
+当前依赖查询或依赖注入时 根据 BeanDefinition每次创建
+
+其他 Scope Bean
+
+- request: 每个 ServletRequest 内部缓存, 生命周期维持在每次 HTTP 请求
+
+- session: 每个 HttpSession 内存缓存, 生命周期维持在每个用户 HTTP 会话
+- application: 当前 Servlet 应用内部缓存
+
