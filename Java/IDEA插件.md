@@ -34,4 +34,4 @@ Xcode Theme
 
 One Dark theme
 
-/tag:Theme
+搜索主题: /tag:Theme

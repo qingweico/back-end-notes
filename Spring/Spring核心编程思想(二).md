@@ -521,3 +521,31 @@ AbstractApplicationContext#close()方法
 - session: 每个 HttpSession 内存缓存, 生命周期维持在每个用户 HTTP 会话
 - application: 当前 Servlet 应用内部缓存
 
+### @Bean 的处理流程是怎样的
+
+- 解析范围 - @Configuration Class 中的 @Bean方法
+- 方法类型 - 静态 @Bean方法和实例 @Bean方法
+
+@Bean >> BeanDefinition
+
+- AnnotatedBeanDefinitionReader 
+-  AnnotationConfigUtils.registerAnnotationConfigProcessors(BeanDefinitionRegistry)
+
+- ConfigurationClassPostProcessor#postProcessBeanDefinitionRegistry(BeanDefinitionRegistry) 
+- processConfigBeanDefinitions(BeanDefinitionRegistry)
+
+- ConfigurationClassParser#retrieveBeanMethodMetadata(sourceClass)
+
+- ConfigurationClass::addBeanMethod(BeanMethod)
+
+- ConfigurationClassBeanDefinitionReader#loadBeanDefinitionsForBeanMethod(BeanMethod)
+
+### BeanFactory 是如何处理循环依赖的
+
+- 循环依赖开关 - AbstractAutowireCapableBeanFactory#setAllowCircularReferences
+
+- 单例属性 - DefaultSingletonBeanRegistry#singletonFactories
+
+- 获取早期未处理 Bean 方法 - AbstractAutowireCapableBeanFactory#getEarlyBeanReference
+
+- 早期未处理 Bean 属性 -  DefaultSingletonBeanRegistry#earlySingletonObjects

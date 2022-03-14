@@ -59,7 +59,7 @@
 
 文件字节输入流: 将计算机硬盘中的内容写到内存中
 
-#### int read()
+int read()
 
 文件temp.txt的内容为abcdefg 注意不要换行
 
@@ -95,7 +95,7 @@ public class ByteStream {
 }
 ```
 
-#### int read(byte[] bytes)
+int read(byte[] bytes)
 
 读取数据之前在内存中准备一个字节数组,一次读取多个字节存入字节数组中,效率高; 返回每次读取到数据的字节长度
 
@@ -126,10 +126,9 @@ public class ByteStream {
 }*
 ```
 
-由于每次读到内存中的byte数组中的数据不会刷新而会覆盖,当读到最后的数据不足字节数组的长度时则会出现数据重复,因而可以使用方法new String(byte[] bytes,int offset,int length)
-;来获取每次读到的有效数据长度
+由于每次读到内存中的byte数组中的数据不会刷新而会覆盖,当读到最后的数据不足字节数组的长度时则会出现数据重复,因而可以使用方法new String(byte[] bytes,int offset,int length)来获取每次读到的有效数据长度
 
-#### new String(byte[] bytes,int offset)
+new String(byte[] bytes,int offset)
 
 ```java
 package io;
@@ -154,7 +153,7 @@ public class ByteStream {
 
 文件字节输出流: 将内存中的数据写入计算机硬盘中
 
-#### void write(byte[] bytes)
+void write(byte[] bytes)
 
 ```java
 package io;
@@ -176,7 +175,7 @@ public class ByteStream {
 }
 ```
 
-#### void write(byte[] bytes,int offset,int length)
+void write(byte[] bytes,int offset,int length)
 
 将字节数组的一部分写入
 

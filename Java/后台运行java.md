@@ -1,7 +1,8 @@
 ```shell
 # start.sh
 # /bin/bash
-nohup java -jar /home/java/boot-tutu-mall-0.0.1-SNAPSHOT.war &
+# log.txt 
+nohup java -jar /home/java/xxx.jar > log.txt &
 ```
 
 ```shell

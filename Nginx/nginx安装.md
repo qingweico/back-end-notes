@@ -14,6 +14,8 @@ yum -y install wget
 ```shell
 cd /usr/local/
 wget https://ftp.pcre.org/pub/pcre/pcre-8.00.tar.gz
+# 当使用wget下载不安全的http域名下的内容时会提示错误
+#sudo yum install -y ca-certificates
 tar -zxvf pcre-8.00.tar.gz
 cd pcre-8.00
 ./configure
