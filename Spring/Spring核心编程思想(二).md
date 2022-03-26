@@ -543,9 +543,95 @@ AbstractApplicationContext#close()方法
 ### BeanFactory 是如何处理循环依赖的
 
 - 循环依赖开关 - AbstractAutowireCapableBeanFactory#setAllowCircularReferences
-
 - 单例属性 - DefaultSingletonBeanRegistry#singletonFactories
-
 - 获取早期未处理 Bean 方法 - AbstractAutowireCapableBeanFactory#getEarlyBeanReference
-
 - 早期未处理 Bean 属性 -  DefaultSingletonBeanRegistry#earlySingletonObjects
+
+### Bean 初始化流程
+
+```properties
+# xml properties yaml json -> BeanDefinition
+# 读取配置信息核心抽象接口 
+BeanDefinitionReader
+```
+
+BeanFactoryPostProcessor
+
+```properties
+# 处理配置文件占位符(BeanDefinition 实例化之前) 实现了BeanFactoryPostProcessor
+PlaceholderConfigurerSupport
+# AbstractApplicationContext#refresh()#invokeBeanFactoryPostProcessors()进行处理
+```
+
+```properties
+# 对各种注解的处理
+ConfigurationClassPostProcessor
+```
+
+```properties
+# @PostConstruct @PreDestroy
+CommonAnnotationBeanPostProcessor
+```
+
+实例化之前
+
+- 准备 BeanPostProcesor
+- 准备监听器 事件 广播器
+
+```properties
+# 实例化 到 初始化
+填充属性
+调用Aware方法接口
+# postProcessBeforeInitialization
+before 
+调用init-method
+# postProcessAfterInitialization
+after
+```
+
+Aware接口
+
+Spring 容器分为 用户自定义容器 和 内建容器
+
+若用户想获取容器对象, 即可调用xxxAware接口
+
+```properties
+# 比如 BeanFactoryAware 和 ApplicationContextAware
+AbstractAutowireCapableBeanFactory#invokeAwareMethods
+```
+
+BeanPostProcessor
+
+动态代理 - > Bena 初始化后调用
+
+```properties
+# 实现了BeanPostProcessor
+AbstractAutoProxyCreator#postProcessAfterInitialization(bean, beanName)
+wrapIfNecessary(bean, beanName, cacheKey)
+createProxy(beanClass, beanName, specificInterceptors, targetSource)
+ProxyFactory#getProxy(classLoader)
+createAopProxy().getProxy(classLoader)
+AopProxy#getProxy(classLoader)
+```
+
+### 容器和对象的创建流程
+
+- 先创建容器
+- 加载配置文件 封装成 BeanDefinition
+- 准备工作
+  - 准备 BeanPostProcesor
+  - 准备监听器 事件 广播器
+- 实例化
+- 初始化
+- 获取到完整对象
+
+```properties
+# 准备工作 AbstractApplicationContext#refresh()
+registerBeanPostProcessors(beanFactory)
+initMessageSource()
+initApplicationEventMulticaster()
+onRefresh()
+registerListeners()
+```
+
+JAVA 解析 XML 通常有两种方式:DOM 和SAX

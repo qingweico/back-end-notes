@@ -29,7 +29,13 @@ set autocommit = 0;# 开始事务
 ### 查看隔离级别
 
 ```mysql
-select @@transaction_isolation;
+#select @@transaction_isolation;
+# show variables like 'transaction_isolation';
++-----------------------+-----------------+
+| Variable_name         | Value           |
++-----------------------+-----------------+
+| transaction_isolation | REPEATABLE-READ |
++-----------------------+-----------------+
 ```
 
 ### 设置隔离级别
