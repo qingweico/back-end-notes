@@ -68,7 +68,7 @@ LSN 也会写到 InnoDB 的数据页中，来确保数据页不会被多次执�
 
 在并发更新场景下，第一个事务写完 redo log buffer 以后，接下来这个 fsync 越晚调用，组员可能越多，节约 IOPS 的效果就越好
 
-为了让一次 fsync 带的组员更多，MySQL 有一个很有趣的优化：拖时间
+为了让一次 fsync 带的组员更多，MySQL 有一个很有趣的优化: 拖时间
 
 <img src="https://static001.geekbang.org/resource/image/98/51/98b3b4ff7b36d6d72e38029b86870551.png" alt="img" />
 

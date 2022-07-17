@@ -47,8 +47,8 @@ import java.util.StringTokenizer;
 
 
 /**
- * @author:qiming
- * @date: 2021/6/13
+ * @author zqw
+ * @date 2021/6/13
  */
 public class WordCount {
 

@@ -1,6 +1,6 @@
 [TOC]
 
-## Spring 事件
+## 第十七章 Spring 事件
 
 ### Java 事件/监听器编程模型
 
@@ -253,7 +253,7 @@ Spring 同步事件 - 绝大多数 Spring 使用场景 如 ContextRefreshedEvent
 
 Spring 异步事件 - 主要 @EventListener 与 @Async 配置, 实现异步处理, 不阻塞主线程(指事件发送的线程和事件处理的线程不是同一个线程)
 
-## Spring 注解
+## 第十八章 Spring 注解
 
 ### Spring 核心注解场景分类
 
@@ -357,7 +357,162 @@ ClassPathScanningCandidateComponentProvider#registerDefaultFilters()
 
 实现: org.springframework.core.annotation.AnnotationAttributes
 
-## Spring 应用上下文声明周期
+## 第十九章 Spring Environment  抽象
+
+### 理解 Spring Environment  抽象
+
+- 统一的 Spring 配置属性管理
+
+  Spring Framework 3.1 开始引入 Environment  抽象 它统一 Spring 配置属性的储存 包括占位符处理和类型转换 不仅完整地替换 PropertyPlaceholderConfigure 而且还支持更丰富的配置属性源(PropertySource)
+
+- 条件化 Spring Bean 装配管理
+
+  通过 Environment  Profiles 信息 帮助 Spring 容器提供条件化地装配 Bean
+
+### Spring Environment 接口使用场景
+
+- 用于属性占位符处理
+- 用于转换 Spring 配置属性类型
+- 用于储存 Spring 配置属性源(Property)
+- 用于 Profile 状态的维护
+
+### Environment  占位符处理
+
+### 处理条件配置 Spring Profiles
+
+Spring 3.1 条件配置
+
+API
+
+- org.springframework.core.env.ConfigurableEnvironment
+  - 修改 [setActiveProfiles] [setDefaultProfiles] [addActiveProfile]
+  - 获取 [getActiveProfiles] [getDefaultProfiles]
+  - 匹配 acceptsProfiles(String... profiles) acceptsProfiles(Profiles profiles)
+
+注解: @org.springframework.core.env.Profiles
+
+Spring 4 重构 @Profile
+
+### 依赖注入 Environment  
+
+直接依赖注入
+
+- 通过 EnvironmentAware接口
+- 通过 @Autowired 注入 Environment
+
+间接依赖注入
+
+- 通过 ApplicationContextAware 接口回调
+- 通过 @Autowired 注入 ApplicationContext
+
+### 依赖查找 Environment 
+
+直接依赖查找
+
+- org.springframework.context.ConfigurableApplicationContext#ENVIRONMENT_BEAN_NAME
+
+间接依赖查找
+
+- org.springframework.context.ConfigurableApplicationContext#getEnvironment
+
+### 依赖注入 @Value
+
+- AutowiredAnnotationBeanPostProcessor
+
+- DefaultListableBeanFactory#doResolveDependency
+
+- QualifierAnnotationAutowireCandidateResolver#getSuggestedValue
+
+### Spring 类型转换在 Environment  中的运用
+
+Environment  底层的实现
+
+底层实现  - org.springframework.core.env.PropertySourcesPropertyResolver
+
+- 核心方法 - convertValueIfNecessary(Object value, @Nullable Class<T> targetType)
+
+底层服务 - org.springframework.core.convert.ConversionService
+
+- 默认的实现 - org.springframework.core.convert.support.DefaultConversionService
+
+### Spring 类型转换在 @Value 中的使用
+
+@Value 底层实现
+
+底层实现 - AutowiredAnnotationBeanPostProcessor
+
+- DefaultListableBeanFactory#doResolveDependency
+
+底层服务 - org.springframework.beans.TypeConverter
+
+- org.springframework.beans.SimpleTypeConverter 委派给 TypeConverterDelegate
+
+- 默认实现 - org.springframework.beans.TypeConverterDelegate
+  - java.beans.PropertyEditor
+  - org.springframework.core.convert.ConversionService
+
+### Spring 配置属性源 Property
+
+API 
+
+- 单配置属性源 - org.springframework.core.env.PropertySource
+- 多配置属性源 - org.springframework.core.env.PropertySources
+
+注解
+
+- 单配置属性源 - @org.springframework.context.annotation.PropertySource
+- 多配置属性源 - @org.springframework.context.annotation.PropertySources
+
+关联
+
+- 储存对象 - org.springframework.core.env.MutablePropertySources （implements PropertySources）
+- 关联方法 - org.springframework.core.env.ConfigurableEnvironment#getPropertySources()
+
+### Spring 内建的配置属性源
+
+内建 PropertySource
+
+| PropertySource 类型                                          | 说明                      |
+| ------------------------------------------------------------ | ------------------------- |
+| org.springframework.core.env.CommandLinePropertySource       | 命令行配置属性源          |
+| org.springframework.jndi.JndiPropertySource                  | JNDI 配置属性源           |
+| org.springframework.core.env.PropertiesPropertySource        | Properties 属性配置源     |
+| org.springframework.web.context.support.ServletConfigPropertySource | Servlet 配置属性源        |
+| org.springframework.web.context.support.ServletContextPropertySource | ServletContext 配置属性源 |
+| org.springframework.core.env.SystemEnvironmentPropertySource | 环境变量配置属性源        |
+
+### 基于注解扩展 Spring 配置属性源
+
+入口 - org.springframework.context.annotation.ConfigurationClassParser#doProcessConfigurationClass
+
+- org.springframework.context.annotation.ConfigurationClassParser#processPropertySource
+
+4.3 新增语义
+
+- 配置属性字符编码 - encoding
+- org.springframework.core.io.support.PropertySourceFactory
+
+适配对象 - org.springframework.core.env.CompositePropertySource
+
+### 基于 API 扩展 Spring 配置属性源
+
+- 基于 Spring 应用上下文启动前装配 PropertySource
+- 基于 Spring 应用上下文启动后装配 PropertySource
+
+### 面试题
+
+#### 简单介绍下 Spring Environment 接口
+
+- 核心接口 - org.springframework.core.env.Environment
+- 父接口 - org.springframework.core.env.PropertyResolver
+- 可配置接口 - org.springframework.core.env.ConfigurableEnvironment
+- 职责
+  - 管理 Spring 配置属性源
+  - 管理 Profiles
+
+#### Environment 完整的生命周期是怎样的
+
+## 第二十章 Spring 应用上下文声明周期
 
 - Spring 应用上下文启动准备阶段
 - BeanFactory 创建阶段
@@ -558,7 +713,7 @@ BeanDefinitionReader
 BeanFactoryPostProcessor
 
 ```properties
-# 处理配置文件占位符(BeanDefinition 实例化之前) 实现了BeanFactoryPostProcessor
+# 处理配置文件占位符(BeanDefinition实例化之前) 实现了BeanFactoryPostProcessor
 PlaceholderConfigurerSupport
 # AbstractApplicationContext#refresh()#invokeBeanFactoryPostProcessors()进行处理
 ```

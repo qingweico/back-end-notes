@@ -8,7 +8,7 @@
 
  ```bash
 # 下载git源码
-https://github.com/git/git/archive/v2.30.0.tar.gz
+wget https://github.com/git/git/archive/v2.30.0.tar.gz
  ```
 
 ```bash

@@ -1,6 +1,6 @@
 [TOC]
 
-## Spring特性总览
+## 第一章 Spring特性总览
 
 ### 核心特性
 
@@ -51,7 +51,7 @@ Java1.3 引入了动态代理
 
 Spring Boot1.x基于Spirng 4开发的, 而SpringBoot 2.x是基于Spring 5开发的
 
-## Java版本依赖与支持
+### Java版本依赖与支持
 
 | Spring Framework版本 | Java标准版 | Java企业版           |
 | -------------------- | ---------- | -------------------- |
@@ -61,7 +61,7 @@ Spring Boot1.x基于Spirng 4开发的, 而SpringBoot 2.x是基于Spring 5开发�
 | 4.x                  | 6+         | Java EE 6 和 7       |
 | 5.x                  | 8+         | Java EE 7            |
 
-## Spring 模块化设计(Modular)
+### Spring 模块化设计(Modular)
 
 - spring-aop
 - spring-aspects
@@ -86,7 +86,7 @@ Spring Boot1.x基于Spirng 4开发的, 而SpringBoot 2.x是基于Spring 5开发�
 
 JAX-RS: Java标准的注解的方式驱动来开发REST服务
 
-## Java语法变化
+### Java语法变化
 
 - 2004 JDK5 枚举、泛型、注解、装箱和拆箱
 
@@ -102,7 +102,9 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 
   从Java9 和Java10开始 Spring Framework5里面并没有提供Java9和Java10之后语法或者API的支持
 
-## Spring IOC 容器概述
+## 第二章 重新认识 IOC
+
+## 第三章 Spring IOC 容器概述
 
 - Spring IOC 依赖查找
 - Spring IOC 依赖注入
@@ -110,21 +112,21 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 - Spring IOC 配置元信息
 - Spring IOC 容器
 - Spring 应用上下文
-- 使用Spring IOC容器
+- 使用Spring IOC 容器
 - Spring IOC 容器生命周期
 
 ### Spring IOC 依赖查找
 
-- 根据Bean名称查找
+- 根据 Bean 名称查找
     - 实时查找
     - 延迟查找
-- 根据Bean类型查找
-    - 单个Bean对象
-    - 集合Bean对象
-- 根据Bean名称 + 类型查找
-- 根据Java注解查找
-    - 单个Bean对象
-    - 集合Bean对象
+- 根据 Bean 类型查找
+    - 单个 Bean 对象
+    - 集合 Bean 对象
+- 根据 Bean 名称 + 类型查找
+- 根据 Java 注解查找
+    - 单个 Bean 对象
+    - 集合 Bean 对象
 
 ### Spring IOC 依赖注入
 
@@ -135,7 +137,7 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 - 单个 Bean 对象
 - 集合 Bean 对象
 
-注入容器内建Bean 对象
+注入容器内建 Bean 对象
 
 注入非 Bean 对象
 
@@ -144,30 +146,36 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 - 实时注入
 - 延迟注入
 
+### Spring IOC 依赖来源
+
+- 自定义Bean
+- 容器内建 Bean 对象
+- 容器内建依赖
+
 ### Spring IOC 配置元信息
 
 Bean定义配置
 
-- 基于XML文件
-- 基于Properties文件
-- 基于Java注解
-- 基于JavaAPI
+- 基于 XML 文件
+- 基于 Properties 文件
+- 基于 Java 注解
+- 基于 Java API
 
 IOC 容器配置
 
-- 基于XML文件
-- 基于Java注解
-- 基于JavaAPI
+- 基于 XML 文件
+- 基于J ava 注解
+- 基于 Java API
 
 外部化属性配置
 
-- 基于Java配置
+- 基于 Java 配置
 
 ### Spring 应用上下文
 
-ApplicationContext和BeanFactory的关系
+ApplicationContext 和 BeanFactory 的关系
 
-ApplicationContext除了IOC的角色, 还提供了
+ApplicationContext除了 IOC 的角色, 还提供了
 
 - 面向切面(AOP)
 - 配置元信息
@@ -181,9 +189,17 @@ BeanFactory是 Spring 底层 IOC 容器
 
 ApplicationContext 是具备应用特性的 BeanFactory 超集
 
-### Spring Bean 基础
+### 面试题
 
-#### 定义Spring Bean
+#### BeanFactory 和 FactoryBean
+
+BeanFactory 是 IOC 底层容器
+
+FactoryBean 是创建 Bean 的一种方式 帮助实现复杂的初始化逻辑
+
+## 第四章 Spring Bean 基础
+
+### 定义 Spring Bean
 
 什么是BeanDefinition
 
@@ -194,7 +210,7 @@ BeanDefinition是Spring Framework 中定义Bean的配置元信息接口
 - 其他Bean引用, 又称为合作者或者依赖
 - 配置设置, 比如Bean属性
 
-BeanDefinition元信息
+### BeanDefinition元信息
 
 | 属性                     | 说明                                            |
 | ------------------------ | ----------------------------------------------- |
@@ -213,7 +229,7 @@ BeanDefinition 构建
 - 通过 BeanDefinitionBuilder
 - 通过 AbstractBeanDefinition 以及派生类
 
-#### 命名 Spring Bean
+### 命名 Spring Bean
 
 Bean 的名称
 
@@ -230,7 +246,7 @@ Bean名称生成器(BeanNameGenerator)由Spring Framework 2.0.3引入 有两种�
 - DefaultBeanNameGenerator 默认通用的BeanNameGenerator实现
 - AnnotationBeanNameGenerator 基于注解扫描的BeanNameGenerator实现
 
-#### 注册 Spring Bean
+### 注册 Spring Bean
 
 BeanDefinition 注册
 
@@ -252,9 +268,9 @@ Java API 配置元信息
 - 非命名方式: BeanDefinitionReaderUtils#(AbstractBeanDefinition definition, BeanDefinitionRegistry registry)
 - 配置类方式: AnnotatedBeanDefinitionReader#register(Class<?>... componentClasses)
 
-#### 实例化 Spring Bean
+### 实例化 Spring Bean
 
-Bean 实例化
+Bean 实例化(Instant)
 
 常规方式
 
@@ -265,11 +281,11 @@ Bean 实例化
 
 特殊方式
 
-- 通过 ServiceLoaderFactoryBean
+- 通过 ServiceLoaderFactoryBean(配置元信息: XML; Java注解; Java API)
 - 通过AutowireCapableBeanFactory#createBean(Class, int, boolean)
 - 通过 BeanDefinitionRegistry#registerBeanDefinition(String, BeanDefinition)
 
-#### 初始化 Spring Bean
+### 初始化 Spring Bean
 
 Bean 初始化
 
@@ -288,7 +304,7 @@ Bean 初始化
 
     - Java API: AbstractBeanDefinition#setInitMethodName(String)
 
-#### 延迟初始化 Spring Bean
+### 延迟初始化 Spring Bean
 
 Bean 延迟初始化
 
@@ -300,7 +316,7 @@ Bean 延迟初始化
 
 - Java 注解 @Lazy 默认为true
 
-#### 销毁 Spring Bean
+### 销毁 Spring Bean
 
 Bean 销毁
 
@@ -319,15 +335,21 @@ Bean 销毁
 
     - Java API: AbstractBeanDefinition#setDestroyMethodName(String）
 
-#### Bean 垃圾回收
+### Bean 垃圾回收
 
 - 关闭 Spring 容器
 - 执行 GC
 - Spring Bean 覆盖的finalize() 方法被调用
 
-Spring IOC 依赖查找
+### 面试题
 
-单一类型依赖查找
+####  如何注册一个 Spring Bean
+
+通过 BeanDefinition 和 外部单体对象来注册
+
+## 第五章 Spring IOC 依赖查找
+
+### 单一类型依赖查找
 
 - 根据 Bean 名称查找
     - getBean(String)
@@ -340,8 +362,6 @@ Spring IOC 依赖查找
         - getBeanProvider(Class)
         - getBeanProvider(Resolvable Type)
 - 根据 Bean 名称 + 类型查找: getBean(String,  Class)
-
-## Spring IOC 依赖查找
 
 ### 集合类型依赖查找
 
@@ -437,7 +457,7 @@ BeanFactory 则提供了单一类型、集合类型以及层次性等多种依�
 
 BeanFactory.getBean 操纵是否线程安全: BeanFactory.getBean 方法的执行是线程安全的, 操作过程中会增加互斥锁(syn)
 
-## Spring 依赖注入
+## 第六章 Spring 依赖注入
 
 依赖注入的模式和类型
 
@@ -566,7 +586,7 @@ CommonAnnotationBeanPostProcessor
 
 ### 面试题
 
-有多少种依赖注入的方式
+#### 有多少种依赖注入的方式
 
 - 构造器注入
 - Setter注入
@@ -582,7 +602,7 @@ CommonAnnotationBeanPostProcessor
 
 如果依赖的参数比较少的话, 推荐使用构造器注入, 构造器注入可以保证线程安全, 确保数据的一致性
 
-## 依赖来源
+## 第七章 Spring IOC依赖来源
 
 ### 依赖查找来源
 
@@ -677,7 +697,7 @@ Spring 容器管理和游离对象
 - Resolvable Dependency: ConfigurableListableBeanFactory#registerResolvableDependency
 - @Value 外部化配置: @Autowired 和 @Value 在AutowiredAnnotationBeanPostProcessor处理
 
-## Spring Bean 作用域
+## 第八章 Spring Bean 作用域
 
 | 来源        | 说明                                                      |
 | ----------- | --------------------------------------------------------- |
@@ -783,7 +803,7 @@ Spring 容器 没有办法管理 prototype Bean 的完整的生命周期, 也没
 
 可以的 实际上 application Bean 与 singleton Bean 没有本质区别
 
-## Spring Bean 生命周期
+## 第九章 Spring Bean 生命周期
 
 ### Spring Bean 元信息配置阶段
 
@@ -961,7 +981,7 @@ BeanFactory 的默认实现为 DefaultListableBeanFactory 其中 Bean 生命周�
 - Bean 销毁前阶段 >> destroyBean
 - Bean 销毁阶段 >> destroyBean
 
-## Spring 配置元信息
+## 第十章 Spring 配置元信息
 
 - Spring Bean 配置元信息 >> BeanDefinition
 - Spring Bean 属性元信息 >> PropertyValues
@@ -979,13 +999,21 @@ StandardAnnotationMetadata: 基于 Java反射
 
 SimpleAnnotationMetadataReadingVisitor: 基于 ASM
 
-## Spring 类型转换
+## 第十一章 Spring 资源管理
+
+## 第十二章 Spring 国际化
+
+## 第十三章 Spring 校验
+
+## 第十四章 Spring 数据绑定
+
+## 第十五章 Spring 类型转换
 
 ### Spring 内建类型转换器
 
 | 转换场景             | 实现类所在包名                               |
 | -------------------- | -------------------------------------------- |
-| 日期 时间相关        | org.springframework.format.datetime          |
+| 日期时间相关         | org.springframework.format.datetime          |
 | Java 8 日期 时间相关 | org.springframework.format.datetime.standard |
 | 通用实现             | org.springframework.core.convert.support     |
 
@@ -1086,7 +1114,7 @@ org.springframework.core.convert.ConversionService
 - 类型条件接口 >> org.springframework.core.convert.converter.ConditionalConverter
 - 综合类型转换接口 >> org.springframework.core.convert.converter.ConditionalGenericConverter
 
-## Spring 泛型处理
+## 第十六章 Spring 泛型处理
 
 ### Java 泛型基础
 

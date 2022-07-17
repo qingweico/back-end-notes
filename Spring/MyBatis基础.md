@@ -187,7 +187,9 @@ public class Demo {
 ### Myatis cud语句
 
 ```xml
-<!--parameterType表示接口中方法参数的类型 可以省略--> 
+<!--parameterType表示接口中方法参数的类型 可以省略-->
+<!--使用数据库自增主键-->
+<!--useGeneratedKeys="true" keyProperty="" keyColumn=""-->
 <insert id="insert" parameterType="cn.qingweico.entity.Account">
     <!--显示插入数据后对应的id值-->
     <selectKey keyProperty="id" resultType="int" keyColumn="id" order="AFTER">

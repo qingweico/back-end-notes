@@ -172,7 +172,3 @@ git merge dev # 用于合并指定分支到当前分支
 git branch -d dev
 ```
 
-```bash
- git remote set-url origin https:// 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@github.com/qingweico/back-end-notes.git
-```
-

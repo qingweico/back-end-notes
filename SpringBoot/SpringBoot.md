@@ -870,6 +870,16 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource             # 数据源类型:HikariCP
+    hikari:
+      connection-timeout: 30000       # 等待连接池分配连接的最大时长(毫秒), 超过这个时长还没可用的连接则发生SQLException, 默认:30秒
+      minimum-idle: 5                 # 最小连接数
+      maximum-pool-size: 20           # 最大连接数
+      auto-commit: true               # 自动提交
+      idle-timeout: 600000            # 连接超时的最大时长(毫秒, 超时则被释放(retired), 默认:10分钟
+      pool-name: DateSourceHikariCP   # 连接池名字
+      max-lifetime: 1800000           # 连接的生命时长 (毫秒, 超时而且没被使用则被释放(retired), 默认:30分钟 1800000ms)
+      connection-test-query: SELECT 1
 jpa:
     show-sql: true
     properties:
@@ -1025,9 +1035,9 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
-    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    # 通过connectProperties属性来打开mergeSql功能; 慢SQL记录
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-    #设置数据源
+    # 设置数据源
     type: com.alibaba.druid.pool.DruidDataSource
 ```
 
@@ -1341,6 +1351,31 @@ public class DynamicDataSourceInterceptor implements Interceptor {
     @Override
     public void setProperties(Properties properties) {}
 }
+```
+
+#### 注册DynamicDataSourceInterceptor
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--打印SQL语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--开启驼峰命名转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--使用列标签(数据库字段)替换列别名(查询字段的时候给字段自定义的名称) 默认为true-->
+        <setting name="useColumnLabel" value="true"/>
+        <!--获取数据库的自增主键-->
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+    <plugins>
+        <plugin interceptor="cn.qingweico.dao.spilt.DynamicDataSourceInterceptor"/>
+    </plugins>
+</configuration>
 ```
 
 ## SpringBoot启动配置原理

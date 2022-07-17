@@ -128,3 +128,6 @@ appendfsync everysec # 出厂默认 异步操作 每秒记录数据 1s内宕机 
 - 如果允许分钟级别的数据丢失, 可以只使用 RDB;
 - 如果只用 AOF, 优先使用 everysec 的配置选项, 因为它在可靠性和性能之间取了一个平衡
 
+### Redis概念图
+
+![redis](https://cdn.qingweico.cn/redis.png)
