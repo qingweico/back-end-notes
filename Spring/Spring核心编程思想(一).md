@@ -102,6 +102,70 @@ JAX-RS: Java标准的注解的方式驱动来开发REST服务
 
   从Java9 和Java10开始 Spring Framework5里面并没有提供Java9和Java10之后语法或者API的支持
 
+### Spring 对 Java EE API 整合
+
+- Java EE Web 技术相关
+
+| JSR 规范                  | Spring 支持版本 | 代表实现                          |
+| ------------------------- | --------------- | --------------------------------- |
+| Servlet + JSP(JSP 035)    | 1.0+            | DispatcherServlet                 |
+| JSTL(JSR 052)             | 1.0+            | JstlView                          |
+| JavaServer Faces(JSR 127) | 1.1+            | FacesContextUtils                 |
+| Portlet(JSR 168)          | 2.0 - .4.2      | DispatcherPortlet                 |
+| SOAP(JSR 067)             | 2.5+            | SoapFaultException                |
+| WebServices(JSR 109)      | 2.5+            | CommonAnnotationBeanPostProcessor |
+| WebSocket(JSR 356)        | 4.0+            | WebSocketHandler                  |
+
+SOAP(JSR 067) 是WebService的一个通信协议  全称是Simple Object Access Protocol 简单对象访问协议
+
+- Java EE 数据存储相关
+
+| JSR 规范                   | Spring 支持版本                     | 代表实现              |
+| -------------------------- | ----------------------------------- | --------------------- |
+| JDO(JSR 12)                | 1.0 - 4.2(4.2 是 4.x的最后一个版本) | JdoTemplate           |
+| JTA(JSR 907)               | 1.0 +                               | JtaTransactionManager |
+| JPA(EJB 3.0 JSR 220的成员) | 2.0 +                               | JpaTransactionManager |
+| Java Caching API (JSR 107) | 3.2 +                               | JCacheCache           |
+
+- Java EE Bean 技术相关
+
+| JSR 规范                               | Spring 支持版本 | 代表实现                             |
+| -------------------------------------- | --------------- | ------------------------------------ |
+| JMS(JSR 914)                           | 1.1 +           | JmsTemplate                          |
+| EJB 2.0                                | 1.0 +           | AbstractStatefulSessionBean          |
+| Dependency Injection for Java(JSR 330) | 2.5 +           | AutowiredAnnotationBeanPostProcessor |
+| Bean Validation(JSR 303)               | 3.0 +           | LocalValidatorFactoryBean            |
+
+### Spring 编程模型
+
+面向对象编程
+
+- 锲约接口: Aware、BeanPostProcessor...
+- 设计模式: ...
+- 对象继承: Abstract* 类
+
+面向切面编程
+
+- 动态代理
+- 字节码提升
+
+面向元编程
+
+- 注解
+- 配置
+- 泛型
+
+函数驱动
+
+- 函数接口: ApplicationEventPublisher、Reactive: Spring WebFlux
+
+模块驱动
+
+- Maven Artifacts
+- OSGI Bundles
+- Java 9 Automatic Moudles
+- Spring @Enable*
+
 ## 第二章 重新认识 IOC
 
 ## 第三章 Spring IOC 容器概述
@@ -173,7 +237,7 @@ IOC 容器配置
 
 ### Spring 应用上下文
 
-ApplicationContext 和 BeanFactory 的关系
+#### ApplicationContext 和 BeanFactory 的关系
 
 ApplicationContext除了 IOC 的角色, 还提供了
 
@@ -349,6 +413,23 @@ Bean 销毁
 
 ## 第五章 Spring IOC 依赖查找
 
+### 依赖查找的前世今生
+
+单一类型依赖查找
+
+- JNDI - javax.naming.Context#lookup(javax.naming.Name)
+- JavaBeans - java.beans.beancontext.BeanContext
+
+集合类型依赖查找
+
+-  java.beans.beancontext.BeanContext
+
+层次性依赖查找
+
+-  java.beans.beancontext.BeanContext
+
+![image-20220718140522250](https://cdn.qingweico.cn/image-20220718140522250.png)
+
 ### 单一类型依赖查找
 
 - 根据 Bean 名称查找
@@ -365,14 +446,14 @@ Bean 销毁
 
 ### 集合类型依赖查找
 
-集合类型依赖查找接口: ListableBeanFactory
+集合类型依赖查找接口 - ListableBeanFactory
 
 根据 Bean 类型查找
 
 - 获取同类型 Bean 名称列表
     - getBeanNamesForType(Class)
     - Spring 4.2 getBeanNamesForType(ResolvableType)
-- 获取同类型Bean 实例列表
+- 获取同类型 Bean 实例列表
     - getBeansOfType(Class) 以及重载方法
 
 通过注解类型查找
@@ -386,13 +467,13 @@ Bean 销毁
 
 ### 层次性依赖查找
 
-层次性依赖查找接口: HierarchicalBeanFactory
+层次性依赖查找接口 - HierarchicalBeanFactory
 
 双亲 BeanFactory: getParentBeanFactory()
 
 层次性查找
 
-- 根据 Bean 名称查找 , 基于 containsLocalBean 方法实现
+- 根据 Bean 名称查找, 基于 containsLocalBean 方法实现
 - 根据 Bean 类型查找实例列表
     - 单一实例: BeanFactoryUtils#beanOfType
     - 集合类型: BeanFactoryUtils#beansOfTypeIncludingAncestors
@@ -447,7 +528,9 @@ org.springframework.context.annotation.AnnotationConfigUtils类中
 | BeanCreationException           | 当 Bean 初始化过程中                  | Bean 初始化方法执行异常时                   |
 | BeanDefinitionStoreException    | 当 BeanDefinition 配置元信息非法时    | XML 配置资源无法打开时                      |
 
-ObjectFactory 和 BeanFactory 的区别
+### 面试题
+
+#### ObjectFactory 和 BeanFactory 的区别
 
 两者都提供了 依赖查找 的能力
 
@@ -998,6 +1081,39 @@ BeanFactory 的默认实现为 DefaultListableBeanFactory 其中 Bean 生命周�
 StandardAnnotationMetadata: 基于 Java反射
 
 SimpleAnnotationMetadataReadingVisitor: 基于 ASM
+
+### Spring Bean 配置元信息底层实现
+
+Spring Java 注册 BeanDefinition 解析与注册
+
+核心 API - AnnotatedBeanDefinitionReader
+
+资源 
+
+- 类对象 - java.lang.Class
+
+底层
+
+- 条件评估 - ConditionEvaluator
+- Bean 范围解析 - ScopedMetadataResolver
+- BeanDefinition 解析 - 内部 API 实现
+- BeanDefinition  处理 - AnnotationConfigUtils.processCommonDefinitionAnnotations
+- BeanDefinition 注册 - BeanDefinitionRegistry
+
+### 基于 XML 资源装载 Spring IOC 容器配置元信息
+
+Spring IOC 容器相关 XML 配置
+
+| 命名空间 | 所属模块       | Schema 资源 URL                                              |
+| -------- | -------------- | ------------------------------------------------------------ |
+| beans    | spring-beans   | https://www.springframework.org/schema/beans/spring-beans.xsd |
+| context  | spring-context | https://www.springframework.org/schema/context/spring-context.xsd |
+| aop      | spring-aop     | https://www.springframework.org/schema/aop/spring-aop.xsd    |
+| tx       | spring-tx      | https://www.springframework.org/schema/tx/spring-tx.xsd      |
+| util     | spring-util    | https://www.springframework.org/schema/util/spring-util.xsd  |
+| tool     | spring-beans   | https://www.springframework.org/schema/tool/spring-tool.xsd  |
+
+META-INF 路径下 spring.handlers 文件
 
 ## 第十一章 Spring 资源管理
 

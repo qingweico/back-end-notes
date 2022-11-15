@@ -180,7 +180,13 @@ slaveof 127.0.0.1 6379
 
 新建sentinel.conf文件
 
-sentinel monitor 被监控数据库的名字 监控主机的ip 票数(最终票数大于票数的数据库成为主库)
+```properties
+# 写入以下内容
+# port 为当前 sentinel 实例的端口
+port 2700x
+# 指定主节点信息
+sentinel monitor 主节点名称 主节点的ip和端口 quor票数(最终票数大于票数的数据库成为主库)
+```
 
 ```bash
 # 启动哨兵模式
@@ -195,23 +201,29 @@ sentinel monitor 被监控数据库的名字 监控主机的ip 票数(最终票�
 ```
 
 ```bash
-# 主库下线
+# 6379主库下线
 127.0.0.1: 6379> SHUTDOWN
 not connected> exit
 ```
 
 ```bash
+                                   # sentine认为6379主观下线
 3600: X 17 Jul 2020 14: 00: 14.585 # +sdown master post6379 127.0.0.1 6379
+                                   # 6379客观下线
 3600: X 17 Jul 2020 14: 00: 14.585 # +odown master post6379 127.0.0.1 6379 #quorum 1/1
 3600: X 17 Jul 2020 14: 00: 14.585 # +new-epoch 1
 3600: X 17 Jul 2020 14: 00: 14.585 # +try-failover master post6379 127.0.0.1 6379
+                                   # 多个sentinel中选举某一个sentinel作为leader
 3600: X 17 Jul 2020 14: 00: 14.586 # +vote-for-leader 0d755d0aeb17d57bdcfac3e5990575f4986e222e 1
 3600: X 17 Jul 2020 14: 00: 14.586 # +elected-leader master post6379 127.0.0.1 6379
 3600: X 17 Jul 2020 14: 00: 14.586 # +failover-state-select-slave master post6379 127.0.0.1 6379
+                                   # 选举 slave@6381 作为 新的 master
 3600: X 17 Jul 2020 14: 00: 14.662 # +selected-slave slave 127.0.0.1: 6381 127.0.0.1 6381 @ post6379 127.0.0.1 6379
+                                   # 执行 slave no one 命令 任命 6381 不在为 slave
 3600: X 17 Jul 2020 14: 00: 14.662 * +failover-state-send-slaveof-noone slave 127.0.0.1: 6381 127.0.0.1 6381 @ post6379 127.0.0.1 6379
 3600: X 17 Jul 2020 14: 00: 14.729 * +failover-state-wait-promotion slave 127.0.0.1: 6381 127.0.0.1 6381 @ post6379 127.0.0.1 6379
 3600: X 17 Jul 2020 14: 00: 14.915 # +promoted-slave slave 127.0.0.1: 6381 127.0.0.1 6381 @ post6379 127.0.0.1 6379
+                                   # 标记 6379 不再为 master 6379 成为 新的 master 的 slave
 3600: X 17 Jul 2020 14: 00: 14.915 # +failover-state-reconf-slaves master post6379 127.0.0.1 6379
 3600: X 17 Jul 2020 14: 00: 14.965 * +slave-reconf-sent slave 127.0.0.1: 6380 127.0.0.1 6380 @ post6379 127.0.0.1 6379
 3600: X 17 Jul 2020 14: 00: 15.936 * +slave-reconf-inprog slave 127.0.0.1: 6380 127.0.0.1 6380 @ post6379 127.0.0.1 6379

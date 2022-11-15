@@ -142,7 +142,7 @@ public class Person {
 
 #### @ConfigurationProperties和@Value的区别
 
-@ConfigurationProperties默读取全局配置文件
+@ConfigurationProperties和@Value默认读取 applciation.properties(yml)文件 自定义读取请使用@PropertySource注解
 
 相同点都是可以从配置文件中读取值并注入到字段中(前提是字段所属的类一定要在ioc容器中)
 
@@ -158,7 +158,7 @@ public class Person {
 
 前者支持注入静态类型的变量,后者不支持(当使用set方法时也可以完成为静态变量注入,注意set方法不可以是静态的, 且@Value注解加在set方法上)
 
-### PropertySouce和ImportResouce注解的区别
+### PropertySource和ImportResource注解的区别
 
 #### PropertySource
 

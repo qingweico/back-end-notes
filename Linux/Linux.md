@@ -777,6 +777,13 @@ rwx作用目录
 
 `curl www.baidu.com -I` 查看http的头部信息
 
+`nc`  nc是netcat的简写 是一个功能强大的网络工具
+
+- 实现任意TCP/UDP端口的监听
+- 端口的扫描
+- 机器之间传输文件
+- 机器之间网络测速
+
 ## 进程管理
 
 在linux中 服务命令中带有d(daemon)表示后台进程 >> mysqld

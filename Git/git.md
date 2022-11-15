@@ -172,3 +172,18 @@ git merge dev # 用于合并指定分支到当前分支
 git branch -d dev
 ```
 
+#### git 忽略 .idea文件
+
+忽略了.idea文件夹, 但是提交时仍旧会出现.idea内文件变动的情况
+
+原因是 .idea文件已经被git跟踪, 之后再加入.gitignore后是没有作用的; 如果你远程仓库已经有这个文件了,那这个方法就不管用了,你需要先删除远程仓库的这个文件,执行命令
+
+```cmd
+git rm -r --cached .idea
+```
+
+- 提交整个 .idea 目录 然后再push一下即可
+- .gitignore中添加.idea
+- 忽略其他文件同样如此
+
+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

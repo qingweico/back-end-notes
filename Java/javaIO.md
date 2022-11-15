@@ -400,7 +400,7 @@ public class Io_ArrayListRandom {
 
 ### InputStreamReader
 
-转换流（字节输入流 --> 字符输入流 ）
+转换流(字节输入流 --> 字符输入流 )
 
 ```java
 BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream("src/io/temp")));
@@ -408,7 +408,7 @@ BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream("
 
 ### OutputStreamWriter
 
-转换流（字节输出流 --> 字符输出流 ）
+转换流(字节输出流 --> 字符输出流 )
 
 ```java
 BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream("src/io/temp",true)));
@@ -673,7 +673,7 @@ public class ByteArray {
 
 而用字符流时用字符串和字符都行
 
-字节流在使用后没有关闭写数据管道时仍然可以成功写入数据（带有缓冲区的除外）
+字节流在使用后没有关闭写数据管道时仍然可以成功写入数据(带有缓冲区的除外)
 
 字符流在使用后没有关闭写数据管道时,此时写入数据失败,系统就会认为还有数据一直在等待中,使用flush方法强行写入
 
@@ -682,14 +682,14 @@ public class ByteArray {
 1:通过Scanner方法
 
 ```java
- Scanner sc=new Scanner(System.in);//System.in是一个标准的输入流 默认接受键盘的输入
+ Scanner sc = new Scanner(System.in);//System.in是一个标准的输入流 默认接受键盘的输入
 ```
 
 2:通过BufferedReader
 
 ```java
-BufferedReader input=new BufferedReader(new InputStreamReader(System.in));
-        String s=input.readLine();
+BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String s = input.readLine();
         input.close();
 ```
 

@@ -357,6 +357,73 @@ ClassPathScanningCandidateComponentProvider#registerDefaultFilters()
 
 实现: org.springframework.core.annotation.AnnotationAttributes
 
+### Spring @Enable 模块驱动
+
+@Enable 模块驱动是以 @Enable 为 前缀的注解驱动编程模型
+
+模块是指具备相同领域的功能组件集合 组合所形成一个独立的单元
+
+比如
+
+- Web MVC 模块
+- AspectJ 代理模块
+- Caching 模块
+- JMX 模块 (Java 管理扩展)
+- Async 模块
+
+注解
+
+- @EnableWebMvc
+- @EnableTransactionManagement
+- @EnableCaching
+- @EnableMBeanExport
+- @EnableAsync
+
+### Spring 条件注解
+
+基于配置条件注解 - @org.springframework.context.annotation.Profile
+
+- 关联对象 - org.springframework.core.env.Environment 中的 Profiles
+- 实现变化 从 Spring 4.0 开始 @Profile 基于 @Conditional 实现
+
+基于编程条件注解 - @org.springframework.context.annotation.Conditional
+
+- 关联对象 - org.springframework.context.annotation.Condition 接口 具体实现
+
+@Conditional 实现原理
+
+- 上下文对象 - org.springframework.context.annotation.ConditionContext  接口
+- 条件判断  - org.springframework.context.annotation.ConditionEvaluator 包级私有
+- 配置阶段 - org.springframework.context.annotation.ConfigurationCondition.ConfigurationPhase
+- 判断入口 - org.springframework.context.annotation.ConfigurationClassPostProcessor
+  - org.springframework.context.annotation.ConfigurationClassParser 包级私有
+
+Profile 即 通过一种配置的方式来隔离某一种环境
+
+### 课外资料
+
+Spring Boot 注解
+
+| Spring Boot 注解         | 场景说明                 | 起始版本 |
+| ------------------------ | ------------------------ | -------- |
+| @SpringBootConfiguration | SpringBoot 配置类        | 1.4.0    |
+| @SpringBootApplication   | SpringBoot 应用引导注解  | 1.2.0    |
+| @EnableAutoConfiguration | SpringBoot  激活自动装配 | 1.0.0    |
+
+Spring Cloud 注解
+
+| 注解                    | 场景说明                            | 版本  |
+| ----------------------- | ----------------------------------- | ----- |
+| @SpringCloudApplication | Spring Cloud 应用引导注解           | 1.0.0 |
+| @EnableDiscoveryClient  | Spring Cloud 激活服务发现客户端注解 | 1.0.0 |
+| @EnableCircuitBreaker   | Spring Cloud 激活熔断注解           | 1.0.0 |
+
+### 面试题
+
+#### @EventListener 的工作原理
+
+核心 API - org.springframework.context.event.EventListenerMethodProcessor
+
 ## 第十九章 Spring Environment  抽象
 
 ### 理解 Spring Environment  抽象
@@ -580,11 +647,11 @@ AbstractApplicationContext#registerBeanPostProcessor(ConfigurableListableBeanFac
 - 注册 MergedBeanDefinitionPostProcessor Beans
 - 注册 ApplicationListenerDetector 对象
 
-### 初始化内建 Bean: MessageSource
+### 初始化内建 Bean:MessageSource
 
 AbstractApplicationContext#initMessageSource()方法
 
-### 初始化内建 Bean: Spring 事件广播器
+### 初始化内建 Bean:Spring 事件广播器
 
 AbstractApplicationContext#initApplicationEventMulticaster()方法
 
@@ -702,7 +769,11 @@ AbstractApplicationContext#close()方法
 - 获取早期未处理 Bean 方法 - AbstractAutowireCapableBeanFactory#getEarlyBeanReference
 - 早期未处理 Bean 属性 -  DefaultSingletonBeanRegistry#earlySingletonObjects
 
-### Bean 初始化流程
+### Bean 创建流程
+
+![DefaultListableBeanFactory](https://cdn.qingweico.cn/DefaultListableBeanFactory.png)
+
+![Bean 创建流程](https://cdn.qingweico.cn/Bean%20%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B.png)
 
 ```properties
 # xml properties yaml json -> BeanDefinition
@@ -710,7 +781,20 @@ AbstractApplicationContext#close()方法
 BeanDefinitionReader
 ```
 
-BeanFactoryPostProcessor
+BeanDefinition到实例化的过程还需要其它操作
+
+在容器创建过程中需要动态的改变Bean的信息 比如替换掉配置文件的占位符
+
+```properties
+<property name="url" value="${jdbc.url}">
+```
+
+#### postProcessor
+
+- BeanFactoryPostProcessor：用来增强 beanDefinition信息
+  - 实现BeanFactoryPostProcessor接口 重写postProcessBeanFactory 修改beanDefinition信息
+
+- BeanPostProcessor：用来增强 bean信息
 
 ```properties
 # 处理配置文件占位符(BeanDefinition实例化之前) 实现了BeanFactoryPostProcessor
@@ -728,7 +812,7 @@ ConfigurationClassPostProcessor
 CommonAnnotationBeanPostProcessor
 ```
 
-实例化之前
+#### 实例化之前
 
 - 准备 BeanPostProcesor
 - 准备监听器 事件 广播器
@@ -744,7 +828,7 @@ before
 after
 ```
 
-Aware接口
+#### Aware接口的作用
 
 Spring 容器分为 用户自定义容器 和 内建容器
 
@@ -755,7 +839,15 @@ Spring 容器分为 用户自定义容器 和 内建容器
 AbstractAutowireCapableBeanFactory#invokeAwareMethods
 ```
 
-BeanPostProcessor
+#### BeanFactory 和 FactoryBean 的区别
+
+都是用来创建 Bean 对象的
+
+BeanFactory 遵循完整的创建过程 这个过程是由 Spring 来管理的
+
+FactoryBean 只需调用 getObjet 就可以返回具体的对象 整个对象的创建过程是由用户来控制的
+
+#### BeanPostProcessor
 
 动态代理 - > Bena 初始化后调用
 

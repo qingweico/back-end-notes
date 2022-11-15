@@ -4,15 +4,15 @@
 
 ## redis基本知识
 
-redis:  一种分布式的内存数据库缓存
+redis: 一种分布式的内存数据库缓存
 
-NoSQL:  Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
+NoSQL: Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
 
 单进程
 
 redis默认16个库,下表从开始,初始化使用0号库
 
-大数据时代的三V :  Volume(海量) Variety(多样) Velocity(实时)
+大数据时代的三V: Volume(海量) Variety(多样) Velocity(实时)
 
 互联网三高: 高性能 高可用 高扩展 
 
@@ -52,15 +52,17 @@ NoSQL: 代表的不仅仅是SQL
 
 #### CAP
 
-- C: Consistency（强一致性）
-- A: Availability（可用性）
-- P: Partition tolerance（分区容错性）
+- C: Consistency(强一致性)
+- A: Availability(可用性)
+- P: Partition tolerance(分区容错性)这里的分区不是指磁盘分区 而是指网络分区
 
 #### BASE
 
-- 基本可用（Basically Available）
-- 软状态（Soft State）
-- 最终一致（Eventually Consistent）
+- 基本可用(Basically Available)读写不报错
+- 软状态(Soft State)只模糊的知道大体的状态 不知道准确的状态
+- 最终一致(Eventually Consistent)经过一段时间后 系统状态最终保持一致
+
+Redis 不是一个强一致性的系统 主打最终一致性
 
 ### Key
 
@@ -106,7 +108,7 @@ type k          # 查看k的数据类型
 
 ## Redis5种数据类型
 
-### String(字符串)（一key单value）
+### String(字符串)(一key单value)
 
 string是redis最基本的类型,一个key对应一个value string是二进制安全的,redis的string可以包含任何数据,一个redis的string的value最多可以是512M
 
@@ -189,7 +191,7 @@ mget k1 k2 k3             # 一次性获取多个值
 msetnx k1 v1 k5 v5        # 若存在已有的键,则设置失败,一个都不会生效
 ```
 
-### set（集合) （无序且唯一  一key多value）
+### set(集合) (无序且唯一  一key多value)
 
 实现:  字典
 
@@ -218,7 +220,9 @@ sinter set set1 # 交集
 sunion set set1 # 并集
 ```
 
-### hash（哈希）（一key多value）
+### hash(哈希)(一key多value)
+
+Hash结构可以将对象中每个字段独立储存 可以针对单个字段做crud 并且内存占用更少
 
 实现:  哈希表
 
@@ -306,11 +310,11 @@ LSET list2 0 9        # 将索引为0的元素替换为9
 2) "1"
 3) "2"
 4) "3"
-LINSERT list2  before/after 9 10  # 在元素"9"的前面（后面）插入元素"10"
+LINSERT list2  before/after 9 10  # 在元素"9"的前面(后面)插入元素"10"
 
 ```
 
-### Zset（有序集合）(sorted set)
+### Zset(有序集合)(sorted set)
 
 ```bash
 zadd zset 1 v1 2 v2 3 v3

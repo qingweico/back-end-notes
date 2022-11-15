@@ -233,7 +233,7 @@ response.addCookie(cookie);
 
 #### session和cookie的周期
 
-session会随着服务器的重启而销毁,也就是一次会话结束。客户端的关闭也会立即销毁session对象 
+session会随着服务器的重启而销毁,也就是一次会话结束 客户端的关闭也会立即销毁session对象 
 
 cookie不会随着服务器的重启而销毁,而默认是关闭客户端则会立即销毁,可以通过设置setMaxAge()来设置销毁时间,即使关闭客户端cookie也不会销毁 
 
@@ -283,7 +283,7 @@ ${applicationScope.name}
 
 Jsp Standard Tag Library   ***jsp 标准标签库*** 
 
-使用时应该先导入相应的jar。 在WEB-INF目录下创建lib文件夹 再将相应的jar包导入到IDEA环境中
+使用时应该先导入相应的jar  在WEB-INF目录下创建lib文件夹 再将相应的jar包导入到IDEA环境中
 
 然后在jsp页面导入相应的包 
 

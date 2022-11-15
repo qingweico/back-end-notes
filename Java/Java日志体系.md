@@ -1,3 +1,5 @@
+[TOC]
+
 ### log4j漏洞演示
 
 ```xml
@@ -209,4 +211,4 @@ public class RmiServer {
 
 桥接器
 
-![Java日志](https://cdn.qingweico.cn/blog/Java%E6%97%A5%E5%BF%97.png)
+![日志桥接器](https://cdn.qingweico.cn/%E6%97%A5%E5%BF%97%E6%A1%A5%E6%8E%A5%E5%99%A8.png)
