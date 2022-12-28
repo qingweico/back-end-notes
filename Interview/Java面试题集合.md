@@ -83,7 +83,7 @@ rewind操作: 重新读操作 将Position置为0
   - 通过字符串找到一个类, 并调用某个方法
   - 查看类的属性、方法
   - 查看注解
-- 运行时修改   运行时修改的是Bytecode
+- 运行时修改   运行时修改的是bytecode
 
 面向切面编程(Aspect Oriented Programming)
 
@@ -1724,6 +1724,19 @@ select * from table where id = 1 for update 触发行级的共享锁
 
 数据库的持久性: 没有100%的持久性
 
+### HikariCP
+
+Spring Boot 2.0 默认使用HikariCP
+
+Spring Boot 1.0 默认使用 Tomcay 连接池 需要移除 tomcat-jdbc 依赖
+
+为什么HikariCP这么快
+
+- 字节码几级别优化(很多方法通过JavaAssist生成)
+- 用 FastStatementList 代替 ArrayList
+- 无锁集合 ConcurrentBag
+- 代理类的优化(比如使用 invokestatic 代替 invokevirtual)
+
 ## 缓存
 
 缓存起源于CPU缓存
@@ -1753,4 +1766,27 @@ LFU(Least Frequent Used)
 MRU(Most Recently Used)
 
 多级缓存: 布隆过滤器
+
+## Spring
+
+Spring 的事务抽象
+
+一致的事务模型
+
+- JDBC/Hibernate/MyBatis
+- DataSource/JTA
+
+事务抽象的核心接口
+
+- org.springframework.transaction.PlatformTransactionManager
+  - org.springframework.jdbc.datasource.DataSourceTransactionManager
+  - org.springframework.transaction.jta.JtaTransactionManager
+  - ...
+- org.springframework.transaction.TransactionDefinition
+
+Spring 事务的传播特性
+
+Spring 事务的隔离级别参考MySQL事务隔离级别
+
+
 

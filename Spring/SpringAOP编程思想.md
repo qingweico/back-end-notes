@@ -375,11 +375,13 @@ MethodInvocation
 - org.springframework.aop.aspectj.AspectJAfterReturningAdvice
 - org.springframework.aop.aspectj.AspectJAfterReturningAdvice
 
-### Advide 容器接口 - Advisor
+### Advice 容器接口 - Advisor
 
 接口 - AfterReturningAdvice
 
 通用实现 - org.springframework.aop.support.DefaultPointcutAdvisor
+
+Advisor 是 Advice 的一个容器
 
 ### Pointcut 与 Advice 连接器 - PointcutAdvisor
 
@@ -422,6 +424,71 @@ AspectJ实现
 - org.springframework.aop.aspectj.DeclareParentsAdvisor
 
 IntroductionAdvisor 与 PointcutAdvisor 的区别是 前者只过滤类型 不过滤方法
+
+### AOP 代理接口 - AopProxy
+
+接口
+
+- org.springframework.aop.framework.AopProxy
+
+实现
+
+JDK 动态代理
+
+- org.springframework.aop.framework.JdkDynamicAopProxy
+
+CGLIB字节码提升
+
+- org.springframework.aop.framework.CglibAopProxy
+  - org.springframework.aop.framework.ObjenesisCglibAopProxy
+
+### AopProxy 工厂接口与实现
+
+接口
+
+- org.springframework.aop.framework.AopProxyFactory
+- 方法AopProxy createAopProxy(AdvisedSupport config) 中参数AdvisedSupport 译为被通知的支持对象
+
+默认实现
+
+- org.springframework.aop.framework.DefaultAopProxyFactory
+
+  返回类型
+
+  - org.springframework.aop.framework.JdkDynamicAopProxy
+
+  - org.springframework.aop.framework.CglibAopProxy
+    - org.springframework.aop.framework.ObjenesisCglibAopProxy
+
+Spring AOP 提供了一种扩展能力 - 在ProxyCreatorSupport类中创建
+
+### JDK AopProxy 实现 - JdkDynamicAopProxy
+
+实现
+
+- org.springframework.aop.framework.JdkDynamicAopProxy
+
+配置
+
+- org.springframework.aop.framework.AdvisedSupport
+
+来源
+
+- org.springframework.aop.framework.DefaultAopProxyFactory
+
+### CGLIB AopProxy 实现 - CglibAopProxy
+
+实现
+
+- org.springframework.aop.framework.CglibAopProxy
+
+配置
+
+- org.springframework.aop.framework.AdvisedSupport
+
+来源
+
+- org.springframework.aop.framework.DefaultAopProxyFactory
 
 ## 第四章 Spring AOP 设计模式
 

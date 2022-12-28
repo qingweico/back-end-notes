@@ -692,4 +692,3 @@ BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String s = input.readLine();
         input.close();
 ```
-

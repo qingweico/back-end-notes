@@ -56,4 +56,6 @@ vm.max_map_count=262145
 sysctl -p
 ```
 
-索引index对应数据库中的表; 文档document对应数据库中行(记录); 字段 fields: 列
+- 索引index对应数据库中的表; 
+- 文档document对应数据库中行(记录); 
+- 字段 fields: 列

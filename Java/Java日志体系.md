@@ -205,10 +205,10 @@ public class RmiServer {
 | log4j2            | log4j、log4-api 、log4j-core                  | apache 开发的一款log4j的升级产品 |
 | java.util.logging | jdk                                           | Java 1.4 以来的官方日志实现      |
 
-适配器
+#### 适配器图示
 
-![Java日志 (1)](https://cdn.qingweico.cn/blog/Java%E6%97%A5%E5%BF%97%20(1).png)
+![日志适配器](https://cdn.qingweico.cn/i0/%E6%97%A5%E5%BF%97%E9%80%82%E9%85%8D%E5%99%A8.png)
 
-桥接器
+#### 桥接器图示
 
 ![日志桥接器](https://cdn.qingweico.cn/%E6%97%A5%E5%BF%97%E6%A1%A5%E6%8E%A5%E5%99%A8.png)

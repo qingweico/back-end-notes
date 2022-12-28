@@ -54,17 +54,17 @@ docker search 镜像名称 # 查找所有的目标镜像
 `-s  点赞数` 查找大于点赞数的所有目标镜像
 
 ```bash
-docker pull 镜像名称【:版本号】# 下载镜像（默认拉取最新的镜像,可以在镜像后面跟着相应的版本号下载对应的版本）
+docker pull 镜像名称【:版本号】# 下载镜像(默认拉取最新的镜像,可以在镜像后面跟着相应的版本号下载对应的版本)
 ```
 
 ```bash
-docker rmi  镜像名称【:版本号】# 删除目标镜像（默认删除最新镜像,可以在镜像后面跟着相应的版本号删除对应的版本）
+docker rmi  镜像名称【:版本号】# 删除目标镜像(默认删除最新镜像,可以在镜像后面跟着相应的版本号删除对应的版本)
 ```
 
 `-f`强制删除
 
 ```bash
-docker rmi 镜像名称 镜像名称     # 删除多个镜像
+docker rmi 镜像名称 镜像名称      # 删除多个镜像
 ```
 
 ```bash
@@ -102,9 +102,9 @@ docker ps # 列出当前正在运行的容器
 `-n 3` 查看之前3次运行过的容器
 
 ```bash
-exit                                 # 直接结束容器的运行
-ctrl + P + Q                         # 离开容器并不结束后台运行
-docker attach 容器ID                  # 重新进入容器
+exit                                # 直接结束容器的运行
+ctrl + P + Q                        # 离开容器并不结束后台运行
+docker attach 容器ID                 # 重新进入容器
 docker exec -t 容器ID 操作            # 直接将在容器的执行结果返回宿主机
 docker start 容器名称或者容器ID        # 重启容器(后台方式运行容器)  
 docker stop  容器名称或者容器ID        # 停止容器   
@@ -125,7 +125,7 @@ failed to resize tty, using default size
 ```bash
 docker rm 容器名称或者容器ID      # 删除历史运行过的容器记录
 docker rm -f 容器名称或ID        # 强制删除正在运行的容器
-docker rm -f $(docker ps -q)    # 强制删除所有正在运行的容器
+docker rm -f $(docker ps -q)   # 强制删除所有正在运行的容器
 ```
 
 ```bash
@@ -134,7 +134,7 @@ docker ps -qa | xargs docker rm
 ```
 
 ```bash
-docker run -d 镜像名称          # 以守护进程方式运行容器
+docker run -d 镜像名称           # 以守护进程方式运行容器
 ```
 
 ```bash
@@ -159,7 +159,7 @@ docker logs -ft --tail=3 容器ID # 查看容器日志
 
 `tail  数字`:显示最后多少条
 
-### docke运行tomcat
+### docker运行tomcat
 
 ```bash
 docker run -it -p 8848:8080 tomcat # 以交互式运行tomcat 
