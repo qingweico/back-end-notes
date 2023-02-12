@@ -172,7 +172,7 @@ git merge dev # 用于合并指定分支到当前分支
 git branch -d dev
 ```
 
-#### git 忽略 .idea文件
+### git 忽略 .idea文件
 
 忽略了.idea文件夹, 但是提交时仍旧会出现.idea内文件变动的情况
 
@@ -186,4 +186,8 @@ git rm -r --cached .idea
 - .gitignore中添加.idea
 - 忽略其他文件同样如此
 
-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
+### git 提交规范
+
+![ea708cf60f3d0f22c57de82c719b97f4](C:\Java\blog-pic\ea708cf60f3d0f22c57de82c719b97f4.png)
+
+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

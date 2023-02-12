@@ -22,7 +22,7 @@ vim /etc/profile
 export PATH=/usr/local/mongodb/bin:$PATH
 source /etc/profile
 # 查看MongoDB版本
-mongo -verison
+mongo --version
 ```
 
 ```bash
@@ -30,7 +30,7 @@ cd mongodb
 # 用于储存数据库文件数据
 mkdir data/db -p
 mkdir data/logs
-# 用于储存日志w
+# 用于储存日志
 cd data/logs
 touch mongodb.log
 ```
@@ -67,21 +67,12 @@ bind_ip = 0.0.0.0
 
 ```bash
 # 启动mongodb
-mongod -f mongodb.conf
+mongod -f /usr/local/mongodb/mongodb.conf
 ```
 
 ## 创建mongodb用户账号权限
 
 修改配置文件mongodb.conf
-
-```bash
-# 不启用验证权限
-# noauth=true
-# 启用用户账号权限
-auth=true
-
-## 重启mongodb
-```
 
 ```bash
 # 进入mongo控制台
@@ -90,6 +81,20 @@ mongo
 use admin
 # 创建用户 账号和密码为root root 角色为root
 db.createUser({user: "root", pwd: "root", roles: ["root"]})
+# root用户需要在admin数据库中认证(MongoDB的用户权限和数据库是绑定的)
+db.auth("root", "root")
+# 登录
+mongo -u 'root' -p 'root'
+# 查看用户
+show users
+```
+
+```bash
+# 不启用验证权限
+# noauth=true
+# 启用用户账号权限
+# auth=true
+# 重启mongodb
 ```
 
 | 角色名称             | 说明                                                         |
@@ -104,11 +109,4 @@ db.createUser({user: "root", pwd: "root", roles: ["root"]})
 | userAdminAnyDatabase | 只在admin数据库中可用, 赋予用户所有数据库的userAdmin权限     |
 | dbAdminAnyDatabase   | 只在admin数据库中可用, 赋予用户所有数据库的dbAdmin权限       |
 | root                 | 只在admin数据库中可用, 超级账号,超级权限                     |
-
-```bash
-# 登陆
-db.auth("root", "root")
-# 查看用户
-show users
-```
 

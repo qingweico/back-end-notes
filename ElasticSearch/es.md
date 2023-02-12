@@ -11,6 +11,8 @@ su esuser
 whoami
 # 以后台方式启动(elasticsearch-x.x.x/bin)
 ./elasticsearch -d
+# 修改es 绑定的端口号
+# elasticsearch-x.x.x/config/elasticsearch.yml
 ```
 
 elasticsearch启动常见错误

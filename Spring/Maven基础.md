@@ -27,13 +27,43 @@ pom:Project Object Model  项目对象模型
 
 ## 常用的Maven命令
 
-- mvn clean：清理
-- mvn compile：编译主程序
-- mvn test-compile：编译测试程序
-- mvn test：执行测试程序
-- mvn package：打包
-- mvn install：安装
-- mvn site：生成站点
+- mvn clean
+
+  用于清除之前构建生成的所有文件; 其中具体为清除了target目录中的所有文件,包括该目录(删除了install生成的所有文件)
+
+- validate
+
+  用于验证项目是否正确,并且其中有必要信息是否都可用
+
+- mvn compile
+
+  编译项目的源代码, 主要是java文件; 一般是编译scr/main/java或是scr/test/java里面的文件
+
+- mvn test
+
+  测试compile中编译出来的代码
+
+- mvn package
+
+  生成target目录, 编译、测试代码, 生成jar/war文件 
+
+  获取compile中编译好的代码并将其打包成可分类的格式(jar包或者 war包)
+
+- vertify
+
+  用来验证test;检查test的结果是否满足标准
+
+- mvn install
+
+  安装至本地仓库;即在本地repository中安装jar,供其他项目使用
+
+- mvn site
+
+  生成项目的站点文档
+
+- deploy
+
+  复制最终的包至远程仓库,共享给其它开发人员和项目
 
 ## java依赖的范围（默认的都是compile）
 
@@ -70,7 +100,7 @@ runtime依赖的范围
 - 对于测试是否有效：有效
 - 对于运行是否有效：有效
 
-## Maven程序的目录结构（Web项目）
+## Maven程序的目录结构(Web项目)
 
 ----
 
@@ -154,6 +184,74 @@ Path: E:\maven\apache-maven-3.6.3\bin
         <target>1.8</target>
     </configuration>
 </plugin>
+```
+
+## Maven 设置多profiles
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<localRepository>C:\Java\repository</localRepository>
+    
+	<pluginGroups>
+        
+	</pluginGroups>
+
+	<proxies>
+
+	</proxies>
+
+
+	<servers>
+
+	</servers>
+
+	<mirrors>
+		
+	</mirrors>
+
+	<profiles>
+		<profile>
+			<id>other</id>
+			<repositories>
+				<repository>
+					<id>other</id>
+					<url>xxx</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>ali-yun</id>
+			<repositories>
+				<repository>
+					<id>ali-yun</id>
+					<url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+	<activeProfiles>
+		<activeProfile>other</activeProfile>
+		<activeProfile>ali-yun</activeProfile>
+	</activeProfiles>
+</settings>
 ```
 
 ## 关于Maven工程下c3p0报错问题

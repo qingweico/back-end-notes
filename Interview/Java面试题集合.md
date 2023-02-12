@@ -655,6 +655,19 @@ eg:
   - static private final 除外
 - invokeinterface call interface
 
+#### MAT(Memory Analyzer tool)
+
+MAT 是一种快速, 功能丰富的Java堆分析工具, 能帮助你查找内存泄漏和减少内存消耗
+
+[Memory Analyzer tool下载链接](https://www.eclipse.org/mat/downloads.php)
+
+功能
+
+- 内存分布详情
+- 对象间依赖
+- 对象状态详情
+- 按条件检索
+
 ### 对象的生命周期
 
 - load 
