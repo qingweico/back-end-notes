@@ -390,13 +390,22 @@ less指令
 #### ln指令 (软连接)
 
 ```bash
-ln -s /root linkToRoot  # 将linkToRoot链接到root目录下
-ln  /root/hard  /root/hard/linkHard   # 硬连接  可以做到数据的同步更新且硬连接的inode和源文件相同,但是硬连接不能对目录使用且不可以跨分区
+ln -s /root linkToRoot                # 将linkToRoot链接到root目录下
+ln  /root/hard  /root/hard/linkHard   # 硬连接  可以做到数据的同步更新且硬连接的inode和源文件相同 但是硬连接不能对目录使用且不可以跨分区
 ```
 
 当我们使用pwd查看绝对路径时仍然是当前路径
 
 `rm - rm linkToRoot` 删除软链接
+
+#### 软硬链接的区别
+
+```shell
+# -s : 建立软链接文件 如果不加 -s 选项 则建立硬链接文件
+ln [选项] 源文件 目标文件
+硬链接 只能应用于文件 而不能应用于目录 而且不能跨文件系统(即分区) 即不可以在不同文件系统的文件间建立链接
+软链接 : 可以跨文件系统
+```
 
 #### alias指令
 

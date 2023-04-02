@@ -274,3 +274,11 @@ Path: E:\maven\apache-maven-3.6.3\bin
 - 其次一定要把c3p0-config.xml文件放在src的根目录下
 
 - 最后最重要的一点是一定要把src目录设置为Source root 因为Maven工程在创建后的src文件夹并不会被默认为java源文件,所以需要手动设置,不然会因为找不到src源文件下的c3p0-config.xml文件而报错
+
+### 其他
+
+```shell
+# 查看 Maven 依赖树
+mvn dependency:tree
+```
+

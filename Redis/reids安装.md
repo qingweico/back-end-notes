@@ -103,3 +103,16 @@ firewall-cmd --reload
 
 ### 重启redis
 
+## windows redis 后台启动方法
+
+```shell
+# 注册windows服务
+redis-server --service-install redis.windows-service.conf --loglevel verbose
+# 启动
+redis-server --service-start
+# 停止
+redis-server --service-stop
+# 卸载
+redis-server --service-uninstall
+```
+
