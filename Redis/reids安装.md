@@ -107,7 +107,7 @@ firewall-cmd --reload
 
 ```shell
 # 注册windows服务
-redis-server --service-install redis.windows-service.conf --loglevel verbose
+redis-server --service-install redis.windows.conf --loglevel verbose
 # 启动
 redis-server --service-start
 # 停止
