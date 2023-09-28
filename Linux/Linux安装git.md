@@ -13,7 +13,7 @@ wget https://github.com/git/git/archive/v2.30.0.tar.gz
 
 ```bash
 # 解压
-tar -zxvf git-2.30.0.tar.gz
+tar -zxvf v2.30.0.tar.gz
 ```
 
 ```bash
