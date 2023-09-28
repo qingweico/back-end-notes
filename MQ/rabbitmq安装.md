@@ -96,9 +96,9 @@ guest	[administrator]
 # 分配权限
 rabbitmqctl set_user_tags admin administrator
 # 新增 vhost
-rabbitmqctl add_vhost[vhost_name]
+rabbitmqctl add_vhost `vhost_name`
 # 删除 vhost
-rabbitmqctl delete_vhost[vhost_name]
+rabbitmqctl delete_vhost `vhost_name`
 ```
 
 权限角色
