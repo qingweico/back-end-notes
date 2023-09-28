@@ -55,6 +55,8 @@ docker search 镜像名称 # 查找所有的目标镜像
 
 ```bash
 docker pull 镜像名称【:版本号】# 下载镜像(默认拉取最新的镜像,可以在镜像后面跟着相应的版本号下载对应的版本)
+# 比如安装8.0版本的mysql
+ docker pull mysql:8.0
 ```
 
 ```bash
