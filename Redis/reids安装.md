@@ -50,6 +50,8 @@ source /etc/profile
 # redis.conf
 # redis密码
 requirepass 123456
+# 后台运行
+daemonize yes
 ```
 
 ```bash
