@@ -11,17 +11,22 @@ docker pull mysql                # 拉取最新版的mysql镜像
 ```shell
 mkdir -p /docker/docker_mysql    # 在根目录下创建docker目录,docker_mysql目录
 cd /docker/docker_mysql          # 进入目录
+# 创建挂载目录
+mkdir conf
+mkdir mysql-files
+mkdir data
+touch conf/my.cnf
 ```
 
 ### 运行mysql
 
 ```shell
 docker run --name MYSQL   
-    -v $PWD/conf:/etc/mysql/my.cnf   # $PWD代表当前路径
-    -v $PWD/logs:/logs               # -v 挂载
+    -v $PWD/conf/my.cnf:/etc/mysql/my.cnf     # $PWD代表当前路径
+    -v $PWD/mysql-files:/var/lib/mysql-files  # -v 挂载
     -v $PWD/data:/var/lib/mysql 
     -e MYSQL_ROOT_PASSWORD=123456    # 初始化msql密码
-    -d -i -p 3307:3306 mysql         # 后台启动 linux下3307端口映射docker容器中mysql默认的3306端口
+    -d -i -p 3306:3306 mysql         # 后台启动 linux下3306端口映射docker容器中mysql默认的3306端口
 ```
 
 ```shell
