@@ -7,6 +7,7 @@
 下载redis [redis官网](http://www.redis.io)  /opt目录下解压
 
 ```bash
+wget https://download.redis.io/releases/redis-6.0.5.tar.gz
 tar -zxvf redis-6.0.5.tar.gz
 ```
 
