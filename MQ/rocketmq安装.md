@@ -5,6 +5,7 @@
 ## 安装（阿里云Centos7.x环境）
 
 ```bash
+wget https://github.com/apache/rocketmq/archive/refs/tags/rocketmq-all-4.7.1.zip /opt
 unzip rocketmq-all-4.7.1-bin-release.zip
 cd rocketmq-all-4.7.1-bin-release.zip
 ```
