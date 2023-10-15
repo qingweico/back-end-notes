@@ -8,11 +8,12 @@ centos7.x
 
 ```bash
 # 下载
-wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-5.0.3-rc0.tgz /opt
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-5.0.3-rc0.tgz -P /opt
 # 解压
-tar -zxvf mongodb-linux-x86_64-rhel70-5.0.3-rc0.tgz -C  /usr/local
+cd /opt && tar -zxvf mongodb-linux-x86_64-rhel70-5.0.3-rc0.tgz -C  /usr/local
 # 重命名
-mv mongodb-linux-x86_64-rhel70-5.0.3-rc0 mongodb
+cd /usr/local && mv mongodb-linux-x86_64-rhel70-5.0.3-rc0 mongodb
+# 其他版本下载 -> https://www.mongodb.com/try/download/community
 ```
 
 ```bash
@@ -26,7 +27,7 @@ mongo --version
 ```
 
 ```bash
-cd mongodb
+cd /usr/local/mongodb
 # 用于储存数据库文件数据
 mkdir data/db -p
 mkdir data/logs
@@ -87,6 +88,13 @@ db.auth("root", "root")
 mongo -u 'root' -p 'root'
 # 查看用户
 show users
+# 查看所有的数据库
+show dbs
+# 创建数据库
+use gy
+# 添加一条数据
+db.gy.insert({"now": Date()})
+
 ```
 
 ```bash

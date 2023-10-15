@@ -1,6 +1,6 @@
 [es下载列表](https://www.elastic.co/cn/downloads/past-releases#elasticsearch)
 
-- 修改es核心配置文件elasticsearch.yml
+- 修改es核心配置文件elasticsearch.yml(允许外网访问 network.host: 0.0.0.0)
 - 修改JVM参数(jvm.options)
 
 ```bash
@@ -28,7 +28,7 @@ ulimit -Sn
 ```
 
 ```bash
-# /etc/security/limits.conf
+# vim /etc/security/limits.conf
 * soft  nproc  4096
 * hard  nproc  4096
 ```
@@ -44,7 +44,7 @@ ulimit -Su
 ```
 
 ```bash
-# /etc/security/limits.conf
+# vim /etc/security/limits.conf
 * soft  nofile 65536
 * hard  nofile 65536
 ```

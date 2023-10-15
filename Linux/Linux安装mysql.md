@@ -146,7 +146,7 @@ firewall-cmd --reload
 set global time_zone = '+8:00';
 ```
 
-### 安装jdk
+### 安装JDK
 
 ```bash
 vim /etc/profile
@@ -164,10 +164,15 @@ export JAVA_HOME PATH
 source /etc/profile
 ```
 
-### 安装maven
+### 安装Maven
 
 ```bash
-# maven variable
+# Maven 3.x 下载地址
+# https://archive.apache.org/dist/maven/maven-3/
+wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /opt
+# 解压
+tar -zxvf /opt/apache-maven-3.6.3-bin.tar.gz -C /usr/local
+# Maven Variable(/etc/profile)
 MAVEN_HOME=/usr/local/apache-maven-3.6.3
 export PATH=${MAVEN_HOME}/bin:${PATH}
 ```

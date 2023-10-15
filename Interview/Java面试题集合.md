@@ -585,6 +585,8 @@ java -XX:+PrintCommandLineFlags -version
 
 #### jps
 
+- jps -l  : 输出应用程序主类的完整包名或应用程序 jar文件的完整路径名
+
 #### jstat
 
 Java Virtual Machine statistics monitoring tool Java统计监控工具

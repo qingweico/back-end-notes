@@ -1364,9 +1364,14 @@ JDK8中使用元空间代替永久代的原因: 因为方法区所储存的类�
 -XX:MaxMetaspaceSize=2g
 # 设置单个线程栈的大小
 -Xss1m
-# 指定堆内存溢出时自动进行dump
+# 指定堆内存溢出时自动进行dump(后缀hprof文件)
+# hprof 文件是 JVM 生成的一种二进制文件, 用于收集 Java 应用程序的运行时信息
+# 分析hprof文件 1 MAT 2 VisualVM 3 JProfiler
 -XX+HeapDumpOnOutOfMemoryError
--XX:HeapDumpPath=/usr/local
+-XX:ErrorFile=/logs/oom_dump/xxx.log
+-XX:HeapDumpPath=/logs/oom_dump/xxx.hprof
+# 当发生 OOM 时, JVM 会立马退出
+-XX:+ExitOnOutOfMemoryError
 ```
 
 ### java8默认使用的垃圾回收器是什么

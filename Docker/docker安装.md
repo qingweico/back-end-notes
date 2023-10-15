@@ -2,7 +2,7 @@
 
 [TOC]
 
-```properties
+```shell
 # centos7
 # step 1: 安装必要的一些系统工具
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
@@ -15,14 +15,14 @@ sudo yum -y install docker-ce
 sudo service docker start
 ```
 
-```properties
+```shell
 # 安装验证
 docker version
 ```
 
 使用阿里云镜像加速器
 
-```properties
+```shell
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {

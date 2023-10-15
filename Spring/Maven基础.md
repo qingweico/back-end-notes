@@ -193,26 +193,7 @@ Path: E:\maven\apache-maven-3.6.3\bin
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-
 	<localRepository>C:\Java\repository</localRepository>
-    
-	<pluginGroups>
-        
-	</pluginGroups>
-
-	<proxies>
-
-	</proxies>
-
-
-	<servers>
-
-	</servers>
-
-	<mirrors>
-		
-	</mirrors>
-
 	<profiles>
 		<profile>
 			<id>other</id>
@@ -252,6 +233,26 @@ Path: E:\maven\apache-maven-3.6.3\bin
 		<activeProfile>ali-yun</activeProfile>
 	</activeProfiles>
 </settings>
+```
+
+```xml
+<!-- pom.xml 文件中配置 ali 仓库镜像(解决配置镜像仍然从 https://repo.maven.apache.org/maven2/ 下载依赖或者插件问题)-->
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
 ```
 
 ## 关于Maven工程下c3p0报错问题

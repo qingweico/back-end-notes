@@ -2,15 +2,15 @@
 
 [TOC]
 
-## 安装（阿里云Centos7.x环境）
+## 安装(阿里云Centos7.x环境)
 
 ```bash
-wget https://github.com/apache/rocketmq/archive/refs/tags/rocketmq-all-4.7.1.zip /opt
-unzip rocketmq-all-4.7.1-bin-release.zip
-cd rocketmq-all-4.7.1-bin-release.zip
+wget https://archive.apache.org/dist/rocketmq/4.7.1/rocketmq-all-4.7.1-bin-release.zip -P /opt
+cd /opt && unzip rocketmq-all-4.7.1-bin-release.zip
+cd rocketmq-all-4.7.1-bin-release
 ```
 
-## 修改配置文件（修改 JVM 内存设置）
+## 修改配置文件(修改 JVM 内存设置)
 
 ```bash
 cd bin
@@ -45,7 +45,8 @@ tail -f ~/logs/rocketmqlogs/broker.log
 # 添加以下内容
 namesrvAddr=公网ip:9876
 brokerIP1=公网ip
-#以加载配置文件方式重新启动broker
+autoCreateTopicEnable=true
+# 以加载配置文件方式重新启动broker
 nohup sh bin/mqbroker -c conf/broker.conf &
 ```
 
@@ -56,3 +57,15 @@ cd bin
 ./mqshutdown broker
 ./mqshutdown namesrv
 ```
+
+## RocketMQ Dashboard
+
+```shell
+# 下载RocketMQ Dashboard
+wget https://dist.apache.org/repos/dist/release/rocketmq/rocketmq-dashboard/1.0.0/rocketmq-dashboard-1.0.0-source-release.zip -P /opt
+# 打包
+# 启动
+nohup java -jar rocketmq-dashboard-1.0.0.jar --server.port=8888 --rocketmq.config.namesrvAddr=127.0.0.1:9876 > dashboard.1og & 
+```
+
+​	
