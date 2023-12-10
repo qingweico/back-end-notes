@@ -81,7 +81,16 @@ mongo
 # 切换到admin库
 use admin
 # 创建用户 账号和密码为root root 角色为root
-db.createUser({user: "root", pwd: "root", roles: ["root"]})
+# 在admin库中创建root用户 同时给用户授予admin库的root角色
+db.createUser({
+    user: "root",
+    pwd: "root",
+    roles: [
+    	{ role: "root", db: "admin" }
+    ]
+})
+# 删除用户
+db.dropUser('${username}')
 # root用户需要在admin数据库中认证(MongoDB的用户权限和数据库是绑定的)
 db.auth("root", "root")
 # 登录
@@ -94,7 +103,8 @@ show dbs
 use gy
 # 添加一条数据
 db.gy.insert({"now": Date()})
-
+# MongoDB默认采用的是UTC时间
+db.adminCommand({setParameter: 1, timeZoneInfo: "Asia/Shanghai"})
 ```
 
 ```bash

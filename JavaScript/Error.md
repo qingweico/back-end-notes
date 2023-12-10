@@ -2,9 +2,7 @@
 
 [TOC]
 
-
-
-## js错误处理机制 
+## js错误处理机制
 
 js原生提供Error构造函数 所有抛出的错误都是这个构造函数的实例
 
@@ -16,12 +14,12 @@ console.log(error);  //出错了
 ## Error派生6大错误对象
 
 - SyntaxError         语法错误
-- ReferenceError   引用错误
+- ReferenceError      引用错误
 
  * RangeError          范围错误
- * TypeError             类型错误  调用对象不存在的方法会抛出该错误
+ * TypeError           类型错误(调用对象不存在的方法会抛出该错误)
  * URLError
- * EvalError             不再使用了
+ * EvalError           不再使用了
 
 该六大类都为构造函数
 
@@ -36,7 +34,7 @@ console.log(error);  //出错了
  UserError.prototype = new Error();
  UserError.prototype.constructor = UserError;
  console.log(new UserError("这是自定义的错误"));
- /*对于javascript引擎来说 遇到throw 程序就终止了*/
+ /*对于javascript引擎来说 遇到throw程序就终止了*/
 ```
 
 ## finally语句

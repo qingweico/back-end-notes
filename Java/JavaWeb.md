@@ -1097,9 +1097,9 @@ public class CharacterFilter implements Filter {
     <named-config name="test">
         <!--指定连接源的基本属性-->
         <property name="user">user</property>
-        <property name="password">passwordty>
+        <property name="password">password</property>
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
-        <property name="jdbcUrl">jdbc:mysql://localhost/test?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="jdbcUrl">jdbc:mysql:/   /localhost/test?useSSL=false&amp;serverTimezone=UTC</property>
 
         <!--若数据库中连接数不足时 一次向数据库服务器申请请求多个连接-->
         <property name="acquireIncrement">5</property>

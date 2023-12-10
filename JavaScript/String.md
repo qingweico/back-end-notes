@@ -6,7 +6,7 @@ str = str.charAt(0);      //"h" 获取索引为0的元素
 ```
 
 ```javascript
-str = str.slice(1,6); "ello"     
+str = str.slice(1,6); "ello "     
 =>
 str = str.substring(1,6); "ello"  //获取索引1到6之间的元素,不包括6 ,且都不会改变原来的字符串
 ```

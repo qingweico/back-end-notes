@@ -49,7 +49,7 @@ pom:Project Object Model  项目对象模型
 
   获取compile中编译好的代码并将其打包成可分类的格式(jar包或者 war包)
 
-- vertify
+- verify
 
   用来验证test;检查test的结果是否满足标准
 
@@ -69,36 +69,36 @@ pom:Project Object Model  项目对象模型
 
 ### test范围依赖 （比如junit）
 
-- 对主程序是否有效：无效
-- 对测试程序是否有效：有效
-- 是否参与打包：不参与
-- 是否参与部署：不参与
+- 对主程序是否有效: 无效
+- 对测试程序是否有效: 有效
+- 是否参与打包: 不参与
+- 是否参与部署: 不参与
 
 --------------
 
 ### compile依赖范围
 
-- 对主程序是否有效： 有效
-- 对测试程序是否有效：有效
-- 是否参与打包：参与
-- 是否参与部署： 参与
+- 对主程序是否有效:  有效
+- 对测试程序是否有效: 有效
+- 是否参与打包: 参与
+- 是否参与部署:  参与
 
 --------
 
 ### provide依赖范围（比如servlet-api jsp-api）
 
-- 对主程序是否有效：有效
-- 对测试是否有效 ： 有效
-- 是否参与打包：不参与
-- 是否参与部署： 不参与
+- 对主程序是否有效: 有效
+- 对测试是否有效 :  有效
+- 是否参与打包: 不参与
+- 是否参与部署:  不参与
 
 -----
 
 runtime依赖的范围
 
-- 对于主程序是否有效： 无效
-- 对于测试是否有效：有效
-- 对于运行是否有效：有效
+- 对于主程序是否有效:  无效
+- 对于测试是否有效: 有效
+- 对于运行是否有效: 有效
 
 ## Maven程序的目录结构(Web项目)
 
@@ -106,9 +106,9 @@ runtime依赖的范围
 
 ## 在IDEA中构建Maven项目
 
-- 首先配置好Maven在本地的环境变量 path和MAVEN_HOME
+- 首先配置好Maven在本地的环境变量path和MAVEN_HOME
 
-```properties
+```text
 MAVEN_HOME: E:\maven\apache-maven-3.6.3
 Path: E:\maven\apache-maven-3.6.3\bin
 ```
@@ -124,10 +124,10 @@ Path: E:\maven\apache-maven-3.6.3\bin
   ```xml
   <mirrors>
       <mirror>
-          <id>alimaven</id>
+          <id>ali-maven</id>
           <mirrorOf>central</mirrorOf>
-          <name>aliyun maven</name>
-          <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+          <name>ali-yun maven</name>
+          <url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
       </mirror>
   </mirrors>
   ```
@@ -216,7 +216,7 @@ Path: E:\maven\apache-maven-3.6.3\bin
 			<repositories>
 				<repository>
 					<id>ali-yun</id>
-					<url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+					<url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
@@ -227,10 +227,22 @@ Path: E:\maven\apache-maven-3.6.3\bin
 				</repository>
 			</repositories>
 		</profile>
+        <profile>
+          <id>spring-plugin</id>
+          <pluginRepositories>
+            <pluginRepository>
+              <id>spring-plugin</id>
+              <name>Spring plugins</name>
+              <url>https://maven.aliyun.com/repository/spring-plugin</url>
+              <layout>default</layout>
+            </pluginRepository>
+          </pluginRepositories>
+        </profile>
 	</profiles>
 	<activeProfiles>
 		<activeProfile>other</activeProfile>
 		<activeProfile>ali-yun</activeProfile>
+        <activeProfile>spring-plugin</activeProfile>
 	</activeProfiles>
 </settings>
 ```
@@ -243,13 +255,13 @@ Path: E:\maven\apache-maven-3.6.3\bin
     <repositories>
         <repository>
             <id>central</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>central</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>

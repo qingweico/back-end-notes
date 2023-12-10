@@ -1,4 +1,4 @@
-```
+```javascript
 async function test1() {
     console.log('start test1');
     console.log(await test2());
@@ -61,7 +61,7 @@ function debounce(fn) {
     let timeout = null; // 创建一个标记用来存放定时器的返回值
     return function () {
         clearTimeout(timeout); // 每当用户输入的时候把前一个 setTimeout clear 掉
-        timeout = setTimeout(() => { // 然后又创建一个新的 setTimeout, 这样就能保证输入字符后的 interval 间隔内如果还有字符输入的话，就不会执行 fn 函数
+        timeout = setTimeout(() => { // 然后又创建一个新的 setTimeout, 这样就能保证输入字符后的 interval 间隔内如果还有字符输入的话, 就不会执行 fn 函数
             fn.apply(this, arguments);
         }, 1000);
     };
@@ -124,7 +124,7 @@ htmlEscape('{"message":"<div onmouseover=\\"alert(\'gotcha!\')\\">hover here.</d
 function getPageName (){
     const url = window.location.pathname;
     let lastIndex = url.lastIndexOf("/");
-    const pageName = url.substr(lastIndex+1,  url.lastIndexOf("."));
+    const pageName = url.substr(lastIndex+1, url.lastIndexOf("."));
     alert(pageName);
 }
 ```

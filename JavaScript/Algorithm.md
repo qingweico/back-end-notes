@@ -36,7 +36,7 @@ function findLongestWord(str) {
 ```javascript
 /*
  * @param {*} collection 数组对象
- * @param {*} source     若该对象中的键和值都存在数组对象中，则返回collection中拥有该键值对的对象
+ * @param {*} source     若该对象中的键和值都存在数组对象中 则返回collection中拥有该键值对的对象
  */
 function where(collection, source) {
     let arr = [];
