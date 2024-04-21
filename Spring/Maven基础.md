@@ -15,12 +15,21 @@
 
 pom:Project Object Model  项目对象模型
 
+## 下载Maven
+
+```shell
+# windows 下最稳定的版本 3.6.3
+# https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
+```
+
 ## Maven工程坐标与仓库中路径的关系关系
 
 ```xml
-<groudId>org.springframework</groudId>
-<artifactId>spring-core</artifactId>
-<version>4.0.0.RELEASE</version>
+<dependency>
+    <groudId>org.springframework</groudId>
+    <artifactId>spring-core</artifactId>
+    <version>4.0.0.RELEASE</version>
+</dependency>
 ```
 
 对应于: ***org/spring-framework/spring-core/4.0.0.RELEASE/spring-core-4.0.0.RELEASE.jar***
@@ -135,39 +144,41 @@ Path: E:\maven\apache-maven-3.6.3\bin
 - 运行一个Web项目时servlet和jsp的范围要设置为provided才OK
 
 ```xml
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>servlet-api</artifactId>
-    <version>2.5</version>
-    <scope>provided</scope>
-</dependency>
-<dependency>
-    <groupId>javax.servlet.jsp</groupId>
-    <artifactId>jsp-api</artifactId>
-    <version>2.0</version>
-    <scope>provided</scope>
-</dependency>
+<dependencys>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.5</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.0</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencys>
 ```
 
 - maven settings.xml全局配置jdk环境
 
    ```xml
    <profiles>
-     	<profile>
-         <id>jdk-1.8</id>
-         <activation>
-           <activeByDefault>true</activeByDefault>
-           <jdk>1.8</jdk>
-         </activation>
-         <properties>
-           <maven.compiler.source>1.8</maven.compiler.source>
-           <maven.compiler.target>1.8</maven.compiler.target>
-           <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-         </properties>
-     </profile>
-     </profiles>
-   ```
-   
+       <profile>
+           <id>jdk-1.8</id>
+           <activation>
+               <activeByDefault>true</activeByDefault>
+               <jdk>1.8</jdk>
+           </activation>
+           <properties>
+               <maven.compiler.source>1.8</maven.compiler.source>
+               <maven.compiler.target>1.8</maven.compiler.target>
+               <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+           </properties>
+       </profile>
+  </profiles>
+  ```
+  
 - Maven内置的Tomcat是tomcat6,如果JDK版本过低的话会出现运行不兼容的情况而报错
 
   - 在pom.xml中引入tomcat7或以上版本的依赖
@@ -193,57 +204,57 @@ Path: E:\maven\apache-maven-3.6.3\bin
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-	<localRepository>C:\Java\repository</localRepository>
-	<profiles>
-		<profile>
-			<id>other</id>
-			<repositories>
-				<repository>
-					<id>other</id>
-					<url>xxx</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-						<updatePolicy>always</updatePolicy>
-					</snapshots>
-				</repository>
-			</repositories>
-		</profile>
-		<profile>
-			<id>ali-yun</id>
-			<repositories>
-				<repository>
-					<id>ali-yun</id>
-					<url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-						<updatePolicy>always</updatePolicy>
-					</snapshots>
-				</repository>
-			</repositories>
-		</profile>
+    <localRepository>C:\Java\repository</localRepository>
+    <profiles>
         <profile>
-          <id>spring-plugin</id>
-          <pluginRepositories>
-            <pluginRepository>
-              <id>spring-plugin</id>
-              <name>Spring plugins</name>
-              <url>https://maven.aliyun.com/repository/spring-plugin</url>
-              <layout>default</layout>
-            </pluginRepository>
-          </pluginRepositories>
+            <id>other</id>
+            <repositories>
+                <repository>
+                    <id>other</id>
+                    <url>xxx</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
         </profile>
-	</profiles>
-	<activeProfiles>
-		<activeProfile>other</activeProfile>
-		<activeProfile>ali-yun</activeProfile>
+        <profile>
+            <id>ali-yun</id>
+            <repositories>
+                <repository>
+                    <id>ali-yun</id>
+                    <url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>spring-plugin</id>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>spring-plugin</id>
+                    <name>Spring plugins</name>
+                    <url>https://maven.aliyun.com/repository/spring-plugin</url>
+                    <layout>default</layout>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>other</activeProfile>
+        <activeProfile>ali-yun</activeProfile>
         <activeProfile>spring-plugin</activeProfile>
-	</activeProfiles>
+    </activeProfiles>
 </settings>
 ```
 
@@ -272,23 +283,25 @@ Path: E:\maven\apache-maven-3.6.3\bin
 - 首先在pom.xml文件中引入c3p0依赖和辅助包依赖
 
    ```xml
-   <dependency>
-        <groupId>com.mchange</groupId>
-        <artifactId>c3p0</artifactId>
-        <version>0.9.5.2</version>
+  <dependencys>
+      <dependency>
+          <groupId>com.mchange</groupId>
+          <artifactId>c3p0</artifactId>
+          <version>0.9.5.2</version>
       </dependency>
       <dependency>
-        <groupId>com.mchange</groupId>
-        <artifactId>mchange-commons-java</artifactId>
-        <version>0.2.15</version>
-   </dependency>
-   ```
+          <groupId>com.mchange</groupId>
+          <artifactId>mchange-commons-java</artifactId>
+          <version>0.2.15</version>
+      </dependency>
+  </dependencys>
+  ```
 
 - 其次一定要把c3p0-config.xml文件放在src的根目录下
 
 - 最后最重要的一点是一定要把src目录设置为Source root 因为Maven工程在创建后的src文件夹并不会被默认为java源文件,所以需要手动设置,不然会因为找不到src源文件下的c3p0-config.xml文件而报错
 
-### 其他
+## 其他
 
 ```shell
 # 查看 Maven 依赖树

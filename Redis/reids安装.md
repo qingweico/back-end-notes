@@ -109,6 +109,8 @@ firewall-cmd --reload
 ## windows redis 后台启动方法
 
 ```shell
+# 下载
+# https://github.com/microsoftarchive/redis/releases
 # 注册windows服务
 redis-server --service-install redis.windows.conf --loglevel verbose
 # 启动

@@ -35,3 +35,7 @@ Xcode Theme
 One Dark theme
 
 搜索主题: /tag:Theme
+
+多行注释0bb97c
+单行注释e1d709
+其他80CBC4

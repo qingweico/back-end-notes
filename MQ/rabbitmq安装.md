@@ -6,7 +6,7 @@ centos7.x
 
 [Install: RPM-based Linux](https://www.rabbitmq.com/install-rpm.html)
 
- [install a recent Erlang version via yum](https://packagecloud.io/rabbitmq/erlang/install#bash-rpm).
+[install a recent Erlang version via yum](https://packagecloud.io/rabbitmq/erlang/install#bash-rpm).
 
 ```bash
 # 安装erlang前置脚本文件 通过yum
