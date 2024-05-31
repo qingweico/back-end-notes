@@ -62,6 +62,8 @@ cd bin
 
 ```shell
 # 下载RocketMQ Dashboard
+# Git Repo
+# https://github.com/apache/rocketmq-externals
 wget https://dist.apache.org/repos/dist/release/rocketmq/rocketmq-dashboard/1.0.0/rocketmq-dashboard-1.0.0-source-release.zip -P /opt
 # 打包
 # 启动
