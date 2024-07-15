@@ -111,6 +111,10 @@ public String hello() {
 <mvc:annotation-driven/>
 ```
 
+### ServletInvocableHandlerMethod
+
+专门用于处理 Servlet 请求, 负责调用控制器的方法来处理 HTTP 请求, 并处理方法的参数和返回值
+
 ### DispatcherServlet 前端控制器
 
 DispatcherServlet是整个流程控制的核心,当用户请求到达前端控制器时,由它调用其他组件来处理用户的请求,正是DispatcherServlet的存在降低了组件之间的耦合性
