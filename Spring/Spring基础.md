@@ -2,7 +2,9 @@
 
 [TOC]
 
-![spring](https://cdn.qingweico.cn/blog/5ea52f33c2a9a83be5c03a12.jpg)
+![spring](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ea52f33c2a9a83be5c03a12.jpg)
+
+![](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ea52f39c2a9a83be5c03ece.png)
 
 ## Spring IOC
 
@@ -337,7 +339,7 @@ BeanFactory在创建ioc核心容器时采用延迟加载的方式,即什么时�
   }
   ```
 
-  ![image-20200620211710439](https://cdn.qingweico.cn/blog/5f0ace9314195aa594182ac7.png)
+  ![image-20200620211710439](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5f0ace9314195aa594182ac7.png)
 
   当使用`@Autowried`注入数据时,但此时容器中存在两个数据类型都为AccountDao的Bean,此时会报错,当数据类型相时,`@Autowried`会根据变量的名称来匹配相应的Bean,匹配成功则注入
 

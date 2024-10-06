@@ -1879,7 +1879,7 @@ void running(ConfigurableApplicationContext context) {
 
 ## SpringBoot缓存
 
-![image-20200807145952386](https://cdn.qingweico.cn/blog/6043572d360785be54a8d7ed.png)
+![image-20200807145952386](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/6043572d360785be54a8d7ed.png)
 
 CachingManager管理多个Cache组件,而每个组件都有自己的唯一一个名称
 

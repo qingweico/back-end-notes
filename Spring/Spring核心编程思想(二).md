@@ -771,9 +771,9 @@ AbstractApplicationContext#close()方法
 
 ### Bean 创建流程
 
-![DefaultListableBeanFactory](https://cdn.qingweico.cn/DefaultListableBeanFactory.png)
+![DefaultListableBeanFactory](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/DefaultListableBeanFactory.png)
 
-![Bean 创建流程](https://cdn.qingweico.cn/Bean%20%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B.png)
+![Bean 创建流程](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/Bean%20%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B.png)
 
 ```properties
 # xml properties yaml json -> BeanDefinition

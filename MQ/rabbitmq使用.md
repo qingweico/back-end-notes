@@ -1,4 +1,4 @@
-![RabbitMQ](https://cdn.qingweico.cn/RabbitMQ.png)
+![RabbitMQ](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/RabbitMQ.png)
 
 **Broker**: 接受和分发消息的应用 RabbitMQ Server 就是 Message Broker
 

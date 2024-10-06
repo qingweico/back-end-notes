@@ -94,7 +94,7 @@ AOF 三种写回策略
 - everysec, 每秒写回: 每个写命令执行完, 只是先把日志写到 AOF 文件的内存缓冲区, 每隔一秒把缓冲区中的内容写入磁盘(默认策略)
 - no, 操作系统控制的写回: 每个写命令执行完, 只是先把日志写到 AOF 文件的内存缓冲区, 由操作系统决定何时将缓冲区内容写回磁盘
 
-![·](https://cdn.qingweico.cn/blog/72f547f18dbac788c7d11yy167d7ebf8.jpg)
+![·](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/72f547f18dbac788c7d11yy167d7ebf8.jpg)
 
 AOF 重写机制
 
@@ -168,4 +168,4 @@ AOF 和 RDB 不能保证数据库100%持久化 Redis内存满了 没有设置过
 
 ### Redis概念图
 
-![redis](https://cdn.qingweico.cn/redis.png)
+![redis](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/redis.png)

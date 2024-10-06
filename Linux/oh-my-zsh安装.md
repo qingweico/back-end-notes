@@ -69,4 +69,4 @@ plugins=(git wd web-search history history-substring-search zsh-syntax-highlight
 source ~/.zshrc
 ```
 
-![image-20220420163845910](https://cdn.qingweico.cn/image-20220420163845910.png)
+![image-20220420163845910](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/image-20220420163845910.png)

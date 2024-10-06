@@ -362,6 +362,8 @@ ServerSocket是一个文件, 存放着所有连进来的Client FD
 
 ### I/O多路复用
 
+![](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/image-20211020124518541.png)
+
 I/O多路复用底层主要用的是 Linux 内核函数 (select、poll、epoll) 来实现; windows 不支持epoll 实现; windows 底层是基于winsock2的selec函数实现的(不开源)
 
 select、poll、epoll的区别
@@ -398,7 +400,7 @@ API设计: 操作会阻塞线程(让线程休眠)
 
 ### NIO
 
-![20211018151300](https://cdn.qingweico.cn/blog/20211018151300.png)
+![20211018151300](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/20211018151300.png)
 
 jdk1.4中引入了NIO
 
@@ -715,11 +717,11 @@ MAT 是一种快速, 功能丰富的Java堆分析工具, 能帮助你查找内�
 
 #### ThreadPoolExecutor的继承关系
 
-![图1 ThreadPoolExecutor UML类图](https://cdn.qingweico.cn/blog/912883e51327e0c7a9d753d11896326511272.png)
+![图1 ThreadPoolExecutor UML类图](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/912883e51327e0c7a9d753d11896326511272.png)
 
 #### 线程池中线程的生命周期状态
 
-![img](https://cdn.qingweico.cn/blog/62853fa44bfa47d63143babe3b5a4c6e82532.png)
+![img](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/62853fa44bfa47d63143babe3b5a4c6e82532.png)
 
 #### ctl属性分析
 
@@ -785,11 +787,11 @@ TERMINATED
 
 
 
-![图3 线程池生命周期](https://cdn.qingweico.cn/blog/582d1606d57ff99aa0e5f8fc59c7819329028.png)
+![图3 线程池生命周期](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/582d1606d57ff99aa0e5f8fc59c7819329028.png)
 
 #### 拒绝策略
 
-![9ffb64cc4c64c0cb8d38dac01c89c905178456](https://cdn.qingweico.cn/blog/9ffb64cc4c64c0cb8d38dac01c89c905178456.png)
+![9ffb64cc4c64c0cb8d38dac01c89c905178456](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/9ffb64cc4c64c0cb8d38dac01c89c905178456.png)
 
 #### execute方法
 
@@ -1253,7 +1255,7 @@ Thread.sleep() : TIME_WAITING
 
 网络请求: BLOCKED
 
-![a524e12c79382f8eacd0d84b6babbc2b](http://cdn.qingweico.cn/blog/a524e12c79382f8eacd0d84b6babbc2b.png)
+![a524e12c79382f8eacd0d84b6babbc2b](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/a524e12c79382f8eacd0d84b6babbc2b.png)
 
 临界区(critical section): 发生竞争的区域(访问共享资源)
 
@@ -1325,7 +1327,7 @@ synchronized需要实现的功能
 
 java同步器整体架构
 
-![fc66d0fafe49a6ba9cccae041cc9b286](https://cdn.qingweico.cn/blog/fc66d0fafe49a6ba9cccae041cc9b286.png)
+![fc66d0fafe49a6ba9cccae041cc9b286](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/fc66d0fafe49a6ba9cccae041cc9b286.png)
 
 Java提供的同步器开发框架
 
@@ -1333,7 +1335,7 @@ Java提供的同步器开发框架
 
 AQS区别于synchronized(built-in or intrinsic lock) Java提供的另一个实现同步的体系
 
-![d609a8ff2bc13468e341259d43aa70aa](http://cdn.qingweico.cn/blog/d609a8ff2bc13468e341259d43aa70aa.png)
+![d609a8ff2bc13468e341259d43aa70aa](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/d609a8ff2bc13468e341259d43aa70aa.png)
 
 AQS的功能特性
 
@@ -1410,7 +1412,7 @@ CLH的解决方案:
 - 跨block vs 单block
 - 可配置公平性 vs 不可配置
 
-![img](https://cdn.qingweico.cn/blog/412d294ff5535bbcddc0d979b2a339e6102264.png)
+![img](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/412d294ff5535bbcddc0d979b2a339e6102264.png)
 
 ### ReentrantLock 中公平锁和非公平锁的获取流程
 
@@ -1554,9 +1556,9 @@ CountDownLatch也是解决了同样的问题, 不过只是一次CyclicBarrier周
 - 支持反向压力: 阻塞任务的提交者
 - 访问拒绝: 拒绝任务的提交者
 
-![725a3db5114d95675f2098c12dc331c3316963](https://cdn.qingweico.cn/blog/725a3db5114d95675f2098c12dc331c3316963.png)
+![725a3db5114d95675f2098c12dc331c3316963](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/725a3db5114d95675f2098c12dc331c3316963.png)
 
-![img](https://cdn.qingweico.cn/blog/a20efe788caf4f07a4ad027639c80b1d.png)
+![img](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/a20efe788caf4f07a4ad027639c80b1d.png)
 
 ## 锁
 
@@ -1609,7 +1611,7 @@ JDK11, 打开就是偏向锁, 而JDK8默认对象头是无锁
 
 锁升级过程
 
-![84f4d5dd908788fec0940431b4b912f0](https://cdn.qingweico.cn/84f4d5dd908788fec0940431b4b912f0.webp)
+![84f4d5dd908788fec0940431b4b912f0](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/84f4d5dd908788fec0940431b4b912f0.webp)
 
 ## 无锁编程
 

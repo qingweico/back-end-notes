@@ -428,7 +428,7 @@ Bean 销毁
 
 -  java.beans.beancontext.BeanContext
 
-![image-20220718140522250](https://cdn.qingweico.cn/image-20220718140522250.png)
+![image-20220718140522250](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/image-20220718140522250.png)
 
 ### 单一类型依赖查找
 

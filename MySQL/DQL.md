@@ -198,7 +198,7 @@ SELECT REPLACE("learn mysql","mysql","java");
     END as 新工资 FROM job;     #年龄为24时薪水*3
     ```
 
-    ![1584274392635](https://cdn.qingweico.cn/blog/1584274392635.png)
+    ![1584274392635](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/1584274392635.png)
 
   - ```mysql
     SELECT *, CASE

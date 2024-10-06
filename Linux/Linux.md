@@ -159,7 +159,7 @@
 
 `who` : 查看用户登陆信息
 
-![1588911447007](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff21f.png)
+![1588911447007](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89f14195aa594bff21f.pngF)
 
 第一个root 代表服务器启动时root登陆
 
@@ -173,7 +173,7 @@ pts代表远程登陆 使用不同的数字区分不同的远程终端
 
 `w` :查看用户登陆的详细信息
 
-![1588911970296](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff221.png)
+![1588911970296](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89f14195aa594bff221.png)
 
 `uptime` 查看用户登陆一些基本信息
 
@@ -508,7 +508,7 @@ find /etc -name *init* -exec 执行操作命令 {} \;      # 对搜索结果进�
 find /etc -name *init* -ok 执行操作命令 {} \;        # 带有询问
 ```
 
-*![1588829333905](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff21d.png)*
+*![1588829333905](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89f14195aa594bff21d.png)*
 
 找到test目录下java的文件且带有询问的删除
 
@@ -641,9 +641,9 @@ uniq -c ip.txt | sort -nr | head -n 3
 
 ### 权限
 
-*![1588306848988](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed34.png)*
+*![1588306848988](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89114195aa594bfed34.png)*
 
-*![1588307060227](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed37.png)*
+*![1588307060227](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89114195aa594bfed37.png)*
 
 从左到右:
 
@@ -807,7 +807,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 `ps -x`: 显示后台进程运行的参数
 
-![1588383393872](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed39.png)
+![1588383393872](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89114195aa594bfed39.png)
 
 - user:用户名
 - PID:进程的id
@@ -831,7 +831,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 `ps -ef`: 以全格式显示当前所有的进程,查看进程的父进程 `-e`:显示所有进程 `-f` :全格式
 
-![1588384476648](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed3b.png)
+![1588384476648](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89114195aa594bfed3b.png)
 
 - UID: 用户ID
 - PID: 进程ID
@@ -844,9 +844,9 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 强制非法用户下线
 
-![1588386912261](https://cdn.qingweico.cn/blog/5ef2e89114195aa594bfed3d.png)
+![1588386912261](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89114195aa594bfed3d.png)
 
-*![1588387069698](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff219.png)*
+*![1588387069698](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89f14195aa594bff219.png)*
 
 `killall 进程名称` :            通过名称终止多个进程
 
@@ -872,7 +872,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 `top -u 用户名`: 监视特定用户
 
-![1588392949656](https://cdn.qingweico.cn/blog/5ef2e89f14195aa594bff21b.png)
+![1588392949656](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89f14195aa594bff21b.png)
 
 `top 回车 k 回车 进程号 `: 选择要终止的进程
 
@@ -894,7 +894,7 @@ ps命令是用来查看目录中,有哪些正在执行,以及他们执行的状�
 
 安装未安装的rpm包时,使用rpm包全名且后跟rpm包的路径,而查询或者卸载时直接使用包名,系统会从数据库中寻找该rpm包的信息,所以可以在任意位置查询或卸载该rpm包
 
-*![1589100480404](https://cdn.qingweico.cn/blog/5ef2e8a614195aa594bff3e6.png)*
+*![1589100480404](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e8a614195aa594bff3e6.png)*
 
 ```bash
 rpm -qa | grep 包名;  # 查询rpm安装包
@@ -940,4 +940,4 @@ rpm -ivh rmp包全名;   # 安装rpm文件
 
 ## Tool
 
-![linux_observability_tools](https://cdn.qingweico.cn/linux_observability_tools.png)
+![linux_observability_tools](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/linux_observability_tools.png)

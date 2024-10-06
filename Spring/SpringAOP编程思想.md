@@ -188,13 +188,12 @@ XML 配置
 
 线索: 
 
--  AspectJ 中 @Around 与 org.aspectj.lang.ProceedingJoinPoint 配合执行被代理方法
+- AspectJ 中 @Around 与 org.aspectj.lang.ProceedingJoinPoint 配合执行被代理方法
 - ProceedingJoinPoint#proceed() 方法类似于 Java Method#invoke(Object, Object...)
 - Spring AOP 底层 API ProxyFactory 可通过 addAvcide 方法于 Advice 实现关联
 - 接口 Advice 是 Interceptor 的父接口 而接口 MethodInterceptor 扩展了 Interceptor
 - MethodInterceptor 的 invoke 方法参数 MethodInvocation 与 ProceedingJoinPoint 类似
 
-![aop-api](https://cdn.qingweico.cn/aop-api.jpg)
 
 ### @AspectJ 前置动作
 

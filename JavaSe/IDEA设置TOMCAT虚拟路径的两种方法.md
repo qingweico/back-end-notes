@@ -8,10 +8,10 @@
 <Context docBase="E:/picture/upload" path="/upload" reloadable="true"/>
 ```
 
-![image-20200921165220393](https://cdn.qingweico.cn/blog/5f686a39160a154a677627a4.png)
+![image-20200921165220393](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5f686a39160a154a677627a4.png)
 
 ## 第二种 用idea设置虚拟路径
 
-![image-20200921165024392](https://cdn.qingweico.cn/blog/5f686a39160a154a6776279f.png)
+![image-20200921165024392](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5f686a39160a154a6776279f.png)
 
-![image-20200921165136904](https://cdn.qingweico.cn/blog/5f686a39160a154a677627a1.png)
+![image-20200921165136904](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5f686a39160a154a677627a1.png)

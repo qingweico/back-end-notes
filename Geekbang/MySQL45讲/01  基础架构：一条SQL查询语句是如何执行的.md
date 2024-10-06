@@ -1,4 +1,4 @@
-![img](https://cdn.qingweico.cn/blog/0d2070e8f84c4801adbfa03bda1f98d9.png)
+![img](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/0d2070e8f84c4801adbfa03bda1f98d9.png)
 
 MySQL 可以分为 Server 层和存储引擎层两部分
 

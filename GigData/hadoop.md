@@ -154,4 +154,4 @@ bin/hdfs dfs -cat /user/root/ouput/part-r-00000
 bin/hdfs dfs -get /user/root/ouput ouput
 ```
 
-![image-20211023141132735](https://cdn.qingweico.cn/blog/image-20211023141132735.png)
+![image-20211023141132735](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/image-20211023141132735.png)

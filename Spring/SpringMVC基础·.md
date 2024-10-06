@@ -645,4 +645,4 @@ public class MyInterceptor implements HandlerInterceptor {
 }
 ```
 
-![springmvcInterceptor](https://cdn.qingweico.cn/blog/5ea52f3ec2a9a83be5c042d0.png)
+![springmvcInterceptor](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ea52f3ec2a9a83be5c042d0.png)

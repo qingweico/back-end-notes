@@ -37,7 +37,7 @@ RocketMQ广泛应用于各种场景 ,包括电子商务、金融、物联网、�
 
 # 架构
 
-![RocketMQ系统架构](https://cdn.qingweico.cn/i0/202310132354132.png)
+![RocketMQ系统架构](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/202310132354132.png)
 
 ### 消费模式
 

@@ -4,9 +4,9 @@
 
 ## IO
 
-![未命名文件](https://cdn.qingweico.cn/blog/5f7ea8f91cd1bbb86ba8c15c.png)
+![未命名文件](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5f7ea8f91cd1bbb86ba8c15c.png)
 
-![CharStream](https://cdn.qingweico.cn/blog/5ef3034f14195aa594c4649d.png)
+![CharStream](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef3034f14195aa594c4649d.png)
 
 ### 常用的流
 

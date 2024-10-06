@@ -51,7 +51,7 @@ master 判断 slave 是不是第一次同步数据
 
 - 限制一个 master 上 slave 节点数量 如果 slave 太多 则可以采用 主-从-从链式结构(下图所示) 减少 master 压力
 
-  ![xxxxxx](https://cdn.qingweico.cn/xxxxxx.png)
+  ![xxxxxx](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/xxxxxx.png)
 
 简述全量同步和增量同步区别
 
@@ -73,7 +73,7 @@ master 判断 slave 是不是第一次同步数据
 
 #### 分片集群结构
 
-![cluster](https://cdn.qingweico.cn/cluster.png)
+![cluster](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/cluster.png)
 
 主从和哨兵可以解决高可用和高并发读的问题 但是依然存在两个问题
 
@@ -147,7 +147,7 @@ slave 节点宕机恢复后可以从 master 节点同步数据 那么 master 节
 
 #### 哨兵的作用
 
-![sentinel](https://cdn.qingweico.cn/sentinel.png)
+![sentinel](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/sentinel.png)
 
 redis 提供了 sentinel 机制来实现从集群的自动故障恢复
 
