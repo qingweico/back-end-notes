@@ -19,15 +19,15 @@
     "brand" : "Crocs",
     "color": "pink",
     "size": 9,
-    "hasLaces" false
+    "hasLaces": false
 }
 ```
 
 首先json是**基于JavaScript对象字面量**,而字面量就是对数据值的具体表示（指字面意思与其想要表达的意思是完全一致的值）,为什么是基于呢,因为对象里还可以包含函数,所以不仅可以创建对象来表示一个物体的属性,还可以创建函数来表示物体的行为,但是数据交换格式的核心是数据,所以json中并不会涉及到JavaScript对象字面量中的函数,json所基于的JavaScript对象字面量单纯是指对象字面量及其属性的语法表示,而这种属性的表示方法是通过名称-值对来实现的
 
 - JSON并不是JavaScript对象字面量而是基于JavaScript对象字面量  
-- JSON基于JavasScript对象子面量中属性的语法,但是并不包含于JavaScript对象字面量中函数相关的部分,也就是说JSON的属性的值不能是函数  
-- JSON属性都必须使用双引号,单引号也不行 (***当值是字符串类型时也只能使用双引号***),而在js中属性可以使用单引号代替双引号,且属性不需要加引号
+- JSON基于JavasScript对象字面量中属性的语法,但是并不包含于JavaScript对象字面量中函数相关的部分,也就是说JSON的属性的值不能是函数  
+- JSON属性都必须使用双引号,单引号也不行(当值是字符串类型时也只能使用双引号),而在js中属性可以使用单引号代替双引号,且属性不需要加引号
 - JSON中属性的值可以是字符串 数字 布尔值 null 数组或是对象 ,json的值并不是总是需要被双引号包裹,当值为字符串时,必须使用双引号,而其他数据类型的值都不应该被双引号包裹
 - JSON中的数字可以是整数、小数、指数、或负数
 - JSON数据类型中没有undefined
@@ -188,14 +188,13 @@ JSON的MIME类型式application/json
 是一种站点对用户浏览器信任而发起攻击的方式
 
 ```json
- [
-       {
-            "user":"v"
-        },{
-            "password":123456
-        }
-  ]
-  
+[
+   {
+        "user":"0XP908"
+    },{
+        "password":123456
+    }
+]
 ```
 
 ***上面的JSON虽然是合法的 但是却十分危险 因为它是可以执行的JavaScript脚本(使用script标签链接并使用) 被称为顶层JSON数组***
@@ -207,7 +206,7 @@ JSON的MIME类型式application/json
     "info":
     [
         {
-            "user":"v"
+            "user":"0XP908"
         },{
             "password":123456
         }
@@ -215,13 +214,11 @@ JSON的MIME类型式application/json
  }
 ```
 
-***将数组放在对象种 使其成为非法的JavaScript 这样就不会被script标签加载***
+- 将数组放在对象中 使其成为非法的JavaScript 这样就不会被script标签加载
 
-**禁止使用GET请求数据 仅使用POST请求获取数据 这样黑客就无法通过URL或<script>标签链接到数据**
+- 禁止使用GET请求数据 仅使用POST请求获取数据 这样黑客就无法通过URL或<script>标签链接到数据
 
-***也不要在JSON中使用顶层数组***
-
-###  注入攻击(向网站注入恶意代码)
+- 也不要在JSON中使用顶层数组注入攻击(向网站注入恶意代码)
 
 **跨站脚本攻击(cross-site scripting XSS)** 是注入攻击的一种 在使用JavaScript从服务器获取到一段JSON字符串时并将转为JavaScript对象时发生
 
@@ -261,7 +258,9 @@ document.body.innerHTML = obj.message;
 
 当鼠标每次移动到屏幕上的消息时会弹出警告框 而黑客则可以通过该脚本获取你这也页面上所有的私人信息
 
-解决办法是将所有诸如<div>这样的HTML标签进行转码<div>转码之后就是`&lt;div&gt` 
+解决办法是将所有诸如<div>这样的HTML标签进行转码<div>转码之后就是`&lt;div&gt`
+
+或者使用 JavaScript 的属性 textContent: 用于获取或设置一个 HTML 元素中的文本内容,只操作文本，不会解析或执行其中的 HTML 标签或脚本 
 
 ```javascript
 //solved
@@ -286,7 +285,7 @@ htmlEscape('{"message":"<div onmouseover=\\"alert(\'gotcha!\')\\">hover here.</d
 //&ltdiv onmouseover=&quotalert('gotcha!')&quot&gthover here.&lt/div&gt
 ```
 
-## 总结t6
+## 总结
 
 - 跨站请求伪造
 
