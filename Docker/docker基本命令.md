@@ -159,7 +159,7 @@ docker logs -ft --tail=3 容器ID # 查看容器日志
 
 `-t`:加入时间戳
 
-`tail  数字`:显示最后多少条
+`tail ${number}`:显示最后多少条
 
 ### docker运行tomcat
 
@@ -169,7 +169,7 @@ docker run -it -p 8848:8080 tomcat # 以交互式运行tomcat
 
 `-p` 指定docker映射tomcat访问端口
 
-`-P` 随机指定docker映射tomcat访问端口
+`-P` 随机指定docker映射tomcat访问端口(大写P)
 
 ```bash
 docker run -d -p 8848:8080 tomcat  # 以守护进程的方式启动tomcat

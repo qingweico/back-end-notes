@@ -10,7 +10,7 @@ NoSQL: Not Only SQL "不仅仅是SQL" 泛指非关系型数据库
 
 单进程
 
-redis默认16个库,下表从开始,初始化使用0号库
+redis默认16个库,下标从0开始,初始化使用0号库
 
 大数据时代的三V: Volume(海量) Variety(多样) Velocity(实时)
 

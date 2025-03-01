@@ -23,5 +23,3 @@ Java SDK 里提供的 ReadWriteLock、StampedLock 就可以优化读多写少场
 使用锁除了要注意性能问题外，还需要注意死锁问题
 
 技术的本质是背后的理论模型
-
-![11e0c64618c04edba52619f41aaa3565](C:\Java\blog-pic\11e0c64618c04edba52619f41aaa3565.webp)

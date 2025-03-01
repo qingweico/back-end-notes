@@ -473,7 +473,7 @@ Redisson、Jedis、lettuce
 
 ### 如果有大量的请求进来怎么解决
 
-### redis怎么保证可用性
+### redis 怎么保证可用性
 
 ### redis 分布式锁有什么缺陷
 
@@ -992,7 +992,7 @@ BeanPostProcessor表示针对Bean的处理器, Spring在创建一个Bean的过�
 
 ### Spring 中Bean的注入方式有几种
 
-- 使用  xml 的方式
+- 使用 xml 的方式
 - 使用@ComponentScan注解来扫描声明了@Controller @Service @Repository @Component注解的类
 - 使用@Configuration注解声明配置类 并使用@Bean注解实现Bean的定义 这种方式其实是xml配置方式的以一种演变, 是Spring迈入到无配置化时代的里程牌
 - 使用@Import注解 导入配置类或者普通的Bean
@@ -1578,7 +1578,7 @@ LRU缓存数据结构
 
 有序数组生成平衡二叉树
 
- 二叉树中的最大路径和
+二叉树中的最大路径和
 
 顺时针打印矩阵
 
