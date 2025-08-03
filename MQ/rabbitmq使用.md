@@ -13,8 +13,3 @@
 **Queue**: 消息最终送到此处 等待consumer 取走
 
 **Binding**: exchange 和 queue 之间的虚拟连接 binding 中可以包含 routing key Binding 消息被保存到 exchange 中的查询表中 用于 message 的分发依据
-
-
-
-
-

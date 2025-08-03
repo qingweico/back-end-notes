@@ -106,7 +106,7 @@ type k          # 查看k的数据类型
 
 `select index(0~15)` 选择库
 
-## Redis5种数据类型
+## Redis中5种数据类型
 
 ### String(字符串)(一key单value)
 
@@ -191,7 +191,7 @@ mget k1 k2 k3             # 一次性获取多个值
 msetnx k1 v1 k5 v5        # 若存在已有的键,则设置失败,一个都不会生效
 ```
 
-### set(集合) (无序且唯一  一key多value)
+### set(集合) (无序且唯一)
 
 实现:  字典
 
@@ -220,7 +220,7 @@ sinter set set1 # 交集
 sunion set set1 # 并集
 ```
 
-### hash(哈希)(一key多value)
+### hash(哈希)
 
 Hash结构可以将对象中每个字段独立储存 可以针对单个字段做crud 并且内存占用更少
 
@@ -229,7 +229,7 @@ Hash结构可以将对象中每个字段独立储存 可以针对单个字段做
 ```bash
 hset student name "jack"        # student为键  name 和 "jack" 键值对为值
 hget student name               # 获取student中name的值
-hmset student name "jack age 21"# 一次性插入多个值
+hmset student name "jack" age 21# 一次性插入多个值
 hmget student name age          # 一次性获取多个值
 hgetall student                 # 获取键中所有的值
 HDEL student age                # 删除单个值
@@ -242,7 +242,7 @@ HINCRBYFLOAT student age 3.0    # 自定义步长以浮点类型增加
 HSETNX student number 1         # 设置student中不存在的键值 若存在则失败
 ```
 
-### list (列表) (字符串链表) (一key多value)
+### list (列表) (字符串链表)
 
 结构:  LinkedList
 
@@ -366,3 +366,32 @@ ZREVRANK zset v2 # 逆序获得元素的下标
 ZREVRANGEBYSCORE zset 2 1 # 逆序获取元素按照指定的score范围    
 ```
 
+## 操作建议
+
+- O(N)命令关注N的数量
+
+  - 例如hgetall、lrange、smembers、zrange、sinter等并非不能使用，但是需要明确N的值
+  - 有遍历的需求可以使用hscan、sscan、zscan代替
+
+- 禁止使用Keys正则(模糊)匹配操作【强制】
+
+  - Redis是单线程处理，在线上Keys数量较多时，操作效率极低【时间复杂度为O(N)】，该命令一旦执行会严重阻塞线上其它命令的正常请求，而且在高QPS情况下会直接造成Redis服务崩溃！如果有类似需求，请使用scan命令代替
+
+- 禁用命令
+
+  - 禁止线上使用keys、flushall、flushdb等，通过redis的rename机制禁掉命令，或者使用scan的方式渐进式处理
+
+- 合理使用select
+
+  - redis的多数据库较弱，使用数字进行区分，很多客户端支持较差，同时多业务用多数据库实际还是单线程处理，会有干扰
+
+- 使用批量操作提高效率
+
+  - 批处理方式
+    - 原生命令：例如mget、mset
+    - 非原生命令：可以使用pipeline提高效率,但要注意控制一次批量操作的元素个数(例如500以内，可根据每个元素占用的内存调节批量操作允许的最大元素数)
+  - 注意原生命令和非原生命令的不同
+    - 原生命令是指原子操作，pipeline是非原子操作
+    - pipeline可以打包不同的命令，原生做不到
+    - pipeline需要客户端和服务端同时支持
+    - 灵活使用各客户端提供的批处理操作(如Redisson基于pipelining的RBatch接口)

@@ -682,13 +682,14 @@ public class ByteArray {
 1:通过Scanner方法
 
 ```java
- Scanner sc = new Scanner(System.in);//System.in是一个标准的输入流 默认接受键盘的输入
+// System.in是一个标准的输入流 默认接受键盘的输入 
+Scanner sc = new Scanner(System.in);
 ```
 
 2:通过BufferedReader
 
 ```java
 BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        String s = input.readLine();
-        input.close();
+String s = input.readLine();
+input.close();
 ```

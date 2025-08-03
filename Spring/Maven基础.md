@@ -73,6 +73,11 @@ pom:Project Object Model  项目对象模型
 - deploy
 
   复制最终的包至远程仓库,共享给其它开发人员和项目
+  
+- ```bash
+  # 更新 Maven 项目的版本号(禁止生成备份文件)
+  mvn versions:set -DnewVersion=1.0.0 -DgenerateBackupPoms=false
+  ```
 
 ## java依赖的范围（默认的都是compile）
 

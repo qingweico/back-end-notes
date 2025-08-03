@@ -310,6 +310,38 @@ git pull看起来像git fetch+git merge
 
 ### BIO, NIO, 和AIO都了解哪些, 各种IO讲一下
 
+### ReentrantLock 和 ReentrantReadWriteLock 有什么区别
+
+java.util.concurrent.locks.ReentrantReadWriteLock implements ReadWriteLock, java.io.Serializable
+
+java.util.concurrent.locks.ReentrantLock implements Lock, java.io.Serializable
+
+相同
+
+- 可重入性
+- 公平性选择
+- 都基于 AQS实现
+- 都需要手动释放锁
+
+不同
+
+| 特性       | ReentrantLock  | ReentrantReadWriteLock                   |
+| ---------- | -------------- | ---------------------------------------- |
+| 锁类型     | 独占锁         | 读写锁(包含读锁和写锁)                 |
+| 并发性能   | 完全互斥       | 读读不互斥, 读写、写写互斥               |
+| 适用场景   | 完全互斥的场景 | 读多写少的场景                           |
+| 锁降级     | 不支持         | 支持（从写锁降级为读锁)                 |
+| 锁获取方式 | lock()         | readLock() 和 writeLock() 分别获取不同锁 |
+
+- 当只有写操作或读写操作频率相当时, 使用 `ReentrantLock`
+- 当读操作远多于写操作时, 使用 `ReentrantReadWriteLock` 可以提高并发性能
+
+在极高并发场景下, `ReentrantReadWriteLock` 的读锁可能导致写锁饥饿, Java 8 引入了 `StampedLock` 作为替代方案之一
+
+### 说下StampedLock
+
+https://blog.csdn.net/qq_37883866/article/details/140664358
+
 ## MQ
 
 ### rabbitmq的使用场景有哪些
@@ -484,7 +516,7 @@ Redisson、Jedis、lettuce
 - 超时释放 锁超时释放虽然可以避免死锁 但是如果是业务执行耗时较长 也会导致所释放 存在安全隐患
 - 主从一致性 如果 redis 提供了主从集群 主从同步存在延迟
 
-//////////////////////////////////////////////// 
+
 
 - 锁未被释放
 - B的锁被A给释放了
@@ -871,6 +903,40 @@ MySQL索引使用的是B+树; 在MySQL一个Innodb页就是一个B+树节点, �
 
 高度为3即再乘以1170 大约是2千万条
 
+### MySQL中索引命中机制是什么
+
+### MyISAM对比InnoDB 引擎
+
+MyISAM
+
+- 不支持事务，无法保证数据一致性，但是无事务开销，查询更快
+- 适合只读或低并发写入场景（如日志存储)
+- 表级锁：任何写操作都会锁住整张表，导致并发性能差
+- 读操作不会阻塞读，但写操作会阻塞所有读写
+- 非聚集索引(索引和数据分离)
+- 崩溃后可能数据损坏，需手动修复
+- 无事务日志，恢复能力弱
+
+InnoDB
+
+- 支持 ACID 事务
+- 适合高并发写入
+- 行级锁：仅锁定被修改的行，提高并发性能
+- 支持意向锁(IS/IX)优化多粒度锁定
+- 聚集索引(主键索引包含数据行)，但是非主键索引(二级索引)需回表查询
+- 通过 redo log(重做日志) 和 undo log(回滚日志)保证数据一致性
+- 支持崩溃自动恢复(WAL 机制)
+
+如何选择
+
+默认选择 InnoDB(MySQL 5.5+ 默认引擎)，除非有特殊需求
+
+MyISAM 适用场景
+
+- 读多写少：如日志分析、数据仓库、表几乎只读(如报表)
+- 不需要事务和行锁：如缓存表、临时计算表
+- 存储引擎限制(如旧系统兼容)
+
 ## Spring
 
 ### Spring 中的 Bean 是线程安全的吗
@@ -1012,6 +1078,82 @@ BeanPostProcessor表示针对Bean的处理器, Spring在创建一个Bean的过�
 
 在Spring 3.x 版本以后 @Configuration + @Bean 取代了xml配置文件 同样只会注册第一个声明Bean的实例 后面id重复的bean则不会再注册了
 
+### Spring 编程式事务中的自动提交具体在哪里关闭的
+
+AbstractPlatformTransactionManager#startTransaction >>> AbstractPlatformTransactionManager#doBegin(不同的事务管理器有不同的实现)
+
+- DataSourceTransactionManager中通过`con.setAutoCommit(false);`
+
+- JpaTransactionManager
+
+  - 通过 EntityManager 控制事务
+  - JPA 实现内部已经处理了连接状态
+
+  ```java
+  // doBegin方法
+  Object transactionData = getJpaDialect().beginTransaction(em,
+  					new JpaTransactionDefinition(definition, timeoutToUse, txObject.isNewEntityManagerHolder()));
+  // beginTransaction方法
+  entityManager.getTransaction().begin();
+  ```
+
+- JtaTransactionManager
+
+  - 委托给JTA容器
+  - 事务由容器全局管理
+
+  ```java
+  // doBegin方法
+  doJtaBegin(txObject, definition);
+  // doJtaBegin方法
+  txObject.getUserTransaction().begin();
+  ```
+
+  - ...
+
+在 Spring 的事务管理体系中，`DataSourceTransactionManager` 的 `doBegin()` 方法中显式设置 `setAutoCommit(false)`，而其他事务管理器(如 JPA、JTA 等)没有这个操作，原因为事务控制层级不同
+
+**JDBC 层级事务**(DataSourceTransactionManager)
+
+- 直接操作数据库连接(Connection)
+- 需要显式管理自动提交模式
+- 必须通过 `setAutoCommit(false)` 开启事务边界
+
+**高级抽象事务** (其他TransactionManager)
+
+- 通过更高层次的API控制事务
+- 自动提交由底层资源管理器处理
+- 不需要(也不能)直接操作连接对象
+
+背后的设计架构考量
+
+1. **单一职责原则**
+
+   - `DataSourceTransactionManager` 只负责JDBC连接级事务
+   - 其他管理器各自处理对应资源的事务语义
+
+2. **抽象层次不同**
+
+   - JDBC是最底层API，需要直接控制连接
+   - ORM/JTA等高级API已经封装了事务控制
+
+3. **事务资源差异**
+
+   | 事务管理器类型 | 控制方式            | autoCommit处理位置 |
+   | :------------- | :------------------ | :----------------- |
+   | DataSource     | 直接操作Connection  | 管理器显式设置     |
+   | JPA/Hibernate  | 通过EntityManager   | ORM框架内部处理    |
+   | JTA(全局事务)  | 通过UserTransaction | 应用服务器管理     |
+
+### SpringBoot什么时候扫描META-INF/spring.factories文件
+
+setInitializers之后
+
+- SpringApplication构造器中setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));
+- SpringFactoriesLoader#loadFactoryNames >> loadSpringFactories
+
+refreshContext之前
+
 ## 网络
 
 ### 301 和 302 代表的是什么 有什么区别
@@ -1078,8 +1220,8 @@ Get、Post请求发送的数据包有什么不同吗?
 
 GET请求时产生一个TCP数据包；POST请求时产生两个TCP数据包
 
-- GET:浏览器会把http header和data一并发送出去, 服务器响应200（返回数据）；
-- POST:浏览器先发送header, 服务器响应100 continue, 浏览器再发送data, 服务器响应200 OK（返回数据）
+- GET:浏览器会把http header和data一并发送出去, 服务器响应200(返回数据)；
+- POST:浏览器先发送header, 服务器响应100 continue, 浏览器再发送data, 服务器响应200 OK(返回数据)
 
 Get、POST性能差可以人为忽略
 
@@ -1195,7 +1337,21 @@ TCP协议中, 数据的发送方和接收方都会使用滑动窗口来控制数
 
 ### 介绍 TCP HTTP和 HTTPS非对称和对称加密; 为什么对称用的多
 
-### 五层网络协议 七层网络协议
+### 说下七层网络协议和五层网络协议
+
+OSI 七层模型（Open Systems Interconnection)
+
+- 应用层
+- 表示层
+- 会话层
+- 传输层
+- 网络层
+- 数据链路层
+- 物理层
+
+五层网络协议去掉了 OSI 中冗余的层次(会话层、表示层)，更简洁
+
+互联网(Internet)主要基于 TCP/IP 协议栈
 
 ### 丢包发生在哪一层 为什么
 

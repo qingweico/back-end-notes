@@ -16,6 +16,6 @@
 
 ### Redis 的问题画像图
 
-![70a5bc1ddc9e3579a2fcb8a5d44118b4](https://static-i0.oss-cn-shanghaiF.aliyuncs.com/pic/70a5bc1ddc9e3579a2fcb8a5d44118b4.webp)
+![70a5bc1ddc9e3579a2fcb8a5d44118b4](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/70a5bc1ddc9e3579a2fcb8a5d44118b4.webp)
 
 Redis 是一个非常优秀的系统，它在 CPU 使用、内存组织、存储持久化和网络通信这四大方面的设计非常经典，而这些，基本涵盖了一个优秀的后端系统工程师需要掌握的核心知识和关键技术

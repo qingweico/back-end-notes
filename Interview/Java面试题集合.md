@@ -1607,7 +1607,7 @@ CountDownLatch也是解决了同样的问题, 不过只是一次CyclicBarrier周
 
 JDK11, 打开就是偏向锁, 而JDK8默认对象头是无锁
 
-![Snipaste_2021-01-29_21-54-41](https://cdn.qingweico.cn/blog/Snipaste_2021-01-29_21-54-41.png) 
+![Snipaste_2021-01-29_21-54-41](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/Snipaste_2021-01-29_21-54-41.png)
 
 锁升级过程
 

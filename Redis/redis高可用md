@@ -1,6 +1,6 @@
 [TOC]
 
-## Redis 集群
+## Redis 集群 & 哨兵
 
 ### 单点 Redis 的问题
 
@@ -141,7 +141,7 @@ redis-cli -c -p 端口号
 
 问题 
 
-slave 节点宕机恢复后可以从 master 节点同步数据 那么 master 节点宕机怎么办哪
+slave 节点宕机恢复后可以从 master 节点同步数据 那么 master 节点宕机怎么办
 
 哨兵机制
 
@@ -177,3 +177,7 @@ Sentinel基于心跳机制检测服务状态 每隔一秒钟向集群发送 ping
 
 - 然后给其他节点发送命令 让其他 slave 节点成为新master节点的 slave 并开始同步数据
 - 最后故障节点被 sentinel 标记为 slave 就算恢复后也将成为新 master 的 slave
+
+#### Redis 集群模式 (Cluster) 与 哨兵模式 (Sentinel) 对比
+
+这是redis提供的两种主要的高可用性解决方案, 一般采用**集群模式+哨兵**的组合方案
