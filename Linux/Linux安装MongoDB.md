@@ -128,3 +128,6 @@ db.adminCommand({setParameter: 1, timeZoneInfo: "Asia/Shanghai"})
 | dbAdminAnyDatabase   | 只在admin数据库中可用, 赋予用户所有数据库的dbAdmin权限       |
 | root                 | 只在admin数据库中可用, 超级账号,超级权限                     |
 
+## Windows下安装使用
+
+[下载](https://www.mongodb.com/try/download/community)
