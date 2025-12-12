@@ -39,7 +39,7 @@ vim ~/.zshrc
 
 ```bash
 # 默认主题
-ZSH_THEME="robbyrussel"
+ZSH_THEME="robbyrussell"
 # mira agnoster duellj(推荐的主题)
 # 设置随机主题
 ZSH_THEME="random"
