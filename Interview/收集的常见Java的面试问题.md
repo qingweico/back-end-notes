@@ -1024,8 +1024,8 @@ BeanPostProcessor表示针对Bean的处理器, Spring在创建一个Bean的过�
 
 - Spring事务是基于数据库事务和AOP机制的
 - 首先对于使用了@Transactional注解的Bean Spring会创建一个代理对象作为Bean
-- 当调用代理对象的方法时 会先判断该方法上是否加了@Transactional注解
-- 如果加了 那么则利用事务管理器创建一个数据库连接, 并且修改数据库连接的autocommit属性为false, 禁止此连接的自动提交
+- 当调用代理对象的方法时,会先判断该方法上是否加了@Transactional注解
+- 如果加了,那么则利用事务管理器创建一个数据库连接, 并且修改数据库连接的autocommit属性为false, 禁止此连接的自动提交
 - 然后执行当前方法, 若方法没有出现异常则直接提交事务
 - 若出现了异常, 并且这和异常是需要回滚的就会回滚事务, 否则仍然提交事务
 - Spring事务的隔离级别对应的就是数据库的隔离级别
@@ -1038,7 +1038,7 @@ BeanPostProcessor表示针对Bean的处理器, Spring在创建一个Bean的过�
 - 若某个方法是private的, 那么@Transactional也不会生效, 因为底层cglib是基于继承来实现的, 子类是不能重写父类的private的方法的 所以无法很好的利用代理, 也会导致@Transactional失效
 - rollbackFor = RuntimeException.class; 若出现的异常不属于rollbackFor中的异常, 则@Transactional失效
 
-### Spirng AOP 什么时候会失效
+### Spring AOP 什么时候会失效
 
 ### BeanFactory和FactoryBean
 
@@ -1134,7 +1134,7 @@ AbstractPlatformTransactionManager#startTransaction >>> AbstractPlatformTransact
 
 2. **抽象层次不同**
 
-   - JDBC是最底层API，需要直接控制连接
+   - JDBC是最底层API,需要直接控制连接
    - ORM/JTA等高级API已经封装了事务控制
 
 3. **事务资源差异**
