@@ -30,3 +30,35 @@ truncate table 表;        # 删除表中所有的数据
 1可以使用条件筛选,而3则不行
 
 ## 修改语句
+
+## 查看表结构语句
+
+```sql
+DESCRIBE t_user;
+SHOW COLUMNS
+FROM
+	t_user;
+SHOW CREATE TABLE t_user;
+SELECT
+    COLUMN_NAME AS '字段名',
+    COLUMN_TYPE AS '数据类型',
+    IS_NULLABLE AS '是否为空',
+    COLUMN_DEFAULT AS '默认值',
+    COLUMN_COMMENT AS '字段说明'
+FROM
+    INFORMATION_SCHEMA.COLUMNS
+WHERE
+    TABLE_SCHEMA = 'test'
+  AND TABLE_NAME = 't_user' SELECT
+	TABLE_NAME,
+	COLUMN_NAME,
+	CONSTRAINT_NAME,
+	REFERENCED_TABLE_NAME,
+	REFERENCED_COLUMN_NAME
+FROM
+    INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+    TABLE_SCHEMA = 'test'
+  AND TABLE_NAME = 't_user';
+
+```
