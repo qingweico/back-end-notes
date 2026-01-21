@@ -143,7 +143,7 @@ SELECT LENGTH(name) as 姓名字节长度,age from job ORDER BY 姓名字节长�
 ```
 
 ```mysql
-SELECT * from job ORDER BY salary,age DESC;  #按薪水升序排列。相同的薪水按照年龄降序排列
+SELECT * from job ORDER BY salary,age DESC;  #按薪水升序排列; 相同的薪水按照年龄降序排列
 ```
 
 ### 常见函数
@@ -183,7 +183,7 @@ SELECT REPLACE("learn mysql","mysql","java");
   - NOW() 返回系统日期-时间
   - CURDATE() 返回系统的日期
   - CURTIME() 返回系统的时间
-  - STR_TO_DATE(str,format)；   日期格式化 相当于java中format函数 序列化日期
+  - STR_TO_DATE(str,format);   日期格式化 相当于java中format函数 序列化日期
   - DATE_FORMAT(date,format); 将字符串类型转化为日期类型 相当于java中的parse函数 反序列化日期 
   
 - 其他函数  USER() DATABASE() VERSION()......
@@ -288,13 +288,13 @@ SELECT COUNT(*),MIN(salary),sex from job where `name` REGEXP '[^c]' GROUP BY sex
   - 全外连接
 - 交叉连接
 
-#### 等值连接 （取两表及两表以上交集的部分）(sql92)
+#### 等值连接 (取两表及两表以上交集的部分)(sql92)
 
 ```mysql
 SELECT country,employee_tbl.`name` from employee_tbl,websites WHERE                employee_tbl.id=websites.id; //如果两张表都含有相同的字段的话需要加表名限制                       
 ```
 
-#### 内连接（sql99）
+#### 内连接(sql99)
 
 ```mysql
 select s.*,c.* from student s INNER JOIN class c on s.number = c.cid;

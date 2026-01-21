@@ -12,7 +12,7 @@ insert into account(username,password) select 用户1,001 UNION ALL select 用�
 ## 删除语句
 
 ```mysql
-delete from 表；          # 删除表中所有的数据
+delete from 表;          # 删除表中所有的数据
 ```
 
 ```mysql
