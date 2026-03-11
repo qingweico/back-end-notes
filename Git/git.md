@@ -2,7 +2,7 @@
 
 [TOC]
 
-## git
+## Git
 
 ***世界上最先进的分布式版本控制系统***
 
@@ -28,7 +28,7 @@ cnpm -v	# 查看cnpm版本
 ### 初始化一个git仓库
 
 ```bash
-git init # 进入一个空白的仓库  初始化生成一个有关仓库配置的.git的隐藏文件
+git init # 进入一个空白的仓库,初始化生成一个有关仓库配置的.git的隐藏文件
 ```
 
 *![git-repo](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2eb7b14195aa594c0631f.jpg)*
@@ -43,8 +43,8 @@ git config --global user.email "email"
 ### 将文件添加到暂存区
 
 ```bash
-git add .     # 添加该目录下所有文件 
-git add 文件   # 可以一次添加多个文件 空格隔开
+git add .     # 添加该目录下所有文件
+git add 文件   # 可以一次添加多个文件,空格隔开
 ```
 
 ### 将文件提交到本地仓库（master分支）
@@ -80,14 +80,14 @@ git reset --hard HEAD^ # 回到上一个版本 HEAD代表当前的版本
 ```
 
 ```bash
-git reset --hard 版本号前几位即可# 从当前版本回到未来的版本
+git reset --hard 版本号前几位即可 # 从当前版本回到未来的版本
 ```
 
 ```bash
 git reflog    # 查看历史所有的命令
 ```
 
-#### 对文件的所有修改必须先add到暂存区（stage） 之后使用commit提交才会对相应的文件作出修改
+#### 对文件的所有修改必须先add到暂存区(stage),之后使用commit提交才会对相应的文件作出修改
 
 #### 对于两次修改同一个文件再使用add提交到暂存区会合并两个文件
 
@@ -96,13 +96,13 @@ git reflog    # 查看历史所有的命令
 - 文件还没有add到暂存区
 
   ```bash
-  git checkout -- 文件 # 撤销在工作区对文件所作的任何修改 回到上一次的add或commit时的文件状态 
+  git checkout -- 文件 # 撤销在工作区对文件所作的任何修改,回到上一次的add或commit时的文件状态 
   ```
 
 - 文件已经add到暂存区
 
   ```bash
-  git reset HEAD 文件 # 将对暂存区的修改回退到工作区 需要重新add文件到暂存区
+  git reset HEAD 文件 # 将对暂存区的修改回退到工作区,需要重新add文件到暂存区
   ```
 
 ### 删除文件
@@ -119,7 +119,7 @@ git status # 查看本地仓库的状态 会显示哪些文件被删除
 
 ![1588929929326](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2eb1814195aa594c0532d.png)
 
-由于工作区的文件已被删除,暂存区此时也是干净的,而`git status` 此时会提示工作区和master本地仓库会不一致,要么重新使用命令`git rm` 把master分支中文件删掉再`git commit` 此时该文件就真的没有了,要么使用命令`git checkout -- 文件` 用版本库中的文件覆盖工作区的文件（没有加覆盖就是还原）
+由于工作区的文件已被删除,暂存区此时也是干净的,而`git status`此时会提示工作区和master本地仓库会不一致。要么重新使用命令`git rm`把master分支中文件删掉再`git commit`,此时该文件就真的没有了;要么使用命令`git checkout -- 文件`,用版本库中的文件覆盖工作区的文件(没有加覆盖就是还原)
 
 ### 关联远程github仓库
 
@@ -144,7 +144,7 @@ git switch -c dev   # git最新版本提供  创建并切换分支
 
 ```bash
 git branch dev  # 创建分支
-git checkout dev# 切换分支
+git checkout dev # 切换分支
 ```
 
 #### 查看当前分支
@@ -160,7 +160,7 @@ git checkout master
 git switch master # 最新版本的切换分支命令
 ```
 
-#### 合并俩个分支
+#### 合并两个分支
 
 ```bash
 git merge dev # 用于合并指定分支到当前分支
@@ -174,15 +174,15 @@ git branch -d dev
 
 ### git 忽略 .idea文件
 
-忽略了.idea文件夹, 但是提交时仍旧会出现.idea内文件变动的情况
+忽略了.idea文件夹,但是提交时仍旧会出现.idea内文件变动的情况
 
-原因是 .idea文件已经被git跟踪, 之后再加入.gitignore后是没有作用的; 如果你远程仓库已经有这个文件了,那这个方法就不管用了,你需要先删除远程仓库的这个文件,执行命令
+原因是.idea文件已经被git跟踪,之后再加入.gitignore后是没有作用的;如果你远程仓库已经有这个文件了,那这个方法就不管用了,你需要先删除远程仓库的这个文件,执行命令
 
 ```cmd
 git rm -r --cached .idea
 ```
 
-- 提交整个 .idea 目录 然后再push一下即可
+- 提交整个.idea目录,然后再push一下即可
 - .gitignore中添加.idea
 - 忽略其他文件同样如此
 

@@ -22,11 +22,11 @@ pom:Project Object Model  项目对象模型
 # https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
 ```
 
-## Maven工程坐标与仓库中路径的关系关系
+## Maven工程坐标与仓库中路径的关系
 
 ```xml
 <dependency>
-    <groudId>org.springframework</groudId>
+    <groupId>org.springframework</groupId>
     <artifactId>spring-core</artifactId>
     <version>4.0.0.RELEASE</version>
 </dependency>
@@ -38,15 +38,15 @@ pom:Project Object Model  项目对象模型
 
 - mvn clean
 
-  用于清除之前构建生成的所有文件; 其中具体为清除了target目录中的所有文件,包括该目录(删除了install生成的所有文件)
+  用于清除之前构建生成的所有文件;其中具体为清除了target目录中的所有文件,包括该目录(删除了install生成的所有文件)
 
 - validate
 
-  用于验证项目是否正确,并且其中有必要信息是否都可用
+  用于验证项目是否正确,并且其中必要信息是否都可用
 
 - mvn compile
 
-  编译项目的源代码, 主要是java文件; 一般是编译scr/main/java或是scr/test/java里面的文件
+  编译项目的源代码,主要是Java文件;一般是编译src/main/java或是src/test/java里面的文件
 
 - mvn test
 

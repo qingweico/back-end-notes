@@ -38,7 +38,7 @@ arr.toString()                   //返回数组的字符串形式
 ```
 
 ```javascript
-arr.join();//该方法会把数住转换为字符串和String.split()方法正好相反,如果数组成员是undefined和null使用join方法将会被转换为空串
+arr.join();//该方法会把数组转换为字符串,和String.split()方法正好相反,如果数组成员是undefined和null,使用join方法将会被转换为空串
 ```
 
 ```javascript

@@ -4,9 +4,9 @@
 
 ## 媒体类型
 
- **英特网上有千种不同的数据类型,HTTP仔细地给每种要通过Web传输的对象打上名为MIME的数据格式标签**
+**互联网上有千种不同的数据类型,HTTP仔细地给每种要通过Web传输的对象打上名为MIME的数据格式标签**
 
-MIME(Multipurpose Internet Mail Extension) 多用途英特网邮件扩展 
+MIME(Multipurpose Internet Mail Extension) 多用途互联网邮件扩展 
 
 MIME类型是一种文本标记,标记一种主要的对象类型和一个特定的子类型,中间由一条斜杠分开 
 
@@ -17,8 +17,8 @@ MIME类型是一种文本标记,标记一种主要的对象类型和一个特定
 
 ## URI(Uniform Resource Identifier) 统一资源标识符（包括URL和URN）
 
-- URL（Unifrom Resource Locator）   统一资源定位符   
-- URN(Unoform Resouce Name)           统一资源名  
+- URL(Uniform Resource Locator)   统一资源定位符   
+- URN(Uniform Resource Name)           统一资源名  
 
 ***（现在 几乎所有的URI都是URL）***
 

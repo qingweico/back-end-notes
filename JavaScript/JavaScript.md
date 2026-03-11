@@ -27,7 +27,7 @@ console.log(typeof null);           //object
 
 ## 布尔值
 
-js中布尔值为false的只有6个,其他的都为true 
+JavaScript中布尔值为false的只有6个,其他的都为true 
 
 - 0
 -  false 

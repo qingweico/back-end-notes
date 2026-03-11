@@ -36,7 +36,7 @@
         <!--服务器初始化时加载类路径下springmvc.xml的配置文件-->
         <param-value>classpath:springmvc.xml</param-value>
     </init-param>
-    <!--一般情况下当有请求时服务器才	会创建Servlet对象-->
+    <!--一般情况下当有请求时服务器才会创建Servlet对象-->
     <!--此时应该当服务器完成初始化时就要创建Servlet对象,完成对springmvc配置文件的加载,完成注解扫描-->
     <load-on-startup>1</load-on-startup>
 </servlet>

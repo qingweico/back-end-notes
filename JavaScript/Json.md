@@ -8,7 +8,7 @@
 
 - JSON独立于编程语言 
 - JSON全称是JavaScript Object Notation(JavaScript对象表示法) 
-- JSON源于JavasSript的一个子集
+- JSON源于JavaScript的一个子集
 
 **数据交换格式**就是用于在不同的平台或系统间交换数据的文本,而表示法(专业术语)就是一个用于表示诸如数字或者单词等数据的字符系统,而且json具有可移植性,即以一种双方系统都兼容的方式在平台间传递信息
 

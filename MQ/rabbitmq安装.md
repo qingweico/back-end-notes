@@ -33,10 +33,10 @@ yum install erlang
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
 ```
 
-[rabbbitmq版本下载列表](https://github.com/rabbitmq/rabbitmq-server/tags)
+[rabbitmq版本下载列表](https://github.com/rabbitmq/rabbitmq-server/tags)
 
 ```bash
-# 下载rabbiitmq
+# 下载rabbitmq
 wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.8.5/rabbitmq-server-3.8.5-1.el7.noarch.rpm
 ```
 

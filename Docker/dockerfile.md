@@ -4,9 +4,9 @@
 
 ## DockerFile
 
-### dockerFile
+### Dockerfile
 
-dockerFile是用来构建docker镜像的构建文件,是由一系列命令或者参数构成的脚本
+Dockerfile是用来构建Docker镜像的构建文件,是由一系列命令或者参数构成的脚本
 
 ### docker语法规则
 
@@ -23,26 +23,26 @@ dockerFile是用来构建docker镜像的构建文件,是由一系列命令或者
 - MAINTAINER         镜像维护者
 - RUN                        容器构建时需要运行的命令
 - EXPOSE                 当前容器对外暴露的端口
-- WORKDIR              创建容器后终端默认的登陆位置
+- WORKDIR              创建容器后终端默认的登录位置
 - ENV                        用来构建镜像中设置环境变量
 - ADD                       将宿主机目录下的文件复制到镜像中并可以自动解压tar包和处理URL
 - COPY                     复制文件或目录到镜像中
-- COLUME               容器数据卷用来数据保存和持久化工作
-- CMD                      指定一个容器启动时要运行的命令且DockerFile中可以有多个CMD命令,但只有最后一个生效；CMD命令会被docker  run后面的命令替换
+- VOLUME               容器数据卷用来数据保存和持久化工作
+- CMD                      指定一个容器启动时要运行的命令且DockerFile中可以有多个CMD命令,但只有最后一个生效;CMD命令会被docker run后面的命令替换
 
 ```java
 CMD ["catalina.sh", "run"]
 ```
 
 ```bash
-#ls -l命令会覆盖tomcat dockerFile文件中["catalina.sh", "run"]命令 即不会运行tomcat容器只会进入到容器中执行ls -l命令
+#ls -l命令会覆盖tomcat Dockerfile文件中["catalina.sh", "run"]命令 即不会运行tomcat容器只会进入到容器中执行ls -l命令
 docker run -it tomcat ls -l 
 ```
 
-- ENTRYPOINT     和CMD作用样但是会在原来的命令上追加命令,即所有的命令会一起起作用
-- ONBUILD        被继承镜像的(父镜像)dockerFile会在子镜像运行时被触发一系列命令
+- ENTRYPOINT     和CMD作用一样但是会在原来的命令上追加命令,即所有的命令会一起起作用
+- ONBUILD        被继承镜像(父镜像)的Dockerfile会在子镜像运行时被触发一系列命令
 
-dockerFile_father
+Dockerfile_father
 
 ```bash
 from centos
@@ -50,10 +50,10 @@ ONBUILD RUN echo "father image is onbuild......"
 ```
 
 ```bash
-docker build -f /docker/dockerFile_father -t mycentos_father .    # 构建父镜像
+docker build -f /docker/Dockerfile_father -t mycentos_father .    # 构建父镜像
 ```
 
-dockerFile_son
+Dockerfile_son
 
 ```bash
 from mycentos_father
@@ -61,7 +61,7 @@ CMD echo "son image is build....."
 ```
 
 ```bash
-docker build -f /docker/dockerFile_son -t mycentos_son .         # 构建子镜像
+docker build -f /docker/Dockerfile_son -t mycentos_son .         # 构建子镜像
 ```
 
 ```bash
@@ -72,7 +72,7 @@ Step 1/2 : from mycentos_father
 father image is onbuild......
 Removing intermediate container f77cce98c31d
  ---> 89c82a0b21ed
-Step 2/2 : CMD echo "son iamge is build....."
+Step 2/2 : CMD echo "son image is build....."
  ---> Running in 74dd8aa75018
 Removing intermediate container 74dd8aa75018
  ---> 26a3187c5378
@@ -105,7 +105,7 @@ CMD /bin/bash
 ```
 
 ```bash
-docker build -f /docker/dockerFile -t mycentos. # 自定义构建镜像文件
+docker build -f /docker/Dockerfile -t mycentos. # 自定义构建镜像文件
 ```
 
 

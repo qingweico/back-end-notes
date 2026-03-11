@@ -23,49 +23,48 @@
 
 master 判断 slave 是不是第一次同步数据
 
-- Replication Id 简称 replid 是数据集的标记 id一致则说明是同一数据集 
-- 每个master 都有唯一的 replid slave 则会继承 master 节点的 replid
-- offset 偏移量 随着记录在repl_baklog中的数据增多而逐渐增大
-- slave 完成同步时也会记录同步的offset
-- 如果 slave 的 offset 小于 master 的 offset 说明 slave 数据落后于 master 需要更新
+- Replication Id简称replid,是数据集的标记,id一致则说明是同一数据集
+- 每个master都有唯一的replid,slave则会继承master节点的replid
+- offset偏移量,随着记录在repl_baklog中的数据增多而逐渐增大
+- slave完成同步时也会记录同步的offset
+- 如果slave的offset小于master的offset,说明slave数据落后于master,需要更新
 
-全量同步流程
+### 全量同步流程
 
-- slave 节点请求增量同步
-- master 节点判断replid 发现不一致 拒绝增量同步
-- masterr 将完整内存数据生成 RDB 发送到 slave
-- slave 清空本地数据 加载 master 的 RDB
-- master 将 RDB 期间的写命令记录在 repl_baklog 并持续将log中的命令发送给 slave
+- slave节点请求增量同步
+- master节点判断replid,发现不一致,拒绝增量同步
+- master将完整内存数据生成RDB发送到slave
+- slave清空本地数据,加载master的RDB
+- master将RDB期间的写命令记录在repl_baklog,并持续将log中的命令发送给slave
 
-增量同步
+### 增量同步
 
-若 slave 重启后同步 则执行增量同步
+若slave重启后同步,则执行增量同步
 
-优化 redis 主从集群
+### 优化Redis主从集群
 
-- 在master 中配置 repl-dissless-sync yes启用无磁盘复制 避免全量同步时的磁盘IO
+- 在master中配置 repl-diskless-sync yes启用无磁盘复制,避免全量同步时的磁盘IO
 
-- Redis 单节点的内存占用不要太大 减少 RDB 导致的过多的磁盘 IO
+- Redis单节点的内存占用不要太大,减少RDB导致的过多的磁盘IO
+- 适当提高repl_baklog的大小,发现slave宕机时尽快实现故障恢复,尽可能避免全量同步
 
-- 适当提高 repl_baklog的大小 发现 slave 宕机时尽快实现故障恢复 尽可能避免全量同步
-
-- 限制一个 master 上 slave 节点数量 如果 slave 太多 则可以采用 主-从-从链式结构(下图所示) 减少 master 压力
+- 限制一个master上slave节点数量,如果slave太多,则可以采用主-从-从链式结构(下图所示),减少master压力
 
   ![xxxxxx](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/xxxxxx.png)
 
-简述全量同步和增量同步区别
+### 简述全量同步和增量同步区别
 
-- 全量同步 master 将完整内存数据生成 RDB 发送到 slave 后续命令则记录在 repl_baklog 逐个发送给 slave
-- 增量同步 slave 提交自己的 offset 到 master master 获取 repl_baklog中 offset 之后的命令给 slave
+- 全量同步: master将完整内存数据生成RDB发送到slave,后续命令则记录在repl_baklog,逐个发送给slave
+- 增量同步: slave提交自己的offset到master,master获取repl_baklog中offset之后的命令给slave
 
-什么时候执行全量同步
+### 什么时候执行全量同步
 
-- slave 节点第一次连接 master 节点
-- slave 节点断开时间太久 repl_baklog 中 offset 已经被覆盖时
+- slave节点第一次连接master节点
+- slave节点断开时间太久,repl_baklog中offset已经被覆盖时
 
-什么时候执行增量同步
+### 什么时候执行增量同步
 
-- slave 节点断开又恢复 并且在 repl_baklog 中能找到 offset 时
+- slave节点断开又恢复,并且在repl_baklog中能找到offset时
 
 ### 储存能力问题
 
@@ -75,17 +74,17 @@ master 判断 slave 是不是第一次同步数据
 
 ![cluster](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/cluster.png)
 
-主从和哨兵可以解决高可用和高并发读的问题 但是依然存在两个问题
+主从和哨兵可以解决高可用和高并发读的问题,但是依然存在两个问题
 
-- 海量数据存储问题·
+- 海量数据存储问题
 - 高并发写的问题
 
 使用分片集群可以解决上述问题
 
-- 集群中有多个master 每个 master 保存了不同的数据
-- 每个 master 都可以有多个 slave 节点
-- master 之间通过 ping 检测彼此健康状况
-- 客户端请求可以访问集群任意节点 最终都会被转发到正确节点上
+- 集群中有多个master,每个master保存了不同的数据
+- 每个master都可以有多个slave节点
+- master之间通过ping检测彼此健康状况
+- 客户端请求可以访问集群任意节点,最终都会被转发到正确节点上
 
 #### 集群搭建
 
@@ -139,7 +138,7 @@ redis-cli -c -p 端口号
 
 利用 Redis 哨兵 实现健康检测和自动恢复
 
-问题 
+问题
 
 slave 节点宕机恢复后可以从 master 节点同步数据 那么 master 节点宕机怎么办
 
@@ -164,7 +163,7 @@ Sentinel基于心跳机制检测服务状态 每隔一秒钟向集群发送 ping
 
 #### 选举新的 master
 
-一旦发现 master 故障 sentinel 需要在 slave 中选择一个作为新的 master 
+一旦发现 master 故障 sentinel 需要在 slave 中选择一个作为新的 master
 
 - 首先根据判断 slave 节点与 master 节点断开时间长短 如果超过指定值(down-after-milliseconds * 10) 则会排除该 slave 节点
 - 然后判断 slave 节点的 slave-priority 值 越小优先级越高 如果是0 则永不参与选举

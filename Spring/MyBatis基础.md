@@ -6,7 +6,7 @@
 
 ![mybatis](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ea6ab97c2a9a83be5655477.png)
 
-Mybatis是一个持久层框架,使用java编写,它封装了JDBC的很多的细节,使开发者只关注sql语句本身,而不用关注使用原生jdbc时应该具有的注册驱动,创建连接,关闭连接等繁杂的过程,它使用了ORM的思想实现了结果集的封装
+MyBatis是一个持久层框架,使用Java编写,它封装了JDBC的很多细节,使开发者只关注SQL语句本身,而不用关注使用原生JDBC时应该具有的注册驱动、创建连接、关闭连接等繁杂的过程,它使用了ORM的思想实现了结果集的封装
 
 ORM: Object Relational Mapping 对象关系映射
 
@@ -62,7 +62,7 @@ ORM: Object Relational Mapping 对象关系映射
     <properties resource="JDBCConfiguration.properties"/>
     <environments default="development">
         <environment id="development">
-            <!--配置JDBC事物管理-->
+            <!--配置JDBC事务管理-->
             <transactionManager type="JDBC"/>
             <!--POLLED配置数据库连接池-->
             <dataSource type="POOLED">
@@ -104,8 +104,8 @@ public class AccountRepositoryImpl implements AccountRepository {
     public List<Account> read() {
         SqlSession sqlSession = factory.openSession();
         //加载src目录下mapper映射文件
-        String statement = "cn.qingweico.mappers.AccountMapper.readAll""
-        List<Account> account = sqlSession.selectList();
+        String statement = "cn.qingweico.mappers.AccountMapper.readAll";
+        List<Account> account = sqlSession.selectList(statement);
         sqlSession.close();
         return account;
     }
@@ -182,9 +182,9 @@ public class Demo {
         }
 ```
 
-***使用接口实现查询时映射文件中id的名称必须和接口中的方法名保持一致***
+**使用接口实现查询时,映射文件中id的名称必须和接口中的方法名保持一致**
 
-### Myatis cud语句
+### MyBatis CUD语句
 
 ```xml
 <!--parameterType表示接口中方法参数的类型 可以省略-->
@@ -195,7 +195,7 @@ public class Demo {
     <selectKey keyProperty="id" resultType="int" keyColumn="id" order="AFTER">
         select last_insert_id();
     </selectKey>
-    insert into account values (#{username},#{password });
+    insert into account values (#{username},#{password});
 </insert> 
 <delete id="delete" parameterType="int">
     delete from account where id = #{id};
@@ -213,7 +213,7 @@ public class Demo {
 <typeAliases>
     <typeAlias type="cn.qingweico.entity.Student" alias="Student"/>
 </typeAliases>
-<!--也可以指定一个包名,MyBatis 会在包名下面搜索需要的 Java Bean  此时aliae默认是实体类首字母小写-->
+<!--也可以指定一个包名,MyBatis会在包名下面搜索需要的Java Bean,此时alias默认是实体类首字母小写-->
 <typeAliases>
     <package name="cn.qingweico.entity"/>
 </typeAliases>
@@ -235,7 +235,7 @@ public class Demo {
 </resultMap>
 ```
 
-<font style="color:purple;font-size:20px"> 起别名的作用是可以简写resultType中的值(接口的返回类型) 并不是可简写namespace中的值(mapper文件映射的接口所在的位置),不要混为一谈</font> 
+**起别名的作用是可以简写resultType中的值(接口的返回类型),并不是可以简写namespace中的值(mapper文件映射的接口所在的位置),不要混为一谈** 
 
 ### 连接池
 
@@ -433,7 +433,7 @@ public class Student implements Serializable {
 ```
 
 ```xml
-<select id="studentList" resultType="Student" parameterMap="Student">
+<select id="studentList" resultType="Student" parameterType="Student">
     select * from student
     <where>
         <!--collection表示实体类中要遍历的属性集合    item代表从集合中取出的值 可以自定义-->
@@ -613,7 +613,7 @@ public class Goods {
     /**
      * 购买该货物的客户列表
      */
-    private List<Customer> customersList;
+    private List<Customer> customerList;
 }
 
 ```
@@ -738,9 +738,9 @@ public void lazyLoading() throws IOException {
 
 ### MyBatis缓存
 
-- MyBatis自带一级缓存 默认开启且不能关闭, 作用范围是同一个sqlSession。当从同一个sqlSession获取相同的数据时,则会使用缓存。当有cud操作时,会自动清除二级缓存,保证数据的准确性
+- MyBatis自带一级缓存,默认开启且不能关闭,作用范围是同一个SqlSession。当从同一个SqlSession获取相同的数据时,则会使用缓存。当有CUD操作时,会自动清除一级缓存,保证数据的准确性
 
-- MyBatis自带的二级缓存,需要手动打开 作用范围是Mapper下的同一个namespace,二级缓存比一级缓存有更大的范围
+- MyBatis自带的二级缓存,需要手动打开,作用范围是Mapper下的同一个namespace,二级缓存比一级缓存有更大的范围
 
   二级缓存开启的条件
 
@@ -937,7 +937,7 @@ public void basedOne2OneAnnotations() throws IOException {
 ```java
 //#{class_id}就是上面的将上面查询的结果集中class_id作为本次单表查询的条件
 @Select("select * from student where class_id = #{class_id}")
-List<Student> findStudentByClassId()
+List<Student> findStudentByClassId(int class_id);
 ```
 
 ```java

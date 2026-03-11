@@ -2,7 +2,7 @@
 
 [TOC]
 
-## 第一种 在tomcat根路径下Tomcat 9.0/conf/server.xml配置
+## 第一种 在Tomcat根路径下Tomcat 9.0/conf/server.xml配置
 
 ```xml
 <Context docBase="E:/picture/upload" path="/upload" reloadable="true"/>

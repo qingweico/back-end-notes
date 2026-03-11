@@ -2,11 +2,11 @@
 
 [TOC]
 
-## MySQ DQL语言
+## MySQL DQL语言
 
 ### 基本语句
 
-- show database(); 用来展示所有的数据库 
+- show databases; 用来展示所有的数据库 
 - use 库名; 进入库
 - show tables; 展示所有的表
 - show tables from 库名;  查看库名中的所有的表(并没有进入该库)
@@ -23,15 +23,15 @@
 
 -----
 
-MYSQL单行注释为# 或--- 多行注释为/*  */
+MySQL单行注释为# 或-- 多行注释为/*  */
 
 #### MySQL分为5种语言
 
 -   DQL语言(数据查询语言)  Data Query Language                     查询语句
 -   DML语言(数据操作语言)  Data Manipulation Language        cud语句
 -   DDL语言(数据描述语言)  Data Definition  Language              create drop alter 对表结构的cud
--   TCL语言(事物控制语言)  Transaction Controller Language   事物的提交和回滚
--   DCL(数据控制语言)  Data Comtrol Language                          grant授权 和revoke撤销授权
+-   TCL语言(事务控制语言)  Transaction Controller Language   事务的提交和回滚
+-   DCL(数据控制语言)  Data Control Language                          grant授权 和revoke撤销授权
 
 -------------
 
@@ -42,9 +42,9 @@ MYSQL单行注释为# 或--- 多行注释为/*  */
 -  改:update 表名  set value=... where key =.... ;                    根据值来修改键 当然而也可以根据键来修改值  
 -  查:select * from 表名 where .....  ;                                        可以查看表中的任意值  
 
-***select version(); 查看当前MYSQL的版本 或者进入dos窗口输入mysql --version 或mysql -V*** 
+***select version(); 查看当前MySQL的版本,或者进入dos窗口输入mysql --version 或mysql -V*** 
 
-***MySQL是不区分大小写的 建议关键字大写,做到语法规范  每条命令最好以分号结尾*** 
+***MySQL是不区分大小写的,建议关键字大写,做到语法规范,每条命令最好以分号结尾*** 
 
 #### 起别名 
 

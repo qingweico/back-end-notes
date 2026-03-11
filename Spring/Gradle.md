@@ -6,7 +6,7 @@
 - 配置环境变量
 - IDEA设置(repository和gradle_home)
 
-- 配置gradle下载镜像
+- 配置Gradle下载镜像
 
 init.gradle(${gradle_home}/init.d)
 

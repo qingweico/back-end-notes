@@ -25,7 +25,7 @@ docker run --name MYSQL
     -v $PWD/conf/my.cnf:/etc/mysql/my.cnf     # $PWD代表当前路径
     -v $PWD/mysql-files:/var/lib/mysql-files  # -v 挂载
     -v $PWD/data:/var/lib/mysql 
-    -e MYSQL_ROOT_PASSWORD=123456    # 初始化msql密码
+    -e MYSQL_ROOT_PASSWORD=123456    # 初始化MySQL密码
     -d -i -p 3306:3306 mysql         # 后台启动 linux下3306端口映射docker容器中mysql默认的3306端口
 ```
 
@@ -34,13 +34,13 @@ docker exec -it mysql容器ID或名称 /bin/bash    #进入mysql容器中
 ```
 
 ```shell
-mysql -u root -p 123456                       #登陆mysql
+mysql -u root -p 123456                       #登录MySQL
 ```
 
 ### 开启远程访问
 
 ```mysql
-alter user 'root'@'%' identified with mysql_native_password by "远程登陆密码";       #密码一定要加引号
+alter user 'root'@'%' identified with mysql_native_password by "远程登录密码";       #密码一定要加引号
 ```
 
 ```mysql

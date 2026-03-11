@@ -19,7 +19,7 @@
 - JDBC事务抽象
 - DAO支持
 - O/R映射
-- XML编列(XML的序列化和反序列化)
+- XML编组(XML的序列化和反序列化)
 
 ### Web技术
 
@@ -37,7 +37,7 @@ Web Reactive 技术栈
 
 ### 技术整合
 
-- 远程调用: RMI(Java标准的远程方法调用); Hessioan 开源协议, Dubbo基于该协议
+- 远程调用: RMI(Java标准的远程方法调用); Hessian开源协议,Dubbo基于该协议
 - Java消息服务(JMS)
 - Java连接架构(JCA)
 - Java管理扩展(JMX)

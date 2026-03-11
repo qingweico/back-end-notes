@@ -27,7 +27,7 @@ docker run -it -v 宿主机绝对路径目录:容器内目录:ro 镜像名 # 容
 
 #### DockerFile添加
 
-构建dockerFile文件
+构建Dockerfile文件
 
 ```shell
 From centos
@@ -42,7 +42,7 @@ build生成新的镜像
 docker build -f /docker/dockerFile -t mycentos .
 ```
 
-`-f`: file 指明要构建的dockerFile文件 如果当目录下存在文件名为DockerFile的文件则可以不用指定dockerFile文件 `-f`也可以省略
+`-f`: file 指明要构建的Dockerfile文件,如果当前目录下存在文件名为Dockerfile的文件则可以不用指定Dockerfile文件,`-f`也可以省略
 
 `-t`: 生成新的镜像名称空间
 

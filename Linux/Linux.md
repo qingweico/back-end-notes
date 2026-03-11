@@ -4,18 +4,18 @@
 
 ## UNIX发展史
 
--  1969年 美国贝尔实验室的肯.汤姆森(Ken Thompson)在PDP-机器上开发出了UNIX系统
--  1971年 Dennis M.Ritchie(丹尼斯.里奇)发明了C语言 与ken Thompson一起开发UNIX系统 
+-  1969年 美国贝尔实验室的肯·汤姆森(Ken Thompson)在PDP-7机器上开发出了UNIX系统
+-  1971年 Dennis M.Ritchie(丹尼斯·里奇)发明了C语言,与Ken Thompson一起开发UNIX系统 
 -  1973年 UNIX大部分的源码用C语言重写,因此提高了UNIX系统的可移植性
 
 ## Linux发展史
    Linux系统诞生于1993年,由芬兰大学生李纳斯(Linus Torvalds)和后来陆续加入的众多的爱好者共同开发完成。
-   Linux是开源软件,源代码开放的UnIX
+   Linux是开源软件,源代码开放的UNIX
 
 ## 支撑互联网的开源技术(LAMP)
 
    -    LINUX  操作系统
-   -    Apache Web操作系统 
+   -    Apache Web服务器 
    -    MySQL  数据库     
    -    PHP    编程语言
 

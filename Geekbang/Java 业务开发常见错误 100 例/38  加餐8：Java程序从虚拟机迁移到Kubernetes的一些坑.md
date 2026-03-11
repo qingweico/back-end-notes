@@ -14,7 +14,7 @@ Java 进程的内存占用除了堆之外，还包括
 使用 NMT 打印各部分区域大小，从而判断到底是哪部分内存区域占用了过多内存，或是可能有内存泄露问题
 
 ```properties
-java -XX:NativeMemoryTracking=smmary/detail -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
+java -XX:NativeMemoryTracking=summary/detail -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
 ```
 
 对于 JDK>8u191 的版本，我们可以设置下面这些 JVM 参数，来让 JVM 自动根据容器内存限制来设置堆内存用量

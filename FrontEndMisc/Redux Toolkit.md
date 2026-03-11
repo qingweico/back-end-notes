@@ -4,7 +4,7 @@
 
 安装
 
-npm run @reduxjs/toolkit
+npm install @reduxjs/toolkit
 
 ### RTK API
 

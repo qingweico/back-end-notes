@@ -123,7 +123,7 @@ public class ByteStream {
         System.out.println(d);
         System.out.println(new String(bytes));
     }
-}*
+}
 ```
 
 由于每次读到内存中的byte数组中的数据不会刷新而会覆盖,当读到最后的数据不足字节数组的长度时则会出现数据重复,因而可以使用方法new String(byte[] bytes,int offset,int length)来获取每次读到的有效数据长度
@@ -320,7 +320,7 @@ public class CharStream {
         BufferedReader br = new BufferedReader(new FileReader("src/io/temp"));
         char[] ch = new char[512];
         int temp;
-        // 每次读取一个k
+        // 每次读取一个字符数组
         while ((temp = br.read(ch)) != -1) {   
             System.out.println(new String(ch, 0, temp));
         }
@@ -387,7 +387,7 @@ public class Io_ArrayListRandom {
         Random r = new Random();
         int index = r.nextInt(arr.size());//产生大小在集合长度范围内的下标
         System.out.println(arr.get(index));
-        arr.remove(index);                //移出随机产生下标对应的数据        
+        arr.remove(index);                //移除随机产生下标对应的数据        
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("src/io/temp", true), "GBK"));
         for (String name : arr) {         //将剩下的数据写入原来文件中
             bw.write(name);
@@ -619,7 +619,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
 
-public class LineNumberReader {
+public class LineNumberReaderTest {
     public static void main(String[] args) throws IOException {
         LineNumberReader lnr = new LineNumberReader(new FileReader("src/io/temp"));
         String s;

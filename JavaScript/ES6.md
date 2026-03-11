@@ -4,7 +4,7 @@
 
 ## let和var的区别
 
-### let块级作用域,而var则是全局作用域
+### let是块级作用域,而var则是函数作用域
 
 ```javascript
 for(var i = 0;i < 10;i++){      

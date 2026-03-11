@@ -4,7 +4,7 @@
 
 ## redis.config
 
-### United单位
+### Units单位
 
 - 配置大小单位,支持byte,不支持bit
 

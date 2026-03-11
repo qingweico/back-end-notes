@@ -11,14 +11,14 @@
 
 ## 事务的隔离级别
 
-| 级别            | 脏读   | 不可重复度 | 幻读   |
+| 级别            | 脏读   | 不可重复读 | 幻读   |
 | --------------- | ------ | ---------- | ------ |
-| read uncommited | 存在   | 存在       | 存在   |
-| read commited   | 不存在 | 存在       | 存在   |
-| repeatable read | 不存在 | 不存在     | 存在   |
-| serializable    | 不存在 | 不存在     | 不存在 |
+| READ UNCOMMITTED | 存在   | 存在       | 存在   |
+| READ COMMITTED   | 不存在 | 存在       | 存在   |
+| REPEATABLE READ  | 不存在 | 不存在     | 存在   |
+| SERIALIZABLE     | 不存在 | 不存在     | 不存在 |
 
-mysql中默认的事务隔离级别是repeatable read
+MySQL中默认的事务隔离级别是REPEATABLE READ
 
 ### 开始事务
 

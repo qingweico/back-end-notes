@@ -2,7 +2,7 @@
 
 [TOC]
 
-## centos7.x
+## CentOS 7.x
 
 ## 安装git
 

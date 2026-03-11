@@ -172,7 +172,7 @@ function insert(newElement, item) {
     current.next = newNode;
 }
 
-// 移出元素
+// 移除元素
 function remove(item) {
     let curNode = this.head;
     while (curNode.next != null && curNode.next.element !== item) {

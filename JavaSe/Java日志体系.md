@@ -3,7 +3,7 @@
 ### log4j漏洞演示
 
 ```xml
-<!--使用log4j日志; <=2.14.1; >= 2.15.0修复-->
+<!--使用log4j日志; <=2.14.1存在漏洞; >= 2.15.0修复-->
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-api</artifactId>

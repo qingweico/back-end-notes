@@ -4,7 +4,7 @@
 
 ### JDK和JRE的区别
 
-JDK是整个Java的核心, 包括了Java运行环境JRE, 一堆Java工具和Java基础的类库; 通过JDK开发人员将源码文件编译成成字节码文件; JRE则是Java运行的环境, 不含开发环境, 即没有编译器和调试器, 将class文件加载到内存中准备运行
+JDK是整个Java的核心, 包括了Java运行环境JRE, 一堆Java工具和Java基础的类库; 通过JDK开发人员将源码文件编译成字节码文件; JRE则是Java运行的环境, 不含开发环境, 即没有编译器和调试器, 将class文件加载到内存中准备运行
 
 ### final关键字  抽象类可以被final修饰吗
 
@@ -13,11 +13,11 @@ JDK是整个Java的核心, 包括了Java运行环境JRE, 一堆Java工具和Java
 - 修饰类, 表示该类无法被继承
 - 抽象类是用于被继承的, final修饰代表不可修改, 不可继承, 所以不能使用final修饰类
 
-### JAVA容器
+### Java容器
 
 - ArrayList底层数组实现, 封装了常见的增删改查的操作, 并且支持动态扩展, 适合查找多的场合 
 
-- LInkedList是基于链表实现的列表, 适合增删较多的场合 
+- LinkedList是基于链表实现的列表, 适合增删较多的场合 
 
 - TreeSet是基于二叉排序树(**红黑树**)实现的, TreeSet里面最典型的就是用到了两种排序方式
 
@@ -43,7 +43,7 @@ JDK是整个Java的核心, 包括了Java运行环境JRE, 一堆Java工具和Java
 
 锁和同步
 
-常用的保证Java操作原子性的工具是锁(lock)和同步方法(或者同步代码快), 使用锁, 可以保证同一时间只有一个现线程能拿到锁, 也就保证了同一时间只有一个线程能执行申请锁和释放锁之间的代码
+常用的保证Java操作原子性的工具是锁(lock)和同步方法(或者同步代码块), 使用锁, 可以保证同一时间只有一个线程能拿到锁, 也就保证了同一时间只有一个线程能执行申请锁和释放锁之间的代码
 
 - 使用非静态同步方法时, 锁住的是当前实例 
 - 使用静态同步方法时, 锁住的是该类的Class对象 
@@ -59,11 +59,11 @@ Java提供volatile关键字来保证可见性
 
 ### Java如何保证顺序性
 
-编译器和处理器对指令进行重新排序时, 会保证重新排序后的执行结果和代码顺序执行的结果一致, 所以重新排序过程并不会影响到单线程程序的执行, 却可能影响多线程程序并发执行的正确性; Java中可通过volatile在一定程序上保证顺序性, 另外还可以通过synchronized和锁来保证顺序性; synchronized和锁保证顺序的原理和原子性一样, 都是*保证同一时间只会有一个线程执行目标代码段来实现的*; 除了从应用层面保证目标代码段执行的顺序性之外, JVM还通过被称为 ***happens-before***原则隐式的保证顺序; 两个的操作顺序只要可以通过happens-before推导出来, 则JVM会保证其顺序性, 反之JVM对其顺序不做任何保证, 可以对其进行必要的重新排序一获取高效率
+编译器和处理器对指令进行重新排序时, 会保证重新排序后的执行结果和代码顺序执行的结果一致, 所以重新排序过程并不会影响到单线程程序的执行, 却可能影响多线程程序并发执行的正确性; Java中可通过volatile在一定程度上保证顺序性, 另外还可以通过synchronized和锁来保证顺序性; synchronized和锁保证顺序的原理和原子性一样, 都是*保证同一时间只会有一个线程执行目标代码段来实现的*; 除了从应用层面保证目标代码段执行的顺序性之外, JVM还通过被称为 ***happens-before***原则隐式的保证顺序; 两个的操作顺序只要可以通过happens-before推导出来, 则JVM会保证其顺序性, 反之JVM对其顺序不做任何保证, 可以对其进行必要的重新排序以获取高效率
 
 ### 有没有其他方法保证线程安全？
 
- 有, 尽可能避免引用非线程安全的条件——共享变量 如果能从设计上避免共享变量的使用, 即可避免非线程安全的发生, 也就无需通过锁或者synchronized以及volatile解决原子性, 可见性和顺序性的问题还有***不可变对象***, 可以使用final修饰的对象保证线程安全, 由于final修饰的引用型变量(***除了String外***)不可变是指引用不可变, 但其指向的对象内容是可变的, 所以此类必须安全发布, 即不能对外提供可以修改final对象的接口
+有, 尽可能避免引用非线程安全的条件——共享变量; 如果能从设计上避免共享变量的使用, 即可避免非线程安全的发生, 也就无需通过锁或者synchronized以及volatile解决原子性、可见性和顺序性的问题; 另外, ***不可变对象***也可以保证线程安全, 可以使用final修饰的对象保证线程安全, 由于final修饰的引用型变量(***除了String外***)不可变是指引用不可变, 但其指向的对象内容是可变的, 所以此类必须安全发布, 即不能对外提供可以修改final对象的接口
 
 ### String、StringBuffer、StringBuilder的区别
 
@@ -72,16 +72,16 @@ StringBuilder线程不安全 但是执行速度快(相对于StringBuffer而言)
 
 ### 执行效率StringBuilder>StringBuffer>String  
 
-单线程操作字符串缓冲区下操作大量数据使用StringBuilder 
+单线程操作字符串缓冲区时操作大量数据使用StringBuilder 
 
-多线程下字符串缓冲区下操作大量数据使用StringBuffer
+多线程下字符串缓冲区时操作大量数据使用StringBuffer
 
 StringBuffer内部被synchronized关键字修饰,执行效率会慢于StringBuilder
 
 ### 常见的加密算法有哪些？并说明一种
 
 ```properties
-常见的加密算法有DES AES Ras Base64 MD5
+常见的加密算法有DES AES RSA Base64 MD5
 ```
 
 ### 显示(强制)类型转换和隐式类型转换
@@ -111,6 +111,7 @@ public class Test {
 }                                         // 1000 0000(-128)
 ```
 
+**submit方法**:
 ```java
 int a = -129;     
 System.out.println((byte)a); //127
@@ -188,21 +189,563 @@ Base64编码
 
 ### String类常用方法有哪些
 
+**推荐做法**: 掌握常用方法分类, 根据场景选择合适方法
+
+**常用方法分类**:
+
+1. **字符串创建和转换**
+   - `String.valueOf()`: 将其他类型转为字符串(推荐, 避免NPE)
+   - `new String(char[])`: 字符数组转字符串
+   - `toCharArray()`: 字符串转字符数组
+   - `getBytes()`: 字符串转字节数组
+
+2. **字符串比较**
+   - `equals(Object obj)`: 内容比较(推荐, 避免空指针)
+   - `equalsIgnoreCase(String)`: 忽略大小写比较
+   - `compareTo(String)`: 字典序比较, 返回int
+   - `contentEquals(CharSequence)`: 与CharSequence比较
+
+3. **字符串查找**
+   - `indexOf(String/char)`: 查找首次出现位置, 未找到返回-1
+   - `lastIndexOf(String/char)`: 查找最后一次出现位置
+   - `contains(CharSequence)`: 是否包含子串(推荐, 语义清晰)
+   - `startsWith(String)`: 是否以指定前缀开始
+   - `endsWith(String)`: 是否以指定后缀结束
+
+4. **字符串截取和分割**
+   - `substring(int beginIndex)`: 从指定位置截取到末尾
+   - `substring(int beginIndex, int endIndex)`: 截取指定范围(左闭右开)
+   - `split(String regex)`: 按正则分割(注意特殊字符需转义)
+   - `split(String regex, int limit)`: 限制分割次数
+
+5. **字符串替换**
+   - `replace(char oldChar, char newChar)`: 替换所有字符
+   - `replace(CharSequence target, CharSequence replacement)`: 替换所有子串
+   - `replaceAll(String regex, String replacement)`: 正则替换
+   - `replaceFirst(String regex, String replacement)`: 替换第一个匹配
+
+6. **字符串格式化**
+   - `format(String format, Object... args)`: 格式化字符串
+   - `join(CharSequence delimiter, CharSequence... elements)`: 连接字符串(Java 8+)
+
+7. **字符串大小写和空白处理**
+   - `toLowerCase()`: 转小写
+   - `toUpperCase()`: 转大写
+   - `trim()`: 去除首尾空白(不包含中间空白)
+   - `strip()`: 去除首尾空白(Java 11+, 支持Unicode空白字符)
+   - `isBlank()`: 是否为空或仅包含空白(Java 11+)
+   - `isEmpty()`: 是否为空字符串
+
+8. **其他常用方法**
+   - `length()`: 字符串长度
+   - `charAt(int index)`: 获取指定位置字符
+   - `concat(String str)`: 连接字符串(不如+操作符常用)
+   - `matches(String regex)`: 是否匹配正则表达式
+
+**为什么不推荐其他做法**:
+- 避免使用`==`比较字符串内容, 应使用`equals()`
+- 避免频繁使用`+`拼接大量字符串, 应使用`StringBuilder`
+- `substring()`在Java 7+会创建新对象, 注意内存使用
+
 ### Files类常用方法有哪些
+
+**推荐做法**: 使用`java.nio.file.Files`进行文件操作, 比传统IO更简洁高效
+
+**常用方法分类**:
+
+1. **文件读取**
+   ```java
+   // 读取所有行
+   List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+   
+   // 读取所有字节
+   byte[] bytes = Files.readAllBytes(path);
+   
+   // 按行流式读取(大文件推荐)
+   Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8);
+   ```
+
+2. **文件写入**
+   ```java
+   // 写入字节
+   Files.write(path, bytes);
+   
+   // 写入行
+   Files.write(path, lines, StandardCharsets.UTF_8);
+   
+   // 追加写入
+   Files.write(path, content.getBytes(), StandardOpenOption.APPEND);
+   ```
+
+3. **文件复制和移动**
+   ```java
+   // 复制文件
+   Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+   
+   // 移动文件
+   Files.move(source, target, StandardCopyOption.REPLACE_EXISTING);
+   ```
+
+4. **文件创建和删除**
+   ```java
+   // 创建文件
+   Files.createFile(path);
+   
+   // 创建目录
+   Files.createDirectories(path); // 创建多级目录
+   Files.createDirectory(path);   // 创建单级目录
+   
+   // 删除文件或目录
+   Files.delete(path);
+   Files.deleteIfExists(path); // 不存在不抛异常
+   ```
+
+5. **文件属性查询**
+   ```java
+   // 文件是否存在
+   boolean exists = Files.exists(path);
+   
+   // 是否为目录
+   boolean isDir = Files.isDirectory(path);
+   
+   // 是否为普通文件
+   boolean isFile = Files.isRegularFile(path);
+   
+   // 文件大小
+   long size = Files.size(path);
+   
+   // 获取文件属性
+   BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
+   ```
+
+6. **文件遍历**
+   ```java
+   // 遍历目录
+   Stream<Path> paths = Files.list(directory);
+   
+   // 递归遍历
+   Stream<Path> paths = Files.walk(directory);
+   
+   // 查找文件
+   Stream<Path> paths = Files.find(directory, maxDepth, 
+       (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"));
+   ```
+
+7. **临时文件**
+   ```java
+   // 创建临时文件
+   Path tempFile = Files.createTempFile("prefix", ".suffix");
+   
+   // 创建临时目录
+   Path tempDir = Files.createTempDirectory("prefix");
+   ```
+
+**为什么不推荐其他做法**:
+- 传统`FileInputStream/FileOutputStream`需要手动关闭资源, `Files`方法自动管理
+- `Files`提供更多便捷方法, 代码更简洁
+- 大文件使用`Files.lines()`流式处理, 避免内存溢出
 
 ### Iterator 怎么使用; 有哪些特点
 
+**推荐做法**: 使用Iterator遍历集合, 支持在遍历过程中安全删除元素
+
+**基本使用**:
+```java
+// 标准遍历方式
+List<String> list = Arrays.asList("a", "b", "c");
+Iterator<String> iterator = list.iterator();
+while (iterator.hasNext()) {
+    String element = iterator.next();
+    System.out.println(element);
+}
+
+// 增强for循环底层也是Iterator(推荐, 更简洁)
+for (String element : list) {
+    System.out.println(element);
+}
+
+// Java 8+ Stream方式(推荐, 函数式编程)
+list.forEach(System.out::println);
+```
+
+**Iterator特点**:
+1. **统一访问接口**: 所有Collection都实现Iterator, 提供统一遍历方式
+2. **支持安全删除**: 遍历过程中可以调用`remove()`删除当前元素
+3. **fail-fast机制**: 遍历时如果集合被其他线程修改, 会抛出`ConcurrentModificationException`
+4. **单向遍历**: 只能向前遍历, 不能后退
+
+**安全删除示例**:
+```java
+List<String> list = new ArrayList<>(Arrays.asList("a", "b", "c"));
+Iterator<String> iterator = list.iterator();
+while (iterator.hasNext()) {
+    String element = iterator.next();
+    if ("b".equals(element)) {
+        iterator.remove(); // 安全删除, 不会抛异常
+    }
+}
+```
+
+**为什么不推荐其他做法**:
+- 避免在增强for循环中直接删除元素, 会抛`ConcurrentModificationException`
+- 避免使用传统for循环通过索引删除, 容易出错且效率低
+
 ### NoClassDefFoundError和ClassNotFoundException的区别
+
+**推荐做法**: 理解两者区别, 快速定位问题根源
+
+**区别对比**:
+
+| 特性 | ClassNotFoundException | NoClassDefFoundError |
+|------|----------------------|---------------------|
+| **异常类型** | 受检异常(Checked Exception) | 非受检异常(Unchecked Exception) |
+| **发生时机** | 编译时或运行时动态加载类时 | 运行时JVM找不到类定义 |
+| **常见原因** | ClassLoader找不到类文件 | 类在编译时存在, 运行时缺失 |
+| **典型场景** | `Class.forName()`, `ClassLoader.loadClass()` | 类依赖缺失, 类文件损坏 |
+| **处理方式** | 必须捕获或声明throws | 通常表示配置问题 |
+
+**ClassNotFoundException示例**:
+```java
+try {
+    Class<?> clazz = Class.forName("com.example.NonExistentClass");
+} catch (ClassNotFoundException e) {
+    // 类路径中找不到该类
+    e.printStackTrace();
+}
+```
+
+**NoClassDefFoundError示例**:
+```java
+// 编译时: A类依赖B类, 编译通过
+// 运行时: B类的class文件缺失或不在classpath中
+// 结果: 抛出NoClassDefFoundError
+public class A {
+    private B b = new B(); // 运行时找不到B类定义
+}
+```
+
+**排查建议**:
+- `ClassNotFoundException`: 检查classpath配置, 确认jar包是否包含
+- `NoClassDefFoundError`: 检查依赖jar包是否完整, 类文件是否损坏
 
 ### ArrayList的扩容是怎么实现; 扩容过程中能不能继续进行 add 操作
 
+**推荐做法**: 理解扩容机制, 合理设置初始容量避免频繁扩容
+
+**扩容实现原理**:
+
+1. **默认容量**: 无参构造创建ArrayList时, 初始容量为0, 首次add时扩容为10
+2. **扩容触发**: 当`size >= elementData.length`时触发扩容
+3. **扩容算法**: `newCapacity = oldCapacity + (oldCapacity >> 1)`, 即扩容1.5倍
+4. **最大容量**: `Integer.MAX_VALUE - 8`(某些VM需要数组头信息)
+
+**源码分析**:
+```java
+// JDK 8+ ArrayList扩容核心代码
+private void grow(int minCapacity) {
+    int oldCapacity = elementData.length;
+    int newCapacity = oldCapacity + (oldCapacity >> 1); // 1.5倍
+    if (newCapacity - minCapacity < 0)
+        newCapacity = minCapacity;
+    if (newCapacity - MAX_ARRAY_SIZE > 0)
+        newCapacity = hugeCapacity(minCapacity);
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}
+```
+
+**扩容过程中add操作**:
+- **可以继续add**: 扩容是同步操作, 扩容完成后立即可以add
+- **线程安全**: ArrayList非线程安全, 多线程环境下扩容和add可能出问题
+- **性能影响**: 扩容需要数组拷贝, 频繁扩容影响性能
+
+**推荐做法**:
+```java
+// 预估容量, 避免频繁扩容
+List<String> list = new ArrayList<>(100); // 指定初始容量
+
+// 或使用Guava Lists
+List<String> list = Lists.newArrayListWithExpectedSize(100);
+```
+
+**为什么不推荐其他做法**:
+- 避免无参构造后频繁add大量元素, 应预估容量
+- 避免在多线程环境下使用ArrayList, 应使用`CopyOnWriteArrayList`或`Collections.synchronizedList()`
+
 ### Java序列化了解吗; 什么是序列化; 有哪些方式; 如果自定义的话怎么做
+
+**推荐做法**: 理解序列化机制, 根据场景选择合适的序列化方式
+
+**什么是序列化**:
+序列化是将Java对象转换为字节流的过程, 反序列化是将字节流恢复为Java对象的过程
+
+**序列化方式**:
+
+1. **Java原生序列化(Serializable)**
+   ```java
+   // 实现Serializable接口
+   public class User implements Serializable {
+       private static final long serialVersionUID = 1L;
+       private String name;
+       private transient int age; // transient字段不序列化
+       
+       // 自定义序列化
+       private void writeObject(ObjectOutputStream out) throws IOException {
+           out.defaultWriteObject();
+           out.writeInt(age); // 手动序列化transient字段
+       }
+       
+       private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+           in.defaultReadObject();
+           age = in.readInt(); // 手动反序列化
+       }
+   }
+   ```
+
+2. **Externalizable接口(完全自定义)**
+   ```java
+   public class User implements Externalizable {
+       private String name;
+       
+       @Override
+       public void writeExternal(ObjectOutput out) throws IOException {
+           out.writeUTF(name);
+       }
+       
+       @Override
+       public void readExternal(ObjectInput in) throws IOException {
+           name = in.readUTF();
+       }
+   }
+   ```
+
+3. **JSON序列化(推荐, 跨语言)**
+   ```java
+   // 使用Jackson
+   ObjectMapper mapper = new ObjectMapper();
+   String json = mapper.writeValueAsString(user);
+   User user = mapper.readValue(json, User.class);
+   ```
+
+4. **其他序列化框架**
+   - **Kryo**: 高性能二进制序列化
+   - **Hessian**: 跨语言二进制协议
+   - **Protobuf**: Google的高效序列化协议
+
+**自定义序列化最佳实践**:
+```java
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String name;
+    private transient String password; // 敏感信息不序列化
+    
+    // 自定义序列化逻辑
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        // 可以加密敏感信息后再序列化
+    }
+    
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        // 解密敏感信息
+    }
+    
+    // 序列化代理模式(推荐, 更安全)
+    private Object writeReplace() {
+        return new SerializationProxy(this);
+    }
+    
+    private static class SerializationProxy implements Serializable {
+        private final String name;
+        
+        SerializationProxy(User user) {
+            this.name = user.name;
+        }
+        
+        private Object readResolve() {
+            return new User(name);
+        }
+    }
+}
+```
+
+**为什么不推荐其他做法**:
+- 避免序列化敏感信息, 使用`transient`或加密
+- 避免频繁使用Java原生序列化, 性能较差, 推荐JSON或二进制协议
+- 必须定义`serialVersionUID`, 避免版本兼容问题
 
 ### 序列化、反序列化的作用
 
+**推荐做法**: 理解序列化应用场景, 合理使用序列化技术
+
+**主要作用**:
+
+1. **对象持久化**: 将对象保存到文件或数据库
+   ```java
+   // 保存对象到文件
+   try (ObjectOutputStream oos = new ObjectOutputStream(
+           new FileOutputStream("user.dat"))) {
+       oos.writeObject(user);
+   }
+   ```
+
+2. **网络传输**: 在分布式系统中传输对象
+   ```java
+   // RPC调用中序列化参数和返回值
+   // Spring Cloud, Dubbo等都依赖序列化
+   ```
+
+3. **缓存存储**: Redis等缓存系统需要序列化对象
+   ```java
+   // Redis存储对象
+   redisTemplate.opsForValue().set("user", user);
+   ```
+
+4. **深拷贝**: 通过序列化实现对象深拷贝
+   ```java
+   public static <T> T deepCopy(T obj) throws Exception {
+       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+       ObjectOutputStream oos = new ObjectOutputStream(baos);
+       oos.writeObject(obj);
+       
+       ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+       ObjectInputStream ois = new ObjectInputStream(bais);
+       return (T) ois.readObject();
+   }
+   ```
+
+5. **进程间通信**: 不同JVM进程间传递对象
+
+**注意事项**:
+- 序列化会带来性能开销, 谨慎使用
+- 序列化后的数据不跨语言, 推荐使用JSON或Protobuf
+- 注意版本兼容性, 修改类结构可能导致反序列化失败
+
 ### 用Iterator遍历Map
 
+**推荐做法**: 使用EntrySet遍历, 性能最优
+
+**遍历方式对比**:
+
+1. **EntrySet遍历(推荐, 性能最优)**
+   ```java
+   Map<String, Integer> map = new HashMap<>();
+   for (Map.Entry<String, Integer> entry : map.entrySet()) {
+       String key = entry.getKey();
+       Integer value = entry.getValue();
+   }
+   ```
+
+2. **KeySet遍历**
+   ```java
+   for (String key : map.keySet()) {
+       Integer value = map.get(key); // 需要二次查找, 性能较差
+   }
+   ```
+
+3. **Values遍历(只需要值)**
+   ```java
+   for (Integer value : map.values()) {
+       // 只需要值
+   }
+   ```
+
+4. **Iterator方式**
+   ```java
+   Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+   while (iterator.hasNext()) {
+       Map.Entry<String, Integer> entry = iterator.next();
+       // 可以在遍历中安全删除
+       if (condition) {
+           iterator.remove();
+       }
+   }
+   ```
+
+5. **Java 8+ Stream方式(推荐, 函数式)**
+   ```java
+   map.entrySet().stream()
+       .filter(entry -> entry.getValue() > 10)
+       .forEach(entry -> System.out.println(entry.getKey()));
+   ```
+
+**性能对比**: EntrySet > KeySet > Values(仅遍历值时)
+
+**为什么不推荐其他做法**:
+- 避免使用KeySet+get方式遍历, 需要两次查找, 性能差
+- 避免在增强for循环中删除元素, 使用Iterator.remove()
+
 ### Jason;Kryo;Hessian;ProtoBuf四种序列化算法的特点和差异; 看过怎么实现的吗
+
+**推荐做法**: 根据场景选择合适的序列化框架
+
+**四种序列化框架对比**:
+
+| 特性 | JSON | Kryo | Hessian | Protobuf |
+|------|------|------|---------|----------|
+| **格式** | 文本(JSON) | 二进制 | 二进制 | 二进制 |
+| **跨语言** | ✅ 是 | ❌ 否 | ✅ 是 | ✅ 是 |
+| **性能** | 中等 | 很高 | 较高 | 很高 |
+| **可读性** | ✅ 好 | ❌ 差 | ❌ 差 | ❌ 差 |
+| **体积** | 较大 | 较小 | 中等 | 最小 |
+| **使用复杂度** | 低 | 中 | 中 | 中(需定义.proto) |
+| **适用场景** | REST API, 日志 | 高性能RPC | 跨语言RPC | 高性能, 跨语言 |
+
+**JSON序列化**:
+```java
+// 使用Jackson
+ObjectMapper mapper = new ObjectMapper();
+String json = mapper.writeValueAsString(user);
+// 优点: 可读性好, 跨语言, 调试方便
+// 缺点: 体积大, 性能一般
+```
+
+**Kryo序列化**:
+```java
+Kryo kryo = new Kryo();
+Output output = new Output(new FileOutputStream("file.bin"));
+kryo.writeObject(output, user);
+output.close();
+// 优点: 性能极高, 体积小
+// 缺点: 不跨语言, 需要注册类
+```
+
+**Hessian序列化**:
+```java
+HessianOutput out = new HessianOutput(outputStream);
+out.writeObject(user);
+// 优点: 跨语言, 性能好
+// 缺点: 对复杂对象支持有限
+```
+
+**Protobuf序列化**:
+```protobuf
+// user.proto
+message User {
+    string name = 1;
+    int32 age = 2;
+}
+```
+```java
+UserProto.User user = UserProto.User.newBuilder()
+    .setName("John")
+    .setAge(30)
+    .build();
+byte[] data = user.toByteArray();
+// 优点: 性能极高, 体积最小, 跨语言
+// 缺点: 需要定义schema, 修改schema需考虑兼容性
+```
+
+**实现原理简述**:
+- **JSON**: 反射获取对象字段, 转换为JSON字符串
+- **Kryo**: 直接操作字节码, 避免反射开销, 使用变长编码压缩
+- **Hessian**: 自定义二进制协议, 支持引用消除重复
+- **Protobuf**: 预编译生成代码, 使用变长编码和字段编号
+
+**推荐选择**:
+- **Web API**: JSON(Jackson/Gson)
+- **高性能RPC(同语言)**: Kryo
+- **跨语言RPC**: Protobuf或Hessian
+- **大数据传输**: Protobuf(体积最小)
 
 ### 什么是死锁;死锁产生的条件;如何避免死锁
 
@@ -230,6 +773,37 @@ Base64编码
 
 ### 使用反射创建实例和new一个对象的区别
 
+**推荐做法**: 理解反射和new的区别, 根据场景选择合适方式
+
+**区别对比**:
+
+| 特性 | new关键字 | 反射(Reflection) |
+|------|----------|-----------------|
+| **性能** | 高(编译时确定) | 低(运行时动态查找) |
+| **类型检查** | 编译时检查 | 运行时检查 |
+| **灵活性** | 低(需知道具体类) | 高(可通过字符串创建) |
+| **代码可读性** | 好 | 较差 |
+| **安全性** | 高 | 低(可访问私有成员) |
+
+**性能对比**:
+```java
+// new方式: 直接调用构造函数, 性能高
+User user = new User();
+
+// 反射方式: 需要查找类, 检查访问权限, 性能低(慢10-100倍)
+Class<?> clazz = Class.forName("com.example.User");
+User user = (User) clazz.newInstance(); // 或 clazz.getDeclaredConstructor().newInstance()
+```
+
+**使用场景**:
+- **new**: 常规对象创建, 性能要求高的场景
+- **反射**: 框架开发(Spring IOC), 动态代理, 插件系统
+
+**为什么不推荐反射**:
+- 性能开销大, 除非必要否则不使用
+- 破坏封装性, 可访问私有成员
+- 代码可读性差, 维护困难
+
 ### 说一下HashMap和HashTable的区别吧
 
 - HashMap的基类是AbstractMap, 基接口是Map; 而HashTable的基类是Dictionary, 基接口是Map
@@ -251,9 +825,108 @@ Base64编码
 
 ### 说一下什么是进程;什么是线程
 
+**推荐做法**: 理解进程和线程的本质区别
+
+**进程(Process)**:
+进程是操作系统进行资源分配和调度的基本单位, 是程序的一次执行过程
+
+**特点**:
+- 拥有独立的地址空间(内存空间)
+- 进程间相互独立, 一个进程崩溃不影响其他进程
+- 进程切换开销大(需要切换页表、上下文等)
+- 进程间通信(IPC)需要特殊机制
+
+**线程(Thread)**:
+线程是CPU调度的基本单位, 是进程内的一个执行流
+
+**特点**:
+- 共享进程的地址空间和资源
+- 线程间可以直接访问共享数据
+- 线程切换开销小(只需切换上下文)
+- 一个线程崩溃可能导致整个进程崩溃
+
+**为什么不推荐其他理解**:
+- 避免将进程和线程混为一谈, 它们有本质区别
+- 理解进程是资源分配单位, 线程是执行单位
+
 ### 进程和线程之间的区别是什么
 
+**推荐做法**: 从多个维度理解区别
+
+**核心区别**:
+
+| 维度 | 进程 | 线程 |
+|------|------|------|
+| **资源拥有** | 独立的内存空间和资源 | 共享进程的资源 |
+| **切换开销** | 大(需要切换页表、上下文) | 小(只需切换上下文) |
+| **通信方式** | IPC(管道、消息队列等) | 共享内存、信号量等 |
+| **独立性** | 相互独立, 崩溃不影响其他进程 | 相互影响, 一个线程崩溃可能影响整个进程 |
+| **创建开销** | 大 | 小 |
+| **地址空间** | 独立 | 共享 |
+| **数量限制** | 受系统资源限制, 数量较少 | 可以创建大量线程 |
+
+**内存模型区别**:
+```
+进程A: [代码段][数据段][堆][栈]  ← 独立地址空间
+进程B: [代码段][数据段][堆][栈]  ← 独立地址空间
+
+进程A:
+  线程1: [栈1]  ← 共享代码段、数据段、堆
+  线程2: [栈2]  ← 共享代码段、数据段、堆
+```
+
+**为什么不推荐其他理解**:
+- 避免认为线程是"轻量级进程", 它们有本质区别
+- 理解进程提供资源隔离, 线程提供并发执行
+
 ### 线程和进程之间的通信方式有哪些
+
+**推荐做法**: 理解不同通信方式的适用场景
+
+**进程间通信(IPC - Inter-Process Communication)**:
+
+1. **管道(Pipe)**
+   - 匿名管道: 父子进程间通信
+   - 命名管道(FIFO): 无亲缘关系进程间通信
+   - 特点: 半双工, 数据流式传输
+
+2. **消息队列(Message Queue)**
+   - 进程间发送消息
+   - 特点: 异步通信, 支持消息类型
+
+3. **共享内存(Shared Memory)**
+   - 多个进程映射同一块内存
+   - 特点: 速度最快, 需要同步机制
+
+4. **信号量(Semaphore)**
+   - 用于进程间同步
+   - 特点: 计数器, 控制资源访问
+
+5. **信号(Signal)**
+   - 进程间发送信号
+   - 特点: 异步通知机制
+
+6. **套接字(Socket)**
+   - 网络通信, 也可用于本地进程间通信
+   - 特点: 跨网络, 通用性强
+
+**线程间通信**:
+
+1. **共享内存**
+   - 直接访问进程的共享变量
+   - 特点: 最简单, 需要同步
+
+2. **消息传递**
+   - 通过共享队列传递消息
+   - 特点: 解耦, 需要同步
+
+3. **同步机制**
+   - synchronized、Lock、volatile
+   - 特点: 保证线程安全
+
+**推荐做法**:
+- 进程间通信: 优先使用消息队列或共享内存+信号量
+- 线程间通信: 使用共享内存+同步机制
 
 ### 进程间的通信方式
 
@@ -265,7 +938,90 @@ Base64编码
 
 ### 能举例说一下信号量的使用吗
 
+**推荐做法**: 理解信号量的PV操作, 掌握实际应用场景
+
+**信号量概念**:
+信号量是一个计数器, 用于控制多个进程/线程对共享资源的访问
+
+**PV操作**:
+- **P操作(Wait)**: 信号量减1, 如果结果小于0, 则阻塞等待
+- **V操作(Signal)**: 信号量加1, 如果有等待的进程, 唤醒一个
+
+**Java中的信号量(Semaphore)**:
+```java
+import java.util.concurrent.Semaphore;
+
+public class SemaphoreExample {
+    // 创建信号量, 允许3个线程同时访问
+    private static final Semaphore semaphore = new Semaphore(3);
+    
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                try {
+                    // P操作: 获取许可
+                    semaphore.acquire();
+                    System.out.println(Thread.currentThread().getName() + " 获得资源");
+                    
+                    // 模拟使用资源
+                    Thread.sleep(2000);
+                    
+                    System.out.println(Thread.currentThread().getName() + " 释放资源");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    // V操作: 释放许可
+                    semaphore.release();
+                }
+            }).start();
+        }
+    }
+}
+```
+
+**实际应用场景**:
+1. **限流**: 控制同时访问资源的线程数
+2. **连接池**: 数据库连接池、HTTP连接池
+3. **生产者消费者**: 控制缓冲区大小
+
+**为什么不推荐其他做法**:
+- 避免使用synchronized实现限流, Semaphore更灵活
+- 避免死锁, 确保acquire和release配对使用
+
 ### 共享内存算在进程的内存占用中吗
+
+**推荐做法**: 理解共享内存的内存统计方式
+
+**共享内存的内存统计**:
+
+1. **不算在单个进程内存占用中**
+   - 共享内存是独立的内存区域
+   - 多个进程映射同一块物理内存
+   - 操作系统单独管理共享内存
+
+2. **内存统计方式**:
+   ```
+   进程A内存 = 进程A私有内存 + 共享内存映射(但不重复计算)
+   进程B内存 = 进程B私有内存 + 共享内存映射(但不重复计算)
+   系统总内存 = 所有进程私有内存 + 共享内存(只计算一次)
+   ```
+
+3. **实际影响**:
+   - `top`或`ps`命令显示的内存可能包含共享内存
+   - 实际物理内存占用 = 私有内存 + 共享内存(不重复计算)
+
+**Linux中查看**:
+```bash
+# 查看共享内存
+ipcs -m
+
+# 查看进程内存详情(包含共享内存)
+cat /proc/PID/smaps
+```
+
+**为什么不推荐其他理解**:
+- 避免认为共享内存会重复计算, 它只占用一份物理内存
+- 理解共享内存是进程间高效通信的方式
 
 ### git中pull和fetch的区别
 
@@ -273,9 +1029,148 @@ git pull看起来像git fetch+git merge
 
 ### socket 和 channel的区别
 
+**推荐做法**: 理解Socket和Channel的本质区别, 根据场景选择
+
+**区别对比**:
+
+| 特性 | Socket | Channel |
+|------|--------|---------|
+| **API层次** | 操作系统API的封装 | Java NIO抽象 |
+| **阻塞模式** | 默认阻塞IO | 支持非阻塞IO |
+| **IO模型** | BIO(阻塞IO) | NIO(非阻塞IO) |
+| **缓冲区** | 需要手动管理 | 内置Buffer机制 |
+| **选择器** | 不支持 | 支持Selector多路复用 |
+| **性能** | 较低(阻塞) | 较高(非阻塞+多路复用) |
+
+**Socket示例**:
+```java
+// 传统Socket - 阻塞IO
+ServerSocket serverSocket = new ServerSocket(8080);
+Socket socket = serverSocket.accept(); // 阻塞等待连接
+InputStream in = socket.getInputStream();
+// 读取数据会阻塞
+```
+
+**Channel示例**:
+```java
+// NIO Channel - 非阻塞IO
+ServerSocketChannel serverChannel = ServerSocketChannel.open();
+serverChannel.configureBlocking(false); // 非阻塞模式
+serverChannel.bind(new InetSocketAddress(8080));
+
+Selector selector = Selector.open();
+serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+// 非阻塞, 可以处理多个连接
+while (true) {
+    selector.select(); // 阻塞直到有事件
+    Set<SelectionKey> keys = selector.selectedKeys();
+    // 处理多个连接的事件
+}
+```
+
+**为什么不推荐其他做法**:
+- 高并发场景避免使用传统Socket, 应使用NIO Channel+Selector
+- 理解Channel是更高级的抽象, 提供更好的性能
+
 ### IO多路复用讲一下
 
+**推荐做法**: 理解IO多路复用的原理和优势
+
+**IO多路复用概念**:
+IO多路复用是指一个线程可以同时监听多个文件描述符(如Socket), 当某个描述符就绪时, 通知程序进行读写操作
+
+**传统IO模型的问题**:
+```java
+// 传统BIO: 一个线程处理一个连接
+// 1000个连接需要1000个线程, 线程切换开销大
+while (true) {
+    Socket socket = serverSocket.accept(); // 阻塞
+    new Thread(() -> {
+        // 处理连接, 阻塞IO
+    }).start();
+}
+```
+
+**IO多路复用模型**:
+```java
+// NIO: 一个线程处理多个连接
+Selector selector = Selector.open();
+serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+while (true) {
+    selector.select(); // 阻塞直到有事件就绪
+    Set<SelectionKey> keys = selector.selectedKeys();
+    for (SelectionKey key : keys) {
+        if (key.isAcceptable()) {
+            // 处理连接
+        } else if (key.isReadable()) {
+            // 处理读事件
+        }
+    }
+}
+```
+
+**IO多路复用优势**:
+1. **减少线程数**: 一个线程可以处理多个连接
+2. **提高性能**: 减少线程切换开销
+3. **资源节约**: 不需要为每个连接创建线程
+
+**Linux实现机制**:
+- **select**: 轮询所有文件描述符, 有1024限制
+- **poll**: 改进select, 无数量限制, 但仍需轮询
+- **epoll**: 事件驱动, 只返回就绪的描述符, 性能最好
+
+**为什么不推荐其他做法**:
+- 高并发场景避免使用BIO, 应使用NIO+多路复用
+- 理解epoll是Linux下最佳选择, select/poll性能较差
+
 ### select描述符限制是多少(1024); 为什么是1024
+
+**推荐做法**: 理解select的限制和原因
+
+**select的限制**:
+- **文件描述符数量限制**: 默认1024个
+- **原因**: `fd_set`结构体使用位图表示, 大小为1024位(128字节)
+
+**fd_set结构**:
+```c
+// Linux内核中的定义
+typedef struct {
+    unsigned long fds_bits[__FD_SETSIZE / __NFDBITS];
+} fd_set;
+
+// __FD_SETSIZE 通常定义为 1024
+```
+
+**为什么是1024**:
+1. **历史原因**: 早期系统资源有限, 1024足够使用
+2. **位图实现**: 使用固定大小的位图, 每个bit表示一个文件描述符
+3. **性能考虑**: 固定大小便于快速操作
+
+**突破1024限制**:
+```c
+// 1. 重新定义FD_SETSIZE(不推荐, 需要重新编译)
+#define FD_SETSIZE 2048
+
+// 2. 使用poll(推荐)
+// poll使用链表, 无数量限制
+
+// 3. 使用epoll(最佳)
+// epoll无数量限制, 性能最好
+```
+
+**Java中的影响**:
+```java
+// Java NIO的Selector底层使用epoll(Linux)或kqueue(Mac)
+// 不受1024限制, 可以处理大量连接
+Selector selector = Selector.open();
+// 可以注册数千个Channel
+```
+
+**为什么不推荐其他做法**:
+- 避免使用select处理大量连接, 应使用epoll
+- 理解select是历史遗留, 现代系统应使用epoll/kqueue
 
 ### 僵尸进程概念;如何解决
 
@@ -296,19 +1191,553 @@ git pull看起来像git fetch+git merge
 
 ### 匿名内部类如何持有外部类对象
 
+**推荐做法**: 理解内部类持有外部类引用的机制
+
+**内部类持有外部类对象**:
+```java
+public class Outer {
+    private String name = "Outer";
+    
+    public void method() {
+        // 匿名内部类持有外部类引用
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(name); // 访问外部类成员
+            }
+        };
+    }
+}
+
+// 编译后等价于
+class Outer$1 implements Runnable {
+    private final Outer this$0; // 持有外部类引用
+    
+    Outer$1(Outer outer) {
+        this.this$0 = outer;
+    }
+    
+    @Override
+    public void run() {
+        System.out.println(this$0.name);
+    }
+}
+```
+
+**内存泄漏风险**:
+```java
+// 如果内部类生命周期长于外部类, 可能导致内存泄漏
+public class Outer {
+    private byte[] data = new byte[1024 * 1024]; // 1MB
+    
+    public Runnable createTask() {
+        // 匿名内部类持有Outer引用, 即使Outer不再使用也无法GC
+        return new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(data.length);
+            }
+        };
+    }
+}
+
+// 使用
+Runnable task = outer.createTask();
+outer = null; // Outer无法被GC, 因为task持有引用
+```
+
+**推荐做法**:
+```java
+// 1. 使用静态内部类(不持有外部类引用)
+public static class StaticInner {
+    // 不持有外部类引用
+}
+
+// 2. 避免在内部类中持有外部类的大对象引用
+// 3. 及时清理内部类引用
+```
+
 类和内部类的关系; 内部类为什么可以访问外部类的私有属性
+
+**推荐做法**: 理解内部类访问外部类私有成员的机制
+
+**访问机制**:
+- 内部类编译后会生成`access$XXX`方法访问外部类私有成员
+- JVM允许同一类文件中的类访问彼此的私有成员
+
+```java
+public class Outer {
+    private String name = "Outer";
+    
+    class Inner {
+        void print() {
+            System.out.println(name); // 访问私有成员
+        }
+    }
+}
+
+// 编译后生成
+class Outer {
+    private String name;
+    
+    // 编译器生成的访问方法
+    static String access$000(Outer outer) {
+        return outer.name;
+    }
+}
+
+class Outer$Inner {
+    void print() {
+        System.out.println(Outer.access$000(this.this$0));
+    }
+}
+```
 
 ### 内存泄漏的场景
 
+**推荐做法**: 识别常见内存泄漏场景, 避免问题
+
+**常见内存泄漏场景**:
+
+1. **集合类持有对象引用**
+   ```java
+   // 错误: 对象不再使用但仍在集合中
+   List<Object> list = new ArrayList<>();
+   Object obj = new Object();
+   list.add(obj);
+   obj = null; // 对象无法GC, 因为list仍持有引用
+   
+   // 解决: 及时从集合中移除
+   list.remove(obj);
+   ```
+
+2. **监听器未移除**
+   ```java
+   // 错误: 监听器持有外部类引用
+   button.addActionListener(new ActionListener() {
+       @Override
+       public void actionPerformed(ActionEvent e) {
+           // 持有外部类引用
+       }
+   });
+   // 忘记移除监听器
+   
+   // 解决: 使用弱引用或及时移除
+   ```
+
+3. **ThreadLocal未清理**
+   ```java
+   // 错误: ThreadLocal使用后未remove
+   ThreadLocal<String> threadLocal = new ThreadLocal<>();
+   threadLocal.set("value");
+   // 忘记remove, 导致内存泄漏
+   
+   // 解决: 使用try-finally确保清理
+   try {
+       threadLocal.set("value");
+   } finally {
+       threadLocal.remove();
+   }
+   ```
+
+4. **内部类持有外部类引用**
+   ```java
+   // 错误: 内部类生命周期长于外部类
+   public class Outer {
+       private byte[] data = new byte[1024 * 1024];
+       
+       public Runnable createTask() {
+           return new Runnable() {
+               @Override
+               public void run() {
+                   System.out.println(data.length); // 持有引用
+               }
+           };
+       }
+   }
+   ```
+
+5. **缓存未设置过期或大小限制**
+   ```java
+   // 错误: 缓存无限增长
+   Map<String, Object> cache = new HashMap<>();
+   // 不断添加, 永不清理
+   
+   // 解决: 使用LRU缓存或设置过期
+   Map<String, Object> cache = new LinkedHashMap<String, Object>(16, 0.75f, true) {
+       @Override
+       protected boolean removeEldestEntry(Map.Entry eldest) {
+           return size() > 1000; // 限制大小
+       }
+   };
+   ```
+
+**为什么不推荐其他做法**:
+- 避免使用强引用缓存, 应使用WeakReference或SoftReference
+- 避免忘记清理资源, 使用try-finally或try-with-resources
+
 ### 内存泄漏的概念
+
+**推荐做法**: 理解内存泄漏的本质
+
+**内存泄漏定义**:
+内存泄漏是指程序中已动态分配的堆内存由于某种原因程序未释放或无法释放, 造成系统内存的浪费, 导致程序运行速度减慢甚至系统崩溃等严重后果
+
+**关键特征**:
+1. **对象不再使用**: 程序逻辑上不再需要该对象
+2. **无法被GC**: 对象仍被引用, GC无法回收
+3. **持续增长**: 内存占用持续增加, 最终导致OOM
+
+**与内存溢出的区别**:
+- **内存泄漏**: 对象无法被回收, 内存逐渐耗尽
+- **内存溢出**: 内存不足, 无法分配新对象
+
+**检测方法**:
+```bash
+# 1. 使用jmap生成堆转储
+jmap -dump:format=b,file=heap.hprof <pid>
+
+# 2. 使用MAT分析
+# 查找Dominator Tree, 找出占用内存最大的对象
+
+# 3. 使用VisualVM监控
+# 观察堆内存趋势, 如果持续增长可能存在泄漏
+```
+
+**为什么不推荐其他理解**:
+- 避免将内存溢出等同于内存泄漏
+- 理解内存泄漏是渐进的过程, 需要长期监控
 
 ### main方法执行之前发生了什么
 
+**推荐做法**: 理解JVM启动过程和类加载机制
+
+**main方法执行前的步骤**:
+
+1. **JVM启动**
+   - 加载JVM动态库
+   - 初始化JVM运行时环境
+
+2. **类加载器初始化**
+   - 创建Bootstrap ClassLoader
+   - 创建Extension ClassLoader
+   - 创建Application ClassLoader
+
+3. **加载主类**
+   ```java
+   // JVM会加载包含main方法的类
+   // 触发类的加载、链接、初始化
+   ```
+
+4. **类加载过程**
+   - **加载**: 查找并加载类的二进制数据
+   - **验证**: 验证class文件格式
+   - **准备**: 为类变量分配内存并设置默认值
+   - **解析**: 将符号引用转换为直接引用
+   - **初始化**: 执行类构造器`<clinit>()`方法
+
+5. **执行main方法**
+   ```java
+   public static void main(String[] args) {
+       // 此时类已完全加载和初始化
+   }
+   ```
+
+**详细流程**:
+```
+1. JVM启动
+   ↓
+2. 创建类加载器层次结构
+   ↓
+3. 查找main方法所在类
+   ↓
+4. 加载主类(触发类加载过程)
+   ↓
+5. 链接(验证、准备、解析)
+   ↓
+6. 初始化(执行静态代码块、静态变量赋值)
+   ↓
+7. 执行main方法
+```
+
+**验证示例**:
+```java
+public class Test {
+    static {
+        System.out.println("静态代码块执行"); // main之前执行
+    }
+    
+    private static String name = initName(); // main之前执行
+    
+    private static String initName() {
+        System.out.println("静态变量初始化");
+        return "Test";
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("main方法执行");
+    }
+}
+// 输出顺序:
+// 静态代码块执行
+// 静态变量初始化
+// main方法执行
+```
+
+**为什么不推荐其他理解**:
+- 避免认为main是程序入口就忽略类加载过程
+- 理解类加载是JVM的核心机制
+
 ### 线程的从用户态和核心态的具体过程是什么
+
+**推荐做法**: 理解用户态和内核态切换的机制
+
+**用户态和内核态**:
+
+1. **用户态(User Mode)**
+   - 应用程序运行在用户态
+   - 只能访问受限资源
+   - 不能直接访问硬件
+
+2. **内核态(Kernel Mode)**
+   - 操作系统运行在内核态
+   - 可以访问所有资源
+   - 可以执行特权指令
+
+**线程切换过程**:
+
+1. **用户态 → 内核态(系统调用)**
+   ```
+   用户线程调用系统调用(如read、write)
+   ↓
+   触发中断/异常(INT 0x80或SYSCALL指令)
+   ↓
+   CPU切换到内核态
+   ↓
+   执行系统调用处理程序
+   ↓
+   访问内核资源
+   ```
+
+2. **内核态 → 用户态(返回)**
+   ```
+   系统调用执行完成
+   ↓
+   设置返回值
+   ↓
+   执行IRET指令返回用户态
+   ↓
+   恢复用户态上下文
+   ```
+
+**线程切换详细过程**:
+```
+1. 保存当前线程上下文(用户态)
+   - 寄存器状态
+   - 程序计数器
+   - 栈指针
+   ↓
+2. 切换到内核态
+   - 保存用户态寄存器
+   - 加载内核栈
+   ↓
+3. 调度器选择下一个线程
+   - 从就绪队列选择
+   - 检查线程优先级
+   ↓
+4. 恢复下一个线程上下文
+   - 加载寄存器
+   - 恢复栈指针
+   ↓
+5. 切换到用户态
+   - 加载用户态寄存器
+   - 跳转到新线程的指令
+```
+
+**Java中的体现**:
+```java
+// 文件IO操作会触发用户态到内核态切换
+FileInputStream fis = new FileInputStream("file.txt");
+fis.read(); // 系统调用, 切换到内核态
+
+// 网络IO也会切换
+Socket socket = new Socket("host", 8080);
+socket.getInputStream().read(); // 系统调用
+```
+
+**性能影响**:
+- 用户态切换开销: 较小(纳秒级)
+- 内核态切换开销: 较大(微秒级), 需要保存/恢复更多上下文
+
+**为什么不推荐其他理解**:
+- 避免忽略系统调用的开销
+- 理解IO操作会触发内核态切换, 影响性能
 
 ### finalize 的作用
 
+**推荐做法**: 理解finalize的机制, 但不推荐使用
+
+**finalize方法作用**:
+`finalize()`是Object类的一个protected方法, 在对象被GC回收之前会被调用
+
+**执行时机**:
+```java
+public class Resource {
+    @Override
+    protected void finalize() throws Throwable {
+        // 对象被GC回收前调用
+        // 可以在这里释放资源
+        super.finalize();
+    }
+}
+```
+
+**为什么不推荐使用finalize**:
+
+1. **执行时机不确定**
+   - GC时机不确定, finalize执行时机也不确定
+   - 可能永远不会执行
+
+2. **性能开销大**
+   - finalize会延迟对象回收
+   - 对象需要两次GC才能回收
+
+3. **可能抛出异常**
+   - finalize中异常会被忽略
+   - 可能导致资源泄漏
+
+4. **无法保证执行顺序**
+   - 多个对象的finalize执行顺序不确定
+
+**推荐做法**:
+```java
+// 1. 使用try-finally确保资源释放
+try {
+    // 使用资源
+} finally {
+    // 释放资源
+}
+
+// 2. 使用try-with-resources(Java 7+)
+try (Resource resource = new Resource()) {
+    // 使用资源, 自动关闭
+}
+
+// 3. 实现AutoCloseable接口
+public class Resource implements AutoCloseable {
+    @Override
+    public void close() throws Exception {
+        // 释放资源
+    }
+}
+```
+
+**finalize的替代方案**:
+- **Cleaner(Java 9+)**: 更可靠的清理机制
+- **PhantomReference**: 对象回收前的通知机制
+
+**为什么不推荐使用finalize**:
+- finalize已被标记为deprecated(Java 9+)
+- 使用try-with-resources或Cleaner更可靠
+
 ### BIO, NIO, 和AIO都了解哪些, 各种IO讲一下
+
+**推荐做法**: 理解三种IO模型, 根据场景选择
+
+**三种IO模型对比**:
+
+| 特性 | BIO(Blocking IO) | NIO(Non-blocking IO) | AIO(Asynchronous IO) |
+|------|-----------------|---------------------|---------------------|
+| **阻塞方式** | 阻塞 | 非阻塞 | 异步非阻塞 |
+| **线程模型** | 一个线程一个连接 | 一个线程多个连接 | 回调机制 |
+| **性能** | 低 | 中 | 高 |
+| **复杂度** | 低 | 中 | 高 |
+| **适用场景** | 连接数少 | 连接数多 | 连接数非常多 |
+
+**BIO(阻塞IO)**:
+```java
+// 传统BIO: 阻塞等待
+ServerSocket serverSocket = new ServerSocket(8080);
+while (true) {
+    Socket socket = serverSocket.accept(); // 阻塞等待连接
+    new Thread(() -> {
+        try {
+            InputStream in = socket.getInputStream();
+            byte[] buffer = new byte[1024];
+            in.read(buffer); // 阻塞等待数据
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }).start();
+}
+// 缺点: 每个连接需要一个线程, 线程开销大
+```
+
+**NIO(非阻塞IO)**:
+```java
+// NIO: 非阻塞+多路复用
+ServerSocketChannel serverChannel = ServerSocketChannel.open();
+serverChannel.configureBlocking(false); // 非阻塞
+serverChannel.bind(new InetSocketAddress(8080));
+
+Selector selector = Selector.open();
+serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+while (true) {
+    selector.select(); // 阻塞直到有事件
+    Set<SelectionKey> keys = selector.selectedKeys();
+    for (SelectionKey key : keys) {
+        if (key.isAcceptable()) {
+            // 处理连接
+        } else if (key.isReadable()) {
+            // 处理读事件, 非阻塞
+        }
+    }
+}
+// 优点: 一个线程处理多个连接
+```
+
+**AIO(异步IO)**:
+```java
+// AIO: 异步回调
+AsynchronousServerSocketChannel serverChannel = 
+    AsynchronousServerSocketChannel.open();
+serverChannel.bind(new InetSocketAddress(8080));
+
+serverChannel.accept(null, new CompletionHandler<AsynchronousSocketChannel, Void>() {
+    @Override
+    public void completed(AsynchronousSocketChannel channel, Void attachment) {
+        // 连接建立回调
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        channel.read(buffer, buffer, new CompletionHandler<Integer, ByteBuffer>() {
+            @Override
+            public void completed(Integer result, ByteBuffer buffer) {
+                // 数据读取完成回调
+            }
+            
+            @Override
+            public void failed(Throwable exc, ByteBuffer buffer) {
+                // 读取失败回调
+            }
+        });
+    }
+    
+    @Override
+    public void failed(Throwable exc, Void attachment) {
+        // 连接失败回调
+    }
+});
+// 优点: 完全异步, 性能最高
+```
+
+**选择建议**:
+- **BIO**: 连接数少(<100), 简单场景
+- **NIO**: 连接数中等(100-10000), 高并发场景(推荐)
+- **AIO**: 连接数非常多(>10000), 但Linux支持不完善
+
+**为什么不推荐其他做法**:
+- 高并发场景避免使用BIO, 线程开销太大
+- Linux下AIO支持不完善, 推荐使用NIO
 
 ### ReentrantLock 和 ReentrantReadWriteLock 有什么区别
 
@@ -346,39 +1775,671 @@ https://blog.csdn.net/qq_37883866/article/details/140664358
 
 ### rabbitmq的使用场景有哪些
 
+**推荐做法**: 理解RabbitMQ的核心价值, 根据业务场景选择使用
+
+**主要使用场景**:
+
+1. **异步处理**
+   - 耗时操作异步化, 提升用户体验
+   - 例如: 用户注册后发送邮件、短信通知
+
+2. **应用解耦**
+   - 系统间通过消息队列通信, 降低耦合度
+   - 例如: 订单系统与库存系统、支付系统解耦
+
+3. **流量削峰**
+   - 突发流量缓冲, 保护下游系统
+   - 例如: 秒杀活动, 将请求先放入队列
+
+4. **日志收集**
+   - 集中式日志处理
+   - 例如: 多个服务将日志发送到消息队列, 统一处理
+
+5. **消息广播**
+   - 一对多消息分发
+   - 例如: 配置变更通知多个服务
+
+**为什么不推荐其他做法**:
+- 避免同步调用导致系统耦合, 应使用消息队列解耦
+- 避免直接处理突发流量, 应使用队列削峰
+
 ### rabbitmq 有哪些重要的角色
+
+**推荐做法**: 理解RabbitMQ的核心角色和职责
+
+**重要角色**:
+
+1. **Producer(生产者)**
+   - 消息的发送方
+   - 将消息发送到Exchange
+
+2. **Consumer(消费者)**
+   - 消息的接收方
+   - 从Queue中获取消息并处理
+
+3. **Broker(消息代理)**
+   - RabbitMQ服务器本身
+   - 接收、存储、转发消息
+
+4. **Exchange(交换机)**
+   - 接收生产者消息, 根据路由规则转发到Queue
+   - 类型: direct、topic、fanout、headers
+
+5. **Queue(队列)**
+   - 存储消息的缓冲区
+   - 消费者从Queue中获取消息
+
+6. **Binding(绑定)**
+   - Exchange和Queue之间的关联关系
+   - 定义路由规则
+
+**为什么不推荐其他理解**:
+- 避免混淆Exchange和Queue的作用, Exchange负责路由, Queue负责存储
 
 ### rabbitmq 有哪些重要的组件
 
+**推荐做法**: 理解RabbitMQ的组件架构
+
+**核心组件**:
+
+1. **Connection(连接)**
+   - 客户端与Broker之间的TCP连接
+   - 一个应用通常维护一个长连接
+
+2. **Channel(通道)**
+   - 连接中的虚拟通道
+   - 多个Channel共享一个Connection, 减少TCP连接数
+
+3. **Virtual Host(虚拟主机)**
+   - 逻辑隔离, 类似命名空间
+   - 不同vhost的Exchange、Queue相互隔离
+
+4. **Exchange Types(交换机类型)**
+   - **direct**: 精确匹配routing key
+   - **topic**: 模式匹配routing key
+   - **fanout**: 广播到所有绑定的Queue
+   - **headers**: 基于消息头匹配
+
+5. **Message(消息)**
+   - 包含payload和properties
+   - properties包括routing key、priority、expiration等
+
+**为什么不推荐其他理解**:
+- 避免在同一个Connection中创建过多Channel, 应合理复用
+
 ### rabbitmq 中vhost 的作用是什么
+
+**推荐做法**: 理解vhost的隔离作用, 合理规划多租户场景
+
+**vhost的作用**:
+
+1. **逻辑隔离**
+   - 不同vhost的Exchange、Queue、Binding完全隔离
+   - 类似数据库的schema概念
+
+2. **权限控制**
+   - 可以为不同用户分配不同vhost的访问权限
+   - 实现多租户场景下的资源隔离
+
+3. **资源管理**
+   - 不同业务使用不同vhost, 便于管理和监控
+   - 可以独立设置vhost的资源限制
+
+**使用示例**:
+```java
+// 连接指定vhost
+ConnectionFactory factory = new ConnectionFactory();
+factory.setHost("localhost");
+factory.setVirtualHost("/production"); // 指定vhost
+Connection connection = factory.newConnection();
+```
+
+**为什么不推荐其他做法**:
+- 避免所有业务使用默认vhost, 应合理划分vhost实现隔离
+- 避免vhost过多导致管理复杂, 应根据业务模块划分
 
 ### rabbitmq 的消息是怎么发送的
 
+**推荐做法**: 理解消息发送流程, 正确使用RabbitMQ API
+
+**消息发送流程**:
+
+1. **Producer发送消息到Exchange**
+   ```java
+   channel.basicPublish(exchange, routingKey, props, messageBody);
+   ```
+
+2. **Exchange根据类型和routing key路由消息**
+   - direct: 精确匹配routing key
+   - topic: 模式匹配routing key
+   - fanout: 忽略routing key, 广播到所有Queue
+   - headers: 匹配消息头
+
+3. **消息到达绑定的Queue**
+   - Exchange根据Binding规则将消息路由到Queue
+
+4. **Consumer从Queue获取消息**
+   ```java
+   channel.basicConsume(queueName, autoAck, consumer);
+   ```
+
+**完整示例**:
+```java
+// 生产者
+ConnectionFactory factory = new ConnectionFactory();
+factory.setHost("localhost");
+try (Connection connection = factory.newConnection();
+     Channel channel = connection.createChannel()) {
+    
+    // 声明Exchange
+    channel.exchangeDeclare("myExchange", "direct");
+    
+    // 发送消息
+    String message = "Hello RabbitMQ";
+    channel.basicPublish("myExchange", "routing.key", null, 
+                        message.getBytes());
+}
+
+// 消费者
+channel.queueDeclare("myQueue", false, false, false, null);
+channel.queueBind("myQueue", "myExchange", "routing.key");
+
+DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+    String message = new String(delivery.getBody(), "UTF-8");
+    System.out.println("Received: " + message);
+    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+};
+channel.basicConsume("myQueue", false, deliverCallback, 
+                    consumerTag -> {});
+```
+
+**为什么不推荐其他做法**:
+- 避免直接发送到Queue(除非使用默认Exchange), 应通过Exchange路由
+- 避免忘记声明Exchange和Queue, 应确保先声明再使用
+
 ### rabbitmq 怎么保证消息的稳定性
+
+**推荐做法**: 使用持久化、确认机制、事务等保证消息可靠性
+
+**保证消息稳定性的措施**:
+
+1. **消息持久化**
+   ```java
+   // Exchange持久化
+   channel.exchangeDeclare("myExchange", "direct", true);
+   
+   // Queue持久化
+   channel.queueDeclare("myQueue", true, false, false, null);
+   
+   // 消息持久化
+   AMQP.BasicProperties props = new AMQP.BasicProperties.Builder()
+       .deliveryMode(2) // 2表示持久化
+       .build();
+   channel.basicPublish("myExchange", "routing.key", props, message);
+   ```
+
+2. **Publisher Confirm机制**
+   ```java
+   // 开启Confirm模式
+   channel.confirmSelect();
+   
+   // 异步确认
+   channel.addConfirmListener((deliveryTag, multiple) -> {
+       // 消息发送成功
+   }, (deliveryTag, multiple) -> {
+       // 消息发送失败, 需要重试
+   });
+   ```
+
+3. **Consumer Ack机制**
+   ```java
+   // 手动确认, 处理完消息后ack
+   channel.basicConsume("myQueue", false, (tag, delivery) -> {
+       try {
+           // 处理消息
+           processMessage(delivery.getBody());
+           // 确认消息
+           channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+       } catch (Exception e) {
+           // 拒绝消息, 重新入队
+           channel.basicNack(delivery.getEnvelope().getDeliveryTag(), 
+                           false, true);
+       }
+   }, tag -> {});
+   ```
+
+4. **事务机制(性能较差, 不推荐)**
+   ```java
+   channel.txSelect();
+   try {
+       channel.basicPublish(...);
+       channel.txCommit();
+   } catch (Exception e) {
+       channel.txRollback();
+   }
+   ```
+
+**为什么不推荐其他做法**:
+- 避免使用自动ack(autoAck=true), 消息处理失败会丢失
+- 避免使用事务保证可靠性, 性能差, 应使用Publisher Confirm
 
 ### rabbitmq 怎么避免消息丢失
 
+**推荐做法**: 从生产者、Broker、消费者三个层面保证消息不丢失
+
+**避免消息丢失的措施**:
+
+1. **生产者层面**
+   - 使用Publisher Confirm机制
+   - 消息持久化(deliveryMode=2)
+   - 实现重试机制
+
+2. **Broker层面**
+   - Exchange、Queue持久化
+   - 消息持久化到磁盘
+   - 镜像队列(高可用)
+
+3. **消费者层面**
+   - 使用手动ack
+   - 处理完消息再ack
+   - 异常时nack并重新入队
+
+**完整示例**:
+```java
+// 生产者: 保证消息发送成功
+channel.confirmSelect();
+channel.addConfirmListener((tag, multiple) -> {
+    // 成功
+}, (tag, multiple) -> {
+    // 失败, 重试
+    retryPublish(tag);
+});
+
+AMQP.BasicProperties props = new AMQP.BasicProperties.Builder()
+    .deliveryMode(2) // 持久化
+    .build();
+channel.basicPublish("exchange", "routingKey", props, message);
+
+// 消费者: 保证消息处理成功
+channel.basicConsume("queue", false, (tag, delivery) -> {
+    try {
+        processMessage(delivery.getBody());
+        channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+    } catch (Exception e) {
+        // 处理失败, 重新入队
+        channel.basicNack(delivery.getEnvelope().getDeliveryTag(), 
+                         false, true);
+    }
+}, tag -> {});
+```
+
+**为什么不推荐其他做法**:
+- 避免使用自动ack, 消息处理失败会丢失
+- 避免消息不持久化, Broker重启会丢失消息
+
 ### 消息持久化成功的条件有哪些
+
+**推荐做法**: 理解持久化的完整条件, 确保消息真正持久化
+
+**消息持久化成功的条件**:
+
+1. **Exchange持久化**
+   ```java
+   channel.exchangeDeclare("exchange", "direct", true); // durable=true
+   ```
+
+2. **Queue持久化**
+   ```java
+   channel.queueDeclare("queue", true, false, false, null); // durable=true
+   ```
+
+3. **消息持久化**
+   ```java
+   AMQP.BasicProperties props = new AMQP.BasicProperties.Builder()
+       .deliveryMode(2) // 2=持久化, 1=非持久化
+       .build();
+   ```
+
+4. **三者缺一不可**
+   - Exchange、Queue、Message都必须持久化
+   - 缺少任何一个, 消息都可能丢失
+
+**验证持久化**:
+```bash
+# 重启RabbitMQ后, 消息仍然存在
+rabbitmqctl stop_app
+rabbitmqctl start_app
+```
+
+**为什么不推荐其他做法**:
+- 避免只持久化消息而Exchange/Queue不持久化, Broker重启后Exchange/Queue消失
+- 避免持久化配置不一致, 确保三者都持久化
 
 ### rabbitmq  持久化有什么缺点
 
+**推荐做法**: 理解持久化的性能影响, 权衡可靠性和性能
+
+**持久化的缺点**:
+
+1. **性能下降**
+   - 消息需要写入磁盘, 比内存操作慢
+   - 吞吐量下降约10倍
+
+2. **磁盘IO压力**
+   - 频繁的磁盘写入操作
+   - 可能成为性能瓶颈
+
+3. **资源消耗**
+   - 磁盘空间占用
+   - 内存中也需要缓存消息
+
+**性能对比**:
+- 非持久化: 吞吐量可达数万QPS
+- 持久化: 吞吐量降至数千QPS
+
+**优化建议**:
+- 使用SSD提升IO性能
+- 合理设置队列长度, 避免消息堆积
+- 非关键消息可以不持久化
+
+**为什么不推荐其他做法**:
+- 避免所有消息都持久化, 应根据业务重要性选择
+- 避免过度追求性能而放弃持久化, 关键消息必须持久化
+
 ### rabbitmq  有几种广播类型
+
+**推荐做法**: 理解不同Exchange类型, 根据场景选择
+
+**广播类型(Exchange类型)**:
+
+1. **fanout(扇出)**
+   - 广播到所有绑定的Queue
+   - 忽略routing key
+   - 适用场景: 消息广播
+
+2. **direct(直连)**
+   - 精确匹配routing key
+   - 适用场景: 点对点消息
+
+3. **topic(主题)**
+   - 模式匹配routing key
+   - 支持通配符: *匹配一个词, #匹配多个词
+   - 适用场景: 消息分类订阅
+
+4. **headers(头匹配)**
+   - 基于消息头匹配
+   - 不常用
+
+**示例**:
+```java
+// fanout: 广播
+channel.exchangeDeclare("logs", "fanout");
+channel.basicPublish("logs", "", null, message); // routing key为空
+
+// direct: 精确匹配
+channel.exchangeDeclare("direct_logs", "direct");
+channel.basicPublish("direct_logs", "error", null, message);
+
+// topic: 模式匹配
+channel.exchangeDeclare("topic_logs", "topic");
+channel.basicPublish("topic_logs", "user.login", null, message);
+// 可以匹配: user.*, user.#, *.login等
+```
+
+**为什么不推荐其他做法**:
+- 避免所有场景都用direct, 应根据消息分发模式选择Exchange类型
 
 ### rabbitmq  节点的类型有哪些
 
+**推荐做法**: 理解节点类型, 合理规划集群架构
+
+**节点类型**:
+
+1. **磁盘节点(Disk Node)**
+   - 元数据存储在磁盘
+   - 集群中至少需要一个磁盘节点
+   - 负责集群元数据的持久化
+
+2. **内存节点(RAM Node)**
+   - 元数据存储在内存
+   - 性能更好, 但重启后元数据丢失
+   - 集群中可以有多个内存节点
+
+**节点类型选择**:
+- 磁盘节点: 适合存储集群配置、队列定义等元数据
+- 内存节点: 适合高吞吐量场景, 但需要至少一个磁盘节点
+
+**为什么不推荐其他做法**:
+- 避免集群中只有内存节点, 必须至少有一个磁盘节点
+- 避免所有节点都是磁盘节点, 合理使用内存节点提升性能
+
 ### rabbitmq  集群搭建需要注意哪些问题
+
+**推荐做法**: 理解集群搭建的关键点, 避免常见问题
+
+**集群搭建注意事项**:
+
+1. **Erlang Cookie一致**
+   - 所有节点的Erlang Cookie必须相同
+   - 文件位置: `$HOME/.erlang.cookie`
+
+2. **至少一个磁盘节点**
+   - 集群中必须至少有一个磁盘节点
+   - 磁盘节点负责元数据持久化
+
+3. **节点名称规范**
+   - 使用`rabbit@hostname`格式
+   - 确保hostname可解析
+
+4. **网络连通性**
+   - 节点间需要开放端口: 4369(epmd), 25672(集群通信)
+   - 确保防火墙规则正确
+
+5. **镜像队列配置**
+   ```bash
+   # 设置镜像队列
+   rabbitmqctl set_policy ha-all "^" '{"ha-mode":"all"}'
+   ```
+
+6. **集群启动顺序**
+   - 先启动磁盘节点
+   - 再启动其他节点并加入集群
+
+**为什么不推荐其他做法**:
+- 避免Erlang Cookie不一致导致节点无法加入集群
+- 避免没有磁盘节点导致元数据丢失
 
 ### rabbitmq  每个节点是其他节点的完整拷贝吗
 
+**推荐做法**: 理解RabbitMQ集群的数据分布机制
+
+**集群数据分布**:
+
+1. **元数据同步**
+   - Exchange、Queue定义等元数据在所有节点同步
+   - 但消息内容不复制
+
+2. **消息存储**
+   - 消息只存储在创建该Queue的节点
+   - 其他节点不存储消息内容
+
+3. **镜像队列**
+   - 配置镜像队列后, 消息会复制到多个节点
+   - 提供高可用性
+
+**数据分布示例**:
+```
+节点A: Queue1的消息
+节点B: Queue2的消息
+节点C: Queue3的消息
+(如果没有镜像队列)
+```
+
+**为什么不推荐其他理解**:
+- 避免认为所有节点都有完整数据拷贝, 默认情况下消息不复制
+- 需要高可用时应配置镜像队列
+
 ### rabbitmq  集群中唯一一个磁盘节点崩溃了会怎样
+
+**推荐做法**: 理解磁盘节点的重要性, 避免单点故障
+
+**唯一磁盘节点崩溃的影响**:
+
+1. **集群无法变更**
+   - 无法创建新的Exchange、Queue
+   - 无法修改集群配置
+
+2. **消息可能丢失**
+   - 如果消息未持久化, 会丢失
+   - 如果消息已持久化, 磁盘节点恢复后可恢复
+
+3. **集群仍可运行**
+   - 现有Queue仍可收发消息
+   - 但无法进行集群管理操作
+
+**解决方案**:
+- 集群中至少配置2个磁盘节点
+- 使用镜像队列保证高可用
+- 定期备份元数据
+
+**为什么不推荐其他做法**:
+- 避免集群中只有一个磁盘节点, 应配置多个磁盘节点避免单点故障
 
 ### rabbitmq  对集群节点停止顺序有要求吗
 
+**推荐做法**: 理解集群节点停止的正确顺序, 避免数据丢失
+
+**节点停止顺序**:
+
+1. **推荐顺序**
+   - 先停止内存节点
+   - 最后停止磁盘节点
+
+2. **原因**
+   - 磁盘节点负责元数据持久化
+   - 最后停止磁盘节点可以确保元数据已保存
+
+3. **强制停止的影响**
+   - 如果强制停止磁盘节点, 可能导致元数据不一致
+   - 需要从其他节点恢复或重新搭建
+
+**停止命令**:
+```bash
+# 优雅停止
+rabbitmqctl stop
+
+# 强制停止(不推荐)
+rabbitmqctl stop_app
+```
+
+**为什么不推荐其他做法**:
+- 避免先停止磁盘节点, 可能导致元数据丢失
+- 避免强制停止节点, 应优雅停止
+
 ### 消息队列如何保证消息可靠传输
+
+**推荐做法**: 从生产者、Broker、消费者三个层面保证消息可靠传输
+
+**保证消息可靠传输的措施**:
+
+1. **生产者可靠性**
+   - Publisher Confirm机制
+   - 消息持久化
+   - 重试机制
+
+2. **Broker可靠性**
+   - Exchange、Queue持久化
+   - 消息持久化
+   - 镜像队列(高可用)
+   - 集群部署
+
+3. **消费者可靠性**
+   - 手动ack
+   - 处理完消息再ack
+   - 异常时nack并重新入队
+   - 幂等性处理
+
+**完整可靠性方案**:
+```java
+// 1. 生产者: Publisher Confirm + 持久化
+channel.confirmSelect();
+AMQP.BasicProperties props = new AMQP.BasicProperties.Builder()
+    .deliveryMode(2)
+    .build();
+channel.basicPublish("exchange", "routingKey", props, message);
+
+// 2. Broker: 持久化配置
+channel.exchangeDeclare("exchange", "direct", true);
+channel.queueDeclare("queue", true, false, false, null);
+
+// 3. 消费者: 手动ack + 幂等处理
+channel.basicConsume("queue", false, (tag, delivery) -> {
+    try {
+        if (processMessageIdempotent(delivery.getBody())) {
+            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+        } else {
+            channel.basicNack(delivery.getEnvelope().getDeliveryTag(), 
+                             false, true);
+        }
+    } catch (Exception e) {
+        channel.basicNack(delivery.getEnvelope().getDeliveryTag(), 
+                         false, true);
+    }
+}, tag -> {});
+```
+
+**为什么不推荐其他做法**:
+- 避免只保证一个层面的可靠性, 应三个层面都保证
+- 避免忽略幂等性, 消息可能重复消费
 
 ## Redis
 
 ### redis是什么; 都有哪些使用场景
+
+**推荐做法**: 理解Redis的核心特性和适用场景
+
+**Redis是什么**:
+Redis(Remote Dictionary Server)是一个开源的内存数据结构存储系统, 可以用作数据库、缓存和消息中间件
+
+**核心特性**:
+- 基于内存存储, 读写速度快
+- 支持多种数据结构: String、Hash、List、Set、Sorted Set等
+- 支持持久化(RDB、AOF)
+- 支持主从复制、哨兵、集群等高可用方案
+
+**主要使用场景**:
+
+1. **缓存**
+   - 热点数据缓存, 减轻数据库压力
+   - 提升系统响应速度
+
+2. **会话存储**
+   - 存储用户Session信息
+   - 分布式系统共享Session
+
+3. **计数器**
+   - 实时统计、点赞数、访问量等
+   - 使用INCR命令实现原子性操作
+
+4. **排行榜**
+   - 使用Sorted Set实现排行榜
+   - 支持按分数排序
+
+5. **消息队列**
+   - 使用List实现简单的消息队列
+   - Pub/Sub实现发布订阅
+
+6. **分布式锁**
+   - 使用SET NX实现分布式锁
+   - 保证分布式系统数据一致性
+
+7. **限流**
+   - 使用滑动窗口、令牌桶等算法
+   - 防止系统过载
+
+**为什么不推荐其他做法**:
+- 避免将所有数据都放入Redis, 应根据访问频率选择
+- 避免使用Redis存储大量冷数据, 应合理设置过期时间
 
 ### redis 单线程问题
 
@@ -491,21 +2552,435 @@ Redis单线程处理IO请求性能瓶颈主要包括2个方面:
 
 ### redis 支持的数据类型有哪些
 
+**推荐做法**: 理解Redis的五种基本数据类型及其使用场景
+
+**基本数据类型**:
+
+1. **String(字符串)**
+   - 最基础的数据类型, 二进制安全
+   - 最大512MB
+   - 常用命令: SET、GET、INCR、DECR、APPEND
+   - 使用场景: 缓存、计数器、分布式锁
+
+2. **Hash(哈希)**
+   - 键值对集合, 适合存储对象
+   - 每个Hash可存储2^32-1个键值对
+   - 常用命令: HSET、HGET、HGETALL、HDEL
+   - 使用场景: 用户信息、商品信息等对象存储
+
+3. **List(列表)**
+   - 双向链表, 按插入顺序排序
+   - 最多可存储2^32-1个元素
+   - 常用命令: LPUSH、RPUSH、LPOP、RPOP、LRANGE
+   - 使用场景: 消息队列、最新消息列表、文章列表
+
+4. **Set(集合)**
+   - 无序集合, 元素唯一
+   - 支持交集、并集、差集操作
+   - 常用命令: SADD、SMEMBERS、SINTER、SUNION
+   - 使用场景: 标签、共同关注、去重
+
+5. **Sorted Set(有序集合)**
+   - 有序集合, 每个元素关联一个分数(score)
+   - 按分数排序, 分数可重复
+   - 常用命令: ZADD、ZRANGE、ZREVRANGE、ZRANK
+   - 使用场景: 排行榜、延时队列、范围查询
+
+**高级数据类型**:
+
+6. **BitMap(位图)**
+   - 基于String实现的位操作
+   - 常用命令: SETBIT、GETBIT、BITCOUNT、BITOP
+   - 使用场景: 用户签到、统计活跃用户、布隆过滤器
+
+7. **HyperLogLog**
+   - 用于基数统计, 误差率约0.81%
+   - 常用命令: PFADD、PFCOUNT、PFMERGE
+   - 使用场景: UV统计、独立访客数
+
+8. **Geospatial(地理空间)**
+   - 存储地理位置信息
+   - 常用命令: GEOADD、GEODIST、GEORADIUS
+   - 使用场景: 附近的人、距离计算
+
+**为什么不推荐其他理解**:
+- 避免将所有数据都用String存储, 应根据数据结构选择合适类型
+- 理解每种类型的底层实现, 合理选择提升性能
+
 ### redis 支持的java客户端有哪些
 
 Redisson、Jedis、lettuce
 
 ### jedis 和 redisson 有哪些区别
 
+**推荐做法**: 根据项目需求选择合适的Redis客户端
+
+**区别对比**:
+
+| 特性 | Jedis | Redisson |
+|------|-------|----------|
+| **API风格** | 直接操作Redis命令 | 面向对象API |
+| **连接管理** | 直连模式, 需要手动管理连接池 | 基于Netty的异步非阻塞 |
+| **分布式功能** | 需要自己实现 | 内置分布式锁、限流器等 |
+| **序列化** | 需要手动序列化 | 自动序列化 |
+| **线程安全** | 非线程安全, 需使用连接池 | 线程安全 |
+| **性能** | 同步阻塞IO | 异步非阻塞IO, 性能更好 |
+| **学习成本** | 低(直接对应Redis命令) | 中(需要学习API) |
+
+**Jedis示例**:
+```java
+// Jedis: 直接操作Redis命令
+Jedis jedis = jedisPool.getResource();
+try {
+    jedis.set("key", "value");
+    String value = jedis.get("key");
+} finally {
+    jedis.close();
+}
+```
+
+**Redisson示例**:
+```java
+// Redisson: 面向对象API
+RedissonClient redisson = Redisson.create(config);
+RBucket<String> bucket = redisson.getBucket("key");
+bucket.set("value");
+String value = bucket.get();
+```
+
+**推荐选择**:
+- **Jedis**: 简单场景, 直接操作Redis命令, 学习成本低
+- **Redisson**: 复杂场景, 需要分布式锁、限流等高级功能, 性能要求高
+
+**为什么不推荐其他做法**:
+- 避免在高并发场景使用Jedis直连, 应使用连接池
+- 避免重复造轮子, Redisson已实现分布式锁等功能
+
 ### 怎么保证缓存和数据库数据一致性
+
+**推荐做法**: 采用Cache Aside模式, 先更新数据库再删除缓存, 配合延迟双删策略
+
+**缓存更新策略**:
+
+1. **Cache Aside模式(推荐)**
+   - 读: 先查缓存, 未命中查数据库并写入缓存
+   - 写: 先更新数据库, 再删除缓存
+   ```java
+   // 读操作
+   public User getUser(Long id) {
+       String key = "user:" + id;
+       String userJson = redis.get(key);
+       if (userJson != null) {
+           return JSON.parseObject(userJson, User.class);
+       }
+       User user = userMapper.selectById(id);
+       if (user != null) {
+           redis.setex(key, 3600, JSON.toJSONString(user));
+       }
+       return user;
+   }
+   
+   // 写操作
+   @Transactional
+   public void updateUser(User user) {
+       // 1. 更新数据库
+       userMapper.updateById(user);
+       // 2. 删除缓存
+       redis.del("user:" + user.getId());
+   }
+   ```
+
+2. **延迟双删策略(解决并发问题)**
+   ```java
+   @Transactional
+   public void updateUser(User user) {
+       // 1. 先删除缓存
+       redis.del("user:" + user.getId());
+       // 2. 更新数据库
+       userMapper.updateById(user);
+       // 3. 延迟删除缓存(异步)
+       CompletableFuture.runAsync(() -> {
+           try {
+               Thread.sleep(500); // 延迟500ms
+               redis.del("user:" + user.getId());
+           } catch (InterruptedException e) {
+               Thread.currentThread().interrupt();
+           }
+       });
+   }
+   ```
+
+3. **消息队列保证最终一致性**
+   ```java
+   // 更新数据库后发送消息
+   @Transactional
+   public void updateUser(User user) {
+       userMapper.updateById(user);
+       // 发送消息到MQ
+       rabbitTemplate.convertAndSend("cache.update", "user:" + user.getId());
+   }
+   
+   // 消费者删除缓存
+   @RabbitListener(queues = "cache.update")
+   public void handleCacheUpdate(String key) {
+       redis.del(key);
+   }
+   ```
+
+4. **使用Canal监听binlog**
+   - Canal监听MySQL binlog
+   - 自动删除或更新Redis缓存
+   - 保证最终一致性
+
+**为什么不推荐其他做法**:
+- 避免先删除缓存再更新数据库, 可能导致脏读
+- 避免更新缓存而非删除, 可能写入无效数据
+- 避免忽略并发场景, 应使用延迟双删或消息队列
 
 ### redis 持久化有几种
 
+**推荐做法**: 理解RDB和AOF两种持久化方式, 根据场景选择或组合使用
+
+**持久化方式**:
+
+1. **RDB(Redis Database)**
+   - 快照方式, 定期将内存数据保存到磁盘
+   - 文件格式: 二进制dump.rdb文件
+   - 触发方式:
+     - 手动: SAVE(阻塞)、BGSAVE(后台)
+     - 自动: 配置save规则(如save 900 1)
+   - 优点:
+     - 文件小, 恢复速度快
+     - 适合备份和灾难恢复
+   - 缺点:
+     - 可能丢失最后一次快照后的数据
+     - 数据量大时fork子进程耗时
+
+2. **AOF(Append Only File)**
+   - 追加日志方式, 记录每个写操作
+   - 文件格式: 文本文件, 记录Redis命令
+   - 同步策略:
+     - always: 每次写操作都同步(最安全, 性能最差)
+     - everysec: 每秒同步一次(推荐, 平衡性能和安全性)
+     - no: 由操作系统决定(性能最好, 可能丢失数据)
+   - 优点:
+     - 数据丢失少, 最多丢失1秒数据
+     - AOF文件可读, 便于问题排查
+   - 缺点:
+     - 文件体积大
+     - 恢复速度慢
+
+**推荐配置**:
+```properties
+# RDB配置
+save 900 1      # 900秒内至少1个key变化
+save 300 10     # 300秒内至少10个key变化
+save 60 10000   # 60秒内至少10000个key变化
+
+# AOF配置
+appendonly yes
+appendfsync everysec  # 推荐使用everysec
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+```
+
+**混合持久化(Redis 4.0+)**:
+- RDB + AOF同时开启
+- AOF文件包含RDB快照 + 增量AOF日志
+- 兼顾RDB的快速恢复和AOF的数据完整性
+
+**为什么不推荐其他做法**:
+- 避免只使用RDB, 可能丢失较多数据
+- 避免AOF使用always策略, 性能影响大, 推荐everysec
+
 ### redis 怎么实现分布式锁
+
+**推荐做法**: 使用SET命令的NX和EX选项实现分布式锁, 或使用Redisson
+
+**基础实现(SET NX EX)**:
+```java
+// 加锁
+public boolean tryLock(String key, String value, long expireTime) {
+    // SET key value NX EX expireTime
+    // NX: 仅当key不存在时设置
+    // EX: 设置过期时间(秒)
+    String result = jedis.set(key, value, "NX", "EX", expireTime);
+    return "OK".equals(result);
+}
+
+// 释放锁(需要判断value, 防止误删)
+public boolean releaseLock(String key, String value) {
+    String script = "if redis.call('get', KEYS[1]) == ARGV[1] then " +
+                    "return redis.call('del', KEYS[1]) else return 0 end";
+    Object result = jedis.eval(script, Collections.singletonList(key), 
+                               Collections.singletonList(value));
+    return Long.valueOf(1).equals(result);
+}
+```
+
+**Redisson实现(推荐)**:
+```java
+// Redisson分布式锁
+RLock lock = redisson.getLock("myLock");
+try {
+    // 尝试加锁, 最多等待100秒, 锁定后30秒自动解锁
+    boolean res = lock.tryLock(100, 30, TimeUnit.SECONDS);
+    if (res) {
+        // 业务逻辑
+    }
+} catch (InterruptedException e) {
+    Thread.currentThread().interrupt();
+} finally {
+    if (lock.isHeldByCurrentThread()) {
+        lock.unlock();
+    }
+}
+```
+
+**关键要点**:
+1. **原子性**: 使用SET NX EX保证加锁和设置过期时间的原子性
+2. **唯一值**: 使用UUID等唯一值, 防止误删其他线程的锁
+3. **过期时间**: 必须设置过期时间, 防止死锁
+4. **释放锁**: 使用Lua脚本保证判断和删除的原子性
+
+**为什么不推荐其他做法**:
+- 避免使用SETNX + EXPIRE(非原子操作, 可能死锁)
+- 避免不设置过期时间(可能导致死锁)
+- 避免直接DEL删除锁(可能误删其他线程的锁)
 
 ### 如果有大量的请求进来怎么解决
 
+**推荐做法**: 采用多级防护策略, 从接入层到应用层逐层限流
+
+**解决方案**:
+
+1. **接入层限流**
+   - Nginx限流: limit_req模块限制请求速率
+   - 网关限流: Spring Cloud Gateway、Sentinel限流
+   ```nginx
+   # Nginx限流配置
+   limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
+   limit_req zone=api_limit burst=20 nodelay;
+   ```
+
+2. **应用层限流**
+   - 令牌桶算法: 控制请求速率
+   - 漏桶算法: 平滑突发流量
+   - 滑动窗口: 限制时间窗口内请求数
+   ```java
+   // 使用Guava RateLimiter
+   RateLimiter rateLimiter = RateLimiter.create(10.0); // 每秒10个请求
+   if (rateLimiter.tryAcquire()) {
+       // 处理请求
+   } else {
+       // 拒绝请求
+   }
+   ```
+
+3. **Redis限流**
+   - 使用Redis实现分布式限流
+   ```java
+   // 滑动窗口限流
+   public boolean isAllowed(String key, int limit, int window) {
+       long now = System.currentTimeMillis();
+       long windowStart = now - window * 1000;
+       jedis.zremrangeByScore(key, 0, windowStart);
+       long count = jedis.zcard(key);
+       if (count < limit) {
+           jedis.zadd(key, now, UUID.randomUUID().toString());
+           jedis.expire(key, window);
+           return true;
+       }
+       return false;
+   }
+   ```
+
+4. **缓存预热**
+   - 系统启动时预加载热点数据
+   - 定时刷新缓存, 避免缓存过期
+
+5. **降级策略**
+   - 返回默认值或缓存数据
+   - 熔断机制, 保护下游服务
+
+6. **队列削峰**
+   - 使用消息队列缓冲请求
+   - 异步处理非实时业务
+
+**为什么不推荐其他做法**:
+- 避免单一限流策略, 应多层防护
+- 避免限流过严导致正常请求被拒绝, 应合理设置阈值
+
 ### redis 怎么保证可用性
+
+**推荐做法**: 采用主从复制、哨兵模式或集群模式保证高可用
+
+**高可用方案**:
+
+1. **主从复制(Master-Slave)**
+   - 主节点负责写, 从节点负责读
+   - 主节点故障需要手动切换
+   - 适用场景: 读写分离, 数据备份
+   ```bash
+   # 配置从节点
+   SLAVEOF master_ip master_port
+   ```
+
+2. **哨兵模式(Sentinel)(推荐)**
+   - 监控主从节点健康状态
+   - 自动故障转移
+   - 自动通知客户端新的主节点地址
+   ```bash
+   # 启动哨兵
+   redis-sentinel sentinel.conf
+   ```
+   ```properties
+   # sentinel.conf配置
+   sentinel monitor mymaster 127.0.0.1 6379 2
+   sentinel down-after-milliseconds mymaster 5000
+   sentinel failover-timeout mymaster 10000
+   ```
+
+3. **集群模式(Cluster)(推荐)**
+   - 多主多从, 数据分片
+   - 自动故障转移
+   - 支持水平扩展
+   ```bash
+   # 创建集群
+   redis-cli --cluster create \
+     127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 \
+     127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 \
+     --cluster-replicas 1
+   ```
+
+4. **数据持久化**
+   - RDB + AOF双重保障
+   - 防止数据丢失
+
+5. **客户端高可用**
+   ```java
+   // Jedis连接池配置
+   JedisPoolConfig config = new JedisPoolConfig();
+   config.setMaxTotal(100);
+   config.setMaxIdle(20);
+   config.setTestOnBorrow(true);
+   
+   // Redisson哨兵模式
+   Config config = new Config();
+   config.useSentinelServers()
+       .addSentinelAddress("127.0.0.1:26379")
+       .setMasterName("mymaster");
+   ```
+
+**高可用指标**:
+- **RTO(恢复时间目标)**: 哨兵模式通常<30秒
+- **RPO(数据恢复点目标)**: 取决于持久化策略
+- **可用性**: 99.9%以上(年停机时间<8.76小时)
+
+**为什么不推荐其他做法**:
+- 避免单机部署, 无高可用保障
+- 避免只使用主从复制, 故障需要手动切换
+- 生产环境推荐使用哨兵或集群模式
 
 ### redis 分布式锁有什么缺陷
 
@@ -523,16 +2998,223 @@ Redisson、Jedis、lettuce
 
 ### redis 如何做内存优化
 
+**推荐做法**: 从数据结构、编码方式、过期策略等多维度优化内存
+
+**内存优化策略**:
+
+1. **合理选择数据类型**
+   - 小数据用String, 对象用Hash
+   - 避免使用String存储大对象, 应使用Hash分段存储
+   ```java
+   // 不推荐: 大对象用String
+   jedis.set("user:1001", JSON.toJSONString(user)); // 序列化后可能很大
+   
+   // 推荐: 使用Hash
+   jedis.hset("user:1001", "name", user.getName());
+   jedis.hset("user:1001", "age", String.valueOf(user.getAge()));
+   ```
+
+2. **使用压缩编码**
+   - Redis自动选择合适编码(ziplist、intset等)
+   - Hash、List、Set、ZSet在元素少时使用压缩编码
+   ```properties
+   # 配置压缩编码阈值
+   hash-max-ziplist-entries 512
+   hash-max-ziplist-value 64
+   list-max-ziplist-size -2
+   set-max-intset-entries 512
+   ```
+
+3. **设置合理的过期时间**
+   - 避免数据无限制增长
+   - 使用EXPIRE设置过期时间
+
+4. **使用对象共享池**
+   - 0-9999的整数会共享, 减少内存占用
+   ```properties
+   # 配置共享对象池大小
+   # 注意: 共享对象池会消耗CPU, 需权衡
+   ```
+
+5. **避免存储大Key**
+   - 单个Key的value不要超过10KB
+   - 大Key会导致阻塞、网络延迟等问题
+   ```java
+   // 不推荐: 大Key
+   jedis.set("big:key", hugeString); // 可能几MB
+   
+   // 推荐: 拆分大Key
+   for (int i = 0; i < chunks.length; i++) {
+       jedis.set("big:key:" + i, chunks[i]);
+   }
+   ```
+
+6. **使用BitMap替代Set**
+   - 对于布尔值场景, BitMap更省内存
+   ```java
+   // Set存储用户ID: 每个ID占用更多内存
+   jedis.sadd("active:users", "1001", "1002");
+   
+   // BitMap存储: 每个用户只占1bit
+   jedis.setbit("active:users", 1001, true);
+   ```
+
+7. **定期清理无用数据**
+   - 使用SCAN命令定期清理过期Key
+   - 监控内存使用情况
+
+**内存分析工具**:
+```bash
+# 查看内存使用情况
+redis-cli --bigkeys
+
+# 分析内存使用
+redis-cli MEMORY USAGE key
+
+# 查看内存统计
+redis-cli INFO memory
+```
+
+**为什么不推荐其他做法**:
+- 避免所有数据都用String存储, 应根据场景选择合适类型
+- 避免不设置过期时间, 导致内存无限增长
+
 ### redis 淘汰策略有哪些
 
 ### redis 常见的性能问题有哪些 怎么解决
 
+**推荐做法**: 识别常见性能问题, 采用针对性优化方案
+
+**常见性能问题及解决方案**:
+
+1. **慢查询**
+   - **问题**: 执行时间过长的命令阻塞Redis
+   - **解决**:
+     ```bash
+     # 设置慢查询阈值(微秒)
+     CONFIG SET slowlog-log-slower-than 10000
+     # 查看慢查询日志
+     SLOWLOG GET 10
+     ```
+   - **优化**: 避免使用KEYS、SMEMBERS等O(N)命令, 使用SCAN替代
+
+2. **大Key问题**
+   - **问题**: 单个Key过大导致阻塞、网络延迟
+   - **解决**:
+     ```bash
+     # 查找大Key
+     redis-cli --bigkeys
+     # 分析Key大小
+     MEMORY USAGE key
+     ```
+   - **优化**: 拆分大Key, 使用Hash分段存储
+
+3. **内存碎片**
+   - **问题**: 内存使用率低但实际内存不足
+   - **解决**:
+     ```bash
+     # 查看内存碎片率
+     INFO memory
+     # 内存碎片率 = used_memory_rss / used_memory
+     # 如果 > 1.5, 考虑重启或清理
+     ```
+
+4. **频繁的Key过期**
+   - **问题**: 大量Key同时过期导致阻塞
+   - **解决**: 给过期时间添加随机值, 避免集中过期
+     ```java
+     // 不推荐: 固定过期时间
+     jedis.setex("key", 3600, "value");
+     
+     // 推荐: 添加随机值
+     int expireTime = 3600 + new Random().nextInt(600); // 3600-4200秒
+     jedis.setex("key", expireTime, "value");
+     ```
+
+5. **网络延迟**
+   - **问题**: 客户端与Redis服务器网络延迟高
+   - **解决**: 
+     - 使用连接池减少连接开销
+     - 使用Pipeline批量操作
+     ```java
+     // Pipeline批量操作
+     Pipeline pipeline = jedis.pipelined();
+     for (int i = 0; i < 1000; i++) {
+         pipeline.set("key" + i, "value" + i);
+     }
+     pipeline.sync();
+     ```
+
+6. **持久化阻塞**
+   - **问题**: RDB/AOF持久化导致阻塞
+   - **解决**:
+     - RDB使用BGSAVE而非SAVE
+     - AOF使用everysec而非always
+     - 避免在高峰期进行持久化
+
+7. **CPU使用率高**
+   - **问题**: 复杂命令或大量连接导致CPU高
+   - **解决**:
+     - 优化命令, 避免复杂计算
+     - 限制连接数
+     - 使用读写分离
+
+**性能监控**:
+```bash
+# 实时监控命令
+redis-cli --stat
+
+# 查看性能指标
+INFO stats
+INFO commandstats
+```
+
+**为什么不推荐其他做法**:
+- 避免使用KEYS命令在生产环境, 应使用SCAN
+- 避免频繁创建连接, 应使用连接池
+
 ### redis删除过期key的算法
 
-- 惰性清除 在访问key时, 如果发现key已经过期, 那么会将key删除
-- 定时清理
-- 定期删除
-- 内存不够时清理
+**推荐做法**: 理解Redis的三种过期Key删除策略, 合理配置保证性能
+
+**过期Key删除策略**:
+
+1. **惰性删除(Lazy Expiration)**
+   - **时机**: 访问Key时检查是否过期
+   - **优点**: CPU友好, 只删除被访问的过期Key
+   - **缺点**: 过期Key不被访问会一直占用内存
+   ```java
+   // 访问Key时检查
+   String value = jedis.get("key");
+   // 如果key已过期, Redis会删除它并返回null
+   ```
+
+2. **定期删除(Periodic Expiration)**
+   - **时机**: 每隔一定时间扫描过期Key
+   - **流程**:
+     - 随机抽取20个Key检查
+     - 删除其中过期的Key
+     - 如果过期Key比例>25%, 继续扫描
+   - **优点**: 平衡CPU和内存
+   - **配置**: 默认每秒执行10次(可通过hz配置)
+   ```properties
+   # 配置定期删除频率(1-500)
+   hz 10
+   ```
+
+3. **内存不够时删除**
+   - **时机**: 执行写入命令时, 内存不足触发淘汰策略
+   - **流程**: 按照配置的淘汰策略删除Key
+   - **淘汰策略**: 见"redis 淘汰策略有哪些"
+
+**三种策略配合**:
+- **惰性删除**: 保证访问时立即删除过期Key
+- **定期删除**: 定期清理过期Key, 减少内存占用
+- **内存淘汰**: 内存不足时强制删除, 保证服务可用
+
+**为什么不推荐其他理解**:
+- 避免只依赖惰性删除, 过期Key可能长期占用内存
+- 避免hz设置过大, 影响Redis性能
 
 当执行写入命令时, 如果发现内存不够, 那么就会按照配置的淘汰策略清理内存
 
@@ -563,31 +3245,706 @@ Redisson、Jedis、lettuce
 
 ### 在集群模式下, Redis 的 key 是如何寻址的
 
+**推荐做法**: 理解Redis Cluster的Hash Slot寻址机制
+
+**Redis Cluster寻址机制**:
+
+1. **Hash Slot(哈希槽)**
+   - Redis Cluster使用16384个槽位(0-16383)
+   - 每个节点负责一部分槽位
+   - Key通过CRC16算法计算hash值, 然后对16384取模得到slot
+
+2. **寻址流程**:
+   ```
+   Key → CRC16(key) → CRC16(key) % 16384 → Slot → Node
+   ```
+
+3. **槽位分配**:
+   ```bash
+   # 查看槽位分配
+   CLUSTER SLOTS
+   # 输出示例:
+   # 1) 1) (integer) 0
+   #    2) (integer) 5460
+   #    3) 1) "127.0.0.1"
+   #       2) (integer) 7000
+   #    4) 1) "127.0.0.1"
+   #       2) (integer) 7001
+   ```
+
+4. **客户端寻址**:
+   - 客户端连接任意节点
+   - 如果Key不在当前节点, 返回MOVED错误和正确节点地址
+   - 客户端更新路由表, 重定向到正确节点
+
+5. **示例**:
+   ```java
+   // Key "user:1001"的寻址过程
+   // 1. CRC16("user:1001") = 12345
+   // 2. 12345 % 16384 = 12345
+   // 3. Slot 12345 可能分配给 Node A
+   // 4. 客户端连接Node A操作该Key
+   ```
+
+**为什么不推荐其他理解**:
+- 避免认为Redis Cluster使用一致性Hash, 实际使用Hash Slot
+- 理解Hash Slot的优势: 便于数据迁移和负载均衡
+
 ### 分布式寻址都有哪些算法; 说一下一致性 hash
 
-- hash 算法(大量缓存重建)
-- 一致性 hash 算法(自动缓存迁移)+ 虚拟节点(自动负载均衡)
-- redis cluster 的 hash slot 算法
+**推荐做法**: 理解不同分布式寻址算法的优缺点, 根据场景选择
+
+**分布式寻址算法**:
+
+1. **Hash算法(取模)**
+   - **原理**: `hash(key) % node_count`
+   - **优点**: 实现简单, 分布均匀
+   - **缺点**: 
+     - 节点增减需要重新计算所有Key
+     - 大量缓存重建, 影响性能
+   - **适用场景**: 节点数量固定不变
+
+2. **一致性Hash算法**
+   - **原理**: 
+     - 将Hash值空间组织成虚拟的圆环(0-2^32-1)
+     - 节点和Key都映射到环上
+     - Key顺时针找到的第一个节点即为目标节点
+   - **优点**:
+     - 节点增减只影响相邻节点
+     - 缓存迁移量小
+   - **缺点**:
+     - 节点分布不均可能导致数据倾斜
+     - 需要虚拟节点解决负载均衡问题
+   - **虚拟节点**:
+     ```java
+     // 为每个物理节点创建多个虚拟节点
+     // 虚拟节点数越多, 分布越均匀
+     for (int i = 0; i < virtualNodeCount; i++) {
+         String virtualNode = node + "#" + i;
+         int hash = hash(virtualNode);
+         ring.put(hash, node);
+     }
+     ```
+   - **适用场景**: Memcached、分布式缓存
+
+3. **Hash Slot算法(Redis Cluster)**
+   - **原理**: 
+     - 固定16384个槽位
+     - Key通过CRC16计算后对16384取模得到slot
+     - 槽位可以动态分配给不同节点
+   - **优点**:
+     - 槽位迁移粒度小, 只迁移部分槽位
+     - 负载均衡好, 可以手动调整槽位分布
+     - 支持动态扩容缩容
+   - **缺点**:
+     - 实现复杂
+     - 需要客户端支持重定向
+   - **适用场景**: Redis Cluster
+
+**一致性Hash详细说明**:
+```java
+public class ConsistentHash {
+    private final SortedMap<Integer, String> ring = new TreeMap<>();
+    private final int virtualNodeCount;
+    
+    public ConsistentHash(int virtualNodeCount) {
+        this.virtualNodeCount = virtualNodeCount;
+    }
+    
+    // 添加节点
+    public void addNode(String node) {
+        for (int i = 0; i < virtualNodeCount; i++) {
+            String virtualNode = node + "#" + i;
+            int hash = hash(virtualNode);
+            ring.put(hash, node);
+        }
+    }
+    
+    // 查找节点
+    public String getNode(String key) {
+        if (ring.isEmpty()) {
+            return null;
+        }
+        int hash = hash(key);
+        SortedMap<Integer, String> tailMap = ring.tailMap(hash);
+        if (tailMap.isEmpty()) {
+            return ring.get(ring.firstKey()); // 环首节点
+        }
+        return tailMap.get(tailMap.firstKey());
+    }
+    
+    private int hash(String key) {
+        return key.hashCode();
+    }
+}
+```
+
+**算法对比**:
+
+| 算法 | 缓存重建量 | 负载均衡 | 实现复杂度 | 适用场景 |
+|------|-----------|---------|-----------|---------|
+| Hash取模 | 高(全部重建) | 好 | 低 | 节点固定 |
+| 一致性Hash | 低(部分重建) | 需虚拟节点 | 中 | 分布式缓存 |
+| Hash Slot | 低(槽位迁移) | 好 | 高 | Redis Cluster |
+
+**为什么不推荐其他做法**:
+- 避免在节点经常变化的场景使用Hash取模, 应使用一致性Hash
+- 避免一致性Hash不使用虚拟节点, 会导致负载不均
 
 ### Redis 的并发竞争问题是什么; 如何解决这个问题
 
+**推荐做法**: 理解并发竞争问题的本质, 使用分布式锁或CAS机制解决
+
+**并发竞争问题**:
+
+1. **问题描述**
+   - 多个客户端同时修改同一个Key
+   - 导致数据不一致或覆盖问题
+   - 典型场景: 库存扣减、计数器递增
+
+2. **问题示例**:
+   ```java
+   // 线程A和B同时执行
+   // 线程A: value = get("count"); value++; set("count", value);
+   // 线程B: value = get("count"); value++; set("count", value);
+   // 结果: 期望+2, 实际只+1(丢失更新)
+   ```
+
+**解决方案**:
+
+1. **分布式锁(推荐)**
+   ```java
+   // 使用分布式锁保证原子性
+   RLock lock = redisson.getLock("count:lock");
+   try {
+       lock.lock();
+       int value = Integer.parseInt(jedis.get("count"));
+       value++;
+       jedis.set("count", String.valueOf(value));
+   } finally {
+       lock.unlock();
+   }
+   ```
+
+2. **Redis原子命令**
+   ```java
+   // 使用INCR原子命令
+   Long result = jedis.incr("count");
+   // 或使用INCRBY
+   Long result = jedis.incrBy("count", 1);
+   ```
+
+3. **Lua脚本(推荐, 保证原子性)**
+   ```java
+   String script = "local current = redis.call('get', KEYS[1]) " +
+                   "if current == false then " +
+                   "  current = 0 " +
+                   "end " +
+                   "local new = current + ARGV[1] " +
+                   "redis.call('set', KEYS[1], new) " +
+                   "return new";
+   Object result = jedis.eval(script, 
+                              Collections.singletonList("count"),
+                              Collections.singletonList("1"));
+   ```
+
+4. **WATCH + MULTI(乐观锁)**
+   ```java
+   // 使用WATCH监控Key变化
+   jedis.watch("count");
+   Transaction tx = jedis.multi();
+   tx.incr("count");
+   List<Object> results = tx.exec();
+   if (results == null) {
+       // 事务失败, Key被其他客户端修改
+       // 重试或放弃
+   }
+   ```
+
+5. **版本号机制**
+   ```java
+   // 使用版本号控制并发
+   String versionKey = "count:version";
+   String dataKey = "count:data";
+   
+   jedis.watch(versionKey);
+   int version = Integer.parseInt(jedis.get(versionKey));
+   Transaction tx = jedis.multi();
+   tx.incr(versionKey);
+   tx.set(dataKey, newValue);
+   List<Object> results = tx.exec();
+   ```
+
+**推荐方案选择**:
+- **简单操作**: 使用原子命令(INCR、DECR等)
+- **复杂操作**: 使用Lua脚本
+- **需要重试**: 使用分布式锁
+- **读多写少**: 使用WATCH + MULTI乐观锁
+
+**为什么不推荐其他做法**:
+- 避免在Redis中实现复杂的业务逻辑, 应使用Lua脚本保证原子性
+- 避免使用WATCH + MULTI处理高并发场景, 失败率高, 应使用分布式锁
+
 ### 了解 Redis 事务的 CAS 方案吗
+
+**推荐做法**: 理解Redis事务的CAS(Compare-And-Swap)机制, 使用WATCH实现乐观锁
+
+**Redis事务CAS机制**:
+
+1. **WATCH命令**
+   - 监控一个或多个Key
+   - 如果被监控的Key在EXEC执行前被修改, 事务将失败
+   - 实现乐观锁机制
+
+2. **事务执行流程**:
+   ```java
+   // 1. WATCH监控Key
+   jedis.watch("balance");
+   
+   // 2. 获取当前值
+   int balance = Integer.parseInt(jedis.get("balance"));
+   
+   // 3. 开启事务
+   Transaction tx = jedis.multi();
+   
+   // 4. 在事务中执行命令
+   if (balance >= 100) {
+       tx.decrBy("balance", 100);
+   }
+   
+   // 5. 执行事务
+   List<Object> results = tx.exec();
+   
+   // 6. 判断事务是否成功
+   if (results == null) {
+       // 事务失败, Key被其他客户端修改
+       // 需要重试
+   } else {
+       // 事务成功
+   }
+   ```
+
+3. **CAS实现示例**:
+   ```java
+   public boolean cas(String key, String expectedValue, String newValue) {
+       jedis.watch(key);
+       String currentValue = jedis.get(key);
+       
+       if (!expectedValue.equals(currentValue)) {
+           jedis.unwatch();
+           return false; // 值不匹配, CAS失败
+       }
+       
+       Transaction tx = jedis.multi();
+       tx.set(key, newValue);
+       List<Object> results = tx.exec();
+       
+       return results != null; // 返回CAS是否成功
+   }
+   ```
+
+4. **CAS vs 分布式锁**:
+   | 特性 | CAS(乐观锁) | 分布式锁(悲观锁) |
+   |------|-----------|----------------|
+   | **冲突检测** | 执行时检测 | 执行前获取锁 |
+   | **性能** | 无锁等待, 性能好 | 需要等待锁, 性能较差 |
+   | **适用场景** | 读多写少, 冲突少 | 写多, 冲突频繁 |
+   | **失败处理** | 需要重试机制 | 阻塞等待 |
+
+5. **实际应用场景**:
+   ```java
+   // 账户余额扣减(使用CAS)
+   public boolean deductBalance(String userId, int amount) {
+       String key = "balance:" + userId;
+       int retryCount = 0;
+       int maxRetries = 3;
+       
+       while (retryCount < maxRetries) {
+           jedis.watch(key);
+           int balance = Integer.parseInt(jedis.get(key));
+           
+           if (balance < amount) {
+               jedis.unwatch();
+               return false; // 余额不足
+           }
+           
+           Transaction tx = jedis.multi();
+           tx.decrBy(key, amount);
+           List<Object> results = tx.exec();
+           
+           if (results != null) {
+               return true; // CAS成功
+           }
+           
+           retryCount++; // CAS失败, 重试
+           try {
+               Thread.sleep(10); // 短暂等待后重试
+           } catch (InterruptedException e) {
+               Thread.currentThread().interrupt();
+               return false;
+           }
+       }
+       
+       return false; // 重试次数用完
+   }
+   ```
+
+**为什么不推荐其他做法**:
+- 避免在高并发写场景使用CAS, 失败率高, 应使用分布式锁
+- 避免CAS无限重试, 应设置最大重试次数
+- 避免WATCH过多Key, 影响性能
 
 ### zset底层; 为什么底层要同时使用哈希表+跳表的结构
 
+**推荐做法**: 理解ZSet的双重数据结构设计, 兼顾查询性能和范围查询
+
+**ZSet底层结构**:
+
+1. **双重数据结构**
+   - **Hash表**: 存储member到score的映射, O(1)时间复杂度查询score
+   - **跳表(SkipList)**: 按score排序存储member, 支持范围查询和排名操作
+
+2. **为什么需要两种结构**:
+   ```java
+   // Hash表: 快速查询member的score
+   ZSCORE key member  // O(1) - 使用Hash表
+   
+   // 跳表: 支持范围查询和排名
+   ZRANGE key start stop  // O(log N) - 使用跳表
+   ZRANK key member        // O(log N) - 使用跳表
+   ```
+
+3. **数据结构对比**:
+   | 操作 | 只用Hash表 | 只用跳表 | Hash+跳表 |
+   |------|-----------|---------|----------|
+   | **查询score** | O(1) ✅ | O(log N) | O(1) ✅ |
+   | **范围查询** | O(N) ❌ | O(log N) ✅ | O(log N) ✅ |
+   | **排名查询** | O(N) ❌ | O(log N) ✅ | O(log N) ✅ |
+   | **插入/删除** | O(1) ✅ | O(log N) | O(log N) |
+
+4. **内存占用**:
+   - Hash表: 存储member和score的映射
+   - 跳表: 存储member、score和指针
+   - 虽然占用更多内存, 但换来了更好的查询性能
+
+5. **实际应用**:
+   ```java
+   // 排行榜场景
+   // 1. 查询用户分数(使用Hash表)
+   Double score = jedis.zscore("leaderboard", "user:1001");
+   
+   // 2. 获取Top 10(使用跳表)
+   Set<String> top10 = jedis.zrevrange("leaderboard", 0, 9);
+   
+   // 3. 查询用户排名(使用跳表)
+   Long rank = jedis.zrevrank("leaderboard", "user:1001");
+   ```
+
+**为什么不推荐其他做法**:
+- 避免只使用Hash表, 无法高效支持范围查询和排名
+- 避免只使用跳表, 查询score性能较差
+- 理解空间换时间的设计思想
+
 ### 讲一下跳表的结构
 
-### redis 数据结构
+**推荐做法**: 理解跳表的多层链表结构, 掌握其查询和插入原理
+
+**跳表(SkipList)结构**:
+
+1. **基本结构**
+   - 多层有序链表
+   - 底层是完整的有序链表(Level 0)
+   - 上层是索引层, 节点数量逐层减半
+   - 每个节点包含: 数据、分数(score)、多层指针数组
+
+2. **结构示意图**:
+   ```
+   Level 3:  Head ──────────────────────────────> NULL
+   Level 2:  Head ──────────> Node3 ──────────> NULL
+   Level 1:  Head ──> Node2 ──> Node3 ──> Node5 ─> NULL
+   Level 0:  Head ──> Node1 ──> Node2 ──> Node3 ──> Node4 ──> Node5 ──> NULL
+             (1,10)  (2,20)   (3,30)   (4,40)   (5,50)
+   ```
+
+3. **节点结构**:
+   ```java
+   class SkipListNode {
+       String member;           // 成员
+       double score;            // 分数
+       SkipListNode[] forward;  // 每层的下一个节点指针
+       SkipListNode backward;   // 后退指针(用于反向遍历)
+   }
+   ```
+
+4. **查询过程**:
+   ```java
+   // 查询score=30的节点
+   // 1. 从最高层开始, 向右查找
+   // 2. 如果下一个节点的score > 30, 向下移动一层
+   // 3. 如果下一个节点的score <= 30, 向右移动
+   // 4. 重复直到找到或到达底层
+   
+   // 时间复杂度: O(log N)
+   ```
+
+5. **插入过程**:
+   ```java
+   // 插入新节点(member="new", score=35)
+   // 1. 找到插入位置(每层都要记录前驱节点)
+   // 2. 随机生成层数(概率为0.5的几何分布)
+   // 3. 创建新节点, 设置各层指针
+   // 4. 更新前驱节点的指针指向新节点
+   
+   // 时间复杂度: O(log N)
+   ```
+
+6. **层数生成**:
+   ```java
+   // Redis跳表层数生成算法
+   int randomLevel() {
+       int level = 1;
+       // 50%概率增加一层
+       while (Math.random() < 0.5 && level < MAX_LEVEL) {
+           level++;
+       }
+       return level;
+   }
+   // 期望层数约为log N
+   ```
+
+7. **优势**:
+   - **查询效率**: O(log N), 接近平衡二叉树
+   - **实现简单**: 比红黑树、AVL树简单
+   - **范围查询**: 支持高效的范围查询
+   - **插入删除**: O(log N), 无需旋转操作
+
+8. **与平衡树对比**:
+   | 特性 | 跳表 | 红黑树 |
+   |------|------|--------|
+   | **查询** | O(log N) | O(log N) |
+   | **插入** | O(log N) | O(log N) |
+   | **范围查询** | O(log N) | O(log N) |
+   | **实现复杂度** | 简单 | 复杂 |
+   | **内存占用** | 较多(多层指针) | 较少 |
+
+**为什么不推荐其他理解**:
+- 避免认为跳表是简单的链表, 它是多层索引结构
+- 理解跳表通过空间换时间提升查询性能
 
 ### redis怎么保证和数据库数据一致性
 
+**推荐做法**: 采用Cache Aside模式, 先更新数据库再删除缓存, 配合延迟双删策略
+
+(此问题已在前面"怎么保证缓存和数据库数据一致性"部分详细说明, 请参考该部分)
+
 ### redis缓存到了过期时间是怎么删除缓存的
+
+**推荐做法**: 理解Redis的三种过期Key删除策略
+
+(此问题已在前面"redis删除过期key的算法"部分详细说明, 请参考该部分)
 
 ### 了解redis的哨兵模式吗
 
+**推荐做法**: 理解哨兵模式的作用和配置, 用于Redis高可用
+
+**哨兵模式(Sentinel)**:
+
+1. **作用**
+   - 监控主从节点健康状态
+   - 自动故障转移(主节点故障时选举新主节点)
+   - 自动通知客户端新的主节点地址
+   - 配置提供者(客户端通过哨兵获取主节点地址)
+
+2. **架构**:
+   ```
+   主节点(Master)
+      ↓
+   从节点1(Slave1) ← 哨兵1(Sentinel1)
+   从节点2(Slave2) ← 哨兵2(Sentinel2)
+   从节点3(Slave3) ← 哨兵3(Sentinel3)
+   ```
+
+3. **配置示例**:
+   ```properties
+   # sentinel.conf
+   # 监控主节点 mymaster, 至少2个哨兵认为主节点下线才进行故障转移
+   sentinel monitor mymaster 127.0.0.1 6379 2
+   
+   # 主节点下线判定时间(毫秒)
+   sentinel down-after-milliseconds mymaster 5000
+   
+   # 故障转移超时时间(毫秒)
+   sentinel failover-timeout mymaster 10000
+   
+   # 故障转移时, 最多有多少个从节点同时对新的主节点进行同步
+   sentinel parallel-syncs mymaster 1
+   ```
+
+4. **故障转移流程**:
+   ```
+   1. 哨兵检测到主节点下线
+   2. 多个哨兵确认主节点下线(主观下线 → 客观下线)
+   3. 选举领头哨兵(Leader Sentinel)
+   4. 领头哨兵从从节点中选择新主节点
+   5. 将其他从节点指向新主节点
+   6. 通知客户端新的主节点地址
+   ```
+
+5. **客户端连接**:
+   ```java
+   // Jedis连接哨兵
+   Set<String> sentinels = new HashSet<>();
+   sentinels.add("127.0.0.1:26379");
+   sentinels.add("127.0.0.1:26380");
+   sentinels.add("127.0.0.1:26381");
+   
+   JedisSentinelPool pool = new JedisSentinelPool("mymaster", sentinels);
+   Jedis jedis = pool.getResource();
+   ```
+
+**为什么不推荐其他做法**:
+- 避免单机部署, 无高可用保障
+- 避免只使用主从复制, 故障需要手动切换
+
 ### redis 的sentinel原理能介绍一下么
 
+**推荐做法**: 深入理解Sentinel的工作原理和实现机制
+
+**Sentinel原理**:
+
+1. **监控机制**
+   - 每个Sentinel每秒向主节点、从节点、其他Sentinel发送PING命令
+   - 如果超过down-after-milliseconds未收到有效回复, 标记为"主观下线"
+   - 当足够数量的Sentinel(quorum)都认为主节点下线, 标记为"客观下线"
+
+2. **故障转移流程**:
+   ```
+   步骤1: 主观下线(SDOWN)
+   - Sentinel检测到主节点无响应
+   - 标记主节点为"主观下线"
+   
+   步骤2: 客观下线(ODOWN)
+   - 询问其他Sentinel是否也认为主节点下线
+   - 如果quorum个Sentinel都认为下线, 标记为"客观下线"
+   
+   步骤3: 选举领头Sentinel
+   - 使用Raft算法选举领头Sentinel
+   - 只有领头Sentinel才能执行故障转移
+   
+   步骤4: 选择新主节点
+   - 从从节点中选择:
+     * 优先级高的(redis.conf中slave-priority)
+     * 复制偏移量大的(数据最新)
+     * 运行ID最小的(字典序)
+   
+   步骤5: 故障转移
+   - 将选中的从节点升级为主节点
+   - 将其他从节点指向新主节点
+   - 将旧主节点(如果恢复)设置为新主节点的从节点
+   
+   步骤6: 通知客户端
+   - 通过发布订阅通知客户端主节点变更
+   - 客户端重新连接新主节点
+   ```
+
+3. **Raft算法选举**:
+   ```java
+   // Sentinel选举领头Sentinel的过程
+   // 1. 每个Sentinel都可以发起选举
+   // 2. 收到选举请求的Sentinel, 如果还没投票, 就投票给第一个请求者
+   // 3. 如果某个Sentinel获得超过半数投票, 成为领头
+   // 4. 如果选举超时, 重新发起选举
+   ```
+
+4. **发布订阅机制**:
+   ```bash
+   # Sentinel通过发布订阅通知客户端
+   # 频道: __sentinel__:hello
+   # 消息格式: 
+   # <ip>,<port>,<runid>,<current_epoch>,<master_name>,<ip>,<port>,<master_epoch>
+   ```
+
+5. **配置纪元(Config Epoch)**:
+   - 每次故障转移都会增加配置纪元
+   - 用于区分不同的故障转移操作
+   - 保证配置的唯一性
+
+**为什么不推荐其他理解**:
+- 避免认为单个Sentinel就能完成故障转移, 需要多个Sentinel达成共识
+- 理解Sentinel使用Raft算法保证一致性
+
 ### 知道redis里面可以设置到期时间吗; 底层是怎么实现的
+
+**推荐做法**: 理解Redis过期时间的设置方式和底层存储机制
+
+**设置过期时间**:
+
+1. **命令**:
+   ```bash
+   # 设置Key的过期时间(秒)
+   EXPIRE key 3600
+   
+   # 设置Key的过期时间(毫秒)
+   PEXPIRE key 3600000
+   
+   # 设置Key在指定时间戳过期(秒)
+   EXPIREAT key 1640995200
+   
+   # 设置Key在指定时间戳过期(毫秒)
+   PEXPIREAT key 1640995200000
+   
+   # 设置Key的同时设置过期时间
+   SET key value EX 3600
+   SET key value PX 3600000
+   ```
+
+2. **底层实现**:
+   - Redis使用**过期字典(expires字典)**存储Key的过期时间
+   - 过期字典的Key是指向键空间中的某个键对象的指针
+   - 过期字典的Value是一个long long类型的整数, 存储过期时间戳(毫秒)
+
+3. **数据结构**:
+   ```c
+   // Redis数据库结构
+   typedef struct redisDb {
+       dict *dict;              // 键空间, 存储所有Key-Value
+       dict *expires;           // 过期字典, 存储Key的过期时间
+       // ... 其他字段
+   } redisDb;
+   
+   // 过期字典存储示例
+   expires["user:1001"] = 1640995200000  // 过期时间戳
+   ```
+
+4. **过期时间检查**:
+   ```c
+   // 检查Key是否过期
+   int keyIsExpired(redisDb *db, robj *key) {
+       // 1. 从过期字典中获取过期时间
+       long long when = getExpire(db, key);
+       
+       // 2. 如果没有设置过期时间, 返回0(未过期)
+       if (when < 0) return 0;
+       
+       // 3. 如果当前时间大于过期时间, 返回1(已过期)
+       if (mstime() > when) return 1;
+       
+       return 0;
+   }
+   ```
+
+5. **过期Key删除**:
+   - 惰性删除: 访问Key时检查是否过期
+   - 定期删除: 定期扫描过期字典, 删除过期Key
+   - 详见"redis删除过期key的算法"
+
+6. **持久化过期时间**:
+   - **RDB**: 保存Key时会保存过期时间, 加载时恢复
+   - **AOF**: 记录EXPIRE命令, 重启时重新设置过期时间
+
+**为什么不推荐其他理解**:
+- 避免认为过期时间存储在Key-Value中, 实际存储在独立的过期字典
+- 理解过期字典使用指针指向键空间, 节省内存
 
 ### 缓存更新策略
 
@@ -633,35 +3990,398 @@ Redisson、Jedis、lettuce
 
 ### 线程池有哪些状态
 
+**推荐做法**: 理解线程池的5种状态及其转换关系
+
+**线程池状态**:
+
+1. **RUNNING(运行中)**
+   - 状态值: -1 << COUNT_BITS (即高3位为111)
+   - 说明: 正常接受新任务, 处理队列中的任务
+   - 转换: 初始状态
+
+2. **SHUTDOWN(关闭)**
+   - 状态值: 0 << COUNT_BITS (即高3位为000)
+   - 说明: 不接受新任务, 但处理队列中的任务
+   - 转换: 调用shutdown()方法
+
+3. **STOP(停止)**
+   - 状态值: 1 << COUNT_BITS (即高3位为001)
+   - 说明: 不接受新任务, 不处理队列中的任务, 中断正在执行的任务
+   - 转换: 调用shutdownNow()方法
+
+4. **TIDYING(整理中)**
+   - 状态值: 2 << COUNT_BITS (即高3位为010)
+   - 说明: 所有任务已终止, workerCount为0, 线程池即将进入TERMINATED状态
+   - 转换: 当线程池和队列都为空时自动转换
+
+5. **TERMINATED(终止)**
+   - 状态值: 3 << COUNT_BITS (即高3位为011)
+   - 说明: terminated()方法执行完成
+   - 转换: 从TIDYING状态转换而来
+
+**状态转换图**:
+```
+RUNNING → shutdown() → SHUTDOWN → 队列和线程池为空 → TIDYING → terminated() → TERMINATED
+  ↓
+shutdownNow() → STOP → 线程池为空 → TIDYING → terminated() → TERMINATED
+```
+
+**源码实现**:
+```java
+// ThreadPoolExecutor中的状态定义
+private static final int RUNNING    = -1 << COUNT_BITS; // 111
+private static final int SHUTDOWN   =  0 << COUNT_BITS; // 000
+private static final int STOP       =  1 << COUNT_BITS; // 001
+private static final int TIDYING    =  2 << COUNT_BITS; // 010
+private static final int TERMINATED =  3 << COUNT_BITS; // 011
+
+// 状态存储在一个AtomicInteger中, 高3位存储状态, 低29位存储线程数
+private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+```
+
+**为什么不推荐其他理解**:
+- 避免混淆SHUTDOWN和STOP, SHUTDOWN会处理队列任务, STOP会中断任务
+- 理解状态转换是自动的, 不需要手动设置
+
 ### 线程池的运行过程
+
+**推荐做法**: 理解线程池执行任务的完整流程
+
+**线程池执行流程**:
+
+1. **提交任务(execute方法)**:
+   ```java
+   public void execute(Runnable command) {
+       if (command == null)
+           throw new NullPointerException();
+       
+       int c = ctl.get();
+       // 1. 如果当前线程数 < 核心线程数, 创建新线程
+       if (workerCountOf(c) < corePoolSize) {
+           if (addWorker(command, true))
+               return;
+           c = ctl.get();
+       }
+       
+       // 2. 如果线程池运行中且任务成功加入队列
+       if (isRunning(c) && workQueue.offer(command)) {
+           int recheck = ctl.get();
+           // 再次检查, 如果线程池已关闭, 移除任务并拒绝
+           if (! isRunning(recheck) && remove(command))
+               reject(command);
+           // 如果线程数为0, 创建新线程
+           else if (workerCountOf(recheck) == 0)
+               addWorker(null, false);
+       }
+       // 3. 如果队列已满, 尝试创建非核心线程
+       else if (!addWorker(command, false))
+           // 4. 如果创建失败, 执行拒绝策略
+           reject(command);
+   }
+   ```
+
+2. **执行流程图**:
+   ```
+   提交任务
+     ↓
+   当前线程数 < 核心线程数?
+     ├─ 是 → 创建核心线程执行任务
+     └─ 否 ↓
+   线程池运行中且队列未满?
+     ├─ 是 → 任务加入队列
+     │        ↓
+     │      队列中有任务且线程数 < 最大线程数?
+     │        ├─ 是 → 创建非核心线程处理
+     │        └─ 否 → 等待核心线程处理
+     └─ 否 ↓
+   当前线程数 < 最大线程数?
+     ├─ 是 → 创建非核心线程执行任务
+     └─ 否 → 执行拒绝策略
+   ```
+
+3. **Worker线程执行任务**:
+   ```java
+   // Worker线程的run方法
+   final void runWorker(Worker w) {
+       Thread wt = Thread.currentThread();
+       Runnable task = w.firstTask;
+       w.firstTask = null;
+       w.unlock();
+       boolean completedAbruptly = true;
+       try {
+           // 循环获取任务
+           while (task != null || (task = getTask()) != null) {
+               w.lock();
+               // 执行任务
+               try {
+                   task.run();
+               } finally {
+                   task = null;
+                   w.completedTasks++;
+                   w.unlock();
+               }
+           }
+           completedAbruptly = false;
+       } finally {
+           // Worker退出处理
+           processWorkerExit(w, completedAbruptly);
+       }
+   }
+   ```
+
+4. **获取任务(getTask方法)**:
+   ```java
+   private Runnable getTask() {
+       boolean timedOut = false;
+       for (;;) {
+           int c = ctl.get();
+           // 如果线程池已关闭且队列为空, 返回null
+           if (runStateAtLeast(c, SHUTDOWN) && (runStateAtLeast(c, STOP) || workQueue.isEmpty())) {
+               decrementWorkerCount();
+               return null;
+           }
+           
+           int wc = workerCountOf(c);
+           // 是否允许核心线程超时 或 当前线程数 > 核心线程数
+           boolean timed = allowCoreThreadTimeOut || wc > corePoolSize;
+           
+           // 从队列中获取任务(带超时)
+           Runnable r = timed ?
+               workQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS) :
+               workQueue.take();
+           
+           if (r != null)
+               return r;
+           timedOut = true;
+       }
+   }
+   ```
+
+5. **关键参数**:
+   - **corePoolSize**: 核心线程数, 即使空闲也保留
+   - **maximumPoolSize**: 最大线程数
+   - **workQueue**: 任务队列
+   - **keepAliveTime**: 非核心线程空闲存活时间
+   - **rejectedExecutionHandler**: 拒绝策略
+
+**为什么不推荐其他理解**:
+- 避免认为任务会立即执行, 实际可能先加入队列
+- 理解核心线程和最大线程的区别, 核心线程不会因为空闲而销毁
 
 ### 怎么实现阻塞队列
 
+**推荐做法**: 理解阻塞队列的核心机制, 使用锁和条件变量实现
+
+**阻塞队列实现原理**:
+
+1. **核心机制**
+   - 使用ReentrantLock保证线程安全
+   - 使用Condition实现阻塞和唤醒
+   - 队列满时put操作阻塞, 队列空时take操作阻塞
+
+2. **简单实现示例**:
+   ```java
+   public class SimpleBlockingQueue<T> {
+       private final Object[] items;
+       private int putIndex;
+       private int takeIndex;
+       private int count;
+       
+       private final ReentrantLock lock;
+       private final Condition notEmpty;  // 非空条件
+       private final Condition notFull;   // 非满条件
+       
+       public SimpleBlockingQueue(int capacity) {
+           if (capacity <= 0)
+               throw new IllegalArgumentException();
+           this.items = new Object[capacity];
+           this.lock = new ReentrantLock();
+           this.notEmpty = lock.newCondition();
+           this.notFull = lock.newCondition();
+       }
+       
+       // 入队(阻塞)
+       public void put(T item) throws InterruptedException {
+           lock.lock();
+           try {
+               // 队列满时等待
+               while (count == items.length) {
+                   notFull.await();
+               }
+               items[putIndex] = item;
+               if (++putIndex == items.length)
+                   putIndex = 0;
+               count++;
+               // 唤醒等待取元素的线程
+               notEmpty.signal();
+           } finally {
+               lock.unlock();
+           }
+       }
+       
+       // 出队(阻塞)
+       public T take() throws InterruptedException {
+           lock.lock();
+           try {
+               // 队列空时等待
+               while (count == 0) {
+                   notEmpty.await();
+               }
+               T item = (T) items[takeIndex];
+               items[takeIndex] = null;
+               if (++takeIndex == items.length)
+                   takeIndex = 0;
+               count--;
+               // 唤醒等待放元素的线程
+               notFull.signal();
+               return item;
+           } finally {
+               lock.unlock();
+           }
+       }
+   }
+   ```
+
+```java
+// execute只能接受Runnable
+void execute(Runnable command);
+
+// 使用示例
+executorService.execute(() -> {
+    System.out.println("执行任务");
+    // 异常会被UncaughtExceptionHandler处理
+    throw new RuntimeException("异常");
+});
+
+// 异常处理方式
+Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+    System.out.println("捕获异常: " + e.getMessage());
+});
+```
+
+3. **ArrayBlockingQueue实现要点**:
+   ```java
+   // JDK ArrayBlockingQueue的核心实现
+   public class ArrayBlockingQueue<E> {
+       final Object[] items;
+       int takeIndex;
+       int putIndex;
+       int count;
+       
+       final ReentrantLock lock;
+       private final Condition notEmpty;
+       private final Condition notFull;
+       
+       // put方法
+       public void put(E e) throws InterruptedException {
+           checkNotNull(e);
+           final ReentrantLock lock = this.lock;
+           lock.lockInterruptibly();
+           try {
+               while (count == items.length)
+                   notFull.await();
+               enqueue(e);
+           } finally {
+               lock.unlock();
+           }
+       }
+       
+       // take方法
+       public E take() throws InterruptedException {
+           final ReentrantLock lock = this.lock;
+           lock.lockInterruptibly();
+           try {
+               while (count == 0)
+                   notEmpty.await();
+               return dequeue();
+           } finally {
+               lock.unlock();
+           }
+       }
+   }
+   ```
+
+4. **LinkedBlockingQueue实现要点**:
+   - 使用链表结构, 可以无界
+   - 使用两把锁(putLock和takeLock)提高并发性能
+   - put和take操作可以并发进行
+
+5. **阻塞队列类型**:
+   | 队列类型 | 特点 | 适用场景 |
+   |---------|------|---------|
+   | **ArrayBlockingQueue** | 有界数组, 一把锁 | 固定大小队列 |
+   | **LinkedBlockingQueue** | 可选有界链表, 两把锁 | 高并发场景 |
+   | **SynchronousQueue** | 不存储元素, 直接传递 | 直接传递场景 |
+   | **PriorityBlockingQueue** | 优先级队列 | 需要优先级排序 |
+   | **DelayQueue** | 延迟队列 | 定时任务 |
+
+**为什么不推荐其他做法**:
+- 避免使用synchronized + wait/notify, ReentrantLock + Condition更灵活
+- 避免忘记signal唤醒等待线程, 可能导致死锁
+- 理解两把锁的设计可以提升并发性能
+
 ### submit 和 execute 有哪些区别
 
-#submit 
+**推荐做法**: 理解submit和execute的区别, 根据需求选择合适的方法
 
+**区别对比**:
+
+| 特性 | execute | submit |
+|------|---------|--------|
+| **参数类型** | 只接受Runnable | 接受Runnable或Callable |
+| **返回值** | void(无返回值) | Future<T>(有返回值) |
+| **异常处理** | 异常会被UncaughtExceptionHandler处理 | 异常封装在Future中, 调用get()时抛出 |
+| **任务类型** | 只能执行Runnable | 可以执行Runnable或Callable |
+
+**execute方法**:
 ```java
- <T> Future<T> submit(Callable<T> task);
+// submit可以接受Runnable或Callable
+<T> Future<T> submit(Callable<T> task);
+Future<?> submit(Runnable task);
+<T> Future<T> submit(Runnable task, T result);
+
+// 使用示例1: Callable
+Future<String> future = executorService.submit(() -> {
+    return "结果";
+});
+String result = future.get(); // 获取结果
+
+// 使用示例2: Runnable
+Future<?> future = executorService.submit(() -> {
+    System.out.println("执行任务");
+    throw new RuntimeException("异常");
+});
+try {
+    future.get(); // 异常会在这里抛出
+} catch (ExecutionException e) {
+    Throwable cause = e.getCause(); // 获取原始异常
+}
+
+// 使用示例3: Runnable with result
+Future<String> future = executorService.submit(() -> {
+    System.out.println("执行任务");
+}, "默认结果");
+String result = future.get(); // 返回"默认结果"
 ```
 
+**底层实现**:
 ```java
- <T> Future<T> submit(Runnable task, T result);
+// submit内部会包装Runnable为FutureTask
+public <T> Future<T> submit(Callable<T> task) {
+    if (task == null) throw new NullPointerException();
+    RunnableFuture<T> ftask = newTaskFor(task);
+    execute(ftask);  // 最终还是调用execute
+    return ftask;
+}
 ```
 
-```java
- Future<?> submit(Runnable task);
-```
+**推荐使用场景**:
+- **execute**: 不需要返回值, 不需要异常处理
+- **submit**: 需要返回值, 需要捕获异常, 需要取消任务
 
-#execute 
-
-```java
- void execute(Runnable command);
-```
-
-- execute 只能接受Runnable类型的任务
-- execute 无返回值, 而submit有返回值
-- execute 中的是 Runnable接口的实现, 所以只能使用try...catch来捕获受检异常;使用UncaughtExceptionHandler接口处理运行时异常;
+**为什么不推荐其他做法**:
+- 避免使用execute执行需要返回值的任务, 应使用submit
+- 避免忽略submit返回的Future, 应处理异常和结果
 
 ### 多线程锁的升级原理是什么
 

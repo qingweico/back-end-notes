@@ -82,9 +82,9 @@ Dom树的叶子
        Node.prototype.cloneNode //克隆节点 接受一个布尔类型的参数 如果为true的话 会复制子节点的所有属性
        //但是不会有监听事件和回调函数属性
        Node.prototype.insertBefore //插入父节点指定的位置 接受两个参数(newNode referenceNode)
-       Node.prototype.removeChild //移出当前节点的子节点
+       Node.prototype.removeChild //移除当前节点的子节点
        var divA = document.getElementById('A');
-       divA.parentNode.removeChild(divA); //也可以移出当前节点
+       divA.parentNode.removeChild(divA); //也可以移除当前节点
        Node.prototype.replaceChild //替换当前节点的一个子结点 (newNode,oldNode)
        Node.prototype.contains //判断文档中是否包含参数节点
        Node.prototype.normalize //合并节点内所有的文本节点  Text.splitText();的n逆方法
@@ -130,8 +130,8 @@ Dom树的叶子
 ```
 
 ```javascript
-div.classList.remove("test");                          //移出div标签的class属性中的test值
-document.getElementById("div").removeAttribute("class")//直接移出div中的class属性
+div.classList.remove("test");                          //移除div标签的class属性中的test值
+document.getElementById("div").removeAttribute("class")//直接移除div中的class属性
 ```
 
 | 选取方法                                     | 返回类型                                  |

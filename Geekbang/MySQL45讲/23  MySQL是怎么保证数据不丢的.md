@@ -93,7 +93,7 @@ WAL 机制主要得益于两个方面:
 - redo log 和 binlog 都是顺序写,磁盘的顺序写比随机写速度要快;
 - 组提交机制,可以大幅度降低磁盘的 IOPS 消耗
 
-如果你的 MySQL 现在出现了性能瓶颈,而且瓶颈在 IO 上,可以通过哪些方法来提升性能呢
+如果你的 MySQL 现在出现了性能瓶颈,而且瓶颈在 I/O 上,可以通过哪些方法来提升性能呢
 
 - 设置 binlog_group_commit_sync_delay 和 binlog_group_commit_sync_no_delay_count 参数,减少 binlog 的写盘次数; 这个方法是基于"额外的故意等待"来实现的,因此可能会增加语句的响应时间,但没有丢失数据的风险
 - 将 sync_binlog 设置为大于 1 的值(比较常见是 100~1000); 这样做的风险是,主机掉电时会丢 binlog 日志

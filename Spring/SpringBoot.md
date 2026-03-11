@@ -53,12 +53,12 @@ SpringBoot在启动时从类路径下<font style="color:purple;font-size:20px">s
 
 ### SpringBoot全局配置文件
 
-- Application.properties
-- Application.yml
+- application.properties
+- application.yml
 
 #### yml文件
 
-将空格玩到极致的语法  所有的冒号后面都有一个空格
+严格的空格语法规则:所有的冒号后面都必须有一个空格
 
 ```yaml
 person:          #person对象的写法 行内写法 person: {name: jack,age: 21}
@@ -142,9 +142,9 @@ public class Person {
 
 #### @ConfigurationProperties和@Value的区别
 
-@ConfigurationProperties和@Value默认读取 applciation.properties(yml)文件 自定义读取请使用@PropertySource注解
+@ConfigurationProperties和@Value默认读取application.properties(yml)文件,自定义读取请使用@PropertySource注解
 
-相同点都是可以从配置文件中读取值并注入到字段中(前提是字段所属的类一定要在ioc容器中)
+相同点都是可以从配置文件中读取值并注入到字段中(前提是字段所属的类一定要在IOC容器中)
 
 @ConfigurationProperties批量注入配置文件中的数据,而@Value则是一次一次注入
 
@@ -163,7 +163,7 @@ public class Person {
 #### PropertySource
 
 ```java
-@PropertySouce(value = {"classpath:xxx.properties"}) //加载指定的配置文件
+@PropertySource(value = {"classpath:xxx.properties"}) //加载指定的配置文件
 ```
 
 #### ImportResource（标注在一个配置类上）
@@ -179,7 +179,7 @@ SpringBoot不推荐用此方式向Spring容器中添加组件,可以自定义一
 ### 配置文件占位符
 
 ```properties
-person.name=jack${person.hello:hello} #不存在的属性直接看成字符串 可以赋予默认值
+person.name=jack${person.hello:hello} #不存在的属性直接作为字符串处理,可以赋予默认值
 person.age=${random.int}              #随机数
 person.list=hello,world
 person.maps.k1=v1
@@ -193,7 +193,7 @@ person.maps.k2=12_${person.name}      #配置文件存在的属性则替换
 在主配置文件中激活环境
 
 ```properties
-spring.Profiles.active = dev
+spring.profiles.active = dev
 ```
 
 application-dev.properties
@@ -244,7 +244,7 @@ spring:
 /config/xxx.properties
 /xxx.properties
 classpath:/config/xxx.properties
-classpaht:/xxx.properties
+classpath:/xxx.properties
 ```
 
 SpringBoot会全部加载这四个位置的配置文件,高优先级的配置文件会覆盖优先级低的相同配置文件
@@ -290,10 +290,10 @@ classpath:/static/
 
 spring:
   mvc:
-  # 配置文件 自定义静态资源的f
+  # 配置文件 自定义静态资源的访问路径
     static-path-pattern: /static/**
   resources:
-  # 配置文件 自定义静态资源的路径
+  # 配置文件 自定义静态资源的存储路径
     static-locations: classpath:/hello,classpath:/test
 ```
 
@@ -404,6 +404,7 @@ public class MyMVCConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -830,7 +831,7 @@ org.springframework.boot.autoconfigure.jdbc
 
 ### SpringBoot整合Spring Data JPA
 
-JPA (java persistence api)
+JPA (Java Persistence API)
 
 #### pom.xml
 
@@ -913,7 +914,7 @@ public class Student {
 }
 ```
 
-#### dao
+#### DAO
 
 ```java
 package cn.qingweico.dao;
@@ -924,7 +925,7 @@ public interface StudentDao extends JpaRepository<Student,Integer> {
 }
 ```
 
-### SpringBoot整合Mybatis
+### SpringBoot整合MyBatis
 
 #### pom.xml
 
@@ -1227,7 +1228,7 @@ package cn.qingweico.dao.spilt;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
- * mysql主从复制
+ * MySQL主从复制
  *
  * @author 周庆伟
  * @date: 2020/09/24
@@ -1250,7 +1251,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * mysql主从复制
+ * MySQL主从复制
  *
  * @author 周庆伟
  * @date: 2020/09/24
@@ -1301,7 +1302,7 @@ import java.util.Locale;
 import java.util.Properties;
 
 /**
- * mysql主从复制
+ * MySQL主从复制
  *
  * @author 周庆伟
  * @date: 2020/09/25
@@ -1397,10 +1398,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class SpringBootDataApplication {
 
     public static void main(String[] args) {
-        //返回ioc容器
+        //返回IOC容器
         ConfigurableApplicationContext run =  SpringApplication.run(SpringBootDataApplication.class, args);
 
-       //查看ioc容器中的组件
+       //查看IOC容器中的组件
         String[] beans = run.getBeanDefinitionNames();
         for(String bean : beans){
             System.out.println(bean);
@@ -1637,15 +1638,15 @@ public ConfigurableApplicationContext run(String... args) {
       ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);
       configureIgnoreBeanInfo(environment);
       Banner printedBanner = printBanner(environment);
-      /*创建IOC容器*/
+       /*创建IOC容器*/
       context = createApplicationContext();
       exceptionReporters = getSpringFactoriesInstances(SpringBootExceptionReporter.class,
             new Class[] { ConfigurableApplicationContext.class }, context);
        /*准备上下文环境*/
       prepareContext(context, environment, listeners, applicationArguments, printedBanner);
-       /*扫描并加载ioc容器中所有的组件*/
+       /*扫描并加载IOC容器中所有的组件*/
       refreshContext(context);
-       /*完成对ioc容器中所有组件的加载*/
+       /*完成对IOC容器中所有组件的加载*/
       afterRefresh(context, applicationArguments);
       stopWatch.stop();
       if (this.logStartupInfo) {

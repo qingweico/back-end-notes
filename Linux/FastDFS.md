@@ -7,7 +7,7 @@
 | libfastcommon        | FastDFS分离出的一些公用函数包 |
 | FastDFS              | FastDFS本体                   |
 | fastdfs-nginx-module | FastDFS和nginx的关联模块      |
-| nginx                | nginx1.15.4                   |
+| Nginx                | nginx1.15.4                   |
 
 ```bash
 # 编译环境

@@ -4,7 +4,7 @@
 
 ## docker
 
-docker:解决了运行环境和配置问题的软件容器,方便做持续继承并有助于整体发布的<font style="color:purple;font-size:20px">容器虚拟化技术</font>
+Docker:解决了运行环境和配置问题的软件容器,方便做持续集成并有助于整体发布的<font style="color:purple;font-size:20px">容器虚拟化技术</font>
 
 ```bash
 # 查看Linux系统版本
@@ -17,7 +17,7 @@ cat /etc/redhat-release
 uname -r
 ```
 
-### docker的基本组成
+### Docker的基本组成
 
 - 容器(container)
 - 镜像(image)
@@ -25,7 +25,7 @@ uname -r
 
 容器是镜像的一个实例,仓库是集中存放镜像的地方
 
-### docker镜像基本命令
+### Docker镜像基本命令
 
 ```bash
 docker --help # 获取帮助命令
@@ -37,7 +37,7 @@ docker images # 查看本机的docker镜像
 
 参数列表：
 
-`-a `列出本地所有的镜像(含中间层的映射层)
+`-a `列出本地所有的镜像(含中间层的镜像层)
 
 `-q `只显示镜像id
 
@@ -46,7 +46,7 @@ docker images # 查看本机的docker镜像
 `--no-trunc`显示完整的镜像信息
 
 ```bash
-docker search 镜像名称 # 查找所有的目标镜像
+docker search 镜像名称 # 搜索目标镜像
 ```
 
 参数列表：

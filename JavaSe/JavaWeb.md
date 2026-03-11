@@ -38,12 +38,12 @@ public interface Servlet {
 /*基于注解的WebServlet*/
 @WebServlet("/servlet")
 public class MyServlet implements Servlet {
-    ServletConfig servletConfig
+    ServletConfig servletConfig;
 }
 ```
 
 ```java
-/*基于注解的WebServlet会返回Servlet的名称: 带的包的类名*/
+/*基于注解的WebServlet会返回Servlet的名称: 带包的类名*/
 servletConfig.getServletName() 
 ```
 
@@ -214,7 +214,7 @@ response.addCookie(cookie);
 - 读取Cookie 
 
   ```java
-  Cookie[] cookies = coorequest.getCookies();
+  Cookie[] cookies = request.getCookies();
   for(Cookie cookie:cookies){
       out.write(cookie.getName() + "---" + cookie.getValue() + "<br/>"); 
   }
@@ -224,11 +224,11 @@ response.addCookie(cookie);
 
 - int getMaxAge() 设置cookie的有效时间    
 
-#### sesson和cookie的区别  
+#### session和cookie的区别  
 
 - session是保存在服务端而cookie是保存在浏览器端 
 - session会随着会话的结束而销毁cookie却可以长期保存在浏览器中 
-- seeion保存的是Object对象而cookie则保存的是文本文件即String类型 
+- session保存的是Object对象而cookie则保存的是文本文件即String类型 
 - session保存的是重要的信息而cookie保存的是不重要的信息   
 
 #### session和cookie的周期
@@ -430,7 +430,7 @@ public class Test extends HttpServlet {
         if(username.equals("admin") && password.equals("123456")){
             HttpSession session = req.getSession();
             session.setAttribute("name",username);
-            // 登陆成功则进入下载界面
+            // 登录成功则进入下载界面
             resp.sendRedirect("Download.jsp");
         }
         else{
@@ -440,7 +440,7 @@ public class Test extends HttpServlet {
 }
 ```
 
-   **登陆**
+   **登录**
 
    ```html
 <%--
@@ -528,7 +528,6 @@ public class Upload extends HttpServlet {
                 }
                 outputStream.close();
                 inputStream.close();
-                outputStream.close();
                 System.out.println("上传成功");
             }
         } catch (Exception e) {
@@ -627,7 +626,7 @@ public class Download extends HttpServlet {
                 fileName = "1.txt";
                 break;
         }
-        resp.setHeader("Content-Disposition" ,"attachment;filename;filename" + URLEncoder.encode(fileName));
+        resp.setHeader("Content-Disposition" ,"attachment;filename=" + URLEncoder.encode(fileName));
         OutputStream outputStream = resp.getOutputStream();
         /* 获取目标资源在服务器的绝对路径 */
         String path = req.getServletContext().getRealPath("file/" + fileName);
@@ -771,14 +770,14 @@ public class Student {
 package com.java.servlet;
 import java.sql.*;
 public class JDBCTools {
-    static  final  String JDBC_DRIVE="com.mysql.cj.jdbc.Driver";
+    static  final  String JDBC_DRIVER="com.mysql.cj.jdbc.Driver";
     static final String DB_URL= "jdbc:mysql://localhost/test?useSSL=false&serverTimezone=UTC";
     static final String USER = "root";
     static final String PASS = "123456";
     private static Connection conn;
     static {
       try {
-          Class.forName(JDBC_DRIVE);
+          Class.forName(JDBC_DRIVER);
       }catch (ClassNotFoundException e){
           e.printStackTrace();
       }
@@ -1099,7 +1098,7 @@ public class CharacterFilter implements Filter {
         <property name="user">user</property>
         <property name="password">password</property>
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
-        <property name="jdbcUrl">jdbc:mysql:/   /localhost/test?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost/test?useSSL=false&amp;serverTimezone=UTC</property>
 
         <!--若数据库中连接数不足时 一次向数据库服务器申请请求多个连接-->
         <property name="acquireIncrement">5</property>

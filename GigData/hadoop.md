@@ -10,7 +10,7 @@ wget https://archive.apache.org/dist/hadoop/common/hadoop-3.1.4/hadoop-3.1.4.tar
 ## 环境配置
 
 ```shell
-$hadoop/sbin/start-dfs.hs
+$hadoop/sbin/start-dfs.sh
 HDFS_DATANODE_USER=root
 HADOOP_DATANODE_SECURE_USER=hdfs
 HDFS_NAMENODE_USER=root
@@ -18,7 +18,7 @@ HDFS_SECONDARYNAMENODE_USER=root
 ```
 
 ```shell
-$hadoop/sbin/stop-dfs.hs
+$hadoop/sbin/stop-dfs.sh
 HDFS_DATANODE_USER=root
 HADOOP_DATANODE_SECURE_USER=hdfs
 HDFS_NAMENODE_USER=root

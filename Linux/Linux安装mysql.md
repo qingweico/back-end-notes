@@ -10,7 +10,7 @@
 mysql-8.0.20-1.el7.x86_64.rpm-bundle.tar
 ```
 
-### 检测本地是否有mariadb已存在的包
+### 检测本地是否有MariaDB已存在的包
 
 ```bash
 rpm -qa | grep mariadb

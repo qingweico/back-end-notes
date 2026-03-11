@@ -6,7 +6,7 @@
 
 设计模式 - 观察者模式扩展
 
-- 可观者对象(消息发送者) - java.util.Observable
+- 观察者对象(消息发送者) - java.util.Observable
 - 观察者 - java.util.Observer
 
 标准化接口

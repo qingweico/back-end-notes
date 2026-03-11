@@ -2,9 +2,9 @@
 
 [TOC]
 
-## 安装配置mongodb
+## 安装配置MongoDB
 
-centos7.x
+CentOS 7.x
 
 ```bash
 # 下载
@@ -37,7 +37,7 @@ touch mongodb.log
 ```
 
 ```bash
-# 在mongodb根目下创建核心配置文件
+# 在MongoDB根目录下创建核心配置文件
 vim mongodb.conf
 # ========================================
 # 端口号

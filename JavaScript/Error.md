@@ -2,9 +2,9 @@
 
 [TOC]
 
-## js错误处理机制
+## JavaScript错误处理机制
 
-js原生提供Error构造函数 所有抛出的错误都是这个构造函数的实例
+JavaScript原生提供Error构造函数,所有抛出的错误都是这个构造函数的实例
 
 ```javascript
 let error = new Error("出错了");

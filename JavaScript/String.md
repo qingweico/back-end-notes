@@ -12,12 +12,12 @@ str = str.substring(1,6); "ello"  //获取索引1到6之间的元素,不包括6 
 ```
 
 ```javascript
-str = str.toLowerCase(); //大写所有的字符
-str = str.toUpperCase(); //小写所有的字符,且都不改变原来的字符串
+str = str.toLowerCase(); //小写所有的字符
+str = str.toUpperCase(); //大写所有的字符,且都不改变原来的字符串
 ```
 
 ```javascript
-str = str.trim();        //移出字符串前面的空格,不改变原有的字符串
+str = str.trim();        //移除字符串前后的空格,不改变原有的字符串
 ```
 
 ```javascript

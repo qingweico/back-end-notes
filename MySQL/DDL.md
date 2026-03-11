@@ -5,11 +5,11 @@
 ## 修改表
 
 ```mysql
-alter TABLE userinfo CHANGE COLUMN username name INT; # 将表userinfo中字段为username修改为name,且类型修改为int
+ALTER TABLE userinfo CHANGE COLUMN username name INT; # 将表userinfo中字段为username修改为name,且类型修改为int
 ```
 
 ```mysql
-ALTER TABLE userinfo ADD COLUMN age int;              # 向表中增加字段
+ALTER TABLE userinfo ADD COLUMN age INT;              # 向表中增加字段
 ```
 
 ```mysql
@@ -21,7 +21,7 @@ ALTER TABLE userinfo RENAME to userinfos;             # 修改表名
 ```
 
 ```mysql
-ALTER TABLE userinfos MODIFY name int;                # 修改表中字段的类型
+ALTER TABLE userinfos MODIFY name INT;                # 修改表中字段的类型
 ```
 
 ## 表的删除
