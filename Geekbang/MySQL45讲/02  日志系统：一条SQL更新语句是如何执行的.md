@@ -1,3 +1,5 @@
+[TOC]
+
 ### 重要的日志模块:redo log
 
 WAL 技术, WAL 的全称是 Write-Ahead Logging, 它的关键点就是先写日志, 再写磁盘
