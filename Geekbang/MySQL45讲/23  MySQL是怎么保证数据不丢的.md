@@ -1,3 +1,5 @@
+[TOC]
+
 只要 redo log 和 binlog 保证持久化到磁盘,就能确保 MySQL 异常重启后,数据可以恢复
 
 ### binlog 的写入机制

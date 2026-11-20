@@ -1,3 +1,5 @@
+[TOC]
+
 ### 全字段排序
 
 "Using filesort"表示的就是需要排序,MySQL 会给每个线程分配一块内存用于排序,称为 sort_buffer
