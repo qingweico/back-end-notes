@@ -4,7 +4,7 @@
 
 ## docker
 
-Docker:解决了运行环境和配置问题的软件容器,方便做持续集成并有助于整体发布的<font style="color:purple;font-size:20px">容器虚拟化技术</font>
+Docker:解决了运行环境和配置问题的软件容器,方便做持续集成并有助于整体发布的<font style="color:purple;font-size:24px">容器虚拟化技术</font>
 
 ```bash
 # 查看Linux系统版本

@@ -165,7 +165,7 @@
 
 `who` : 查看用户登陆信息
 
-![1588911447007](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89f14195aa594bff21f.pngF)
+![1588911447007](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/5ef2e89f14195aa594bff21f.png)
 
 第一个root 代表服务器启动时root登陆
 
